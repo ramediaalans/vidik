@@ -1328,6 +1328,13 @@ body.emu-active .header {
   touch-action: none;
 }
 
+/* Стороны экрана идут за кадровым буфером ядра: RetroArch сам вписывает в него
+   картинку с чёрными полями, и если растянуть буфер в другие пропорции,
+   картинка сплющится. Значение ставит JS (см. Emulator.tsx). */
+.emu__screen {
+  aspect-ratio: var(--emu-ar, 4 / 3);
+}
+
 /* Экран эмулятора: по умолчанию без VHS-текстур и blend-mode —
    полноэкранное смешивание поверх 60 fps съедает кадры и рвёт звук. */
 .emu__screen::before,
@@ -1386,9 +1393,14 @@ body.emu-active .header {
   background: #000;
 }
 
+/* --emu-ar ставит JS по реальным сторонам кадрового буфера (см. Emulator.tsx).
+   В полном экране RetroArch делает буфер по размеру экрана и сам вписывает в него
+   картинку 4:3 с чёрными полями — если здесь жёстко держать 4:3, эти поля
+   растянутся и картинка сплющится. 1.3333 — запасной вариант до первого кадра. */
 .emu__frame:fullscreen .crt__screen {
-  width: min(100vw, calc(100vh * 4 / 3));
-  height: min(100vh, calc(100vw * 3 / 4));
+  --emu-ar: 1.3333;
+  width: min(100vw, calc(100vh * var(--emu-ar)));
+  height: min(100vh, calc(100vw / var(--emu-ar)));
   max-width: 100vw;
   max-height: 100vh;
   border-radius: 0;

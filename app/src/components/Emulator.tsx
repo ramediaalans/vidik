@@ -17,6 +17,21 @@ const CORE_FPS: Record<RomCore, number> = {
   snes9x: 60.0988 // Super Nintendo, NTSC
 };
 
+// RetroArch в браузере считает свой GL-viewport ровно один раз — на старте ядра —
+// и при смене размера канваса его НЕ пересчитывает (проверено: буфер 1200x900,
+// viewport остаётся 784x600 и через 4 секунды). Именно поэтому при входе в полный
+// экран картинка уезжала в угол: мы увеличивали буфер, а ядро продолжало рисовать
+// в старый прямоугольник в левом нижнем углу (начало координат GL — снизу слева).
+// Решение: буфер задаём один раз при запуске и больше не трогаем, а под любой экран
+// его растягивает CSS (.emu__canvas — всегда 100% коробки 4:3).
+function bufferSize() {
+  const tall = Math.max(window.screen?.height ?? 0, window.innerHeight || 0, 720);
+  // Ниже 720p картинка мылится на большом экране, выше 1440p — зря греем видеокарту:
+  // исходник всё равно 320x224.
+  const height = Math.min(1440, Math.round(tall));
+  return { width: Math.round((height * 4) / 3), height };
+}
+
 const KEYS_P1: Array<[string, string]> = [
   ['← ↑ → ↓', 'Движение'],
   ['Z', 'Удар / прыжок (B)'],
@@ -118,10 +133,8 @@ export function Emulator({ rom }: { rom: Rom }) {
           core: rom.core,
           rom: { fileName: rom.file.split('/').pop() ?? 'game.bin', fileContent },
           element: canvasRef.current ?? undefined,
-          // Размером кадрового буфера управляет сам RetroArch по CSS-размеру канваса.
-          // Если вмешаться и фиксировать буфер, в полноэкранном режиме GL-viewport
-          // расходится с буфером и картинка уезжает в угол.
-          size: 'auto',
+          // Фиксированный буфер 4:3 на всю сессию — см. bufferSize().
+          size: bufferSize(),
           respondToGlobalEvents: true,
           retroarchConfig: {
             // без этого игра встаёт на паузу, как только фокус уходит с канваса
@@ -235,57 +248,94 @@ export function Emulator({ rom }: { rom: Rom }) {
     else void frame.requestFullscreen?.();
   }, []);
 
-  // При входе и выходе из фуллскрина CSS-размер экрана меняется мгновенно,
-  // а RetroArch сам об этом не узнаёт — кадр остаётся старого размера и висит
-  // кусочком в углу. Следим за контейнером и сами пересчитываем буфер.
+  // Геометрия канваса целиком на CSS. Две вещи, за которыми всё же надо следить:
+  // 1) emscripten прописывает канвасу inline-размеры и леттербокс-паддинги,
+  //    иногда с !important — это сильнее наших стилей, снимаем;
+  // 2) при входе в полный экран RetroArch сам переделывает буфер под размер экрана
+  //    и сам же добавляет чёрные поля до 4:3 внутри него. Значит, коробка на странице
+  //    должна повторять стороны буфера, а не держать 4:3, иначе на широком
+  //    телевизоре картинка сплющивается и съезжает.
   useEffect(() => {
     if (status !== 'running' && status !== 'paused') return;
     const screen = screenRef.current;
-    if (!screen) return;
+    const canvas = canvasRef.current;
+    if (!screen || !canvas) return;
 
-    let timer = 0;
+    /** Реальный GL-viewport ядра — только для диагностики. */
+    const viewportOf = (el: HTMLCanvasElement): [number, number] | null => {
+      const gl = (el.getContext('webgl2') ?? el.getContext('webgl')) as
+        | WebGLRenderingContext
+        | null;
+      if (!gl) return null;
+      const vp = gl.getParameter(gl.VIEWPORT) as Int32Array | null;
+      if (!vp || vp[2] < 16 || vp[3] < 16) return null;
+      return [vp[2], vp[3]];
+    };
 
-    const apply = () => {
-      const emu = emuRef.current;
-      const canvas = canvasRef.current;
-      if (!emu || !canvas) return;
-      const rect = screen.getBoundingClientRect();
-      if (rect.width < 32 || rect.height < 32) return;
-      // Буфер обязан совпадать с CSS-размером канваса. RetroArch берёт размер
-      // GL-viewport из CSS (emscripten_get_element_css_size), а рисует в буфер по
-      // атрибутам width/height. Любое расхождение — и картинка съезжает: раньше
-      // здесь была планка 1440×1080, и на большом мониторе в полном экране
-      // изображение уезжало вниз и обрезалось.
-      const width = Math.round(rect.width);
-      const height = Math.round(rect.height);
-      // Сравниваем с реальным состоянием канваса, а не с прошлым расчётом:
-      // emscripten иногда сам меняет буфер, и мы должны это починить.
-      if (canvas.width === width && canvas.height === height) return;
-      try {
-        emu.resize({ width, height });
-      } catch {
-        // ядро ещё не готово — пересчитаем на следующем событии
+    const INLINE_JUNK = [
+      'width',
+      'height',
+      'padding',
+      'padding-left',
+      'padding-right',
+      'padding-top',
+      'padding-bottom',
+      'margin-left',
+      'margin-top'
+    ];
+
+    const stripInline = () => {
+      for (const prop of INLINE_JUNK) {
+        if (canvas.style.getPropertyValue(prop)) canvas.style.removeProperty(prop);
       }
     };
 
-    const schedule = () => {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(apply, 120);
+    // Стороны коробки = стороны кадрового буфера: тогда пиксель буфера всегда
+    // квадратный и ничего не может съехать — чем бы этот буфер ни стал.
+    const syncAspect = () => {
+      if (!canvas.width || !canvas.height) return;
+      const ar = (canvas.width / canvas.height).toFixed(4);
+      if (screen.style.getPropertyValue('--emu-ar') !== ar) {
+        screen.style.setProperty('--emu-ar', ar);
+      }
     };
 
-    const observer = new ResizeObserver(schedule);
-    observer.observe(screen);
-    document.addEventListener('fullscreenchange', schedule);
-    // Окно могли перетащить на другой экран с другим разрешением или DPI.
-    window.addEventListener('resize', schedule);
-    const guard = window.setInterval(apply, 1000);
+    const sync = () => {
+      stripInline();
+      syncAspect();
+    };
+
+    sync();
+    // И inline-стили, и размер буфера меняются атрибутами — ловим их оба.
+    const observer = new MutationObserver(sync);
+    observer.observe(canvas, {
+      attributes: true,
+      attributeFilter: ['style', 'width', 'height']
+    });
+    // На выходе из полного экрана RetroArch тоже пересчитывает буфер — но не сразу.
+    const onFullscreen = () => {
+      sync();
+      window.setTimeout(sync, 400);
+    };
+    document.addEventListener('fullscreenchange', onFullscreen);
+
+    // Ручка для диагностики из консоли браузера.
+    (window as unknown as { __vidikEmuInfo?: () => unknown }).__vidikEmuInfo = () => {
+      const rect = screen.getBoundingClientRect();
+      return {
+        buffer: `${canvas.width}x${canvas.height}`,
+        cssBox: `${Math.round(rect.width)}x${Math.round(rect.height)}`,
+        viewport: viewportOf(canvas)?.join('x') ?? null,
+        inline: canvas.getAttribute('style'),
+        dpr: window.devicePixelRatio,
+        screen: `${window.screen.width}x${window.screen.height}`,
+        fullscreen: document.fullscreenElement?.className ?? null
+      };
+    };
 
     return () => {
-      window.clearTimeout(timer);
-      window.clearInterval(guard);
       observer.disconnect();
-      document.removeEventListener('fullscreenchange', schedule);
-      window.removeEventListener('resize', schedule);
+      document.removeEventListener('fullscreenchange', onFullscreen);
     };
   }, [status]);
 

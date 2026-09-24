@@ -45,7 +45,7 @@ const chrome = spawn(
     `--user-data-dir=${profile}`,
     `--window-size=${width},${height}`,
     '--hide-scrollbars',
-    '--force-device-scale-factor=1',
+    `--force-device-scale-factor=${args.dpr ?? 1}`,
     '--no-first-run',
     '--no-default-browser-check',
     '--disable-extensions',
