@@ -30,6 +30,35 @@ npm run lint
 
 Исходные PNG генерации (`assets_raw/`) в репозиторий не попадают — в сборке участвуют только WebP из `app/public/images/`.
 
+## Кассетник (музыка)
+
+На сайте живёт Webamp — веб-порт Winamp 2. Он рисуется в `#webamp` вне дерева React,
+поэтому музыка не обрывается при переходе между разделами. Свёрнутый плеер остаётся
+в панели задач слева внизу. При запуске эмулятора музыка сама встаёт на паузу
+(событие `vidik:audio-claim`).
+
+| Файл | Роль |
+|---|---|
+| `app/src/media/player.tsx` | `PlayerProvider`, ленивая загрузка Webamp, панель задач |
+| `app/src/media/playerContext.ts` | контекст, `usePlayer()`, `claimAudio()` |
+| `app/src/components/TapeDeck.tsx` | список треков с поиском в разделе `/muzyka` |
+| `app/src/data/tracks.ts` | сгенерированный плейлист (править вручную не надо) |
+
+Сами MP3 лежат в `app/public/music/` и в гит не коммитятся. Импорт из локальной папки:
+
+```powershell
+node tools/import-music.mjs --src "D:\Музыка" --bitrate 128k
+```
+
+Скрипт читает ID3 (в том числе windows-1251), пережимает через ffmpeg, считает длительность
+и перезаписывает `tracks.ts`. Нужны `ffmpeg` и `ffprobe` в PATH.
+
+Проверка плеера в браузере:
+
+```powershell
+node tools/probe.mjs --url http://localhost:4173/muzyka --steps tools/steps/music.js --out qa/music.png
+```
+
 ## Контент и права
 
 Все изображения — оригинальные, созданы для этого проекта. Чужие постеры, обложки и кадры не используются. Старые сайты открываются через Internet Archive, справки ведут на Википедию и другие легальные источники.

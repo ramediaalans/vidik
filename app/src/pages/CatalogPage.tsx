@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import type { ReactNode } from 'react';
 import { asset } from '../media/asset';
 import { SectionHeader } from '../components/core';
 import { MediaCard } from '../components/MediaCard';
@@ -13,9 +14,10 @@ type Props = {
   cover: string;
   coverAlt: string;
   findTitle?: string;
+  extra?: ReactNode;
 };
 
-export function CatalogPage({ index, title, note, items, cover, coverAlt, findTitle }: Props) {
+export function CatalogPage({ index, title, note, items, cover, coverAlt, findTitle, extra }: Props) {
   const [active, setActive] = useState<CatalogItem | null>(null);
   const [genre, setGenre] = useState('Все');
   const [sort, setSort] = useState<'year-asc' | 'year-desc' | 'title'>('year-asc');
@@ -52,6 +54,8 @@ export function CatalogPage({ index, title, note, items, cover, coverAlt, findTi
           <p className="lead">{note}</p>
         </div>
       </section>
+
+      {extra}
 
       <section className="section container">
         <SectionHeader index="Фильтры" title={findTitle ?? 'Найди своё'} />

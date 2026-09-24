@@ -8,3 +8,9 @@ qa/
 Thumbs.db
 assets_raw/
 
+# Media and emulator payloads: local dev only, never published
+app/public/roms/
+app/public/music/
+app/public/cores/
+rel.json
+

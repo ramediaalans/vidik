@@ -11,7 +11,12 @@ const NostalgiaPage = lazy(() => import('./pages/NostalgiaPage').then((m) => ({ 
 const RetroNetPage = lazy(() => import('./pages/RetroNetPage').then((m) => ({ default: m.RetroNetPage })));
 const SearchPage = lazy(() => import('./pages/SearchPage').then((m) => ({ default: m.SearchPage })));
 const YearsPage = lazy(() => import('./pages/YearsPage').then((m) => ({ default: m.YearsPage })));
+const CartridgeShelf = lazy(() =>
+  import('./components/CartridgeShelf').then((m) => ({ default: m.CartridgeShelf }))
+);
+const TapeDeck = lazy(() => import('./components/TapeDeck').then((m) => ({ default: m.TapeDeck })));
 import { movies, cartoons, games, music } from './data/catalog';
+import { PlayerProvider, PlayerTaskbar } from './media/player';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -74,7 +79,7 @@ export default function App() {
   };
 
   return (
-    <>
+    <PlayerProvider>
       <Grain />
       <KonamiEasterEgg />
       {!booted ? <BootScreen onDone={finishBoot} /> : null}
@@ -130,6 +135,7 @@ export default function App() {
                 findTitle="Вставь картридж"
                 cover="/images/games/section-games.webp"
                 coverAlt="Приставка и картриджи на ковре"
+                extra={<CartridgeShelf />}
               />
             }
           />
@@ -144,6 +150,7 @@ export default function App() {
                 findTitle="Перемотай на трек"
                 cover="/images/music/section-music.webp"
                 coverAlt="Магнитофон и кассеты"
+                extra={<TapeDeck />}
               />
             }
           />
@@ -171,6 +178,7 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
-    </>
+      <PlayerTaskbar />
+    </PlayerProvider>
   );
 }

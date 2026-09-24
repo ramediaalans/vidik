@@ -1,0 +1,212 @@
+[
+  {
+    "slug": "batman",
+    "file": "roms/batman.gen",
+    "core": "segaMD",
+    "kb": 512,
+    "source": "Batman (J) [h2C].gen"
+  },
+  {
+    "slug": "batman-forever",
+    "file": "roms/batman-forever.gen",
+    "core": "segaMD",
+    "kb": 4096,
+    "source": "Batman Forever (W) [o1].gen"
+  },
+  {
+    "slug": "battletoads",
+    "file": "roms/battletoads.gen",
+    "core": "segaMD",
+    "kb": 512,
+    "source": "Battletoads (W) [h1C].gen"
+  },
+  {
+    "slug": "battletoads-and-double-dragon",
+    "file": "roms/battletoads-and-double-dragon.gen",
+    "core": "segaMD",
+    "kb": 1072,
+    "source": "Battletoads and Double Dragon (U) [hI+4C].gen"
+  },
+  {
+    "slug": "battletoads-double-dragon-the-ultimate-team",
+    "file": "roms/battletoads-double-dragon-the-ultimate-team.smc",
+    "core": "snes",
+    "kb": 1024,
+    "source": "Battletoads & Double Dragon - The Ultimate Team [T+Rus_Shedevr].smc"
+  },
+  {
+    "slug": "battletoads-in-battlemaniacs",
+    "file": "roms/battletoads-in-battlemaniacs.smc",
+    "core": "snes",
+    "kb": 1024,
+    "source": "Battletoads in Battlemaniacs [T+Rus_Shedevr].smc"
+  },
+  {
+    "slug": "chip-n-dale-rescue-rangers",
+    "file": "roms/chip-n-dale-rescue-rangers.nes",
+    "core": "nes",
+    "kb": 256,
+    "source": "Chip 'n Dale Rescue Rangers [T+Rus_Shedevr_&_Chronix].nes"
+  },
+  {
+    "slug": "chip-n-dale-rescue-rangers-2",
+    "file": "roms/chip-n-dale-rescue-rangers-2.nes",
+    "core": "nes",
+    "kb": 256,
+    "source": "Chip 'n Dale Rescue Rangers 2 [T+Rus_Shedevr].nes"
+  },
+  {
+    "slug": "comix-zone",
+    "file": "roms/comix-zone.gen",
+    "core": "segaMD",
+    "kb": 2048,
+    "source": "Comix Zone (U) [T+Rus].gen"
+  },
+  {
+    "slug": "contra",
+    "file": "roms/contra.nes",
+    "core": "nes",
+    "kb": 256,
+    "source": "Contra (J) [T+Rus_Shedevr].nes"
+  },
+  {
+    "slug": "contra-force",
+    "file": "roms/contra-force.nes",
+    "core": "nes",
+    "kb": 256,
+    "source": "Contra Force [T+Rus_Griever].nes"
+  },
+  {
+    "slug": "contra-hard-corps",
+    "file": "roms/contra-hard-corps.gen",
+    "core": "segaMD",
+    "kb": 2048,
+    "source": "Contra - Hard Corps (U) [T+Rus].gen"
+  },
+  {
+    "slug": "disney-s-aladdin",
+    "file": "roms/disney-s-aladdin.gen",
+    "core": "segaMD",
+    "kb": 2048,
+    "source": "Disney's Aladdin (U) [T+Rus].gen"
+  },
+  {
+    "slug": "doom-troopers-the-mutant-chronicles",
+    "file": "roms/doom-troopers-the-mutant-chronicles.gen",
+    "core": "segaMD",
+    "kb": 2048,
+    "source": "Doom Troopers - The Mutant Chronicles (U) [f1+3C].gen"
+  },
+  {
+    "slug": "dune-the-battle-for-arrakis",
+    "file": "roms/dune-the-battle-for-arrakis.gen",
+    "core": "segaMD",
+    "kb": 2048,
+    "source": "Dune - The Battle for Arrakis (U) [T+Rus][b1].gen"
+  },
+  {
+    "slug": "earthworm-jim",
+    "file": "roms/earthworm-jim.gen",
+    "core": "segaMD",
+    "kb": 3072,
+    "source": "Earthworm Jim (U) [b1].gen"
+  },
+  {
+    "slug": "earthworm-jim-2",
+    "file": "roms/earthworm-jim-2.gen",
+    "core": "segaMD",
+    "kb": 3072,
+    "source": "Earthworm Jim 2 (E) [f1].gen"
+  },
+  {
+    "slug": "flintstones-the",
+    "file": "roms/flintstones-the.gen",
+    "core": "segaMD",
+    "kb": 512,
+    "source": "Flintstones, The (U) [T+Rus].gen"
+  },
+  {
+    "slug": "jurassic-park",
+    "file": "roms/jurassic-park.gen",
+    "core": "segaMD",
+    "kb": 2048,
+    "source": "Jurassic Park (U) [h1C].gen"
+  },
+  {
+    "slug": "lion-king-the",
+    "file": "roms/lion-king-the.gen",
+    "core": "segaMD",
+    "kb": 3072,
+    "source": "Lion King, The (W) [b2].gen"
+  },
+  {
+    "slug": "mortal-kombat-3",
+    "file": "roms/mortal-kombat-3.gen",
+    "core": "segaMD",
+    "kb": 4096,
+    "source": "Mortal Kombat 3 (E) [!].gen"
+  },
+  {
+    "slug": "mortal-kombat-ii",
+    "file": "roms/mortal-kombat-ii.gen",
+    "core": "segaMD",
+    "kb": 3072,
+    "source": "Mortal Kombat II (W) [p1][!].gen"
+  },
+  {
+    "slug": "prince-of-persia",
+    "file": "roms/prince-of-persia.gen",
+    "core": "segaMD",
+    "kb": 1024,
+    "source": "Prince of Persia (U) [T+Rus].gen"
+  },
+  {
+    "slug": "robocop-3",
+    "file": "roms/robocop-3.gen",
+    "core": "segaMD",
+    "kb": 512,
+    "source": "Robocop 3 (UE) [!].gen"
+  },
+  {
+    "slug": "robocop-versus-the-terminator",
+    "file": "roms/robocop-versus-the-terminator.gen",
+    "core": "segaMD",
+    "kb": 2048,
+    "source": "Robocop Versus The Terminator (U) [T+Por100%_LordRipper].gen"
+  },
+  {
+    "slug": "teenage-mutant-hero-turtles-tournament-fighters",
+    "file": "roms/teenage-mutant-hero-turtles-tournament-fighters.gen",
+    "core": "segaMD",
+    "kb": 2048,
+    "source": "Teenage Mutant Hero Turtles - Tournament Fighters (E) [f1].gen"
+  },
+  {
+    "slug": "teenage-mutant-ninja-turtles-the-hyperstone-heist",
+    "file": "roms/teenage-mutant-ninja-turtles-the-hyperstone-heist.gen",
+    "core": "segaMD",
+    "kb": 1024,
+    "source": "Teenage Mutant Ninja Turtles - The Hyperstone Heist (U) [f1][T+Ger99].gen"
+  },
+  {
+    "slug": "tiny-toon-adventures",
+    "file": "roms/tiny-toon-adventures.gen",
+    "core": "segaMD",
+    "kb": 512,
+    "source": "Tiny Toon Adventures (E) [T+Rus SergeyK(NewGame) (21.11.2002)].gen"
+  },
+  {
+    "slug": "tom-and-jerry-frantic-antics",
+    "file": "roms/tom-and-jerry-frantic-antics.gen",
+    "core": "segaMD",
+    "kb": 1024,
+    "source": "Tom and Jerry - Frantic Antics (U) (1994) [!].gen"
+  },
+  {
+    "slug": "wwf-wrestlemania-arcade",
+    "file": "roms/wwf-wrestlemania-arcade.gen",
+    "core": "segaMD",
+    "kb": 4096,
+    "source": "WWF Wrestlemania Arcade (U) [h3C].gen"
+  }
+]

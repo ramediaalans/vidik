@@ -1196,3 +1196,495 @@ html, body { overflow-x: hidden; max-width: 100%; }
   display: block;
 }
 
+/* Полка с картриджами */
+.cart-grid {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.cart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 300px;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  border: 1px solid #3a3733;
+  border-radius: 10px 10px 4px 4px;
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0 5px, rgba(255, 255, 255, 0.05) 5px 10px)
+      top / 100% 22px no-repeat,
+    linear-gradient(180deg, #3d3934, #201e1c);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 34px rgba(0, 0, 0, 0.45);
+  transition: transform var(--t-mid) var(--ease), box-shadow var(--t-mid) var(--ease);
+}
+
+.cart:hover,
+.cart:focus-visible {
+  transform: translateY(-6px) rotate(-0.4deg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 28px 48px rgba(0, 0, 0, 0.6);
+}
+
+.cart__label {
+  margin-top: 24px;
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 3px;
+  color: var(--ink);
+  background: linear-gradient(180deg, #e9dfc8, #c9b994);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.cart__name {
+  min-width: 0;
+  font-size: clamp(14px, 1.5vw, 18px);
+  line-height: 1.1;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  hyphens: none;
+}
+
+/* Слот под коробочную обложку: они вертикальные и разных пропорций,
+   поэтому квадрат + contain, чтобы ничего не отрезало. */
+.cart__art {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+}
+
+.cart__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+}
+
+.cart__artStub {
+  background: #2a2724;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  color: var(--dust);
+}
+
+.cart__meta {
+  font-size: 13px;
+  color: var(--burgundy);
+}
+
+.cart__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--dust);
+}
+
+/* Эмулятор */
+/* Пока игра запущена, глушим всю косметику, которая пересчитывается
+   каждый кадр поверх канваса: анимированное зерно с blend-mode и размытие
+   фона. Это и была причина заиканий звука. */
+body.emu-active .grain {
+  display: none;
+}
+
+body.emu-active .modal {
+  backdrop-filter: none;
+  background: rgba(5, 5, 6, 0.95);
+}
+
+body.emu-active .header {
+  backdrop-filter: none;
+  background: #0b0b0c;
+}
+
+/* !important обязателен: emscripten сам прописывает канвасу inline style="width:256px"
+   по размеру кадрового буфера. Нам нужен буфер родного размера,
+   но растянутый CSS-ом на весь экран — и в окне, и в фуллскрине. */
+.emu__canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: #000;
+  image-rendering: pixelated;
+  touch-action: none;
+}
+
+/* Экран эмулятора: по умолчанию без VHS-текстур и blend-mode —
+   полноэкранное смешивание поверх 60 fps съедает кадры и рвёт звук. */
+.emu__screen::before,
+.emu__screen::after {
+  display: none;
+}
+
+.emu__screen .crt__glass {
+  display: none;
+}
+
+.emu__screen--fx::before,
+.emu__screen--fx::after {
+  display: block;
+}
+
+.emu__screen--fx .crt__glass {
+  display: block;
+}
+
+.emu__screen--fx .emu__canvas {
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.emu__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding: var(--sp-5);
+  text-align: center;
+  font-size: clamp(16px, 2.4vw, 22px);
+  color: var(--acid);
+  background: rgba(5, 7, 10, 0.74);
+}
+
+.emu__keysWrap {
+  margin-top: var(--sp-5);
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.emu__keysTitle {
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: var(--dust);
+}
+
+.emu__frame:fullscreen {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+}
+
+.emu__frame:fullscreen .crt__screen {
+  width: min(100vw, calc(100vh * 4 / 3));
+  height: min(100vh, calc(100vw * 3 / 4));
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.emu__keys {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.emu__key {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--panel-2);
+}
+
+.emu__pad {
+  display: none;
+}
+
+.emu__padBtn {
+  min-height: 52px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--bone);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  touch-action: none;
+  user-select: none;
+}
+
+.emu__padBtn:active {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.emu__padBtn--up {
+  grid-area: up;
+}
+.emu__padBtn--down {
+  grid-area: down;
+}
+.emu__padBtn--left {
+  grid-area: left;
+}
+.emu__padBtn--right {
+  grid-area: right;
+}
+.emu__padBtn--a {
+  grid-area: a;
+}
+.emu__padBtn--b {
+  grid-area: b;
+}
+.emu__padBtn--sel {
+  grid-area: sel;
+}
+.emu__padBtn--start {
+  grid-area: start;
+}
+
+@media (pointer: coarse), (max-width: 860px) {
+  .emu__pad {
+    display: grid;
+    margin-top: var(--sp-4);
+    gap: 8px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas:
+      '. up . b a'
+      'left . right sel start'
+      '. down . . .';
+  }
+
+  .emu__keys {
+    display: none;
+  }
+}
+
+/* ==== Кассетник: Webamp, панель задач, полка с треками ==================== */
+
+/* Якорь, в который Webamp рисует своё окно. Сам якорь прозрачен для мыши,
+   иначе он перехватывал бы клики по всей странице. */
+.webamp-anchor {
+  position: fixed;
+  /* Сверху отступ на высоту шапки: Webamp ставит своё окно в левый верхний угол. */
+  inset: 88px 0 0 0;
+  z-index: 70;
+  pointer-events: none;
+}
+
+.webamp-anchor #webamp {
+  pointer-events: auto;
+}
+
+body.webamp-hidden #webamp {
+  display: none !important;
+}
+
+.taskbar {
+  position: fixed;
+  left: var(--sp-4);
+  bottom: var(--sp-4);
+  z-index: 72;
+  display: flex;
+  align-items: stretch;
+  max-width: min(420px, calc(100vw - 32px));
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: rgba(20, 20, 22, 0.94);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.taskbar__main,
+.taskbar__side {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--bone);
+  font: inherit;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.taskbar__main {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  padding: 10px var(--sp-3);
+  text-align: left;
+}
+
+.taskbar__main:hover,
+.taskbar__side:hover {
+  background: var(--panel-2);
+}
+
+.taskbar__side {
+  padding: 0 var(--sp-3);
+  border-left: 1px solid var(--line);
+  color: var(--dust);
+}
+
+.taskbar__text {
+  overflow: hidden;
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.taskbar__eq {
+  display: flex;
+  flex: none;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.taskbar__eq i {
+  width: 3px;
+  height: 4px;
+  background: var(--dust);
+}
+
+.taskbar--playing .taskbar__eq i {
+  background: var(--acid);
+  animation: taskbar-eq 620ms steps(4, end) infinite alternate;
+}
+
+.taskbar--playing .taskbar__eq i:nth-child(2) {
+  animation-duration: 420ms;
+}
+
+.taskbar--playing .taskbar__eq i:nth-child(3) {
+  animation-duration: 780ms;
+}
+
+@keyframes taskbar-eq {
+  from {
+    height: 3px;
+  }
+  to {
+    height: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .taskbar--playing .taskbar__eq i {
+    height: 10px;
+    animation: none;
+  }
+}
+
+.deck {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  list-style: none;
+  overflow: hidden;
+}
+
+.deck__row {
+  display: grid;
+  grid-template-columns: 40px 44px minmax(0, 1fr) minmax(0, 1.4fr) 56px;
+  grid-template-areas: 'play num artist title time';
+  align-items: center;
+  gap: var(--sp-2);
+  padding-right: var(--sp-3);
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.deck__row:first-child {
+  border-top: 0;
+}
+
+.deck__row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.deck__row:hover {
+  background: var(--panel-2);
+}
+
+.deck__row--on {
+  background: rgba(201, 240, 58, 0.12);
+}
+
+.deck__play {
+  grid-area: play;
+  appearance: none;
+  min-height: 38px;
+  height: 100%;
+  border: 0;
+  border-right: 1px solid var(--line);
+  background: transparent;
+  color: var(--bone);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.deck__play:hover {
+  color: var(--acid);
+}
+
+.deck__num {
+  grid-area: num;
+  color: var(--dust);
+  font-size: 11px;
+}
+
+.deck__artist {
+  grid-area: artist;
+  overflow: hidden;
+  color: var(--beige);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.deck__title {
+  grid-area: title;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.deck__time {
+  grid-area: time;
+  color: var(--dust);
+  font-size: 11px;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .deck__row {
+    grid-template-columns: 40px minmax(0, 1fr) 56px;
+    grid-template-areas:
+      'play artist time'
+      'play title time';
+    padding: 4px var(--sp-2) 4px 0;
+  }
+
+  .deck__num {
+    display: none;
+  }
+
+  .deck__title {
+    color: var(--dust);
+    font-size: 12px;
+  }
+}
+
