@@ -85,6 +85,8 @@ export function Emulator({ rom }: { rom: Rom }) {
   const [note, setNote] = useState('Вставляем картридж…');
   const [hasSave, setHasSave] = useState(false);
   const [fx, setFx] = useState(false);
+  const [displayHz, setDisplayHz] = useState(0);
+  const targetFps = CORE_FPS[rom.core] ?? 60;
 
   useEffect(() => {
     let cancelled = false;
@@ -103,10 +105,15 @@ export function Emulator({ rom }: { rom: Rom }) {
 
         // Меряем монитор до запуска ядра: главный цикл эмулятора надо ограничить
         // с самого первого кадра, иначе на 240 Гц игра стартует вчетверо быстрее.
-        const targetFps = CORE_FPS[rom.core] ?? 60;
+        const fps = CORE_FPS[rom.core] ?? 60;
         const refreshRate = await getRefreshRate();
         if (cancelled) return;
-        detachPacer = installFramePacer(targetFps, refreshRate);
+        // Герцовка может смениться прямо во время игры (окно перетащили на телевизор),
+        // поэтому пейсер сам сообщает текущую частоту, а мы показываем её в статусе.
+        detachPacer = installFramePacer(fps, refreshRate, (hz) => {
+          if (cancelled) return;
+          setDisplayHz((prev) => (Math.abs(prev - hz) > 2 ? hz : prev));
+        });
         const nostalgist = await Nostalgist.launch({
           core: rom.core,
           rom: { fileName: rom.file.split('/').pop() ?? 'game.bin', fileContent },
@@ -134,7 +141,7 @@ export function Emulator({ rom }: { rom: Rom }) {
             // на максимальной скорости процессора.
             video_vsync: true,
             video_swap_interval: 1,
-            video_refresh_rate: targetFps,
+            video_refresh_rate: fps,
             video_frame_delay: 0,
             video_max_swapchain_images: 2,
             video_threaded: false,
@@ -156,11 +163,7 @@ export function Emulator({ rom }: { rom: Rom }) {
         // хук для визуального QA (tools/probe.mjs)
         (window as unknown as { __vidikEmu?: Nostalgist }).__vidikEmu = nostalgist;
         setStatus('running');
-        setNote(
-          refreshRate > targetFps * 1.05
-            ? `Монитор ${Math.round(refreshRate)} Гц — держим ${Math.round(targetFps)} кадров в секунду.`
-            : 'Поехали.'
-        );
+        setNote('Поехали.');
         setHasSave(Boolean(await getSave(rom.id)));
       } catch (error) {
         if (cancelled) return;
@@ -241,20 +244,23 @@ export function Emulator({ rom }: { rom: Rom }) {
     if (!screen) return;
 
     let timer = 0;
-    let last = '';
 
     const apply = () => {
       const emu = emuRef.current;
-      if (!emu) return;
+      const canvas = canvasRef.current;
+      if (!emu || !canvas) return;
       const rect = screen.getBoundingClientRect();
       if (rect.width < 32 || rect.height < 32) return;
-      // Ограничиваем верхнюю планку: рендерить 8-битную игру в 4K незачем.
-      const scale = Math.min(1, 1440 / rect.width, 1080 / rect.height);
-      const width = Math.round(rect.width * scale);
-      const height = Math.round(rect.height * scale);
-      const key = `${width}x${height}`;
-      if (key === last) return;
-      last = key;
+      // Буфер обязан совпадать с CSS-размером канваса. RetroArch берёт размер
+      // GL-viewport из CSS (emscripten_get_element_css_size), а рисует в буфер по
+      // атрибутам width/height. Любое расхождение — и картинка съезжает: раньше
+      // здесь была планка 1440×1080, и на большом мониторе в полном экране
+      // изображение уезжало вниз и обрезалось.
+      const width = Math.round(rect.width);
+      const height = Math.round(rect.height);
+      // Сравниваем с реальным состоянием канваса, а не с прошлым расчётом:
+      // emscripten иногда сам меняет буфер, и мы должны это починить.
+      if (canvas.width === width && canvas.height === height) return;
       try {
         emu.resize({ width, height });
       } catch {
@@ -270,11 +276,16 @@ export function Emulator({ rom }: { rom: Rom }) {
     const observer = new ResizeObserver(schedule);
     observer.observe(screen);
     document.addEventListener('fullscreenchange', schedule);
+    // Окно могли перетащить на другой экран с другим разрешением или DPI.
+    window.addEventListener('resize', schedule);
+    const guard = window.setInterval(apply, 1000);
 
     return () => {
       window.clearTimeout(timer);
+      window.clearInterval(guard);
       observer.disconnect();
       document.removeEventListener('fullscreenchange', schedule);
+      window.removeEventListener('resize', schedule);
     };
   }, [status]);
 
@@ -348,6 +359,9 @@ export function Emulator({ rom }: { rom: Rom }) {
       {status === 'running' || status === 'paused' ? (
         <p className="mono" style={{ marginTop: 12, color: 'var(--amber)' }}>
           {note}
+          {displayHz > targetFps * 1.05
+            ? ` · Экран ${Math.round(displayHz)} Гц — держим ${Math.round(targetFps)} кадров в секунду.`
+            : ''}
         </p>
       ) : null}
 

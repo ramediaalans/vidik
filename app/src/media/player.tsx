@@ -101,8 +101,11 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     [boot]
   );
 
+  // Внимание: webamp.pause() — это кнопка «пауза» старого Winamp, то есть переключатель:
+  // если плеер стоит, она его ЗАПУСКАЕТ. Поэтому всегда смотрим реальный статус.
   const pause = useCallback(() => {
-    webampRef.current?.pause();
+    const webamp = webampRef.current;
+    if (webamp && webamp.getMediaStatus() === 'PLAYING') webamp.pause();
     setPlaying(false);
   }, []);
 
@@ -132,7 +135,8 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const onClaim = () => {
-      webampRef.current?.pause();
+      const webamp = webampRef.current;
+      if (webamp && webamp.getMediaStatus() === 'PLAYING') webamp.pause();
       setPlaying(false);
     };
     window.addEventListener(AUDIO_CLAIM_EVENT, onClaim);

@@ -1319,6 +1319,10 @@ body.emu-active .header {
   display: block !important;
   width: 100% !important;
   height: 100% !important;
+  /* emscripten в полном экране любит добавить канвасу padding для своего
+     леттербокса — и картинка уезжает вниз и вправо. Не даём. */
+  padding: 0 !important;
+  margin: 0 !important;
   background: #000;
   image-rendering: pixelated;
   touch-action: none;

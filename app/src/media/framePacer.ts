@@ -10,12 +10,11 @@
 
 const EMSCRIPTEN_RUNNER = 'Browser_mainLoop_runner';
 
-let cachedRefreshRate = 0;
-
-/** Частота обновления экрана в Гц, измеренная по интервалам requestAnimationFrame. */
+/**
+ * Частота обновления экрана в Гц, измеренная по интервалам requestAnimationFrame.
+ * Без кэша: ноутбук можно переткнуть в телевизор прямо по ходу, и герцовка сменится.
+ */
 export async function getRefreshRate(samples = 20): Promise<number> {
-  if (cachedRefreshRate) return cachedRefreshRate;
-
   const deltas = await new Promise<number[]>((resolve) => {
     const out: number[] = [];
     let prev = 0;
@@ -32,27 +31,48 @@ export async function getRefreshRate(samples = 20): Promise<number> {
   // теряется, и по среднему быстрый монитор легко выглядит как 60 Гц.
   const clean = deltas.filter((d) => d > 0.5 && d < 100).sort((a, b) => a - b);
   const quick = clean.length ? clean[Math.floor(clean.length * 0.25)] : 1000 / 60;
-  cachedRefreshRate = Math.min(500, Math.max(30, 1000 / quick));
-  return cachedRefreshRate;
+  return Math.min(500, Math.max(30, 1000 / quick));
 }
 
 /**
  * Ограничивает главный цикл эмулятора частотой targetFps.
  * Возвращает функцию снятия патча.
  */
-export function installFramePacer(targetFps: number, refreshRate: number): () => void {
+export function installFramePacer(
+  targetFps: number,
+  refreshRate: number,
+  onRefreshRate?: (hz: number) => void
+): () => void {
   const period = 1000 / targetFps;
-  // Допуск — половина кадра монитора: без него на 144 Гц (не кратно 60)
-  // мы бы выбрасывали лишние кадры и получали рывки. На 60 Гц допуск равен
-  // половине кадра, так что ограничитель не срабатывает и ничего не ломает.
-  const tolerance = Math.min(period / 2, Math.max(1000 / refreshRate / 2, 1));
   const original = window.requestAnimationFrame.bind(window);
   let due = 0;
+  let prev = 0;
+  // Стартуем с измеренной герцовки и дальше ведём её по живым кадрам:
+  // перетащили окно с ноута 240 Гц на телевизор 60 Гц — ограничитель подстроится сам.
+  let vblank = 1000 / Math.min(500, Math.max(24, refreshRate || 60));
+  let reported = 0;
 
   const patched = (callback: FrameRequestCallback): number => {
     if (callback.name !== EMSCRIPTEN_RUNNER) return original(callback);
 
     const gate = (time: number) => {
+      if (prev) {
+        const delta = time - prev;
+        if (delta > 0.5 && delta < 100) vblank += (delta - vblank) * 0.1;
+      }
+      prev = time;
+
+      const hz = 1000 / vblank;
+      if (!reported || Math.abs(hz - reported) > reported * 0.08) {
+        reported = hz;
+        onRefreshRate?.(hz);
+      }
+
+      // Допуск — половина кадра монитора: без него на 144 Гц (не кратно 60)
+      // мы бы выбрасывали лишние кадры и получали рывки. На 60 Гц допуск равен
+      // половине кадра, так что ограничитель не срабатывает и ничего не ломает.
+      const tolerance = Math.min(period / 2, Math.max(vblank / 2, 1));
+
       if (!due) due = time;
       if (time < due - tolerance) {
         // рано: пропускаем кадр монитора, но держим цепочку живой —
