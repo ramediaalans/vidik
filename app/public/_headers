@@ -6,11 +6,7 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()
-  # Отчёт без блокировки: смотрим в консоли, что бы упало при реальной CSP.
-  # Когда отчёт чистый — переименовать в Content-Security-Policy.
-  # Внимание: SDK балансера вставляет iframe на заранее неизвестные домены,
-  # поэтому frame-src придётся дополнить по итогам отчёта.
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-eval' https://graphicslab.io https://alt.graphicslab.io https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' blob: https:; worker-src 'self' blob:; frame-src https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://graphicslab.io https://alt.graphicslab.io https://*.graphicslab.io https://www.youtube.com https://www.youtube-nocookie.com https://s.ytimg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' blob: data: https:; worker-src 'self' blob:; frame-src https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'
 
 # Хешированные бандлы и картинки никогда не меняются под тем же именем.
 /assets/*
