@@ -1855,120 +1855,56 @@ body.webamp-hidden #webamp {
   white-space: nowrap;
 }
 
-/* ---------- Корпус телевизора ---------- */
-/* Экран слева, справа вертикальная панель с динамиком и ручками —
-   компоновка «Рубина» и «Горизонта». */
+/* ---------- Photo television cabinet ---------- */
+/* Source: 1536 x 1024. Transparent CRT cutout: x=113..1170, y=98..818.
+   The player sits below the cutout; the cabinet image stays above it. */
 .tv__set {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 92px;
-  gap: 16px;
-  align-items: stretch;
-  border-radius: 26px;
-  padding: 20px;
-  background:
-    linear-gradient(150deg, #423a31 0%, #2a2521 42%, #1a1714 100%);
-  border: 1px solid #4a4239;
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -3px 8px rgba(0, 0, 0, 0.7),
-    0 34px 70px rgba(0, 0, 0, 0.6);
-}
-.tv__set .crt__screen {
-  border-radius: 20px / 26px;
-  border: 3px solid #14110f;
-}
-.tv__panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  padding: 6px 0 10px;
-}
-/* Решётка динамика — фрезерованные горизонтальные прорези в пластике. */
-.tv__grille {
-  flex: 1;
-  width: 100%;
-  border-radius: 8px;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.55) 0 3px,
-    rgba(255, 255, 255, 0.05) 3px 7px
-  );
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
-}
-.tv__dials {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-.tv__dial {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 34% 30%, #6d6153, #2b2521 70%);
-  box-shadow:
-    inset 0 2px 3px rgba(255, 255, 255, 0.18),
-    inset 0 -3px 5px rgba(0, 0, 0, 0.6),
-    0 3px 6px rgba(0, 0, 0, 0.5);
   position: relative;
+  width: 100%;
+  background: transparent;
+  filter: drop-shadow(0 30px 34px rgba(0, 0, 0, 0.55));
 }
-/* Риска на ручке переключения каналов. */
-.tv__dial::after {
-  content: '';
+.tv__screenFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+}
+.tv__screenFrame .tv__screen {
   position: absolute;
-  top: 6px;
-  left: 50%;
-  width: 2px;
-  height: 12px;
-  margin-left: -1px;
-  border-radius: 1px;
-  background: rgba(237, 230, 214, 0.75);
+  top: 9.57%;
+  left: 7.36%;
+  z-index: 1;
+  width: 68.88%;
+  height: 70.41%;
+  aspect-ratio: auto;
+  overflow: hidden;
+  border: 0;
+  border-radius: 11% / 12%;
+  background: #030405;
+  box-shadow: inset 0 0 36px rgba(0, 0, 0, 0.9);
 }
-.tv__dial--small {
-  width: 30px;
-  height: 30px;
+.tv__cabinet {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
 }
-.tv__dial--small::after {
-  height: 8px;
-}
-.tv__brand {
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  color: #9a8c76;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
-}
-.tv__led {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #3a2f28;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
-}
-.tv__led.is-on {
-  background: #ff5b3a;
-  box-shadow: 0 0 10px 3px rgba(255, 91, 58, 0.6);
-}
-/* На узком экране боковина съедает картинку — убираем. */
 @media (max-width: 620px) {
-  .tv__set {
-    grid-template-columns: minmax(0, 1fr);
-    padding: 12px;
+  .tv__osd {
+    top: 9px;
+    right: 10px;
+    gap: 6px;
+    padding: 4px 7px;
+    font-size: 10px;
   }
-  .tv__panel {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 4px;
-  }
-  .tv__grille {
-    height: 18px;
-    flex: 1;
-  }
-  .tv__dials {
-    flex-direction: row;
-  }
-  .tv__brand {
-    display: none;
+  .tv__power,
+  .tv__overlay {
+    font-size: 11px;
   }
 }
 /* Подпись у текущей строки, когда идёт реклама, а не сама передача. */
@@ -2358,4 +2294,88 @@ body.webamp-hidden #webamp {
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
+}
+
+/* ---------- Линейный ТВ-эфир: помехи, тест-карта и пульт ---------- */
+.tv__static {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  background:
+    repeating-radial-gradient(circle at 17% 33%, rgba(255,255,255,.9) 0 1px, rgba(0,0,0,.85) 1px 3px),
+    repeating-linear-gradient(0deg, transparent 0 2px, rgba(255,255,255,.22) 2px 3px), #777;
+  background-size: 5px 7px, 100% 4px;
+  animation: tv-static-jump 70ms steps(2) infinite;
+  mix-blend-mode: screen;
+}
+@keyframes tv-static-jump { to { background-position: 17px -13px, 0 2px; } }
+.tv__warm { animation: tv-warm-up 900ms ease-out both; transform-origin: center; }
+@keyframes tv-warm-up {
+  0% { clip-path: inset(49.5% 0); filter: brightness(4); opacity: .25; }
+  35% { clip-path: inset(43% 0); opacity: .75; }
+  100% { clip-path: inset(0); filter: brightness(1); opacity: 1; }
+}
+.tv__generated {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 9px;
+  padding: 8%;
+  color: #eee8d5;
+  text-align: center;
+  background:
+    linear-gradient(90deg, #ddd 0 14%, #e6d947 14% 28%, #44c8c8 28% 42%, #48c466 42% 56%, #bd4abf 56% 70%, #d33 70% 84%, #395bd2 84%) top/100% 44% no-repeat,
+    radial-gradient(circle, transparent 0 22%, #d9d9d9 22% 23%, transparent 23% 31%, #d9d9d9 31% 32%, transparent 32%), #151719;
+  font-family: var(--font-mono);
+  text-shadow: 0 2px #000;
+}
+.tv__generated strong { margin-top: 42%; font-size: clamp(13px, 2vw, 21px); }
+.tv__generated span, .tv__generated small { color: var(--dust); }
+.tv__testMark { position: absolute; top: 15%; font: 900 clamp(30px, 7vw, 70px)/1 var(--font-display); color: #111; text-shadow: none; }
+.tv__mount--vibix, .tv__mount--vibix .vplayer, .tv__mount--vibix .vplayer__mount,
+.tv__mount--vibix ins, .tv__mount--vibix iframe { width: 100% !important; height: 100% !important; }
+.tv__remote {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  margin: 14px auto 0;
+  padding: 10px 12px;
+  border: 1px solid #3b3834;
+  border-radius: 18px;
+  background: linear-gradient(#292824, #111);
+  box-shadow: 0 8px 18px rgba(0,0,0,.45), inset 0 1px rgba(255,255,255,.08);
+}
+.tv__remoteButton {
+  min-width: 62px;
+  padding: 9px 12px;
+  border: 1px solid #080808;
+  border-radius: 10px;
+  color: #ded8c9;
+  background: #30302d;
+  box-shadow: inset 0 1px rgba(255,255,255,.12), 0 2px #050505;
+  font: 700 11px/1 var(--font-mono);
+  cursor: pointer;
+}
+.tv__remoteButton:active { transform: translateY(2px); box-shadow: inset 0 1px rgba(255,255,255,.08); }
+.tv__remoteButton--power { color: #fff; background: #8d2927; }
+.tv__remoteButton:disabled { opacity: .4; cursor: not-allowed; }
+.tv__onAir { margin-top: 12px; color: var(--amber); }
+.tv__sourceNote { margin-top: 18px; color: var(--dust); font-size: 11px; line-height: 1.55; }
+.guide__row { grid-template-columns: 64px minmax(0, 1fr) auto auto; }
+.guide__meta { color: var(--dust); font-size: 10px; white-space: nowrap; }
+@media (max-width: 720px) {
+  .guide__row { grid-template-columns: 54px minmax(0, 1fr) auto; }
+  .guide__meta { display: none; }
+  .tv__remote { width: 100%; justify-content: center; }
+  .tv__remoteButton { min-width: 58px; padding-inline: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tv__static, .tv__warm { animation: none; }
 }
