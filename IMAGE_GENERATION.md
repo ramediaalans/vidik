@@ -64,6 +64,7 @@ not 3d render, not cgi, no glossy hdr, no vaporwave neon cliche
 | `games/section-games.webp` + `game-1…6` | «Игры», «Ретроинтернет» | готов |
 | `music/section-music.webp` + `music-1…6` | «Музыка», кассета | готов |
 | `tv/section-tv.webp` | «Телевизор» | готов |
+| `tv/tv-set.webp` | «Телевизор», корпус вокруг живого эфира | нужен |
 | `stories/section-stories.webp` | «Истории», герой | готов |
 | `textures/texture-paper.webp`, `texture-carpet.webp` | фоны, шум | готов |
 | `stories/story-1…6.webp` | карточки и чтение историй | готов |
@@ -137,6 +138,30 @@ videocassettes, lace doily, carpet on the wall, warm lamp and cold screen glow, 
 beams, cinematic centered composition with empty space on the left for a title,
 Kodak Gold grain
 ```
+
+---
+
+### tv-set — корпус телевизора для живого эфира (формат 4:3)
+
+Особый кадр: в его экран сайт вставляет настоящее видео, поэтому требования жёстче обычных:
+
+- телевизор строго анфас, без перспективных искажений, по центру кадра;
+- экран — ровный чёрный прямоугольник без бликов, отражений и картинки (его закроет плеер);
+- вокруг телевизора — ровный тёмный фон без интерьера, чтобы корпус можно было вырезать;
+- никаких надписей на корпусе: шильдик «ВИДИК» рисует интерфейс.
+
+```
+Photorealistic 35mm film still of a 1980s Soviet wood-veneer CRT television set,
+strictly frontal orthographic view, perfectly centered, screen bezel parallel to
+frame edges, empty matte black screen with no image and no reflections, chunky
+brown plastic and wood veneer body, vertical speaker grille and two round tuning
+knobs on the right side panel, small red indicator lamp, worn plastic, dust,
+warm 2700K lamp light from the left, plain dark neutral background, studio product
+shot, Kodak Gold grain, soft vignette
+```
+
+После генерации: `assets_raw/tv-set.png` → `node tools/optimize.mjs` → `node tools/tv/measure-set.mjs`
+(найдёт прямоугольник экрана и выдаст CSS-переменные для позиционирования плеера).
 
 ---
 

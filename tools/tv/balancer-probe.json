@@ -1,0 +1,106 @@
+{
+  "kodik": {
+    "sample": {
+      "id": "serial-37072",
+      "type": "foreign-serial",
+      "link": "//kodikplayer.com/serial/37072/4ca0f8d4b86530b8f42afb4e5c64f339/720p",
+      "title": "Аладдин: Вы слышали моё имя",
+      "title_orig": "Aladdin - Naam Toh Suna Hoga",
+      "other_title": "Аладдин: наверное, слышали это имя",
+      "translation": {
+        "id": 1940,
+        "title": "DESI WORLD PASSION",
+        "type": "voice"
+      },
+      "year": 2018,
+      "last_season": 3,
+      "last_episode": 59,
+      "episodes_count": 222,
+      "kinopoisk_id": "1178201",
+      "imdb_id": "tt8806456",
+      "quality": "HDTVRip 720p",
+      "camrip": false,
+      "lgbt": false,
+      "blocked_countries": [],
+      "blocked_seasons": {},
+      "created_at": "2021-09-03T11:40:15Z",
+      "updated_at": "2022-12-11T23:06:43Z",
+      "material_data": {
+        "title": "Аладдин: Вы слышали моё имя",
+        "title_en": "Aladdin - Naam Toh Suna Hoga",
+        "year": 2018,
+        "description": "Юноша по имени Аладдин влюбляется в принцессу Жасмин. Однажды он находит волшебную лампу, в которой живет Джинн.",
+        "poster_url": "https://st.kp.yandex.net/images/film_big/1178201.jpg",
+        "countries": [
+          "Индия"
+        ],
+        "all_genres": [
+          "мелодрама",
+          "приключения",
+          "фэнтези"
+        ],
+        "genres": [
+          "мелодрама",
+          "приключения",
+          "фэнтези"
+        ],
+        "imdb_rating": 6.4,
+        "imdb_votes": 1500,
+        "premiere_world": "2018-08-21",
+        "actors": [
+          "Shrashti Maheshwari",
+          "Сиддхартх Нигам",
+          "Авнит Каур",
+          "Смита Бансал",
+          "Амир Далви",
+          "Пракхар Сахена",
+          "Raashul Tandon",
+          "Ashi Singh",
+          "Гириш Кр. Сахдев",
+          "Винод Капур"
+        ],
+        "directors": [
+          "Кушал Джаври",
+          "Амандип Сингх",
+          "Pooja Seth Hingorani"
+        ],
+        "producers": [
+          "Хитеш Таккар",
+          "Ниссар Парвез",
+          "Vikas Seth",
+          "Alind Srivastava",
+          "Tarunima Varma"
+        ],
+        "writers": [
+          "Kushal Awasthi",
+          "Shivam Awasthi",
+          "Shakti Sagar Chopra",
+          "Lakshmi Jaikumar",
+          "Mann Singh Manku"
+        ],
+        "composers": [
+          "Souvyk Chakraborty"
+        ],
+        "editors": [
+          "Ankush Ambre",
+          "Ganga Kacharla"
+        ],
+        "designers": [
+          "Нидхи Яша"
+        ],
+        "operators": [
+          "Vignesh Kamble",
+          "Nidhin Valanday"
+        ]
+      },
+      "screenshots": [
+        "https://i.kodikres.com/screenshots/seria/882762/1.jpg",
+        "https://i.kodikres.com/screenshots/seria/882762/2.jpg",
+        "https://i.kodikres.com/screenshots/seria/882762/3.jpg",
+        "https://i.kodikres.com/screenshots/seria/882762/4.jpg",
+        "https://i.kodikres.com/screenshots/seria/882762/5.jpg"
+      ]
+    }
+  },
+  "vibix": {}
+}

@@ -1,0 +1,157 @@
+{
+  "_note": "Ручная конфигурация пулов ТВ. era задаётся здесь, а не парсится из заголовков: у большинства рекламных роликов года в названии нет.",
+  "pools": {
+    "ort-guide": {
+      "tier": "B",
+      "era": "1997-1999",
+      "name": "Программы передач, заставки и конец эфира ОРТ",
+      "playlist": "PLPJm59W3jZdi6cyR2eJxGtmoOqaEiaGzH",
+      "splitByDuration": {
+        "replayMinSec": 900
+      },
+      "kind": "interstitial",
+      "maxSec": 5400,
+      "interstitialMaxSec": 420
+    },
+    "idents-ort": {
+      "tier": "B",
+      "era": "1995-2000",
+      "name": "Заставки, часы и реклама ОРТ",
+      "playlist": "PLvLAxijRtp4zPMK_Tf8D0fKlGjJYZSa31",
+      "kind": "interstitial",
+      "maxSec": 420
+    },
+    "idents-rus": {
+      "tier": "B",
+      "era": "1991-2005",
+      "name": "История заставок и часов отечественного ТВ",
+      "playlist": "PLq64p6qrM1UrcE4cE3PQVMuh7mAg9hYF5",
+      "kind": "interstitial",
+      "maxSec": 420
+    },
+    "ads-1": {
+      "tier": "B",
+      "era": "1990-1999",
+      "name": "Реклама 90-х",
+      "playlist": "PLdHC5zfVVF36TuSKtzgOVm6uz_0BS_NNk",
+      "kind": "interstitial",
+      "maxSec": 420,
+      "dropTitleMatch": "2000|2001|2002|2003|2004|2005|нулевых|2000-х"
+    },
+    "ads-2": {
+      "tier": "B",
+      "era": "1990-1999",
+      "name": "Русские рекламы 90-х",
+      "playlist": "PLKnCpGSOledeNuDQNiWooKZVefoWMOiBS",
+      "kind": "interstitial",
+      "maxSec": 420,
+      "dropTitleMatch": "2000|2001|2002|2003|2004|2005|нулевых|2000-х"
+    },
+    "ads-social": {
+      "tier": "B",
+      "era": "1995-1999",
+      "name": "Социальная реклама, «Русский проект»",
+      "playlist": "PLQB_k9DumlTvqUulNUCxksCxBPDYe_M5j",
+      "kind": "interstitial",
+      "maxSec": 420
+    },
+    "vhs-ads": {
+      "tier": "B",
+      "era": "1997-1999",
+      "name": "Рекламные блоки ОРТ (оцифровки VHS)",
+      "playlist": "PLtrWocuDZ3VFCIvR9iQQAKxdiUMg8Yjhp",
+      "kind": "interstitial",
+      "maxSec": 420,
+      "keepTitleMatch": "199\\d|~199|ОРТ|РТР",
+      "dropTitleMatch": "200\\d|201\\d"
+    },
+    "cartoons": {
+      "tier": "A",
+      "era": "1960-1991",
+      "name": "Советские мультфильмы (ГТРФ)",
+      "playlist": "PL6t54Fq3Uh6bDvIOMz3jq8YVNP8Z4Pikm",
+      "kind": "program",
+      "minSec": 180,
+      "maxSec": 5400
+    },
+    "goodnight": {
+      "tier": "A",
+      "era": "1987-1990",
+      "name": "Спокойной ночи, малыши (ГТРФ)",
+      "playlist": "PL6t54Fq3Uh6ZE2ZTDqTEuG0Pwcr7IMFFs",
+      "kind": "program",
+      "minSec": 120
+    },
+    "vremya": {
+      "tier": "A",
+      "era": "1990-1991",
+      "name": "Программа «Время» (ГТРФ)",
+      "playlist": "PL6t54Fq3Uh6ayH70fzshTRc2M_nhghP0y",
+      "kind": "program",
+      "minYear": 1990,
+      "minSec": 600
+    },
+    "films-rare": {
+      "tier": "A",
+      "era": "1960-1991",
+      "name": "Редкие видео и фильмы (ГТРФ)",
+      "playlist": "PL6t54Fq3Uh6Y01_AquIrLEOPXDhe9gR7N",
+      "kind": "program",
+      "minSec": 300,
+      "maxSec": 7200
+    },
+    "films-year": {
+      "tier": "A",
+      "era": "1960-1991",
+      "name": "Подборки фильмов по годам (ГТРФ)",
+      "playlist": "PL6t54Fq3Uh6aC4CK-RsIAN1pe0XXJWcq2",
+      "kind": "longform",
+      "disabled": true,
+      "_why": "Сборники по 5-15 часов, в слоты не ложатся. Кандидат в ночной непрерывный эфир."
+    }
+  },
+  "interstitials": [
+    "ort-guide",
+    "idents-ort",
+    "idents-rus",
+    "ads-1",
+    "ads-2",
+    "ads-social",
+    "vhs-ads"
+  ],
+  "channels": {
+    "pervaya": {
+      "num": "01",
+      "name": "Первая программа",
+      "note": "Новости для взрослых и Спокойной ночи для всех остальных",
+      "pools": [
+        "vremya",
+        "goodnight"
+      ],
+      "anchors": [
+        {
+          "at": "21:30",
+          "pool": "ort-guide-replay",
+          "label": "Эфир целиком"
+        }
+      ]
+    },
+    "utro": {
+      "num": "02",
+      "name": "Утренний",
+      "note": "Мультфильмы и Спокойной ночи",
+      "pools": [
+        "cartoons",
+        "goodnight"
+      ]
+    },
+    "kino": {
+      "num": "03",
+      "name": "Кино",
+      "note": "Фильмы и редкие записи, повторы допустимы",
+      "pools": [
+        "films-rare"
+      ]
+    }
+  }
+}

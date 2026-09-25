@@ -14,3 +14,11 @@ app/public/music/
 app/public/cores/
 rel.json
 
+
+# Secrets
+.env
+.env.local
+
+# Локальный вывод конвейера каталога
+tools/films/*.out
+tools/films/*.png
