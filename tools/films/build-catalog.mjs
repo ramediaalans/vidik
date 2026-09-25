@@ -101,6 +101,8 @@ async function convert(rec, group) {
   return {
     slug,
     kpId: rec.kpId,
+    vibixType: rec.playerType,
+    vibixId: rec.playerId,
     title: clean(rec.title),
     titleOrig: clean(rec.titleOrig) || null,
     year: rec.year,
@@ -125,7 +127,7 @@ const disney = [];
 for (const r of sel.disney) disney.push(await convert(r, 'disney'));
 
 const ts = `// Сгенерировано tools/films/build-catalog.mjs — руками не править.
-// Источник метаданных и потока — балансер Vibix, воспроизведение идёт через его плеер по kinopoisk_id.
+// Источник метаданных и потока — балансер Vibix; идентификаторы плеера взяты из API embed_code.
 
 export interface FilmSeason {
   season: number;
@@ -135,6 +137,8 @@ export interface FilmSeason {
 export interface Film {
   slug: string;
   kpId: number;
+  vibixType: 'movie' | 'serial';
+  vibixId: string;
   title: string;
   titleOrig: string | null;
   year: number;

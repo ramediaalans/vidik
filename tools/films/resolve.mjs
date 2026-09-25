@@ -153,12 +153,17 @@ async function process(list, wantType, label) {
     const it = best.it;
     const full = it.kp_id ? await card(it.kp_id) : null;
     const ser = wantType === 'serial' && it.kp_id ? await seasons(it.kp_id) : null;
+    const embedCode = full?.embed_code ?? '';
+    const playerType = /data-type="([^"]+)"/.exec(embedCode)?.[1] ?? null;
+    const playerId = /data-id="([^"]+)"/.exec(embedCode)?.[1] ?? null;
     const rec = {
       ask: { title, year },
       id: it.id,
       kpId: it.kp_id ?? null,
       imdbId: full?.imdb_id ?? it.imdb_id ?? null,
       type: it.type,
+      playerType,
+      playerId,
       title: full?.name_rus ?? full?.name ?? it.name,
       titleOrig: full?.name_original ?? full?.name_eng ?? null,
       year: Number(full?.year ?? it.year) || null,
@@ -184,7 +189,7 @@ async function process(list, wantType, label) {
       } else sInfo = '  СЕЗОНЫ НЕ ПРИШЛИ';
     }
     console.log(
-      `  ✓  ${String(rec.title).slice(0, 34).padEnd(36)} ${String(rec.year).padEnd(6)} kp=${String(rec.kpId).padEnd(8)} ${String(rec.type).padEnd(7)} ${String(rec.quality ?? '').padEnd(8)} кп=${String(rec.kpRating ?? '-').padEnd(5)} ${rec.duration ? rec.duration + 'мин' : ''} озвучек=${rec.voiceovers.length}${rec.poster ? '' : '  БЕЗ ПОСТЕРА'}${rec.description ? '' : '  БЕЗ ОПИСАНИЯ'}` +
+      `  ✓  ${String(rec.title).slice(0, 34).padEnd(36)} ${String(rec.year).padEnd(6)} kp=${String(rec.kpId).padEnd(8)} ${String(rec.type).padEnd(7)} player=${String(rec.playerType)}/${String(rec.playerId)} ${String(rec.quality ?? '').padEnd(8)} кп=${String(rec.kpRating ?? '-').padEnd(5)} ${rec.duration ? rec.duration + 'мин' : ''} озвучек=${rec.voiceovers.length}${rec.poster ? '' : '  БЕЗ ПОСТЕРА'}${rec.description ? '' : '  БЕЗ ОПИСАНИЯ'}` +
         sInfo +
         (best.dy ? `  [год расходится на ${best.dy}]` : '')
     );

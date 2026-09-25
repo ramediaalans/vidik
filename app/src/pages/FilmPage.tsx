@@ -98,8 +98,9 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
 
         {on ? (
           <VibixPlayer
-            key={`${film.kpId}-${season}`}
-            kpId={film.kpId}
+            key={`${film.vibixType}-${film.vibixId}-${season}`}
+            type={film.vibixType}
+            id={film.vibixId}
             season={seasons.length ? season : undefined}
             label={`Плеер: ${film.title}`}
           />

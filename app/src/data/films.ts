@@ -1,5 +1,5 @@
 // Сгенерировано tools/films/build-catalog.mjs — руками не править.
-// Источник метаданных и потока — балансер Vibix, воспроизведение идёт через его плеер по kinopoisk_id.
+// Источник метаданных и потока — балансер Vibix; идентификаторы плеера взяты из API embed_code.
 
 export interface FilmSeason {
   season: number;
@@ -9,6 +9,8 @@ export interface FilmSeason {
 export interface Film {
   slug: string;
   kpId: number;
+  vibixType: 'movie' | 'serial';
+  vibixId: string;
   title: string;
   titleOrig: string | null;
   year: number;
@@ -28,6 +30,8 @@ export const salon: Film[] = [
   {
     "slug": "terminator-2-sudnyy-den-1991",
     "kpId": 444,
+    "vibixType": "movie",
+    "vibixId": "22293",
     "title": "Терминатор 2: Судный день",
     "titleOrig": "Terminator 2: Judgment Day",
     "year": 1991,
@@ -51,6 +55,8 @@ export const salon: Film[] = [
   {
     "slug": "terminator-1984",
     "kpId": 507,
+    "vibixType": "movie",
+    "vibixId": "4627",
     "title": "Терминатор",
     "titleOrig": "The Terminator",
     "year": 1984,
@@ -74,6 +80,8 @@ export const salon: Film[] = [
   {
     "slug": "krepkiy-oreshek-1988",
     "kpId": 471,
+    "vibixType": "movie",
+    "vibixId": "4600",
     "title": "Крепкий орешек",
     "titleOrig": "Die Hard",
     "year": 1988,
@@ -96,6 +104,8 @@ export const salon: Film[] = [
   {
     "slug": "hischnik-1987",
     "kpId": 6303,
+    "vibixType": "movie",
+    "vibixId": "4681",
     "title": "Хищник",
     "titleOrig": "Predator",
     "year": 1987,
@@ -119,6 +129,8 @@ export const salon: Film[] = [
   {
     "slug": "kommandos-1985",
     "kpId": 2238,
+    "vibixType": "movie",
+    "vibixId": "5551",
     "title": "Коммандос",
     "titleOrig": "Commando",
     "year": 1985,
@@ -141,6 +153,8 @@ export const salon: Film[] = [
   {
     "slug": "kobra-1986",
     "kpId": 18281,
+    "vibixType": "movie",
+    "vibixId": "226378",
     "title": "Кобра",
     "titleOrig": "Cobra",
     "year": 1986,
@@ -164,6 +178,8 @@ export const salon: Film[] = [
   {
     "slug": "robokop-1987",
     "kpId": 7410,
+    "vibixType": "movie",
+    "vibixId": "5193",
     "title": "Робокоп",
     "titleOrig": "RoboCop",
     "year": 1987,
@@ -186,6 +202,8 @@ export const salon: Film[] = [
   {
     "slug": "krovavyy-sport-1988",
     "kpId": 4777,
+    "vibixType": "movie",
+    "vibixId": "5651",
     "title": "Кровавый спорт",
     "titleOrig": "Bloodsport",
     "year": 1988,
@@ -208,6 +226,8 @@ export const salon: Film[] = [
   {
     "slug": "kikbokser-1989",
     "kpId": 28131,
+    "vibixType": "movie",
+    "vibixId": "220448",
     "title": "Кикбоксер",
     "titleOrig": "Kickboxer",
     "year": 1989,
@@ -230,6 +250,8 @@ export const salon: Film[] = [
   {
     "slug": "universalnyy-soldat-1992",
     "kpId": 12363,
+    "vibixType": "movie",
+    "vibixId": "92363",
     "title": "Универсальный солдат",
     "titleOrig": "Universal Soldier",
     "year": 1992,
@@ -251,6 +273,8 @@ export const salon: Film[] = [
   {
     "slug": "razrushitel-1993",
     "kpId": 4827,
+    "vibixType": "movie",
+    "vibixId": "5270",
     "title": "Разрушитель",
     "titleOrig": "Demolition Man",
     "year": 1993,
@@ -273,6 +297,8 @@ export const salon: Film[] = [
   {
     "slug": "skalolaz-1993",
     "kpId": 8164,
+    "vibixType": "movie",
+    "vibixId": "292470",
     "title": "Скалолаз",
     "titleOrig": "Cliffhanger",
     "year": 1993,
@@ -296,6 +322,8 @@ export const salon: Film[] = [
   {
     "slug": "smertelnaya-bitva-1995",
     "kpId": 22355,
+    "vibixType": "movie",
+    "vibixId": "5210",
     "title": "Смертельная битва",
     "titleOrig": "Mortal Kombat",
     "year": 1995,
@@ -318,6 +346,8 @@ export const salon: Film[] = [
   {
     "slug": "stiratel-1996",
     "kpId": 6018,
+    "vibixType": "movie",
+    "vibixId": "225905",
     "title": "Стиратель",
     "titleOrig": "Eraser",
     "year": 1996,
@@ -340,6 +370,8 @@ export const salon: Film[] = [
   {
     "slug": "skorost-1994",
     "kpId": 1968,
+    "vibixType": "movie",
+    "vibixId": "4795",
     "title": "Скорость",
     "titleOrig": "Speed",
     "year": 1994,
@@ -362,6 +394,8 @@ export const salon: Film[] = [
   {
     "slug": "cherepashki-nindzya-1990",
     "kpId": 8137,
+    "vibixType": "movie",
+    "vibixId": "23652",
     "title": "Черепашки-ниндзя",
     "titleOrig": "Teenage Mutant Ninja Turtles",
     "year": 1990,
@@ -385,6 +419,8 @@ export const salon: Film[] = [
   {
     "slug": "nazad-v-buduschee-1985",
     "kpId": 476,
+    "vibixType": "movie",
+    "vibixId": "4487",
     "title": "Назад в будущее",
     "titleOrig": "Back to the Future",
     "year": 1985,
@@ -407,6 +443,8 @@ export const salon: Film[] = [
   {
     "slug": "chuzhie-1986",
     "kpId": 406,
+    "vibixType": "movie",
+    "vibixId": "4589",
     "title": "Чужие",
     "titleOrig": "Aliens",
     "year": 1986,
@@ -430,6 +468,8 @@ export const salon: Film[] = [
   {
     "slug": "park-yurskogo-perioda-1993",
     "kpId": 7121,
+    "vibixType": "movie",
+    "vibixId": "4762",
     "title": "Парк Юрского периода",
     "titleOrig": "Jurassic Park",
     "year": 1993,
@@ -451,6 +491,8 @@ export const salon: Film[] = [
   {
     "slug": "pyatyy-element-1997",
     "kpId": 2656,
+    "vibixType": "movie",
+    "vibixId": "4528",
     "title": "Пятый элемент",
     "titleOrig": "The Fifth Element",
     "year": 1997,
@@ -474,6 +516,8 @@ export const salon: Film[] = [
   {
     "slug": "matrica-1999",
     "kpId": 301,
+    "vibixType": "movie",
+    "vibixId": "4469",
     "title": "Матрица",
     "titleOrig": "The Matrix",
     "year": 1999,
@@ -496,6 +540,8 @@ export const salon: Film[] = [
   {
     "slug": "den-nezavisimosti-1996",
     "kpId": 2022,
+    "vibixType": "movie",
+    "vibixId": "5138",
     "title": "День независимости",
     "titleOrig": "Independence Day",
     "year": 1996,
@@ -518,6 +564,8 @@ export const salon: Film[] = [
   {
     "slug": "mumiya-1999",
     "kpId": 4484,
+    "vibixType": "movie",
+    "vibixId": "4753",
     "title": "Мумия",
     "titleOrig": "The Mummy",
     "year": 1999,
@@ -540,6 +588,8 @@ export const salon: Film[] = [
   {
     "slug": "odin-doma-1990",
     "kpId": 8124,
+    "vibixType": "movie",
+    "vibixId": "63592",
     "title": "Один дома",
     "titleOrig": "Home Alone",
     "year": 1990,
@@ -561,6 +611,8 @@ export const salon: Film[] = [
   {
     "slug": "maska-1994",
     "kpId": 6039,
+    "vibixType": "movie",
+    "vibixId": "4613",
     "title": "Маска",
     "titleOrig": "The Mask",
     "year": 1994,
@@ -583,6 +635,8 @@ export const salon: Film[] = [
   {
     "slug": "dzhumandzhi-1995",
     "kpId": 8161,
+    "vibixType": "movie",
+    "vibixId": "18530",
     "title": "Джуманджи",
     "titleOrig": "Jumanji",
     "year": 1995,
@@ -605,6 +659,8 @@ export const salon: Film[] = [
   {
     "slug": "mayor-peyn-1995",
     "kpId": 21503,
+    "vibixType": "movie",
+    "vibixId": "5192",
     "title": "Майор Пэйн",
     "titleOrig": "Major Payne",
     "year": 1995,
@@ -626,6 +682,8 @@ export const salon: Film[] = [
   {
     "slug": "tupoy-i-esche-tupee-1994",
     "kpId": 5185,
+    "vibixType": "movie",
+    "vibixId": "6292",
     "title": "Тупой и еще тупее",
     "titleOrig": "Dumb and Dumber",
     "year": 1994,
@@ -646,6 +704,8 @@ export const salon: Film[] = [
   {
     "slug": "titanik-1997",
     "kpId": 2213,
+    "vibixType": "movie",
+    "vibixId": "4457",
     "title": "Титаник",
     "titleOrig": "Titanic",
     "year": 1997,
@@ -668,6 +728,8 @@ export const salon: Film[] = [
   {
     "slug": "kriminalnoe-chtivo-1994",
     "kpId": 342,
+    "vibixType": "movie",
+    "vibixId": "4432",
     "title": "Криминальное чтиво",
     "titleOrig": "Pulp Fiction",
     "year": 1994,
@@ -689,6 +751,8 @@ export const salon: Film[] = [
   {
     "slug": "leon-1994",
     "kpId": 389,
+    "vibixType": "movie",
+    "vibixId": "19891",
     "title": "Леон",
     "titleOrig": "Léon",
     "year": 1994,
@@ -712,6 +776,8 @@ export const salon: Film[] = [
   {
     "slug": "pobeg-iz-shoushenka-1994",
     "kpId": 326,
+    "vibixType": "movie",
+    "vibixId": "4422",
     "title": "Побег из Шоушенка",
     "titleOrig": "The Shawshank Redemption",
     "year": 1994,
@@ -732,6 +798,8 @@ export const salon: Film[] = [
   {
     "slug": "forrest-gamp-1994",
     "kpId": 448,
+    "vibixType": "movie",
+    "vibixId": "4424",
     "title": "Форрест Гамп",
     "titleOrig": "Forrest Gump",
     "year": 1994,
@@ -754,6 +822,8 @@ export const salon: Film[] = [
   {
     "slug": "brat-1997",
     "kpId": 41519,
+    "vibixType": "movie",
+    "vibixId": "51188",
     "title": "Брат",
     "titleOrig": "Брат",
     "year": 1997,
@@ -776,6 +846,8 @@ export const salon: Film[] = [
   {
     "slug": "brat-2-2000",
     "kpId": 41520,
+    "vibixType": "movie",
+    "vibixId": "51189",
     "title": "Брат 2",
     "titleOrig": "Брат 2",
     "year": 2000,
@@ -798,6 +870,8 @@ export const salon: Film[] = [
   {
     "slug": "osobennosti-nacionalnoy-ohoty-1995",
     "kpId": 7653,
+    "vibixType": "movie",
+    "vibixId": "48997",
     "title": "Особенности национальной охоты",
     "titleOrig": "Особенности национальной охоты",
     "year": 1995,
@@ -818,6 +892,8 @@ export const salon: Film[] = [
   {
     "slug": "zhmurki-2005",
     "kpId": 84830,
+    "vibixType": "movie",
+    "vibixId": "51565",
     "title": "Жмурки",
     "titleOrig": "Жмурки",
     "year": 2005,
@@ -839,6 +915,8 @@ export const salon: Film[] = [
   {
     "slug": "bumer-2003",
     "kpId": 57166,
+    "vibixType": "movie",
+    "vibixId": "111031",
     "title": "Бумер",
     "titleOrig": "Бумер",
     "year": 2003,
@@ -863,6 +941,8 @@ export const disney: Film[] = [
   {
     "slug": "utinye-istorii-1987",
     "kpId": 81426,
+    "vibixType": "serial",
+    "vibixId": "2159",
     "title": "Утиные истории",
     "titleOrig": "DuckTales",
     "year": 1987,
@@ -904,6 +984,8 @@ export const disney: Film[] = [
   {
     "slug": "chip-i-deyl-speshat-na-pomosch-1989",
     "kpId": 95231,
+    "vibixType": "serial",
+    "vibixId": "322",
     "title": "Чип и Дейл спешат на помощь",
     "titleOrig": "Chip 'n Dale: Rescue Rangers",
     "year": 1989,
@@ -940,6 +1022,8 @@ export const disney: Film[] = [
   {
     "slug": "chernyy-plasch-1991",
     "kpId": 395106,
+    "vibixType": "serial",
+    "vibixId": "3181",
     "title": "Черный Плащ",
     "titleOrig": "Darkwing Duck",
     "year": 1991,
@@ -977,6 +1061,8 @@ export const disney: Film[] = [
   {
     "slug": "gufi-i-ego-komanda-1992",
     "kpId": 94678,
+    "vibixType": "serial",
+    "vibixId": "4030",
     "title": "Гуфи и его команда",
     "titleOrig": "Goof Troop",
     "year": 1992,
@@ -1006,6 +1092,8 @@ export const disney: Film[] = [
   {
     "slug": "priklyucheniya-mishek-gammi-1985",
     "kpId": 81023,
+    "vibixType": "serial",
+    "vibixId": "1908",
     "title": "Приключения мишек Гамми",
     "titleOrig": "Adventures of the Gummi Bears",
     "year": 1985,
@@ -1055,6 +1143,8 @@ export const disney: Film[] = [
   {
     "slug": "aladdin-1994",
     "kpId": 229178,
+    "vibixType": "serial",
+    "vibixId": "7616",
     "title": "Аладдин",
     "titleOrig": "Aladdin",
     "year": 1994,
@@ -1092,6 +1182,8 @@ export const disney: Film[] = [
   {
     "slug": "timon-i-pumba-1995",
     "kpId": 94672,
+    "vibixType": "serial",
+    "vibixId": "3962",
     "title": "Тимон и Пумба",
     "titleOrig": "Timon & Pumbaa",
     "year": 1995,
@@ -1137,6 +1229,8 @@ export const disney: Film[] = [
   {
     "slug": "rusalochka-1992",
     "kpId": 229458,
+    "vibixType": "serial",
+    "vibixId": "6165",
     "title": "Русалочка",
     "titleOrig": "The Little Mermaid",
     "year": 1992,
@@ -1174,6 +1268,8 @@ export const disney: Film[] = [
   {
     "slug": "101-dalmatinec-1997",
     "kpId": 471870,
+    "vibixType": "serial",
+    "vibixId": "6590",
     "title": "101 далматинец",
     "titleOrig": "101 Dalmatians: The Series",
     "year": 1997,
@@ -1203,6 +1299,8 @@ export const disney: Film[] = [
   {
     "slug": "myshinyy-dom-2001",
     "kpId": 580714,
+    "vibixType": "serial",
+    "vibixId": "7274",
     "title": "Мышиный дом",
     "titleOrig": "House of Mouse",
     "year": 2001,
@@ -1240,6 +1338,8 @@ export const disney: Film[] = [
   {
     "slug": "lilo-i-stich-2003",
     "kpId": 230374,
+    "vibixType": "serial",
+    "vibixId": "4056",
     "title": "Лило и Стич",
     "titleOrig": "Lilo & Stitch: The Series",
     "year": 2003,
