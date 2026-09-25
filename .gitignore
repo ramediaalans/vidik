@@ -29,3 +29,6 @@ tools/**/*.jpg
 # Скачанный чужой SDK балансера — материал для анализа, не наш код
 tools/tv/rendex-*.js
 tools/tv/vibix-embed.js
+
+# ��������� ��������� (rclone � ��.)
+tools/_bin/
