@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 const LINKS = [
-  { to: '/filmy', label: 'Фильмы' },
-  { to: '/multfilmy', label: 'Мультфильмы' },
+  { to: '/videosalon', label: 'Видеосалон' },
+  { to: '/disney-klub', label: 'Дисней-клуб' },
   { to: '/televizor', label: 'Телевизор' },
   { to: '/igry', label: 'Игры' },
   { to: '/muzyka', label: 'Музыка' },
@@ -78,8 +78,8 @@ export function Footer() {
               ВИДИК
             </div>
             <p className="lead" style={{ fontSize: 15 }}>
-              Интерактивный архив постсоветского детства. Мы не храним чужой контент —
-              только собираем память и ведём к легальным источникам.
+              Интерактивный архив постсоветского детства. Фильмы, мультики и телеэфир идут
+              со сторонних плееров — у нас не хранится ни одного чужого видеофайла.
             </p>
           </div>
           <div>
@@ -102,6 +102,8 @@ export function Footer() {
             <div className="mono" style={{ marginBottom: 8 }}>Про проект</div>
             <Link to="/po-godam">По годам</Link>
             <Link to="/poisk">Поиск</Link>
+            <Link to="/filmy">Архив кино</Link>
+            <Link to="/multfilmy">Архив мультфильмов</Link>
             <a href="https://archive.org" target="_blank" rel="noreferrer noopener">
               Интернет-архив
             </a>
@@ -109,7 +111,7 @@ export function Footer() {
         </div>
         <div className="divider" style={{ margin: '32px 0 16px' }} />
         <div className="row" style={{ justifyContent: 'space-between' }}>
-          <span className="mono">Все изображения — оригинальные, созданы для этого проекта</span>
+          <span className="mono">Оформление сделано для этого проекта</span>
           <span className="mono">1990–2005 · сделано с помехами</span>
         </div>
       </div>

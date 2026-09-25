@@ -1,0 +1,2343 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Vibix API Documentation",
+    "description": "",
+    "version": "1.1.0"
+  },
+  "paths": {
+    "/api/v1/publisher/statistics": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Get publisher statistics with flexible filtering",
+        "description": "Returns aggregated statistics for the authenticated publisher. Supports grouping by date, domain, or country.",
+        "operationId": "07d135abdea7220ae86cab1c7d8566dc",
+        "parameters": [
+          {
+            "name": "date_from",
+            "in": "query",
+            "description": "Start date",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-06-01"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "description": "End date (max 90 days from date_from)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-06-28"
+            }
+          },
+          {
+            "name": "group_by",
+            "in": "query",
+            "description": "Group results by",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "date",
+              "enum": [
+                "date",
+                "domain",
+                "country"
+              ]
+            }
+          },
+          {
+            "name": "domain_id[]",
+            "in": "query",
+            "description": "Filter by domain IDs (multiple allowed)",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "country_id[]",
+            "in": "query",
+            "description": "Filter by country IDs (multiple allowed)",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Column to sort by",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "player_starts",
+                "ads_views",
+                "ads_clicks",
+                "revenue",
+                "banner_show",
+                "banner_click",
+                "brand_show",
+                "brand_click",
+                "sticker_show",
+                "sticker_click",
+                "flyroll_show",
+                "flyroll_click"
+              ]
+            }
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "description": "Sort direction",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Items per page (10-500)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "maximum": 500,
+              "minimum": 10
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublisherStatisticsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/kp/{kpId}": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить загруженное видео по Киопоиск ID",
+        "operationId": "b5940d885e3ff24e40682ae4833825dc",
+        "parameters": [
+          {
+            "name": "kpId",
+            "in": "path",
+            "description": "Kinopoisk ID of the video",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": "484488"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoLinkResource"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Video not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/imdb/{imdbId}": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Get video by IMDB ID",
+        "operationId": "7229585f405cf87de1a2835c77bc5790",
+        "parameters": [
+          {
+            "name": "imdbId",
+            "in": "path",
+            "description": "IMDB ID of the video",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "tt1527186"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoLinkResource"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Video not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/search": {
+      "post": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Search video by name",
+        "operationId": "67bb89519e4ab3fe524701b861f728e8",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name of the video",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "example": "1"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "example": "20"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "404": {
+            "description": "Video not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/links": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить список загруженных видео",
+        "operationId": "ea031b4ce3256e20af59bd74aafa846f",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Type of video",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "movie",
+                "serial"
+              ]
+            }
+          },
+          {
+            "name": "category[]",
+            "in": "query",
+            "description": "Categories of the video",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "year[]",
+            "in": "query",
+            "description": "Years of release",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "genre[]",
+            "in": "query",
+            "description": "Genres of the video",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "country[]",
+            "in": "query",
+            "description": "Countries of the video",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "tag[]",
+            "in": "query",
+            "description": "Tags of the video",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "voiceover[]",
+            "in": "query",
+            "description": "Voiceovers of the video",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "kp_id[]",
+            "in": "query",
+            "description": "Kinopoisk IDs",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "exist_kp_id",
+            "in": "query",
+            "description": "Has Kinopoisk ID",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": "false",
+              "example": "true"
+            }
+          },
+          {
+            "name": "no_ads",
+            "in": "query",
+            "description": "Video without embedded ads",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": "false",
+              "example": "true"
+            }
+          },
+          {
+            "name": "lgbt",
+            "in": "query",
+            "description": "The video contains LGBT content",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": "false",
+              "example": "true"
+            }
+          },
+          {
+            "name": "is_uploaded",
+            "in": "query",
+            "description": "The video available (uploaded)",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": "true",
+              "example": "true"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Fields of the video",
+            "required": false,
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "id",
+                  "name",
+                  "name_rus",
+                  "name_eng",
+                  "name_original",
+                  "type",
+                  "year",
+                  "kp_id",
+                  "kinopoisk_id",
+                  "imdb_id",
+                  "kp_rating",
+                  "imdb_rating",
+                  "iframe_url",
+                  "voiceovers",
+                  "tags",
+                  "poster_url",
+                  "backdrop_url",
+                  "quality",
+                  "duration",
+                  "genre",
+                  "country",
+                  "description",
+                  "description_short",
+                  "updated_at",
+                  "uploaded_at"
+                ]
+              }
+            }
+          },
+          {
+            "$ref": "#components/parameters/page"
+          },
+          {
+            "$ref": "#components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VideoLinkResource"
+                      }
+                    },
+                    "links": {
+                      "$ref": "#/components/schemas/Links"
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/401"
+          },
+          "403": {
+            "$ref": "#components/responses/403"
+          },
+          "422": {
+            "$ref": "#components/responses/422"
+          },
+          "500": {
+            "$ref": "#components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/get_kpids": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить список kp_id",
+        "operationId": "30c48b9dd8eb7dbfd97416e1d88ef361",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Type of video",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "movie",
+                "serial"
+              ]
+            }
+          },
+          {
+            "name": "category[]",
+            "in": "query",
+            "description": "Categories of the video",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Year of release",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#components/parameters/page"
+          },
+          {
+            "parameter": "limit",
+            "name": "limit",
+            "in": "query",
+            "description": "Количество записей на странице",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1000,
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/401"
+          },
+          "403": {
+            "$ref": "#components/responses/403"
+          },
+          "422": {
+            "$ref": "#components/responses/422"
+          },
+          "500": {
+            "$ref": "#components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/categories": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить список категорий",
+        "operationId": "46bff8120dd412a72bee3aad1946f187",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CategoryResource"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/401"
+          },
+          "403": {
+            "$ref": "#components/responses/403"
+          },
+          "422": {
+            "$ref": "#components/responses/422"
+          },
+          "500": {
+            "$ref": "#components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/genres": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить список жанров",
+        "operationId": "334667795f3258e9e8a08a8ee66f7be8",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/GenreResource"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/401"
+          },
+          "403": {
+            "$ref": "#components/responses/403"
+          },
+          "422": {
+            "$ref": "#components/responses/422"
+          },
+          "500": {
+            "$ref": "#components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/countries": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить список стран",
+        "operationId": "02f2a2940224cfeba92cbbf605bd21eb",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CountryResource"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/401"
+          },
+          "403": {
+            "$ref": "#components/responses/403"
+          },
+          "422": {
+            "$ref": "#components/responses/422"
+          },
+          "500": {
+            "$ref": "#components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/tags": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить список тегов",
+        "operationId": "b1f09dd18c13b35b476cbe5e4bac7d34",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TagResource"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/401"
+          },
+          "403": {
+            "$ref": "#components/responses/403"
+          },
+          "422": {
+            "$ref": "#components/responses/422"
+          },
+          "500": {
+            "$ref": "#components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/voiceovers": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить список озвучек",
+        "operationId": "6670c87ff324a14d96e9d289ec41b6be",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/VoiceoverResource"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/401"
+          },
+          "403": {
+            "$ref": "#components/responses/403"
+          },
+          "422": {
+            "$ref": "#components/responses/422"
+          },
+          "500": {
+            "$ref": "#components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/videos/occupations": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить список профессий коллектива съёмочной группы",
+        "operationId": "b0ff6705a81d679b47e1623f989c4f58",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OccupationResource"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/401"
+          },
+          "403": {
+            "$ref": "#components/responses/403"
+          },
+          "422": {
+            "$ref": "#components/responses/422"
+          },
+          "500": {
+            "$ref": "#components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/publisher/get_id": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "summary": "Получить user_id",
+        "operationId": "a1f1589737634a18adde26914ae28140",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/401"
+          },
+          "403": {
+            "$ref": "#components/responses/403"
+          },
+          "422": {
+            "$ref": "#components/responses/422"
+          },
+          "500": {
+            "$ref": "#components/responses/500"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/serials/kp/{kpId}": {
+      "get": {
+        "tags": [
+          "Serials"
+        ],
+        "summary": "Количество сезонов и серий по Киопоиск ID",
+        "operationId": "a8f96903a003befeb084c96ac352fb02",
+        "parameters": [
+          {
+            "name": "kpId",
+            "in": "path",
+            "description": "Kinopoisk ID of the video",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": "484488"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SerialResource"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Video not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    },
+    "/api/v1/serials/imdb/{imdbId}": {
+      "get": {
+        "tags": [
+          "Serials"
+        ],
+        "summary": "Количество сезонов и серий по IMDB ID",
+        "operationId": "b6b7766337342c82f2ef35a25bb8bbb8",
+        "parameters": [
+          {
+            "name": "imdbId",
+            "in": "path",
+            "description": "IMDB ID of the video",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "tt1527186"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SerialResource"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Video not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "sanctum": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Links": {
+        "properties": {
+          "first": {
+            "type": "string",
+            "format": "url"
+          },
+          "last": {
+            "type": "string",
+            "format": "url"
+          },
+          "prev": {
+            "type": "string",
+            "format": "url",
+            "nullable": true
+          },
+          "next": {
+            "type": "string",
+            "format": "url",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "Meta": {
+        "properties": {
+          "current_page": {
+            "type": "integer"
+          },
+          "from": {
+            "type": "integer"
+          },
+          "last_page": {
+            "type": "integer"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "url",
+                  "nullable": true
+                },
+                "label": {
+                  "type": "string"
+                },
+                "active": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "path": {
+            "type": "string",
+            "format": "url"
+          },
+          "per_page": {
+            "type": "integer"
+          },
+          "to": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "SuccessResponseProperties": {
+        "properties": {
+          "data": {
+            "type": "object"
+          },
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Success message"
+          },
+          "status": {
+            "type": "integer",
+            "example": 200
+          }
+        },
+        "type": "object"
+      },
+      "ErrorResponseProperties": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "Error message"
+          },
+          "status": {
+            "type": "integer",
+            "example": 444
+          }
+        },
+        "type": "object"
+      },
+      "DomainResource": {
+        "title": "Domain",
+        "description": "Domain info",
+        "properties": {
+          "id": {
+            "description": "Domain ID",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Domain name",
+            "type": "string",
+            "example": "yandex.ru",
+            "nullable": true
+          },
+          "status": {
+            "description": "Domain status",
+            "type": "string",
+            "example": "new",
+            "nullable": true
+          },
+          "last_error": {
+            "description": "Last error",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "OccupationResource": {
+        "title": "Occupation Name",
+        "description": "Occupation Name",
+        "properties": {
+          "id": {
+            "description": "ID Профессии",
+            "type": "integer",
+            "example": "actor"
+          },
+          "name": {
+            "description": "Название профессии",
+            "type": "string",
+            "example": "Актёры"
+          }
+        },
+        "type": "object"
+      },
+      "PlayerjsDesignsResource": {
+        "title": "PlayerjsDesigns",
+        "description": "PlayerjsDesign info",
+        "properties": {
+          "id": {
+            "description": "PlayerjsDesign ID",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "PlayerjsDesign name",
+            "type": "string",
+            "nullable": true
+          },
+          "prefix": {
+            "description": "PlayerjsDesign prefix",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "ProfileResource": {
+        "title": "Profile Resource",
+        "description": "Profile resource representation",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "john.doe@example.com"
+          },
+          "sites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "example.com",
+              "example.org"
+            ]
+          },
+          "cpm": {
+            "type": "integer",
+            "example": 100
+          },
+          "payment_protocol": {
+            "type": "string",
+            "example": "TRC20"
+          },
+          "wallet": {
+            "type": "string",
+            "example": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+          },
+          "copy_width": {
+            "type": "string",
+            "example": "600px"
+          },
+          "copy_height": {
+            "type": "string",
+            "example": "200px"
+          },
+          "copy_template": {
+            "type": "string",
+            "example": "{link}"
+          }
+        },
+        "type": "object"
+      },
+      "SerialResource": {
+        "title": "Количество сезонов и серий",
+        "description": "Количество сезонов и серий",
+        "properties": {
+          "id": {
+            "description": "ID видео",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Название видео на русском либо на английском в случае если название на русском отсутствует",
+            "type": "string"
+          },
+          "seasons": {
+            "description": "Список сезонов",
+            "type": "array",
+            "items": {
+              "properties": {
+                "name": {
+                  "description": "Название сезона",
+                  "type": "string"
+                },
+                "series": {
+                  "description": "Список серий",
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "description": "ID серии",
+                        "type": "integer",
+                        "example": "100"
+                      },
+                      "name": {
+                        "description": "Название серии",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              },
+              "type": "object"
+            },
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "SettingsResource": {
+        "title": "Profile Resource",
+        "description": "Profile resource representation",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "john.doe@example.com"
+          },
+          "sites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "example.com",
+              "example.org"
+            ]
+          },
+          "cpm": {
+            "type": "integer",
+            "example": 100
+          },
+          "payment_protocol": {
+            "type": "string",
+            "example": "TRC20"
+          },
+          "wallet": {
+            "type": "string",
+            "example": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+          },
+          "copy_width": {
+            "type": "string",
+            "example": "600px"
+          },
+          "copy_height": {
+            "type": "string",
+            "example": "200px"
+          },
+          "copy_template": {
+            "type": "string",
+            "example": "{link}"
+          },
+          "dle_allow_user_data": {
+            "type": "integer",
+            "example": "0"
+          },
+          "referral_code": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UserTrialAdminResource": {
+        "title": "User Trial",
+        "description": "User Trial",
+        "properties": {
+          "id": {
+            "description": "ID User",
+            "type": "integer",
+            "example": "100"
+          },
+          "user_id": {
+            "description": "ID User",
+            "type": "integer",
+            "example": "100"
+          },
+          "email": {
+            "description": "User email",
+            "type": "string"
+          },
+          "user_id_started_trial": {
+            "description": "ID User who started trial",
+            "type": "integer",
+            "example": "100"
+          },
+          "email_started_trial": {
+            "description": "User email who started trial",
+            "type": "string"
+          },
+          "trial_comment": {
+            "description": "Trial comment",
+            "type": "string"
+          },
+          "trial_status": {
+            "description": "User trial status",
+            "type": "string"
+          },
+          "start_trial_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_trial_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trial_day_left": {
+            "type": "integer"
+          },
+          "trial_hour_left": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "UserTrialResource": {
+        "title": "User Trial",
+        "description": "User Trial",
+        "properties": {
+          "id": {
+            "description": "ID User",
+            "type": "integer",
+            "example": "100"
+          },
+          "user_id": {
+            "description": "ID User",
+            "type": "integer",
+            "example": "100"
+          },
+          "email": {
+            "description": "User email",
+            "type": "string"
+          },
+          "trial_status": {
+            "description": "User trial status",
+            "type": "string"
+          },
+          "start_trial_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_trial_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "trials_days_total": {
+            "type": "integer"
+          },
+          "trial_day_left": {
+            "type": "integer"
+          },
+          "trial_hour_left": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "VideoNameEpisodesResource": {
+        "title": "Video Name",
+        "description": "Video Name",
+        "properties": {
+          "id": {
+            "description": "ID видео",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Video name",
+            "type": "string",
+            "example": "Друзья и враги",
+            "nullable": true
+          },
+          "name_rus": {
+            "description": "Video name russian",
+            "type": "string",
+            "example": "Друзья и враги",
+            "nullable": true
+          },
+          "name_eng": {
+            "description": "Video name english",
+            "type": "string",
+            "example": "Club Friday To Be Continued: Friend & Enemy",
+            "nullable": true
+          },
+          "uploaded_episodes": {
+            "description": "Список сезонов",
+            "type": "array",
+            "items": {
+              "properties": {
+                "ID serial": {
+                  "description": "Список серий",
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "ID season": {
+                        "description": "Список серий",
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "ID voiceover": {
+                              "description": "ID серии",
+                              "type": "integer",
+                              "example": "Date created"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              },
+              "type": "object"
+            },
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "VideoNameResource": {
+        "title": "Video Name",
+        "description": "Video Name",
+        "properties": {
+          "id": {
+            "description": "ID видео",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Video name",
+            "type": "string",
+            "example": "Друзья и враги",
+            "nullable": true
+          },
+          "name_rus": {
+            "description": "Video name russian",
+            "type": "string",
+            "example": "Друзья и враги",
+            "nullable": true
+          },
+          "name_eng": {
+            "description": "Video name english",
+            "type": "string",
+            "example": "Club Friday To Be Continued: Friend & Enemy",
+            "nullable": true
+          },
+          "name_original": {
+            "description": "Video name original",
+            "type": "string",
+            "example": "Club Friday To Be Continued: Friend & Enemy",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "VideoNewsFeedResource": {
+        "title": "Video News Feed",
+        "description": "Video News Feed",
+        "properties": {
+          "id": {
+            "description": "ID видео",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Video name",
+            "type": "string",
+            "example": "Дюна: Часть вторая (2024) [Профессиональный (дублированный)]",
+            "nullable": true
+          },
+          "kp_rating": {
+            "description": "Рейтинг на Кинопоиске",
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "imdb_rating": {
+            "description": "Рейтинг на IMDb",
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "added_date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "VoiceoverResource": {
+        "title": "Voiceover Name",
+        "description": "Voiceover Name",
+        "properties": {
+          "id": {
+            "description": "ID Voiceover",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Voiceover name",
+            "type": "string",
+            "example": "LostFilm",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "CategoryResource": {
+        "title": "Video Category",
+        "description": "Video Category",
+        "properties": {
+          "id": {
+            "description": "ID Category",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Category name",
+            "type": "string",
+            "example": "Аниме",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "CountryResource": {
+        "title": "Video country",
+        "description": "Video country",
+        "properties": {
+          "id": {
+            "description": "ID Country",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Country name",
+            "type": "string",
+            "example": "Россия",
+            "nullable": true
+          },
+          "name_eng": {
+            "description": "Country name eng",
+            "type": "string",
+            "example": "Russia",
+            "nullable": true
+          },
+          "code": {
+            "description": "Country code",
+            "type": "string",
+            "example": "RU",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "GenreResource": {
+        "title": "Video genre",
+        "description": "Video genre",
+        "properties": {
+          "id": {
+            "description": "ID Genre",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Genre name",
+            "type": "string",
+            "example": "комедия",
+            "nullable": true
+          },
+          "name_eng": {
+            "description": "Genre name eng",
+            "type": "string",
+            "example": "comedy",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "PublisherStatisticsItem": {
+        "title": "Publisher Statistics Item",
+        "description": "Aggregated statistics row for one group",
+        "properties": {
+          "group_value": {
+            "description": "Group label: date (d.m.Y), domain name, or country name",
+            "type": "string",
+            "example": "example.com"
+          },
+          "player_starts": {
+            "description": "Player starts count",
+            "type": "integer",
+            "example": 12345
+          },
+          "ads_views": {
+            "description": "Adjusted ad views",
+            "type": "integer",
+            "example": 10000
+          },
+          "ads_clicks": {
+            "description": "Ad clicks",
+            "type": "integer",
+            "example": 500
+          },
+          "revenue": {
+            "description": "Total revenue, rounded to 2 decimals",
+            "type": "number",
+            "format": "float",
+            "example": 125.5
+          },
+          "banner_show": {
+            "description": "Banner shows",
+            "type": "integer",
+            "example": 8000
+          },
+          "banner_click": {
+            "description": "Banner clicks",
+            "type": "integer",
+            "example": 200
+          },
+          "brand_show": {
+            "description": "Brand shows",
+            "type": "integer",
+            "example": 5000
+          },
+          "brand_click": {
+            "description": "Brand clicks",
+            "type": "integer",
+            "example": 150
+          },
+          "sticker_show": {
+            "description": "Sticker shows",
+            "type": "integer",
+            "example": 3000
+          },
+          "sticker_click": {
+            "description": "Sticker clicks",
+            "type": "integer",
+            "example": 80
+          },
+          "flyroll_show": {
+            "description": "Flyroll shows",
+            "type": "integer",
+            "example": 2000
+          },
+          "flyroll_click": {
+            "description": "Flyroll clicks",
+            "type": "integer",
+            "example": 40
+          }
+        },
+        "type": "object"
+      },
+      "PublisherStatisticsTotals": {
+        "title": "Publisher Statistics Totals",
+        "description": "Aggregated totals across the entire period (all pages)",
+        "properties": {
+          "player_starts": {
+            "type": "integer",
+            "example": 500000
+          },
+          "ads_views": {
+            "type": "integer",
+            "example": 400000
+          },
+          "ads_clicks": {
+            "type": "integer",
+            "example": 20000
+          },
+          "revenue": {
+            "type": "number",
+            "format": "float",
+            "example": 5020
+          },
+          "banner_show": {
+            "type": "integer",
+            "example": 320000
+          },
+          "banner_click": {
+            "type": "integer",
+            "example": 8000
+          },
+          "brand_show": {
+            "type": "integer",
+            "example": 200000
+          },
+          "brand_click": {
+            "type": "integer",
+            "example": 6000
+          },
+          "sticker_show": {
+            "type": "integer",
+            "example": 120000
+          },
+          "sticker_click": {
+            "type": "integer",
+            "example": 3200
+          },
+          "flyroll_show": {
+            "type": "integer",
+            "example": 80000
+          },
+          "flyroll_click": {
+            "type": "integer",
+            "example": 1600
+          }
+        },
+        "type": "object"
+      },
+      "PublisherStatisticsPagination": {
+        "title": "Publisher Statistics Pagination",
+        "properties": {
+          "current_page": {
+            "type": "integer",
+            "example": 1
+          },
+          "per_page": {
+            "type": "integer",
+            "example": 50
+          },
+          "total": {
+            "type": "integer",
+            "example": 150
+          },
+          "last_page": {
+            "type": "integer",
+            "example": 3
+          }
+        },
+        "type": "object"
+      },
+      "PublisherStatisticsResponse": {
+        "title": "Publisher Statistics Response",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PublisherStatisticsItem"
+                }
+              },
+              "totals": {
+                "$ref": "#/components/schemas/PublisherStatisticsTotals"
+              },
+              "pagination": {
+                "$ref": "#/components/schemas/PublisherStatisticsPagination"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "RknBlockResource": {
+        "title": "Rkn Block Resource",
+        "description": "Данные о блокировке домена Роскомнадзором",
+        "properties": {
+          "domain": {
+            "description": "Заблокированный домен",
+            "type": "string",
+            "example": "example.com"
+          },
+          "status": {
+            "description": "Текущий статус блокировки",
+            "type": "string",
+            "example": "blocked"
+          },
+          "first_blocked_at": {
+            "description": "Дата первой фиксации блокировки (ISO 8601)",
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-03-15T10:00:00+03:00",
+            "nullable": true
+          },
+          "last_checked_at": {
+            "description": "Дата последней проверки статуса (ISO 8601)",
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-06-26T07:04:00+03:00",
+            "nullable": true
+          },
+          "unblocked_at": {
+            "description": "Дата разблокировки (ISO 8601)",
+            "type": "string",
+            "format": "date-time",
+            "example": null,
+            "nullable": true
+          },
+          "updated_at": {
+            "description": "Дата обновления записи (ISO 8601)",
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-06-26T07:04:00+03:00",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "TagResource": {
+        "title": "Video tag",
+        "description": "Video tag",
+        "properties": {
+          "id": {
+            "description": "ID Country",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Tag name",
+            "type": "string",
+            "example": "Новинка",
+            "nullable": true
+          },
+          "code": {
+            "description": "Tag code",
+            "type": "string",
+            "example": "novinka",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "VideoLinkResource": {
+        "title": "Video Link Resource",
+        "description": "Video Link resource representation",
+        "properties": {
+          "id": {
+            "description": "ID видео",
+            "type": "integer",
+            "example": "100"
+          },
+          "name": {
+            "description": "Название видео на русском либо на английском в случае если название на русском отсутствует",
+            "type": "string"
+          },
+          "name_rus": {
+            "description": "Название видео на русском",
+            "type": "string",
+            "nullable": true
+          },
+          "name_eng": {
+            "description": "Название видео на английском",
+            "type": "string",
+            "nullable": true
+          },
+          "name_original": {
+            "description": "Оригинальное название видео",
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "description": "Тип видео: movie|serial",
+            "type": "string"
+          },
+          "year": {
+            "description": "Год выпуска видео",
+            "type": "integer",
+            "nullable": true
+          },
+          "kp_id": {
+            "description": "ID видео на Кинопоиске",
+            "type": "integer",
+            "example": "484488",
+            "nullable": true
+          },
+          "kinopoisk_id": {
+            "description": "ID видео на Кинопоиске",
+            "type": "integer",
+            "example": "484488",
+            "nullable": true,
+            "deprecated": true
+          },
+          "imdb_id": {
+            "description": "ID видео на IMDb",
+            "type": "string",
+            "nullable": true
+          },
+          "kp_rating": {
+            "description": "Рейтинг на Кинопоиске",
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "kp_votes": {
+            "description": "Количество оценок на Кинопоиске",
+            "type": "integer",
+            "nullable": true
+          },
+          "imdb_rating": {
+            "description": "Рейтинг на IMDb",
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "imdb_votes": {
+            "description": "Количество оценок на IMDb",
+            "type": "integer",
+            "nullable": true
+          },
+          "iframe_url": {
+            "description": "URL фрейма видео",
+            "type": "string"
+          },
+          "embed_code": {
+            "description": "Код тега <ins>",
+            "type": "string"
+          },
+          "persons": {
+            "description": "Список коллектива съёмочной группы",
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": {
+                  "description": "ID персоны",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "Имя",
+                  "type": "string"
+                },
+                "name_eng": {
+                  "description": "Имя на английском",
+                  "type": "string"
+                },
+                "name_anyway": {
+                  "description": "Имя",
+                  "type": "string"
+                },
+                "occupation": {
+                  "description": "ID Профессии",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "nullable": true
+          },
+          "voiceovers": {
+            "description": "Список озвучек",
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": {
+                  "description": "ID озвучки",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "Название озвучки",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "nullable": true
+          },
+          "tags": {
+            "description": "Список тегов",
+            "type": "array",
+            "items": {
+              "properties": {
+                "id": {
+                  "description": "ID тега",
+                  "type": "integer"
+                },
+                "code": {
+                  "description": "Код тега",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Название тега",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "nullable": true
+          },
+          "poster_url": {
+            "description": "URL постера",
+            "type": "string",
+            "nullable": true
+          },
+          "backdrop_url": {
+            "description": "URL широкоформатного постера",
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "description": "Длительность видео в минутах",
+            "type": "integer",
+            "nullable": true
+          },
+          "quality": {
+            "description": "Качество видео",
+            "type": "string"
+          },
+          "genre": {
+            "description": "Жанры видео",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "country": {
+            "description": "Страны производства видео",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "description": {
+            "description": "Описание видео",
+            "type": "string",
+            "nullable": true
+          },
+          "description_short": {
+            "description": "Краткое описание видео",
+            "type": "string",
+            "nullable": true
+          },
+          "updated_at": {
+            "description": "Дата и время добавления видео",
+            "type": "string",
+            "nullable": true,
+            "deprecated": true
+          },
+          "uploaded_at": {
+            "description": "Дата и время добавления видео",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {}
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponseProperties"
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Access denied",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponseProperties"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponseProperties"
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Validation failed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponseProperties"
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponseProperties"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "page": {
+        "name": "page",
+        "in": "query",
+        "description": "Номер страницы",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int64",
+          "default": 1,
+          "minimum": 1
+        }
+      },
+      "limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Количество записей на странице",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int64",
+          "default": 20,
+          "minimum": 1
+        }
+      }
+    },
+    "securitySchemes": {
+      "sanctum": {
+        "type": "http",
+        "description": "Laravel Sanctum token authentication",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

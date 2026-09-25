@@ -11,6 +11,9 @@ const NostalgiaPage = lazy(() => import('./pages/NostalgiaPage').then((m) => ({ 
 const RetroNetPage = lazy(() => import('./pages/RetroNetPage').then((m) => ({ default: m.RetroNetPage })));
 const SearchPage = lazy(() => import('./pages/SearchPage').then((m) => ({ default: m.SearchPage })));
 const YearsPage = lazy(() => import('./pages/YearsPage').then((m) => ({ default: m.YearsPage })));
+const SalonPage = lazy(() => import('./pages/SalonPage').then((m) => ({ default: m.SalonPage })));
+const DisneyPage = lazy(() => import('./pages/DisneyPage').then((m) => ({ default: m.DisneyPage })));
+const FilmPage = lazy(() => import('./pages/FilmPage').then((m) => ({ default: m.FilmPage })));
 const CartridgeShelf = lazy(() =>
   import('./components/CartridgeShelf').then((m) => ({ default: m.CartridgeShelf }))
 );
@@ -154,6 +157,10 @@ export default function App() {
               />
             }
           />
+          <Route path="/videosalon" element={<SalonPage />} />
+          <Route path="/videosalon/:slug" element={<FilmPage group="salon" />} />
+          <Route path="/disney-klub" element={<DisneyPage />} />
+          <Route path="/disney-klub/:slug" element={<FilmPage group="disney" />} />
           <Route path="/televizor" element={<TVPage />} />
           <Route path="/istorii" element={<StoriesPage />} />
           <Route path="/nostalgiya" element={<NostalgiaPage />} />

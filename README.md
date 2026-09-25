@@ -59,6 +59,60 @@ node tools/import-music.mjs --src "D:\Музыка" --bitrate 128k
 node tools/probe.mjs --url http://localhost:4173/muzyka --steps tools/steps/music.js --out qa/music.png
 ```
 
+## Видеосалон и Дисней-клуб
+
+Два раздела с полными фильмами и мультсериалами:
+
+- `/videosalon` — 38 фильмов эпохи. Карточки нарисованы как VHS-кассеты, название на наклейке пишется от руки (Caveat).
+- `/disney-klub` — 11 мультсериалов воскресного блока, карточки с постерами и выбором сезона.
+
+Старые разделы `/filmy` и `/multfilmy` остались как архив заметок и кадров — ссылки на них есть в подвале.
+
+| Файл | Роль |
+|---|---|
+| `app/src/pages/SalonPage.tsx` | полка кассет с фильтрами |
+| `app/src/pages/DisneyPage.tsx` | сетка постеров |
+| `app/src/pages/FilmPage.tsx` | карточка + плеер (общая для обоих разделов) |
+| `app/src/components/VhsTape.tsx` | кассета (чистый CSS, без картинок) |
+| `app/src/components/VibixPlayer.tsx` | подключение плеера-балансера |
+| `app/src/data/films.ts` | сгенерированный каталог (руками не править) |
+
+### Конвейер каталога
+
+Всё собирается на этапе разработки, в браузер не уезжает ни один токен:
+
+```powershell
+node tools/films/resolve.mjs        # сверяет списки с базой → tools/films/selection.json
+node tools/films/build-catalog.mjs  # качает постеры в webp → app/src/data/films.ts
+```
+
+Списки фильмов и мультсериалов заданы вверху `resolve.mjs`. Ключи балансера лежат в `.env`
+(`BALANCER2_BASE`, `BALANCER2_TOKEN`), файл в `.gitignore`.
+
+### Сам плеер
+
+SDK балансера сам находит тег `<ins data-type="kp" data-id="{kinopoisk_id}">` и меняет его на iframe —
+в том числе у тегов, вставленных после загрузки страницы, так что SPA-навигация ему не мешает.
+Внутренние id балансера не нужны — хватает kinopoisk_id. Плеер монтируется только по кнопке,
+и этот же клик гасит кассетник через `claimAudio()`.
+
+Проверка в браузере:
+
+```powershell
+node tools/probe.mjs --url http://localhost:5173/videosalon --steps tools/steps/salon.js --out qa/salon.png
+node tools/probe.mjs --url http://localhost:5173/videosalon/terminator-2-sudnyy-den-1991 --steps tools/steps/film-page.js --out qa/film.png
+```
+
 ## Контент и права
 
-Все изображения — оригинальные, созданы для этого проекта. Чужие постеры, обложки и кадры не используются. Старые сайты открываются через Internet Archive, справки ведут на Википедию и другие легальные источники.
+Оформление сайта (фоны, иллюстрации разделов, графика кассет и картриджей) создано для этого проекта.
+
+Чужой материал тоже есть, и он не хранится у нас:
+
+- фильмы и мультсериалы идут через сторонний плеер-балансер в iframe;
+- постеры и описания взяты из его же API и лежат в `app/public/films/`;
+- телеэфир собран из публичных роликов YouTube и играется его штатным плеером;
+- старые сайты открываются через Internet Archive, справки ведут на Википедию.
+
+Музыка и образы игр (`app/public/music/`, `roms/`, `cores/`) в репозиторий не коммитятся и для
+публичной публикации не предназначены.

@@ -17,16 +17,16 @@ import type { CatalogItem } from '../media/types';
 
 const TILES = [
   {
-    to: '/filmy',
-    label: 'Фильмы',
-    note: 'Видеосалон и одноголосый перевод',
+    to: '/videosalon',
+    label: 'Видеосалон',
+    note: 'Полка кассет — бери и смотри',
     image: '/images/movies/section-movies.webp',
     alt: 'Полки видеопроката'
   },
   {
-    to: '/multfilmy',
-    label: 'Мультфильмы',
-    note: 'Утренний блок на ковре',
+    to: '/disney-klub',
+    label: 'Дисней-клуб',
+    note: 'Воскресный блок мультсериалов',
     image: '/images/cartoons/section-cartoons.webp',
     alt: 'Телевизор с мультфильмом'
   },
@@ -81,8 +81,8 @@ export function Home() {
               <span className="mono">каналов</span>
             </div>
             <div>
-              <b>24</b>
-              <span className="mono">записи в архиве</span>
+              <b>49</b>
+              <span className="mono">фильмов и сериалов целиком</span>
             </div>
             <div>
               <b>6</b>
@@ -131,7 +131,7 @@ export function Home() {
         <SectionHeader
           index="02 · Архив"
           title="Что смотрели и во что играли"
-          note="Карточки ведут к легальным источникам: мы не храним чужой контент."
+          note="Заметки и кадры из архива памяти — без плеера, просто чтобы вспомнить."
           action={
             <Link className="btn" to="/poisk">
               Искать по архиву
