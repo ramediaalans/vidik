@@ -1,13 +1,27 @@
 // Плеер балансера. SDK сам находит тег <ins> и меняет его на iframe — в том числе
 // у тегов, вставленных после загрузки страницы, так что SPA-навигация ему не мешает.
 // Реакт в этот узел не лезет: всё содержимое создаётся и сносится вручную.
-import { useEffect, useRef } from 'react';
+//
+// Идентификатор паблишера и адреса SDK задаются в .env в корне репозитория
+// (VITE_VIBIX_PUBLISHER_ID, VITE_VIBIX_SDK_SOURCES). Это не секрет — значение всё
+// равно уходит в бандл, — но так его можно менять без правки кода и держать
+// разные значения для дева, превью и боевого домена.
+import { useEffect, useRef, useState } from 'react';
 
-const PUBLISHER_ID = '679202313';
-const SDK_SOURCES = [
+const PUBLISHER_ID = (import.meta.env.VITE_VIBIX_PUBLISHER_ID ?? '').trim();
+
+const DEFAULT_SDK_SOURCES = [
   'https://graphicslab.io/sdk/v2/rendex-sdk.min.js',
   'https://alt.graphicslab.io/sdk/v2/rendex-sdk.min.js'
 ];
+
+const SDK_SOURCES = (import.meta.env.VITE_VIBIX_SDK_SOURCES ?? '')
+  .split(',')
+  .map((src) => src.trim())
+  .filter(Boolean);
+
+const sources = SDK_SOURCES.length > 0 ? SDK_SOURCES : DEFAULT_SDK_SOURCES;
+
 let sdkPromise: Promise<void> | undefined;
 
 function loadScript(src: string) {
@@ -32,8 +46,12 @@ function loadScript(src: string) {
   });
 }
 
+// Пробуем зеркала по очереди: падает всё — промис отклоняется, и это видно в UI.
 function ensureSdk() {
-  sdkPromise ??= loadScript(SDK_SOURCES[0]).catch(() => loadScript(SDK_SOURCES[1]));
+  sdkPromise ??= sources.reduce(
+    (chain, src) => chain.catch(() => loadScript(src)),
+    Promise.reject<void>(new Error('Vibix SDK: нет источников'))
+  );
   return sdkPromise;
 }
 
@@ -49,10 +67,14 @@ export function VibixPlayer({
   label: string;
 }) {
   const host = useRef<HTMLDivElement>(null);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const mount = host.current;
-    if (!mount) return;
+    if (!mount || !PUBLISHER_ID) return;
+
+    let alive = true;
+    setFailed(false);
 
     const ins = document.createElement('ins');
     ins.setAttribute('data-publisher-id', PUBLISHER_ID);
@@ -68,16 +90,35 @@ export function VibixPlayer({
     ins.setAttribute('data-color2', 'C9F03A');
     ins.setAttribute('data-color3', 'EDE6D6');
     mount.append(ins);
-    void ensureSdk();
+
+    ensureSdk().catch(() => {
+      if (alive) setFailed(true);
+    });
 
     return () => {
+      alive = false;
       mount.replaceChildren();
     };
   }, [type, id, season]);
 
+  if (!PUBLISHER_ID) {
+    return (
+      <div className="vplayer">
+        <p className="mono">
+          Плеер не настроен: задайте VITE_VIBIX_PUBLISHER_ID в .env и пересоберите сайт.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="vplayer">
       <div className="vplayer__mount" ref={host} aria-label={label} />
+      {failed ? (
+        <p className="mono" role="status">
+          Плеер не отвечает. Похоже, кассету зажевало — попробуй обновить страницу.
+        </p>
+      ) : null}
     </div>
   );
 }

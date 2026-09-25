@@ -1,0 +1,23 @@
+# Заголовки для Cloudflare Pages. Файл копируется в dist и читается автоматически.
+# Netlify понимает тот же формат. Vercel использует vercel.json.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()
+  # Отчёт без блокировки: смотрим в консоли, что бы упало при реальной CSP.
+  # Когда отчёт чистый — переименовать в Content-Security-Policy.
+  # Внимание: SDK балансера вставляет iframe на заранее неизвестные домены,
+  # поэтому frame-src придётся дополнить по итогам отчёта.
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-eval' https://graphicslab.io https://alt.graphicslab.io https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' blob: https:; worker-src 'self' blob:; frame-src https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
+
+# Хешированные бандлы и картинки никогда не меняются под тем же именем.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/films/*
+  Cache-Control: public, max-age=31536000, immutable

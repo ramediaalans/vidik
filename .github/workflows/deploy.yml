@@ -34,6 +34,8 @@ jobs:
       - name: Build
         env:
           VITE_BASE: /${{ github.event.repository.name }}/
+          VITE_VIBIX_PUBLISHER_ID: ${{ vars.VITE_VIBIX_PUBLISHER_ID }}
+          VITE_VIBIX_SDK_SOURCES: ${{ vars.VITE_VIBIX_SDK_SOURCES }}
         run: npm run build
 
       - name: SPA fallback for Pages

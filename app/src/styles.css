@@ -1856,8 +1856,8 @@ body.webamp-hidden #webamp {
 }
 
 /* ---------- Photo television cabinet ---------- */
-/* Source: 1536 x 1024. Transparent CRT cutout: x=113..1170, y=98..818.
-   The player sits below the cutout; the cabinet image stays above it. */
+/* Source: 1536 x 1024. Native PNG alpha defines the CRT cutout:
+   x=126..1175, y=102..850. The cabinet is not contour-cropped. */
 .tv__set {
   position: relative;
   width: 100%;
@@ -1871,11 +1871,11 @@ body.webamp-hidden #webamp {
 }
 .tv__screenFrame .tv__screen {
   position: absolute;
-  top: 9.57%;
-  left: 7.36%;
+  top: 9.96%;
+  left: 8.2%;
   z-index: 1;
-  width: 68.88%;
-  height: 70.41%;
+  width: 68.36%;
+  height: 73.14%;
   aspect-ratio: auto;
   overflow: hidden;
   border: 0;
