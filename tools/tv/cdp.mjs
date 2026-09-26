@@ -30,9 +30,15 @@ class Cdp {
     });
   }
   on(fn) { this.handlers.push(fn); }
-  send(method, params = {}) {
+  send(method, params = {}, sessionId) {
     const id = (this.id += 1);
-    return new Promise((res, rej) => { this.pending.set(id, { resolve: res, reject: rej }); this.ws.send(JSON.stringify({ id, method, params })); });
+    const msg = sessionId ? { id, method, params, sessionId } : { id, method, params };
+    return new Promise((res, rej) => { this.pending.set(id, { resolve: res, reject: rej }); this.ws.send(JSON.stringify(msg)); });
+  }
+  async evIn(sessionId, expression) {
+    const r = await this.send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true }, sessionId);
+    if (r.exceptionDetails) return { __error: r.exceptionDetails.text };
+    return r.result.value;
   }
   async ev(expression) {
     const r = await this.send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true });

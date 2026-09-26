@@ -1,0 +1,239 @@
+
+### c1.eve.odin-doma «Один дома» 1990 [movie]
+  id=734235 kp=1312838 2021 FullHD | Один дома | Home Sweet Home Alone
+
+### c1.eve.maska «Маска» 1994 [movie]
+  id=700127 kp=6039 1994 FullHD | Маска | The Mask
+
+### c1.eve.bethoven «Бетховен» 1992 [movie]
+  id=753295 kp=15635 1991 FullHD | Бетховен | Beethoven
+
+### c3.disney.korol-lev «Король Лев» 1994 [movie]
+  id=517995 kp=2360 1994 FullHD | Король Лев | The Lion King
+  id=1036149 kp=1005878 2019 FullHD | Король Лев | The Lion King
+
+### c3.disney.aladdin «Аладдин» 1992 [movie]
+  id=518865 kp=2361 1992 FullHD | Аладдин | Aladdin
+  id=747253 kp=181984 1986 FullHD | Аладдин | Aladdin
+  id=690478 kp=1007049 2019 FullHD | Аладдин | Aladdin
+
+### c3.disney.rusalochka «Русалочка» 1989 [movie]
+  id=518209 kp=8147 1989 FullHD | Русалочка | The Little Mermaid
+  id=925175 kp=963388 2018 FullHD | Рассказы Русалочки | The Little Mermaid
+  id=850547 kp=999881 2023 FullHD | Русалочка | The Little Mermaid
+
+### c3.disney.krasavica «Красавица и чудовище» 1991 [movie]
+  id=520684 kp=540 1991 FullHD | Красавица и чудовище | Beauty and the Beast
+  id=483106 kp=720023 2012 FullHD | Красавица и чудовище | Die Schöne und das Biest
+  id=201098 kp=674218 2014 FullHD | Красавица и чудовище | Beauty and the Beast
+
+### c3.disney.kniga-dzhungley «Книга джунглей» 1967 [movie]
+  id=522390 kp=8133 1967 FullHD | Книга джунглей | The Jungle Book
+  id=802564 kp=1723 1994 FullHD | Книга джунглей | The Jungle Book
+  id=776195 kp=779024 2016 FullHD | Книга джунглей | The Jungle Book
+
+### c3.disney.pokahontas «Покахонтас» 1995 [movie]
+  id=522471 kp=5213 1995 FullHD | Покахонтас | Pocahontas
+
+### c3.com.zhandarm «Жандарм из Сен-Тропе» 1964 [movie]
+  id=927226 kp=57308 1964 FullHD | Жандарм из Сен-Тропе | The Gendarme of Saint-Tropez
+
+### c3.com.razinya «Разиня» 1965 [movie]
+  id=731597 kp=80775 1965 FullHD | Разиня | The Sucker
+
+### c3.com.igrushka «Игрушка» 1976 [movie]
+  id=608307 kp=57004 1976 FullHD | Игрушка | The Toy
+  id=59318 kp=29925 1982 FullHD | Игрушка | The Toy
+  id=939342 kp=5305452 2022 FullHD | Игрушка | Laruan
+
+### c3.com.nevezuchie «Невезучие» 1981 [movie]
+  id=521281 kp=20908 1981 FullHD | Невезучие | La Chèvre
+  id=97269 kp=18461 1991 FullHD | Невезучие | Pure Luck
+  id=927804 kp=14287 2003 FullHD | Невезучие | Ruby & Quentin
+
+### c3.com.ukroshchenie «Укрощение строптивого» 1980 [movie]
+  id=928194 kp=63912 1980 FullHD | Укрощение строптивого | The Taming of the Scoundrel
+
+### c3.com.blef «Блеф» 1976 [movie]
+  id=927971 kp=10179 1976 FullHD | Блеф | The Con Artists
+  id=178848 kp=3925 1987 FullHD | Блеф | The Squeeze
+
+### c3.ma.dospehi-boga «Доспехи Бога» 1986 [movie]
+  id=927841 kp=24705 1986 FullHD | Доспехи Бога | Armour of God
+
+### c3.ma.pyanyy-master «Пьяный мастер» 1978 [movie]
+  id=773109 kp=24726 1978 FullHD | Пьяный мастер | Drunken Master
+
+### c3.ma.krovavyy-sport «Кровавый спорт» 1988 [movie]
+  id=645237 kp=4777 1988 FullHD | Кровавый спорт | Bloodsport
+
+### c3.ma.kikbokser «Кикбоксер» 1989 [movie]
+  id=927665 kp=28131 1989 FullHD | Кикбоксер | Kickboxer
+
+### c3.ma.vyhod-drakona «Выход дракона» 1973 [movie]
+  id=53158 kp=24743 1973 FullHD | Выход Дракона | Enter the Dragon
+
+### c3.ma.policeyskaya-istoriya «Полицейская история» 1985 [movie]
+  id=929556 kp=22791 1985 FullHD | Полицейская история | Police Story
+  id=922582 kp=102847 1975 FullHD | Полицейская история | 
+
+### c3.sf.hishchnik «Хищник» 1987 [movie]
+  id=938177 kp=6303 1987 FullHD | Хищник | Predator
+  id=519793 kp=840829 2018 FullHD | Хищник | The Predator
+
+### c3.sf.vspomnit-vse «Вспомнить все» 1990 [movie]
+  id=928092 kp=2443 1990 FullHD | Вспомнить всё | Total Recall
+  id=753478 kp=453374 2012 FullHD | Вспомнить всё | Total Recall
+
+### c3.sf.robokop «Робокоп» 1987 [movie]
+  id=668021 kp=7410 1987 FullHD | Робокоп | RoboCop
+  id=625408 kp=416183 2014 FullHD | РобоКоп | RoboCop
+
+### c3.big.terminator2 «Терминатор 2 Судный день» 1991 [movie]
+  id=928220 kp=444 1991 FullHD | Терминатор 2: Судный день | Terminator 2: Judgment Day
+
+### c3.big.matrica «Матрица» 1999 [movie]
+  id=938184 kp=301 1999 FullHD | Матрица | The Matrix
+
+### c3.big.pyatyy-element «Пятый элемент» 1997 [movie]
+  id=521318 kp=2656 1997 FullHD | Пятый элемент | The Fifth Element
+
+### c3.thr.leon «Леон» 1994 [movie]
+  id=928248 kp=389 1994 FullHD | Леон | Léon: The Professional
+
+### c3.thr.skorost «Скорость» 1994 [movie]
+  id=649277 kp=1968 1994 FullHD | Скорость | Speed
+
+### c3.thr.molchanie-yagnyat «Молчание ягнят» 1991 [movie]
+  id=522145 kp=345 1990 FullHD | Молчание ягнят | The Silence of the Lambs
+
+### c3.hor.koshmar «Кошмар на улице Вязов» 1984 [movie]
+  id=49779 kp=5198 1984 FullHD | Кошмар на улице Вязов | A Nightmare on Elm Street
+  id=784775 kp=409179 2010 FullHD | Кошмар на улице Вязов | A Nightmare on Elm Street
+
+### c3.hor.detskie-igry «Детские игры» 1988 [movie]
+  id=808281 kp=5891 1988 FullHD | Детские игры | Child's Play
+  id=929505 kp=1179256 2019 FullHD | Детские игры | Child's Play
+
+### c3.hor.bayki-iz-sklepa «Байки из склепа» 1989 [serial]
+  id=547362 kp=271501 1989 FullHD | Байки из склепа | Tales from the Crypt
+
+### c3.b.universalnyy-soldat «Универсальный солдат» 1992 [movie]
+  id=929619 kp=12363 1992 FullHD | Универсальный солдат | Universal Soldier
+
+### c3.b.kiborg «Киборг» 1989 [movie]
+  id=755668 kp=4010 1989 FullHD | Киборг | Cyborg
+
+### c3.b.bezumnyy-maks-2 «Безумный Макс 2 Воин дороги» 1981 [movie]
+  id=539731 kp=8374 1981 FullHD | Безумный Макс 2: Воин дороги | The Road Warrior
+
+### c2.s.sailormoon «Красавица-воин Сейлор Мун» 1992 [serial]
+  id=644213 kp=229704 1992 FullHD | Красавица-воин Сейлор Мун | Sailor Moon
+
+### c2.s.transformers «Трансформеры Битвы зверей» 1996 [serial]
+  id=715948 kp=79741 1994 FullHD | Скорая помощь | ER
+  id=558024 kp=400004 2007 FullHD | Трансформеры | Transformers: Animated
+  id=600504 kp=1047554 2015 FullHD | नगन | Naagin
+
+### c2.s.spiderman «Человек-паук» 1994 [serial]
+  id=938267 kp=95232 1994 FullHD | Человек-паук | Spider-Man: The Animated Series
+  id=616814 kp=1008482 2017 FullHD | Человек-паук | Spider-Man
+
+### c2.s.xmen «Люди Икс» 1992 [serial]
+  id=531091 kp=439734 2008 FullHD | Росомаха и Люди Икс. Начало | Wolverine and the X-Men
+  id=600504 kp=1047554 2015 FullHD | नगन | Naagin
+  id=686558 kp=855925 2015 FullHD | Люди | Humans
+
+### c2.s.tmnt «Черепашки-мутанты ниндзя» 1987 [serial]
+  id=190459 kp=94890 1987 FullHD | Черепашки-мутанты-ниндзя | Teenage Mutant Ninja Turtles
+  id=1017456 kp=421422 2003 FullHD | Мутанты черепашки ниндзя. Новые приключения! | Teenage Mutant Ninja Turtles
+  id=778567 kp=584136 2012 FullHD | Черепашки-ниндзя | Teenage Mutant Ninja Turtles
+
+### c2.s.elen «Элен и ребята» 1992 [serial]
+  id=600504 kp=1047554 2015 FullHD | नगन | Naagin
+  id=1005630 kp=1384717 2020 FullHD | 小娘惹 | The Little Nyonya
+  id=1057444 kp=5915895 2024 FullHD | Я | Me
+
+### c2.s.beverly «Беверли-Хиллз 90210» 1990 [serial]
+  id=691447 kp=80742 1990 FullHD | Беверли-Хиллз 90210 | Beverly Hills, 90210
+
+### c2.s.dikiy-angel «Дикий ангел» 1998 [serial]
+  id=734109 kp=77191 1998 FullHD | Дикий ангел | Wild Angel
+
+### c2.s.arnold «Эй, Арнольд!» 1996 [serial]
+  id=600504 kp=1047554 2015 FullHD | नगन | Naagin
+  id=1005630 kp=1384717 2020 FullHD | 小娘惹 | The Little Nyonya
+  id=814044 kp=5305426 2023 FullHD | Арнольд | Arnold
+
+### c2.s.rugrats «Ох уж эти детки» 1991 [serial]
+  id=666527 kp=214312 1991 FullHD | Ох, уж эти детки! | Rugrats
+  id=1040203 kp=1179195 2021 FullHD | Ох уж эти детки! | Rugrats
+
+### c2.s.monsters «ААА!!! Настоящие монстры» 1994 [serial]
+  id=715948 kp=79741 1994 FullHD | Скорая помощь | ER
+  id=520023 kp=258582 2004 FullHD | Монстр | Monster
+  id=190100 kp=580219 2011 FullHD | Настоящие | 
+
+### c2.s.gerakl «Удивительные странствия Геракла» 1995 [serial]
+  id=715948 kp=79741 1994 FullHD | Скорая помощь | ER
+  id=600504 kp=1047554 2015 FullHD | नगन | Naagin
+  id=1005630 kp=1384717 2020 FullHD | 小娘惹 | The Little Nyonya
+
+### c2.s.zena «Зена - королева воинов» 1995 [serial]
+  id=600504 kp=1047554 2015 FullHD | नगन | Naagin
+  id=929531 kp=1219257 2019 FullHD | Воин | Warrior
+  id=1005630 kp=1384717 2020 FullHD | 小娘惹 | The Little Nyonya
+
+### c2.s.temnota «Боишься ли ты темноты?» 1990 [serial]
+  id=676804 kp=1274369 2019 FullHD | Боишься ли ты темноты? | Are You Afraid of the Dark?
+
+### c2.s.murashki «Мурашки» 1995 [serial]
+  id=969148 kp=4852099 2023 FullHD | Ужастики | Goosebumps
+
+### c2.s.xfiles «Секретные материалы» 1993 [serial]
+  id=897731 kp=77046 1993 FullHD | Секретные материалы | The X-Files
+
+### c2.s.twinpeaks «Твин Пикс» 1990 [serial]
+  id=928045 kp=84358 1990 FullHD | Твин Пикс | Twin Peaks
+
+### c2.s.babylon5 «Вавилон 5» 1994 [serial]
+  id=520901 kp=77298 1993 FullHD | Вавилон 5 | Babylon 5
+
+### c2.s.quantum «Квантовый скачок» 1989 [serial]
+  id=1009297 kp=94222 1989 FullHD | Квантовый скачок | Quantum Leap
+  id=817020 kp=5068184 2022 FullHD | Квантовый скачок | Quantum Leap
+
+### c2.s.bivis «Бивис и Батт-Хед» 1993 [serial]
+  id=711782 kp=94667 1993 FullHD | Бивис и Батт-Хед | Beavis and Butt-Head
+  id=447237 kp=5081207 2022 FullHD | Бивис и Батт-Хед | Beavis and Butt-Head
+
+### c1.s.utinye «Утиные истории» 1987 [serial]
+  id=788722 kp=81426 1987 FullHD | Утиные истории | DuckTales
+  id=716461 kp=1008491 2017 FullHD | Утиные истории | DuckTales
+
+### c1.s.chipdale «Чип и Дейл спешат на помощь» 1989 [serial]
+  id=637777 kp=95231 1989 FullHD | Чип и Дейл спешат на помощь | Chip 'n' Dale Rescue Rangers
+
+### c1.s.chernyy-plashch «Черный плащ» 1991 [serial]
+  id=897120 kp=395106 1991 FullHD | Черный Плащ | Darkwing Duck
+
+### c1.s.santa-barbara «Санта-Барбара» 1984 [serial]
+  id=600504 kp=1047554 2015 FullHD | नगन | Naagin
+  id=1005630 kp=1384717 2020 FullHD | 小娘惹 | The Little Nyonya
+
+### c1.s.bogatye «Богатые тоже плачут» 1979 [serial]
+  id=929331 kp=4780333 2022 FullHD | Богатые тоже плачут | 
+
+### c1.s.dikaya-roza «Дикая Роза» 1987 [serial]
+  id=546953 kp=294989 1987 FullHD | Дикая роза | Rosa salvaje
+
+### c1.s.gostya «Гостья из будущего» 1984 [serial]
+  id=929877 kp=77185 1984 FullHD | Гостья из будущего | Guest from the Future
+
+### c1.s.elektronik «Приключения Электроника» 1979 [serial]
+  id=522212 kp=77284 1979 FullHD | Приключения Электроника | The Adventures of the Electronic
+
+### c1.s.petrov «Приключения Петрова и Васечкина, обыкновенные и невероятные» 1983 [movie]
+  id=60172 kp=123123 1956 FullHD | にっぽんＧメン 特別武装班出動 | 
+  id=151973 kp=1051460 2014 FullHD | 非狐外传 | 
+  id=699840 kp=847421 2014 FullHD | दस कटत | 

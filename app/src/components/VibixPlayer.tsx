@@ -59,11 +59,13 @@ export function VibixPlayer({
   type,
   id,
   season,
+  episode,
   label
 }: {
   type: 'movie' | 'serial';
   id: string;
   season?: number;
+  episode?: number;
   label: string;
 }) {
   const host = useRef<HTMLDivElement>(null);
@@ -81,6 +83,7 @@ export function VibixPlayer({
     ins.setAttribute('data-type', type);
     ins.setAttribute('data-id', id);
     if (season) ins.setAttribute('data-season', String(season));
+    if (episode) ins.setAttribute('data-episodes', String(episode));
     ins.setAttribute('data-nopreload', 'true');
     ins.setAttribute('data-poster', 'true');
     ins.setAttribute('data-width', '100%');
@@ -99,7 +102,7 @@ export function VibixPlayer({
       alive = false;
       mount.replaceChildren();
     };
-  }, [type, id, season]);
+  }, [type, id, season, episode]);
 
   if (!PUBLISHER_ID) {
     return (

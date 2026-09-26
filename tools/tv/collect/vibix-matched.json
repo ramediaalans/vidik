@@ -1,0 +1,1674 @@
+[
+ {
+  "key": "c1.eve.odin-doma",
+  "t": "Один дома",
+  "alt": "Home Alone",
+  "y": 1990,
+  "type": "movie",
+  "res": [
+   {
+    "id": 734235,
+    "kp": 1312838,
+    "name": "Один дома",
+    "eng": "Home Sweet Home Alone",
+    "year": "2021",
+    "q": "FullHD",
+    "up": "2025-01-30",
+    "dy": 31
+   }
+  ]
+ },
+ {
+  "key": "c1.eve.maska",
+  "t": "Маска",
+  "alt": "The Mask",
+  "y": 1994,
+  "type": "movie",
+  "res": [
+   {
+    "id": 700127,
+    "kp": 6039,
+    "name": "Маска",
+    "eng": "The Mask",
+    "year": "1994",
+    "q": "FullHD",
+    "up": "2024-03-17",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c1.eve.bethoven",
+  "t": "Бетховен",
+  "alt": "Beethoven",
+  "y": 1992,
+  "type": "movie",
+  "res": [
+   {
+    "id": 753295,
+    "kp": 15635,
+    "name": "Бетховен",
+    "eng": "Beethoven",
+    "year": "1991",
+    "q": "FullHD",
+    "up": "2024-04-28",
+    "dy": 1
+   }
+  ]
+ },
+ {
+  "key": "c3.disney.korol-lev",
+  "t": "Король Лев",
+  "alt": "The Lion King",
+  "y": 1994,
+  "type": "movie",
+  "res": [
+   {
+    "id": 517995,
+    "kp": 2360,
+    "name": "Король Лев",
+    "eng": "The Lion King",
+    "year": "1994",
+    "q": "FullHD",
+    "up": "2024-07-27",
+    "dy": 0
+   },
+   {
+    "id": 1036149,
+    "kp": 1005878,
+    "name": "Король Лев",
+    "eng": "The Lion King",
+    "year": "2019",
+    "q": "FullHD",
+    "up": "2024-07-28",
+    "dy": 25
+   }
+  ]
+ },
+ {
+  "key": "c3.disney.aladdin",
+  "t": "Аладдин",
+  "alt": "Aladdin",
+  "y": 1992,
+  "type": "movie",
+  "res": [
+   {
+    "id": 518865,
+    "kp": 2361,
+    "name": "Аладдин",
+    "eng": "Aladdin",
+    "year": "1992",
+    "q": "FullHD",
+    "up": "2026-02-01",
+    "dy": 0
+   },
+   {
+    "id": 747253,
+    "kp": 181984,
+    "name": "Аладдин",
+    "eng": "Aladdin",
+    "year": "1986",
+    "q": "FullHD",
+    "up": "2026-02-19",
+    "dy": 6
+   },
+   {
+    "id": 690478,
+    "kp": 1007049,
+    "name": "Аладдин",
+    "eng": "Aladdin",
+    "year": "2019",
+    "q": "FullHD",
+    "up": "2024-07-28",
+    "dy": 27
+   }
+  ]
+ },
+ {
+  "key": "c3.disney.rusalochka",
+  "t": "Русалочка",
+  "alt": "The Little Mermaid",
+  "y": 1989,
+  "type": "movie",
+  "res": [
+   {
+    "id": 518209,
+    "kp": 8147,
+    "name": "Русалочка",
+    "eng": "The Little Mermaid",
+    "year": "1989",
+    "q": "FullHD",
+    "up": "2026-02-01",
+    "dy": 0
+   },
+   {
+    "id": 925175,
+    "kp": 963388,
+    "name": "Рассказы Русалочки",
+    "eng": "The Little Mermaid",
+    "year": "2018",
+    "q": "FullHD",
+    "up": "2025-12-02",
+    "dy": 29
+   },
+   {
+    "id": 850547,
+    "kp": 999881,
+    "name": "Русалочка",
+    "eng": "The Little Mermaid",
+    "year": "2023",
+    "q": "FullHD",
+    "up": "2025-12-10",
+    "dy": 34
+   }
+  ]
+ },
+ {
+  "key": "c3.disney.krasavica",
+  "t": "Красавица и чудовище",
+  "alt": "Beauty and the Beast",
+  "y": 1991,
+  "type": "movie",
+  "res": [
+   {
+    "id": 520684,
+    "kp": 540,
+    "name": "Красавица и чудовище",
+    "eng": "Beauty and the Beast",
+    "year": "1991",
+    "q": "FullHD",
+    "up": "2024-07-29",
+    "dy": 0
+   },
+   {
+    "id": 483106,
+    "kp": 720023,
+    "name": "Красавица и чудовище",
+    "eng": "Die Schöne und das Biest",
+    "year": "2012",
+    "q": "FullHD",
+    "up": "2025-07-17",
+    "dy": 21
+   },
+   {
+    "id": 201098,
+    "kp": 674218,
+    "name": "Красавица и чудовище",
+    "eng": "Beauty and the Beast",
+    "year": "2014",
+    "q": "FullHD",
+    "up": "2025-08-18",
+    "dy": 23
+   }
+  ]
+ },
+ {
+  "key": "c3.disney.kniga-dzhungley",
+  "t": "Книга джунглей",
+  "alt": "The Jungle Book",
+  "y": 1967,
+  "type": "movie",
+  "res": [
+   {
+    "id": 522390,
+    "kp": 8133,
+    "name": "Книга джунглей",
+    "eng": "The Jungle Book",
+    "year": "1967",
+    "q": "FullHD",
+    "up": "2025-07-28",
+    "dy": 0
+   },
+   {
+    "id": 802564,
+    "kp": 1723,
+    "name": "Книга джунглей",
+    "eng": "The Jungle Book",
+    "year": "1994",
+    "q": "FullHD",
+    "up": "2024-06-21",
+    "dy": 27
+   },
+   {
+    "id": 776195,
+    "kp": 779024,
+    "name": "Книга джунглей",
+    "eng": "The Jungle Book",
+    "year": "2016",
+    "q": "FullHD",
+    "up": "2026-06-21",
+    "dy": 49
+   }
+  ]
+ },
+ {
+  "key": "c3.disney.pokahontas",
+  "t": "Покахонтас",
+  "alt": "Pocahontas",
+  "y": 1995,
+  "type": "movie",
+  "res": [
+   {
+    "id": 522471,
+    "kp": 5213,
+    "name": "Покахонтас",
+    "eng": "Pocahontas",
+    "year": "1995",
+    "q": "FullHD",
+    "up": "2025-04-24",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.com.zhandarm",
+  "t": "Жандарм из Сен-Тропе",
+  "alt": "Le gendarme de Saint-Tropez",
+  "y": 1964,
+  "type": "movie",
+  "res": [
+   {
+    "id": 927226,
+    "kp": 57308,
+    "name": "Жандарм из Сен-Тропе",
+    "eng": "The Gendarme of Saint-Tropez",
+    "year": "1964",
+    "q": "FullHD",
+    "up": "2024-08-22",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.com.razinya",
+  "t": "Разиня",
+  "alt": "Le corniaud",
+  "y": 1965,
+  "type": "movie",
+  "res": [
+   {
+    "id": 731597,
+    "kp": 80775,
+    "name": "Разиня",
+    "eng": "The Sucker",
+    "year": "1965",
+    "q": "FullHD",
+    "up": "2024-03-23",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.com.igrushka",
+  "t": "Игрушка",
+  "alt": "Le jouet",
+  "y": 1976,
+  "type": "movie",
+  "res": [
+   {
+    "id": 608307,
+    "kp": 57004,
+    "name": "Игрушка",
+    "eng": "The Toy",
+    "year": "1976",
+    "q": "FullHD",
+    "up": "2024-03-21",
+    "dy": 0
+   },
+   {
+    "id": 59318,
+    "kp": 29925,
+    "name": "Игрушка",
+    "eng": "The Toy",
+    "year": "1982",
+    "q": "FullHD",
+    "up": "2026-03-10",
+    "dy": 6
+   },
+   {
+    "id": 939342,
+    "kp": 5305452,
+    "name": "Игрушка",
+    "eng": "Laruan",
+    "year": "2022",
+    "q": "FullHD",
+    "up": "2026-03-20",
+    "dy": 46
+   }
+  ]
+ },
+ {
+  "key": "c3.com.nevezuchie",
+  "t": "Невезучие",
+  "alt": "La chèvre",
+  "y": 1981,
+  "type": "movie",
+  "res": [
+   {
+    "id": 521281,
+    "kp": 20908,
+    "name": "Невезучие",
+    "eng": "La Chèvre",
+    "year": "1981",
+    "q": "FullHD",
+    "up": "2024-03-18",
+    "dy": 0
+   },
+   {
+    "id": 97269,
+    "kp": 18461,
+    "name": "Невезучие",
+    "eng": "Pure Luck",
+    "year": "1991",
+    "q": "FullHD",
+    "up": "2026-02-11",
+    "dy": 10
+   },
+   {
+    "id": 927804,
+    "kp": 14287,
+    "name": "Невезучие",
+    "eng": "Ruby & Quentin",
+    "year": "2003",
+    "q": "FullHD",
+    "up": "2024-11-04",
+    "dy": 22
+   }
+  ]
+ },
+ {
+  "key": "c3.com.ukroshchenie",
+  "t": "Укрощение строптивого",
+  "alt": "Il bisbetico domato",
+  "y": 1980,
+  "type": "movie",
+  "res": [
+   {
+    "id": 928194,
+    "kp": 63912,
+    "name": "Укрощение строптивого",
+    "eng": "The Taming of the Scoundrel",
+    "year": "1980",
+    "q": "FullHD",
+    "up": "2024-07-28",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.com.blef",
+  "t": "Блеф",
+  "alt": "Bluff storia di truffe e di imbroglioni",
+  "y": 1976,
+  "type": "movie",
+  "res": [
+   {
+    "id": 927971,
+    "kp": 10179,
+    "name": "Блеф",
+    "eng": "The Con Artists",
+    "year": "1976",
+    "q": "FullHD",
+    "up": "2024-11-01",
+    "dy": 0
+   },
+   {
+    "id": 178848,
+    "kp": 3925,
+    "name": "Блеф",
+    "eng": "The Squeeze",
+    "year": "1987",
+    "q": "FullHD",
+    "up": "2026-02-26",
+    "dy": 11
+   }
+  ]
+ },
+ {
+  "key": "c3.ma.dospehi-boga",
+  "t": "Доспехи Бога",
+  "alt": "Armour of God",
+  "y": 1986,
+  "type": "movie",
+  "res": [
+   {
+    "id": 927841,
+    "kp": 24705,
+    "name": "Доспехи Бога",
+    "eng": "Armour of God",
+    "year": "1986",
+    "q": "FullHD",
+    "up": "2024-11-02",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.ma.pyanyy-master",
+  "t": "Пьяный мастер",
+  "alt": "Drunken Master",
+  "y": 1978,
+  "type": "movie",
+  "res": [
+   {
+    "id": 773109,
+    "kp": 24726,
+    "name": "Пьяный мастер",
+    "eng": "Drunken Master",
+    "year": "1978",
+    "q": "FullHD",
+    "up": "2024-03-26",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.ma.krovavyy-sport",
+  "t": "Кровавый спорт",
+  "alt": "Bloodsport",
+  "y": 1988,
+  "type": "movie",
+  "res": [
+   {
+    "id": 645237,
+    "kp": 4777,
+    "name": "Кровавый спорт",
+    "eng": "Bloodsport",
+    "year": "1988",
+    "q": "FullHD",
+    "up": "2024-04-22",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.ma.kikbokser",
+  "t": "Кикбоксер",
+  "alt": "Kickboxer",
+  "y": 1989,
+  "type": "movie",
+  "res": [
+   {
+    "id": 927665,
+    "kp": 28131,
+    "name": "Кикбоксер",
+    "eng": "Kickboxer",
+    "year": "1989",
+    "q": "FullHD",
+    "up": "2026-01-23",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.ma.vyhod-drakona",
+  "t": "Выход дракона",
+  "alt": "Enter the Dragon",
+  "y": 1973,
+  "type": "movie",
+  "res": [
+   {
+    "id": 53158,
+    "kp": 24743,
+    "name": "Выход Дракона",
+    "eng": "Enter the Dragon",
+    "year": "1973",
+    "q": "FullHD",
+    "up": "2024-03-23",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.ma.policeyskaya-istoriya",
+  "t": "Полицейская история",
+  "alt": "Police Story",
+  "y": 1985,
+  "type": "movie",
+  "res": [
+   {
+    "id": 929556,
+    "kp": 22791,
+    "name": "Полицейская история",
+    "eng": "Police Story",
+    "year": "1985",
+    "q": "FullHD",
+    "up": "2025-08-14",
+    "dy": 0
+   },
+   {
+    "id": 922582,
+    "kp": 102847,
+    "name": "Полицейская история",
+    "eng": null,
+    "year": "1975",
+    "q": "FullHD",
+    "up": "2026-09-08",
+    "dy": 10
+   }
+  ]
+ },
+ {
+  "key": "c3.sf.hishchnik",
+  "t": "Хищник",
+  "alt": "Predator",
+  "y": 1987,
+  "type": "movie",
+  "res": [
+   {
+    "id": 938177,
+    "kp": 6303,
+    "name": "Хищник",
+    "eng": "Predator",
+    "year": "1987",
+    "q": "FullHD",
+    "up": "2024-03-20",
+    "dy": 0
+   },
+   {
+    "id": 519793,
+    "kp": 840829,
+    "name": "Хищник",
+    "eng": "The Predator",
+    "year": "2018",
+    "q": "FullHD",
+    "up": "2025-09-27",
+    "dy": 31
+   }
+  ]
+ },
+ {
+  "key": "c3.sf.vspomnit-vse",
+  "t": "Вспомнить все",
+  "alt": "Total Recall",
+  "y": 1990,
+  "type": "movie",
+  "res": [
+   {
+    "id": 928092,
+    "kp": 2443,
+    "name": "Вспомнить всё",
+    "eng": "Total Recall",
+    "year": "1990",
+    "q": "FullHD",
+    "up": "2024-11-02",
+    "dy": 0
+   },
+   {
+    "id": 753478,
+    "kp": 453374,
+    "name": "Вспомнить всё",
+    "eng": "Total Recall",
+    "year": "2012",
+    "q": "FullHD",
+    "up": "2025-08-31",
+    "dy": 22
+   }
+  ]
+ },
+ {
+  "key": "c3.sf.robokop",
+  "t": "Робокоп",
+  "alt": "RoboCop",
+  "y": 1987,
+  "type": "movie",
+  "res": [
+   {
+    "id": 668021,
+    "kp": 7410,
+    "name": "Робокоп",
+    "eng": "RoboCop",
+    "year": "1987",
+    "q": "FullHD",
+    "up": "2024-04-04",
+    "dy": 0
+   },
+   {
+    "id": 625408,
+    "kp": 416183,
+    "name": "РобоКоп",
+    "eng": "RoboCop",
+    "year": "2014",
+    "q": "FullHD",
+    "up": "2025-11-07",
+    "dy": 27
+   }
+  ]
+ },
+ {
+  "key": "c3.big.terminator2",
+  "t": "Терминатор 2 Судный день",
+  "alt": "Terminator 2 Judgment Day",
+  "y": 1991,
+  "type": "movie",
+  "res": [
+   {
+    "id": 928220,
+    "kp": 444,
+    "name": "Терминатор 2: Судный день",
+    "eng": "Terminator 2: Judgment Day",
+    "year": "1991",
+    "q": "FullHD",
+    "up": "2024-08-28",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.big.matrica",
+  "t": "Матрица",
+  "alt": "The Matrix",
+  "y": 1999,
+  "type": "movie",
+  "res": [
+   {
+    "id": 938184,
+    "kp": 301,
+    "name": "Матрица",
+    "eng": "The Matrix",
+    "year": "1999",
+    "q": "FullHD",
+    "up": "2024-02-27",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.big.pyatyy-element",
+  "t": "Пятый элемент",
+  "alt": "The Fifth Element",
+  "y": 1997,
+  "type": "movie",
+  "res": [
+   {
+    "id": 521318,
+    "kp": 2656,
+    "name": "Пятый элемент",
+    "eng": "The Fifth Element",
+    "year": "1997",
+    "q": "FullHD",
+    "up": "2024-03-03",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.thr.leon",
+  "t": "Леон",
+  "alt": "Leon",
+  "y": 1994,
+  "type": "movie",
+  "res": [
+   {
+    "id": 928248,
+    "kp": 389,
+    "name": "Леон",
+    "eng": "Léon: The Professional",
+    "year": "1994",
+    "q": "FullHD",
+    "up": "2024-08-19",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.thr.skorost",
+  "t": "Скорость",
+  "alt": "Speed",
+  "y": 1994,
+  "type": "movie",
+  "res": [
+   {
+    "id": 649277,
+    "kp": 1968,
+    "name": "Скорость",
+    "eng": "Speed",
+    "year": "1994",
+    "q": "FullHD",
+    "up": "2024-03-24",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.thr.molchanie-yagnyat",
+  "t": "Молчание ягнят",
+  "alt": "The Silence of the Lambs",
+  "y": 1991,
+  "type": "movie",
+  "res": [
+   {
+    "id": 522145,
+    "kp": 345,
+    "name": "Молчание ягнят",
+    "eng": "The Silence of the Lambs",
+    "year": "1990",
+    "q": "FullHD",
+    "up": "2024-02-27",
+    "dy": 1
+   }
+  ]
+ },
+ {
+  "key": "c3.hor.koshmar",
+  "t": "Кошмар на улице Вязов",
+  "alt": "A Nightmare on Elm Street",
+  "y": 1984,
+  "type": "movie",
+  "res": [
+   {
+    "id": 49779,
+    "kp": 5198,
+    "name": "Кошмар на улице Вязов",
+    "eng": "A Nightmare on Elm Street",
+    "year": "1984",
+    "q": "FullHD",
+    "up": "2025-03-03",
+    "dy": 0
+   },
+   {
+    "id": 784775,
+    "kp": 409179,
+    "name": "Кошмар на улице Вязов",
+    "eng": "A Nightmare on Elm Street",
+    "year": "2010",
+    "q": "FullHD",
+    "up": "2025-03-04",
+    "dy": 26
+   }
+  ]
+ },
+ {
+  "key": "c3.hor.detskie-igry",
+  "t": "Детские игры",
+  "alt": "Child's Play",
+  "y": 1988,
+  "type": "movie",
+  "res": [
+   {
+    "id": 808281,
+    "kp": 5891,
+    "name": "Детские игры",
+    "eng": "Child's Play",
+    "year": "1988",
+    "q": "FullHD",
+    "up": "2026-02-07",
+    "dy": 0
+   },
+   {
+    "id": 929505,
+    "kp": 1179256,
+    "name": "Детские игры",
+    "eng": "Child's Play",
+    "year": "2019",
+    "q": "FullHD",
+    "up": "2025-11-21",
+    "dy": 31
+   }
+  ]
+ },
+ {
+  "key": "c3.hor.bayki-iz-sklepa",
+  "t": "Байки из склепа",
+  "alt": "Tales from the Crypt",
+  "y": 1989,
+  "type": "serial",
+  "res": [
+   {
+    "id": 547362,
+    "kp": 271501,
+    "name": "Байки из склепа",
+    "eng": "Tales from the Crypt",
+    "year": "1989",
+    "q": "FullHD",
+    "up": "2025-01-29",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.b.universalnyy-soldat",
+  "t": "Универсальный солдат",
+  "alt": "Universal Soldier",
+  "y": 1992,
+  "type": "movie",
+  "res": [
+   {
+    "id": 929619,
+    "kp": 12363,
+    "name": "Универсальный солдат",
+    "eng": "Universal Soldier",
+    "year": "1992",
+    "q": "FullHD",
+    "up": "2025-02-25",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.b.kiborg",
+  "t": "Киборг",
+  "alt": "Cyborg",
+  "y": 1989,
+  "type": "movie",
+  "res": [
+   {
+    "id": 755668,
+    "kp": 4010,
+    "name": "Киборг",
+    "eng": "Cyborg",
+    "year": "1989",
+    "q": "FullHD",
+    "up": "2026-02-22",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c3.b.bezumnyy-maks-2",
+  "t": "Безумный Макс 2 Воин дороги",
+  "alt": "Mad Max 2 The Road Warrior",
+  "y": 1981,
+  "type": "movie",
+  "res": [
+   {
+    "id": 539731,
+    "kp": 8374,
+    "name": "Безумный Макс 2: Воин дороги",
+    "eng": "The Road Warrior",
+    "year": "1981",
+    "q": "FullHD",
+    "up": "2025-03-15",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c2.s.sailormoon",
+  "t": "Красавица-воин Сейлор Мун",
+  "alt": "Sailor Moon",
+  "y": 1992,
+  "type": "serial",
+  "res": [
+   {
+    "id": 644213,
+    "kp": 229704,
+    "name": "Красавица-воин Сейлор Мун",
+    "eng": "Sailor Moon",
+    "year": "1992",
+    "q": "FullHD",
+    "up": "2026-07-24",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c2.s.transformers",
+  "t": "Трансформеры Битвы зверей",
+  "alt": "Beast Wars Transformers",
+  "y": 1996,
+  "type": "serial",
+  "res": [
+   {
+    "id": 715948,
+    "kp": 79741,
+    "name": "Скорая помощь",
+    "eng": "ER",
+    "year": "1994",
+    "q": "FullHD",
+    "up": "2024-11-07",
+    "dy": 2
+   },
+   {
+    "id": 558024,
+    "kp": 400004,
+    "name": "Трансформеры",
+    "eng": "Transformers: Animated",
+    "year": "2007",
+    "q": "FullHD",
+    "up": "2026-03-21",
+    "dy": 11
+   },
+   {
+    "id": 600504,
+    "kp": 1047554,
+    "name": "नगन",
+    "eng": "Naagin",
+    "year": "2015",
+    "q": "FullHD",
+    "up": "2025-09-14",
+    "dy": 19
+   }
+  ]
+ },
+ {
+  "key": "c2.s.spiderman",
+  "t": "Человек-паук",
+  "alt": "Spider-Man",
+  "y": 1994,
+  "type": "serial",
+  "res": [
+   {
+    "id": 938267,
+    "kp": 95232,
+    "name": "Человек-паук",
+    "eng": "Spider-Man: The Animated Series",
+    "year": "1994",
+    "q": "FullHD",
+    "up": "2024-02-09",
+    "dy": 0
+   },
+   {
+    "id": 616814,
+    "kp": 1008482,
+    "name": "Человек-паук",
+    "eng": "Spider-Man",
+    "year": "2017",
+    "q": "FullHD",
+    "up": "2025-01-31",
+    "dy": 23
+   }
+  ]
+ },
+ {
+  "key": "c2.s.xmen",
+  "t": "Люди Икс",
+  "alt": "X-Men",
+  "y": 1992,
+  "type": "serial",
+  "res": [
+   {
+    "id": 531091,
+    "kp": 439734,
+    "name": "Росомаха и Люди Икс. Начало",
+    "eng": "Wolverine and the X-Men",
+    "year": "2008",
+    "q": "FullHD",
+    "up": "2026-06-09",
+    "dy": 16
+   },
+   {
+    "id": 600504,
+    "kp": 1047554,
+    "name": "नगन",
+    "eng": "Naagin",
+    "year": "2015",
+    "q": "FullHD",
+    "up": "2025-09-14",
+    "dy": 23
+   },
+   {
+    "id": 686558,
+    "kp": 855925,
+    "name": "Люди",
+    "eng": "Humans",
+    "year": "2015",
+    "q": "FullHD",
+    "up": "2024-12-22",
+    "dy": 23
+   }
+  ]
+ },
+ {
+  "key": "c2.s.tmnt",
+  "t": "Черепашки-мутанты ниндзя",
+  "alt": "Teenage Mutant Ninja Turtles",
+  "y": 1987,
+  "type": "serial",
+  "res": [
+   {
+    "id": 190459,
+    "kp": 94890,
+    "name": "Черепашки-мутанты-ниндзя",
+    "eng": "Teenage Mutant Ninja Turtles",
+    "year": "1987",
+    "q": "FullHD",
+    "up": "2026-06-27",
+    "dy": 0
+   },
+   {
+    "id": 1017456,
+    "kp": 421422,
+    "name": "Мутанты черепашки ниндзя. Новые приключения!",
+    "eng": "Teenage Mutant Ninja Turtles",
+    "year": "2003",
+    "q": "FullHD",
+    "up": "2024-10-03",
+    "dy": 16
+   },
+   {
+    "id": 778567,
+    "kp": 584136,
+    "name": "Черепашки-ниндзя",
+    "eng": "Teenage Mutant Ninja Turtles",
+    "year": "2012",
+    "q": "FullHD",
+    "up": "2024-11-08",
+    "dy": 25
+   }
+  ]
+ },
+ {
+  "key": "c2.s.elen",
+  "t": "Элен и ребята",
+  "alt": "Helene et les garcons",
+  "y": 1992,
+  "type": "serial",
+  "res": [
+   {
+    "id": 600504,
+    "kp": 1047554,
+    "name": "नगन",
+    "eng": "Naagin",
+    "year": "2015",
+    "q": "FullHD",
+    "up": "2025-09-14",
+    "dy": 23
+   },
+   {
+    "id": 1005630,
+    "kp": 1384717,
+    "name": "小娘惹",
+    "eng": "The Little Nyonya",
+    "year": "2020",
+    "q": "FullHD",
+    "up": "2025-05-10",
+    "dy": 28
+   },
+   {
+    "id": 1057444,
+    "kp": 5915895,
+    "name": "Я",
+    "eng": "Me",
+    "year": "2024",
+    "q": "FullHD",
+    "up": "2024-08-13",
+    "dy": 32
+   }
+  ]
+ },
+ {
+  "key": "c2.s.beverly",
+  "t": "Беверли-Хиллз 90210",
+  "alt": "Beverly Hills 90210",
+  "y": 1990,
+  "type": "serial",
+  "res": [
+   {
+    "id": 691447,
+    "kp": 80742,
+    "name": "Беверли-Хиллз 90210",
+    "eng": "Beverly Hills, 90210",
+    "year": "1990",
+    "q": "FullHD",
+    "up": "2025-02-04",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c2.s.dikiy-angel",
+  "t": "Дикий ангел",
+  "alt": "Muneca brava",
+  "y": 1998,
+  "type": "serial",
+  "res": [
+   {
+    "id": 734109,
+    "kp": 77191,
+    "name": "Дикий ангел",
+    "eng": "Wild Angel",
+    "year": "1998",
+    "q": "FullHD",
+    "up": "2026-06-24",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c2.s.arnold",
+  "t": "Эй, Арнольд!",
+  "alt": "Hey Arnold!",
+  "y": 1996,
+  "type": "serial",
+  "res": [
+   {
+    "id": 600504,
+    "kp": 1047554,
+    "name": "नगन",
+    "eng": "Naagin",
+    "year": "2015",
+    "q": "FullHD",
+    "up": "2025-09-14",
+    "dy": 19
+   },
+   {
+    "id": 1005630,
+    "kp": 1384717,
+    "name": "小娘惹",
+    "eng": "The Little Nyonya",
+    "year": "2020",
+    "q": "FullHD",
+    "up": "2025-05-10",
+    "dy": 24
+   },
+   {
+    "id": 814044,
+    "kp": 5305426,
+    "name": "Арнольд",
+    "eng": "Arnold",
+    "year": "2023",
+    "q": "FullHD",
+    "up": "2024-12-27",
+    "dy": 27
+   }
+  ]
+ },
+ {
+  "key": "c2.s.rugrats",
+  "t": "Ох уж эти детки",
+  "alt": "Rugrats",
+  "y": 1991,
+  "type": "serial",
+  "res": [
+   {
+    "id": 666527,
+    "kp": 214312,
+    "name": "Ох, уж эти детки!",
+    "eng": "Rugrats",
+    "year": "1991",
+    "q": "FullHD",
+    "up": "2026-02-24",
+    "dy": 0
+   },
+   {
+    "id": 1040203,
+    "kp": 1179195,
+    "name": "Ох уж эти детки!",
+    "eng": "Rugrats",
+    "year": "2021",
+    "q": "FullHD",
+    "up": "2026-02-19",
+    "dy": 30
+   }
+  ]
+ },
+ {
+  "key": "c2.s.monsters",
+  "t": "ААА!!! Настоящие монстры",
+  "alt": "Aaahh!!! Real Monsters",
+  "y": 1994,
+  "type": "serial",
+  "res": [
+   {
+    "id": 715948,
+    "kp": 79741,
+    "name": "Скорая помощь",
+    "eng": "ER",
+    "year": "1994",
+    "q": "FullHD",
+    "up": "2024-11-07",
+    "dy": 0
+   },
+   {
+    "id": 520023,
+    "kp": 258582,
+    "name": "Монстр",
+    "eng": "Monster",
+    "year": "2004",
+    "q": "FullHD",
+    "up": "2025-12-30",
+    "dy": 10
+   },
+   {
+    "id": 190100,
+    "kp": 580219,
+    "name": "Настоящие",
+    "eng": null,
+    "year": "2011",
+    "q": "FullHD",
+    "up": "2025-08-07",
+    "dy": 17
+   }
+  ]
+ },
+ {
+  "key": "c2.s.gerakl",
+  "t": "Удивительные странствия Геракла",
+  "alt": "Hercules The Legendary Journeys",
+  "y": 1995,
+  "type": "serial",
+  "res": [
+   {
+    "id": 715948,
+    "kp": 79741,
+    "name": "Скорая помощь",
+    "eng": "ER",
+    "year": "1994",
+    "q": "FullHD",
+    "up": "2024-11-07",
+    "dy": 1
+   },
+   {
+    "id": 600504,
+    "kp": 1047554,
+    "name": "नगन",
+    "eng": "Naagin",
+    "year": "2015",
+    "q": "FullHD",
+    "up": "2025-09-14",
+    "dy": 20
+   },
+   {
+    "id": 1005630,
+    "kp": 1384717,
+    "name": "小娘惹",
+    "eng": "The Little Nyonya",
+    "year": "2020",
+    "q": "FullHD",
+    "up": "2025-05-10",
+    "dy": 25
+   }
+  ]
+ },
+ {
+  "key": "c2.s.zena",
+  "t": "Зена - королева воинов",
+  "alt": "Xena Warrior Princess",
+  "y": 1995,
+  "type": "serial",
+  "res": [
+   {
+    "id": 600504,
+    "kp": 1047554,
+    "name": "नगन",
+    "eng": "Naagin",
+    "year": "2015",
+    "q": "FullHD",
+    "up": "2025-09-14",
+    "dy": 20
+   },
+   {
+    "id": 929531,
+    "kp": 1219257,
+    "name": "Воин",
+    "eng": "Warrior",
+    "year": "2019",
+    "q": "FullHD",
+    "up": "2025-03-27",
+    "dy": 24
+   },
+   {
+    "id": 1005630,
+    "kp": 1384717,
+    "name": "小娘惹",
+    "eng": "The Little Nyonya",
+    "year": "2020",
+    "q": "FullHD",
+    "up": "2025-05-10",
+    "dy": 25
+   }
+  ]
+ },
+ {
+  "key": "c2.s.temnota",
+  "t": "Боишься ли ты темноты?",
+  "alt": "Are You Afraid of the Dark?",
+  "y": 1990,
+  "type": "serial",
+  "res": [
+   {
+    "id": 676804,
+    "kp": 1274369,
+    "name": "Боишься ли ты темноты?",
+    "eng": "Are You Afraid of the Dark?",
+    "year": "2019",
+    "q": "FullHD",
+    "up": "2025-02-11",
+    "dy": 29
+   }
+  ]
+ },
+ {
+  "key": "c2.s.murashki",
+  "t": "Мурашки",
+  "alt": "Goosebumps",
+  "y": 1995,
+  "type": "serial",
+  "res": [
+   {
+    "id": 969148,
+    "kp": 4852099,
+    "name": "Ужастики",
+    "eng": "Goosebumps",
+    "year": "2023",
+    "q": "FullHD",
+    "up": "2025-05-27",
+    "dy": 28
+   }
+  ]
+ },
+ {
+  "key": "c2.s.xfiles",
+  "t": "Секретные материалы",
+  "alt": "The X-Files",
+  "y": 1993,
+  "type": "serial",
+  "res": [
+   {
+    "id": 897731,
+    "kp": 77046,
+    "name": "Секретные материалы",
+    "eng": "The X-Files",
+    "year": "1993",
+    "q": "FullHD",
+    "up": "2024-06-26",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c2.s.twinpeaks",
+  "t": "Твин Пикс",
+  "alt": "Twin Peaks",
+  "y": 1990,
+  "type": "serial",
+  "res": [
+   {
+    "id": 928045,
+    "kp": 84358,
+    "name": "Твин Пикс",
+    "eng": "Twin Peaks",
+    "year": "1990",
+    "q": "FullHD",
+    "up": "2024-08-11",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c2.s.babylon5",
+  "t": "Вавилон 5",
+  "alt": "Babylon 5",
+  "y": 1994,
+  "type": "serial",
+  "res": [
+   {
+    "id": 520901,
+    "kp": 77298,
+    "name": "Вавилон 5",
+    "eng": "Babylon 5",
+    "year": "1993",
+    "q": "FullHD",
+    "up": "2024-06-25",
+    "dy": 1
+   }
+  ]
+ },
+ {
+  "key": "c2.s.quantum",
+  "t": "Квантовый скачок",
+  "alt": "Quantum Leap",
+  "y": 1989,
+  "type": "serial",
+  "res": [
+   {
+    "id": 1009297,
+    "kp": 94222,
+    "name": "Квантовый скачок",
+    "eng": "Quantum Leap",
+    "year": "1989",
+    "q": "FullHD",
+    "up": "2024-12-15",
+    "dy": 0
+   },
+   {
+    "id": 817020,
+    "kp": 5068184,
+    "name": "Квантовый скачок",
+    "eng": "Quantum Leap",
+    "year": "2022",
+    "q": "FullHD",
+    "up": "2024-12-15",
+    "dy": 33
+   }
+  ]
+ },
+ {
+  "key": "c2.s.bivis",
+  "t": "Бивис и Батт-Хед",
+  "alt": "Beavis and Butt-Head",
+  "y": 1993,
+  "type": "serial",
+  "res": [
+   {
+    "id": 711782,
+    "kp": 94667,
+    "name": "Бивис и Батт-Хед",
+    "eng": "Beavis and Butt-Head",
+    "year": "1993",
+    "q": "FullHD",
+    "up": "2025-03-01",
+    "dy": 0
+   },
+   {
+    "id": 447237,
+    "kp": 5081207,
+    "name": "Бивис и Батт-Хед",
+    "eng": "Beavis and Butt-Head",
+    "year": "2022",
+    "q": "FullHD",
+    "up": "2025-09-06",
+    "dy": 29
+   }
+  ]
+ },
+ {
+  "key": "c1.s.utinye",
+  "t": "Утиные истории",
+  "alt": "DuckTales",
+  "y": 1987,
+  "type": "serial",
+  "res": [
+   {
+    "id": 788722,
+    "kp": 81426,
+    "name": "Утиные истории",
+    "eng": "DuckTales",
+    "year": "1987",
+    "q": "FullHD",
+    "up": "2025-02-16",
+    "dy": 0
+   },
+   {
+    "id": 716461,
+    "kp": 1008491,
+    "name": "Утиные истории",
+    "eng": "DuckTales",
+    "year": "2017",
+    "q": "FullHD",
+    "up": "2025-02-16",
+    "dy": 30
+   }
+  ]
+ },
+ {
+  "key": "c1.s.chipdale",
+  "t": "Чип и Дейл спешат на помощь",
+  "alt": "Chip 'n Dale Rescue Rangers",
+  "y": 1989,
+  "type": "serial",
+  "res": [
+   {
+    "id": 637777,
+    "kp": 95231,
+    "name": "Чип и Дейл спешат на помощь",
+    "eng": "Chip 'n' Dale Rescue Rangers",
+    "year": "1989",
+    "q": "FullHD",
+    "up": "2024-07-28",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c1.s.chernyy-plashch",
+  "t": "Черный плащ",
+  "alt": "Darkwing Duck",
+  "y": 1991,
+  "type": "serial",
+  "res": [
+   {
+    "id": 897120,
+    "kp": 395106,
+    "name": "Черный Плащ",
+    "eng": "Darkwing Duck",
+    "year": "1991",
+    "q": "FullHD",
+    "up": "2025-03-18",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c1.s.santa-barbara",
+  "t": "Санта-Барбара",
+  "alt": "Santa Barbara",
+  "y": 1984,
+  "type": "serial",
+  "res": [
+   {
+    "id": 600504,
+    "kp": 1047554,
+    "name": "नगन",
+    "eng": "Naagin",
+    "year": "2015",
+    "q": "FullHD",
+    "up": "2025-09-14",
+    "dy": 31
+   },
+   {
+    "id": 1005630,
+    "kp": 1384717,
+    "name": "小娘惹",
+    "eng": "The Little Nyonya",
+    "year": "2020",
+    "q": "FullHD",
+    "up": "2025-05-10",
+    "dy": 36
+   }
+  ]
+ },
+ {
+  "key": "c1.s.bogatye",
+  "t": "Богатые тоже плачут",
+  "alt": "Los ricos tambien lloran",
+  "y": 1979,
+  "type": "serial",
+  "res": [
+   {
+    "id": 929331,
+    "kp": 4780333,
+    "name": "Богатые тоже плачут",
+    "eng": null,
+    "year": "2022",
+    "q": "FullHD",
+    "up": "2026-06-25",
+    "dy": 43
+   }
+  ]
+ },
+ {
+  "key": "c1.s.dikaya-roza",
+  "t": "Дикая Роза",
+  "alt": "Rosa salvaje",
+  "y": 1987,
+  "type": "serial",
+  "res": [
+   {
+    "id": 546953,
+    "kp": 294989,
+    "name": "Дикая роза",
+    "eng": "Rosa salvaje",
+    "year": "1987",
+    "q": "FullHD",
+    "up": "2025-04-13",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c1.s.gostya",
+  "t": "Гостья из будущего",
+  "y": 1984,
+  "type": "serial",
+  "res": [
+   {
+    "id": 929877,
+    "kp": 77185,
+    "name": "Гостья из будущего",
+    "eng": "Guest from the Future",
+    "year": "1984",
+    "q": "FullHD",
+    "up": "2024-12-04",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c1.s.elektronik",
+  "t": "Приключения Электроника",
+  "y": 1979,
+  "type": "serial",
+  "res": [
+   {
+    "id": 522212,
+    "kp": 77284,
+    "name": "Приключения Электроника",
+    "eng": "The Adventures of the Electronic",
+    "year": "1979",
+    "q": "FullHD",
+    "up": "2024-12-16",
+    "dy": 0
+   }
+  ]
+ },
+ {
+  "key": "c1.s.petrov",
+  "t": "Приключения Петрова и Васечкина, обыкновенные и невероятные",
+  "y": 1983,
+  "type": "movie",
+  "res": [
+   {
+    "id": 60172,
+    "kp": 123123,
+    "name": "にっぽんＧメン 特別武装班出動",
+    "eng": null,
+    "year": "1956",
+    "q": "FullHD",
+    "up": "2025-10-09",
+    "dy": 27
+   },
+   {
+    "id": 151973,
+    "kp": 1051460,
+    "name": "非狐外传",
+    "eng": null,
+    "year": "2014",
+    "q": "FullHD",
+    "up": "2026-09-02",
+    "dy": 31
+   },
+   {
+    "id": 699840,
+    "kp": 847421,
+    "name": "दस कटत",
+    "eng": null,
+    "year": "2014",
+    "q": "FullHD",
+    "up": "2026-09-01",
+    "dy": 31
+   }
+  ]
+ }
+]

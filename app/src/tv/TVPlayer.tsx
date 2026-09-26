@@ -103,14 +103,26 @@ function YouTubeAir({ slot, offset, muted, onReady, onError }: {
   return <div className="tv__mount" ref={mount} />;
 }
 
+// Рутубе умеет стартовать с середины. Сдвиг берём один раз при монтировании,
+// иначе iframe перезагружался бы каждую секунду.
+function RutubeAir({ slot, offset, onReady }: { slot: Slot; offset: number; onReady: () => void }) {
+  const [src] = useState(
+    () => `https://rutube.ru/play/embed/${slot.mediaId}/?t=${Math.floor(offset)}&autoStart=true`
+  );
+  return <iframe className="tv__mount" src={src} title={slot.title} allow="autoplay; fullscreen" onLoad={onReady} />;
+}
+
 function ScheduledMedia({ slot, offset, muted, onReady, onError }: {
   slot: Slot; offset: number; muted: boolean; onReady: () => void; onError: () => void;
 }) {
   if (slot.provider === 'youtube') return <YouTubeAir {...{ slot, offset, muted, onReady, onError }} />;
   if (slot.provider === 'vibix') {
-    return <div className="tv__mount tv__mount--vibix"><VibixPlayer type={slot.mediaType === 'movie' ? 'movie' : 'serial'} id={slot.mediaId} season={slot.season} label={slot.title} /></div>;
+    return <div className="tv__mount tv__mount--vibix"><VibixPlayer type={slot.mediaType === 'movie' ? 'movie' : 'serial'} id={slot.mediaId} season={slot.season} episode={slot.episode} label={slot.title} /></div>;
   }
-  if ((slot.provider === 'rutube' || slot.provider === 'kodik') && slot.publicRef) {
+  if (slot.provider === 'rutube') {
+    return <RutubeAir key={`${slot.mediaId}:${slot.start}`} slot={slot} offset={offset} onReady={onReady} />;
+  }
+  if (slot.provider === 'kodik' && slot.publicRef) {
     return <iframe className="tv__mount" src={slot.publicRef} title={slot.title} allow="autoplay; fullscreen" onLoad={onReady} />;
   }
   return (

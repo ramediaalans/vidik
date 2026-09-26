@@ -1,0 +1,3343 @@
+{
+ "meta": {
+  "generated": "2026-09-26",
+  "timezone": "UTC+3",
+  "rotationEpoch": "2026-01-01",
+  "note": "Каркас часов статичен, меняется только наполнение. Внутри блока ассеты крутятся по кругу до следующего блока."
+ },
+ "interstitials": {
+  "ads": [
+   {
+    "provider": "youtube",
+    "id": "ecKYl2K34og",
+    "dur": 595,
+    "title": "Самая смешная реклама. Сборник смешных рекламных роликов #7",
+    "up": "2020-03-18",
+    "src": "x.ad.sbornik"
+   },
+   {
+    "provider": "rutube",
+    "id": "ad957c8f39ec2621af4f9c0f99904a05",
+    "dur": 1563,
+    "title": "РЕКЛАМА 90 х ностальгия лучшие рекламные ролики 90х годов",
+    "up": "2023-12-10",
+    "src": "x.ad.sbornik"
+   },
+   {
+    "provider": "rutube",
+    "id": "f6b6bdb601d0464881d1621dc2c5bca1",
+    "dur": 100,
+    "title": "Городок ©1996 (#36) реклама. инвайт - просто добавь воды!",
+    "up": "2024-11-15",
+    "src": "x.ad.invite"
+   },
+   {
+    "provider": "rutube",
+    "id": "bda75a9bf6af361dda998c49e02a5788",
+    "dur": 343,
+    "title": "Инвайт просто добавь воды  Напиток 90 х из детства Invite реклама",
+    "up": "2024-11-10",
+    "src": "x.ad.invite"
+   },
+   {
+    "provider": "youtube",
+    "id": "ZNewE-9-1xc",
+    "dur": 46,
+    "title": "АО МММ-4. Леня и Иван Голубковы. \"Я не халявщик, я партнер!\"",
+    "up": "2014-02-02",
+    "src": "x.ad.mmm"
+   },
+   {
+    "provider": "youtube",
+    "id": "H_2hpvALTvI",
+    "dur": 45,
+    "title": "МММ - Леня голубков - серия 13 (реклама 90х)",
+    "up": "2015-09-02",
+    "src": "x.ad.mmm"
+   },
+   {
+    "provider": "rutube",
+    "id": "8b822825bef4a38d0620d7606e49fd16",
+    "dur": 1537,
+    "title": "Реклама МММ все 43 ролика. Леня Голубков.",
+    "up": "2023-12-29",
+    "src": "x.ad.mmm"
+   },
+   {
+    "provider": "rutube",
+    "id": "25c9a5db1e4463759e267a794325dcb1",
+    "dur": 60,
+    "title": "Всемирная история, банк Империал",
+    "up": "2010-11-09",
+    "src": "x.ad.imperial"
+   },
+   {
+    "provider": "rutube",
+    "id": "fd8b68b55aa6385fb0b3938f6962c80c",
+    "dur": 60,
+    "title": "Ретро реклама-Всемирная история, Банк Империал",
+    "up": "2008-08-20",
+    "src": "x.ad.imperial"
+   },
+   {
+    "provider": "youtube",
+    "id": "6r7hwDiRfiY",
+    "dur": 62,
+    "title": "Банк Империал  Всемирная история Людовик XIV",
+    "up": "2015-07-26",
+    "src": "x.ad.imperial"
+   }
+  ],
+  "idents": [
+   {
+    "provider": "rutube",
+    "id": "ccca0cec6dfbc21b54bbdbcfec0e4d57",
+    "dur": 66,
+    "title": "Часы и заставка (ОРТ, 12.11.1995)",
+    "up": "2024-11-11",
+    "src": "x.id.ort"
+   },
+   {
+    "provider": "youtube",
+    "id": "1ycyqU1h_hs",
+    "dur": 47,
+    "title": "Все заставки ОРТ (01.04 - 30.09.1995)",
+    "up": "2014-06-21",
+    "src": "x.id.ort"
+   },
+   {
+    "provider": "youtube",
+    "id": "zKJGGVaQRgk",
+    "dur": 27,
+    "title": "Анонс РТР (1996 - 1997)",
+    "up": "2011-10-27",
+    "src": "x.id.rtr"
+   },
+   {
+    "provider": "youtube",
+    "id": "CgFKS0ilNrg",
+    "dur": 12,
+    "title": "Перед и после рекламная заставка (РТР, 1997)",
+    "up": "2016-02-23",
+    "src": "x.id.rtr"
+   },
+   {
+    "provider": "youtube",
+    "id": "PmkpNZKHD2E",
+    "dur": 5,
+    "title": "Заставка производство телекомпании ВИD Уменьшенная маска 1997 1998",
+    "up": "2019-02-17",
+    "src": "x.id.vid"
+   },
+   {
+    "provider": "youtube",
+    "id": "PR0dhZ23XoU",
+    "dur": 14,
+    "title": "Заставка ВИD - Африканская маска (31.03.2000) VHS.Rip",
+    "up": "2017-12-18",
+    "src": "x.id.vid"
+   },
+   {
+    "provider": "youtube",
+    "id": "uTX0Val8q08",
+    "dur": 6,
+    "title": "Межпрограммная заставка (ТВ-6 Москва, 1997-1998) HD 50 fps",
+    "up": "2021-03-25",
+    "src": "x.id.tv6"
+   },
+   {
+    "provider": "youtube",
+    "id": "41SuXzxQhA8",
+    "dur": 5,
+    "title": "Промо-заставка «Вы смотрите ТВ-6» (ТВ-6, 1997-2000)",
+    "up": "2016-06-26",
+    "src": "x.id.tv6"
+   }
+  ],
+  "vhs": [
+   {
+    "provider": "youtube",
+    "id": "MILPRTaw2y0",
+    "dur": 670,
+    "title": "Трейлеры фильмов и реклама с VHS кассеты 2001 год.",
+    "up": "2017-11-10",
+    "src": "x.id.trailer"
+   },
+   {
+    "provider": "youtube",
+    "id": "Vk9dXcI2zVs",
+    "dur": 336,
+    "title": "Трейлеры видеокассет от концерна Видеосервис (VHS) Дубляж - Сербин",
+    "up": "2022-07-27",
+    "src": "x.id.trailer"
+   },
+   {
+    "provider": "rutube",
+    "id": "132b80ba01b98a5e50e25d761a715896",
+    "dur": 31,
+    "title": "Реклама VHS видеокассет LG  90 е годы",
+    "up": "2025-06-04",
+    "src": "x.id.videosalon"
+   },
+   {
+    "provider": "rutube",
+    "id": "f2ecc94e6d30ecaede857e7b3eed238e",
+    "dur": 147,
+    "title": "Детям до 18 лет не  рекомендуется смотреть",
+    "up": "2024-04-25",
+    "src": "x.id.do16"
+   }
+  ]
+ },
+ "channels": {
+  "pervaya": {
+   "title": "Первая кнопка",
+   "A": [
+    {
+     "at": "06:00",
+     "label": "Утренние мультфильмы",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "e7AhYRhfhzw",
+       "dur": 540,
+       "title": "Ну, погоди! — 1 выпуск (1969)",
+       "up": "2018-01-08",
+       "src": "c1.mult.nupogodi"
+      },
+      {
+       "provider": "rutube",
+       "id": "8d6531c3f50272910be2709877cb5a7e",
+       "dur": 600,
+       "title": "Ну, погоди! — выпуск №3",
+       "up": "2024-11-06",
+       "src": "c1.mult.nupogodi"
+      },
+      {
+       "provider": "rutube",
+       "id": "87cc20f4a2b82dbdc90717bea68d4690",
+       "dur": 600,
+       "title": "Ну, погоди! — 14 выпуск",
+       "up": "2025-02-07",
+       "src": "c1.mult.nupogodi"
+      },
+      {
+       "provider": "youtube",
+       "id": "PAe-51_72AQ",
+       "dur": 540,
+       "title": "Ну, погоди! — 8 выпуск",
+       "up": "2016-11-29",
+       "src": "c1.mult.nupogodi"
+      }
+     ]
+    },
+    {
+     "at": "07:00",
+     "label": "Утренний канал: «Утренняя звезда»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "9c9e41ce65a91e9c0ff236fa53183a5d",
+       "dur": 2760,
+       "title": "«Утренняя звезда — 95»",
+       "up": "2023-12-24",
+       "src": "extra.utro95"
+      },
+      {
+       "provider": "youtube",
+       "id": "TFwUnS_FirA",
+       "dur": 1767,
+       "title": "Утренняя почта. Ретро. Музыкально-развлекательная программа (1990)",
+       "up": "2020-10-11",
+       "src": "c1.utro.pochta"
+      }
+     ]
+    },
+    {
+     "at": "08:30",
+     "label": "Утреннее кино: «Гостья из будущего»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "1204",
+       "kp": 77185,
+       "dur": 18900,
+       "title": "Гостья из будущего (1984) — 1×01",
+       "up": "2024-12-04",
+       "src": "c1.kino.gostya",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "1204",
+       "kp": 77185,
+       "dur": 18900,
+       "title": "Гостья из будущего (1984) — 1×02",
+       "up": "2024-12-04",
+       "src": "c1.kino.gostya",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      }
+     ]
+    },
+    {
+     "at": "10:00",
+     "label": "Теленовелла: «Санта-Барбара»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "P9DQu0sSEns",
+       "dur": 2536,
+       "title": "Санта-Барбара 1 серия",
+       "up": "2020-05-05",
+       "src": "c1.nov.santabarbara"
+      },
+      {
+       "provider": "youtube",
+       "id": "f8XfZps5RZQ",
+       "dur": 2622,
+       "title": "Санта-Барбара [Серия 2, 1984]",
+       "up": "2013-06-15",
+       "src": "c1.nov.santabarbara"
+      },
+      {
+       "provider": "youtube",
+       "id": "R7w4vlDFgfs",
+       "dur": 2574,
+       "title": "Санта-Барбара [Серия 4, 1984]",
+       "up": "2013-06-15",
+       "src": "c1.nov.santabarbara"
+      }
+     ]
+    },
+    {
+     "at": "12:00",
+     "label": "Телеигра: «Своя игра»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "KlbBjFyyd7U",
+       "dur": 2336,
+       "title": "Своя Игра Стома   Вассерман   Клинов",
+       "up": "2017-09-10",
+       "src": "c1.igra.svoyaigra"
+      }
+     ]
+    },
+    {
+     "at": "13:00",
+     "label": "«Сам себе режиссёр»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "1b519eb498df99be61449a65d07ba062",
+       "dur": 2580,
+       "title": "Сам себе режиссёр (РТР, 6 января 2002)",
+       "up": "2023-11-03",
+       "src": "c1.fam.samsebe"
+      }
+     ]
+    },
+    {
+     "at": "14:00",
+     "label": "Час Супонева: «Зов джунглей»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "3108fda67aeb78c689123e89a145ecc7",
+       "dur": 1410,
+       "title": "Зов Джунглей ведущий Сергей Супонев",
+       "up": "2023-09-12",
+       "src": "c1.sup.zovdzhungley"
+      },
+      {
+       "provider": "youtube",
+       "id": "PITDdfV7sss",
+       "dur": 1404,
+       "title": "Зов джунглей / Сергей Супонев (Выпуск 3)",
+       "up": "2023-01-31",
+       "src": "c1.sup.zovdzhungley"
+      }
+     ]
+    },
+    {
+     "at": "15:00",
+     "label": "«Звёздный час»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "aHOKhq-cJh4",
+       "dur": 2339,
+       "title": "Звездный час. 1993 год. Первый выпуск с Сергеем Супоневым.",
+       "up": "2018-08-30",
+       "src": "c1.sup.zvezdnychas"
+      }
+     ]
+    },
+    {
+     "at": "16:00",
+     "label": "Disney Club: «Утиные истории»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "2159",
+       "kp": 81426,
+       "dur": null,
+       "title": "Утиные истории (1987) — 1×01",
+       "up": "2025-02-16",
+       "src": "c1.disney.utinye",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "2159",
+       "kp": 81426,
+       "dur": null,
+       "title": "Утиные истории (1987) — 1×02",
+       "up": "2025-02-16",
+       "src": "c1.disney.utinye",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "vibix",
+       "id": "2159",
+       "kp": 81426,
+       "dur": null,
+       "title": "Утиные истории (1987) — 1×03",
+       "up": "2025-02-16",
+       "src": "c1.disney.utinye",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      }
+     ]
+    },
+    {
+     "at": "17:30",
+     "label": "«До 16 и старше»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "fb3d3e11456c0640e045143ee6344e32",
+       "dur": 2652,
+       "title": "До 16-ти и старше 1989 год - передача для слома СССР",
+       "up": "2018-12-02",
+       "src": "c1.teen.do16"
+      }
+     ]
+    },
+    {
+     "at": "18:30",
+     "label": "«Любовь с первого взгляда»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "EfEp8HPdzLc",
+       "dur": 1588,
+       "title": "Любовь с первого взгляда Выпуск 5",
+       "up": "2021-10-31",
+       "src": "c1.show.lyubov"
+      },
+      {
+       "provider": "youtube",
+       "id": "_9KArZ7ac6Y",
+       "dur": 1674,
+       "title": "Любовь с первого взгляда Выпуск 3  -- 1996 г.",
+       "up": "2022-10-24",
+       "src": "c1.show.lyubov"
+      }
+     ]
+    },
+    {
+     "at": "19:30",
+     "label": "Капитал-шоу «Поле чудес»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "ZnRnFfd7dj0",
+       "dur": 3946,
+       "title": "«Поле Чудес» с Владиславом Листьевым от 25.10.1991 (повтор от 03.03.1995)",
+       "up": "2020-02-15",
+       "src": "c1.prime.polechudes"
+      }
+     ]
+    },
+    {
+     "at": "20:45",
+     "label": "«Спокойной ночи, малыши!»",
+     "kind": "interstitial",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "ec863e6e713d1802f2eaeff7349b6974",
+       "dur": 674,
+       "title": "Спокойной ночи, малыши ( март 2011) Дима, Хрюша, Степашка, Буквоежка",
+       "up": "2025-02-09",
+       "src": "c1.anchor.spokoynoy"
+      }
+     ]
+    },
+    {
+     "at": "21:00",
+     "label": "Программа «Время»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "8qTnP2oOdRc",
+       "dur": 1966,
+       "title": "Программа Время  13-22  июнь 1995",
+       "up": "2017-05-05",
+       "src": "c1.anchor.vremya"
+      }
+     ]
+    },
+    {
+     "at": "21:35",
+     "label": "Большое вечернее кино",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4551",
+       "kp": 5928,
+       "dur": 7140,
+       "title": "Один дома 2: Затерянный в Нью-Йорке (1992)",
+       "up": "2024-03-14",
+       "src": "c1.eve.odin-doma2",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "23:30",
+     "label": "«Городок»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "vvz_LGQAmso",
+       "dur": 1210,
+       "title": "Городок Олейников и Стоянов \"Массаж\"",
+       "up": "2014-06-15",
+       "src": "c1.humor.gorodok"
+      },
+      {
+       "provider": "youtube",
+       "id": "6rKyOwTK50w",
+       "dur": 1472,
+       "title": "Городок.Встречаются как-то Стоянов и Олейников",
+       "up": "2015-01-09",
+       "src": "c1.humor.gorodok"
+      }
+     ]
+    },
+    {
+     "at": "00:30",
+     "label": "«МузОБОЗ» и клипы 90-х",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "fiM2NnxDf6U",
+       "dur": 2795,
+       "title": "\"МУЗОБОЗ\" - \"Привет из 1995 года\" [вед.: Иван Демидов] [HD]",
+       "up": "2018-04-27",
+       "src": "c1.night.muzoboz"
+      },
+      {
+       "provider": "rutube",
+       "id": "9b40ab4e82a0addb8f55580041ec1e30",
+       "dur": 2246,
+       "title": "Евро 90х ретро музыкальные клипы",
+       "up": "2025-02-03",
+       "src": "c1.night.klipy"
+      }
+     ]
+    },
+    {
+     "at": "03:00",
+     "label": "Техническая пауза",
+     "kind": "technical",
+     "assets": [
+      {
+       "provider": "generated",
+       "id": "testcard",
+       "dur": 10800,
+       "title": "Настроечная таблица УЭИТ + 1000 Гц",
+       "src": "generated"
+      }
+     ]
+    }
+   ],
+   "B": [
+    {
+     "at": "06:00",
+     "label": "Утренние мультфильмы",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "dc34ae855119b11b28b92b14e1f3c853",
+       "dur": 614,
+       "title": "винни пух глава 1 1969 1 сезон то Союзмультфильм",
+       "up": "2025-02-22",
+       "src": "c1.mult.winni"
+      },
+      {
+       "provider": "rutube",
+       "id": "3ad0939a1b8eb0a3b587108b50ea2b62",
+       "dur": 598,
+       "title": "винни пух идёт гости глава 2 1971 1 сезон то Союзмультфильм",
+       "up": "2025-02-22",
+       "src": "c1.mult.winni"
+      },
+      {
+       "provider": "rutube",
+       "id": "fbf80ce7d20525cc4305af360716df25",
+       "dur": 1171,
+       "title": "винни пух день забота глава 3 1972 1 сезон то Союзмультфильм",
+       "up": "2025-02-22",
+       "src": "c1.mult.winni"
+      },
+      {
+       "provider": "youtube",
+       "id": "njy5b4XkCbg",
+       "dur": 529,
+       "title": "Бременские музыканты | Сказки для детей | анимация | Мультфильм",
+       "up": "2017-01-23",
+       "src": "c1.mult.bremen"
+      }
+     ]
+    },
+    {
+     "at": "07:00",
+     "label": "Утренний канал",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "PF5m0U16bBM",
+       "dur": 2520,
+       "title": "Утренняя звезда (ОРТ, 1995)",
+       "up": "2019-03-22",
+       "src": "c1.utro.zvezda"
+      },
+      {
+       "provider": "youtube",
+       "id": "fy6iQAsDOTU",
+       "dur": 1832,
+       "title": "Утренняя почта. 8 марта (1990)",
+       "up": "2023-03-05",
+       "src": "c1.utro.pochta"
+      }
+     ]
+    },
+    {
+     "at": "08:30",
+     "label": "Утреннее кино: «Приключения Электроника»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "1411",
+       "kp": 77284,
+       "dur": 12900,
+       "title": "Приключения Электроника (1979) — 1×01",
+       "up": "2024-12-16",
+       "src": "c1.kino.elektronik",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "1411",
+       "kp": 77284,
+       "dur": 12900,
+       "title": "Приключения Электроника (1979) — 1×02",
+       "up": "2024-12-16",
+       "src": "c1.kino.elektronik",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      }
+     ]
+    },
+    {
+     "at": "10:00",
+     "label": "Теленовелла: «Богатые тоже плачут»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "c8e8aa9692b462450e03a2f16866313f",
+       "dur": 2547,
+       "title": "Сериал Богатые тоже плачут - 1 сезон 1 серия / Los ricos también lloran",
+       "up": "2025-02-06",
+       "src": "c1.nov.bogatye"
+      },
+      {
+       "provider": "youtube",
+       "id": "yNkcFiWVAWg",
+       "dur": 1278,
+       "title": "Богатые тоже плачут смотреть 1 серия!",
+       "up": "2015-06-05",
+       "src": "c1.nov.bogatye"
+      },
+      {
+       "provider": "youtube",
+       "id": "VRE-Ti7LKD8",
+       "dur": 1238,
+       "title": "Богатые тоже плачут смотреть 236 серия!",
+       "up": "2015-06-07",
+       "src": "c1.nov.bogatye"
+      }
+     ]
+    },
+    {
+     "at": "12:00",
+     "label": "«Что? Где? Когда?»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "7hdadN-KkyU",
+       "dur": 2540,
+       "title": "Что? Где? Когда? (Матч реванш 31 декабря 1994)",
+       "up": "2012-09-24",
+       "src": "c1.igra.chgk"
+      }
+     ]
+    },
+    {
+     "at": "13:00",
+     "label": "«Устами младенца»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "27917cK8qfI",
+       "dur": 1557,
+       "title": "Устами младенца. Эфир от 13 мая 1995 года",
+       "up": "2018-05-27",
+       "src": "c1.fam.ustami"
+      }
+     ]
+    },
+    {
+     "at": "14:00",
+     "label": "Час Супонева: «Зов джунглей»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "Yg5SY-Ll0XE",
+       "dur": 1319,
+       "title": "Зов Джунглей 🦁 33-я игра 🦁 Сергей Супонев",
+       "up": "2023-05-26",
+       "src": "c1.sup.zovdzhungley"
+      },
+      {
+       "provider": "youtube",
+       "id": "VlxeqwKlMIo",
+       "dur": 1374,
+       "title": "Зов Джунглей 🦁 7-я игра 🦁 Сергей Супонев",
+       "up": "2023-05-26",
+       "src": "c1.sup.zovdzhungley"
+      }
+     ]
+    },
+    {
+     "at": "15:00",
+     "label": "«Звёздный час»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "01f66aea046ba20c70592658b705d679",
+       "dur": 1910,
+       "title": "Выпуск 2 1995 Звездный час Cергей Супонев",
+       "up": "2025-02-02",
+       "src": "c1.sup.zvezdnychas"
+      }
+     ]
+    },
+    {
+     "at": "16:00",
+     "label": "Disney Club: «Чип и Дейл»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "322",
+       "kp": 95231,
+       "dur": null,
+       "title": "Чип и Дейл спешат на помощь (1989) — 1×01",
+       "up": "2024-07-28",
+       "src": "c1.disney.chipdale",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "322",
+       "kp": 95231,
+       "dur": null,
+       "title": "Чип и Дейл спешат на помощь (1989) — 1×02",
+       "up": "2024-07-28",
+       "src": "c1.disney.chipdale",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "vibix",
+       "id": "322",
+       "kp": 95231,
+       "dur": null,
+       "title": "Чип и Дейл спешат на помощь (1989) — 1×03",
+       "up": "2024-07-28",
+       "src": "c1.disney.chipdale",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      }
+     ]
+    },
+    {
+     "at": "17:30",
+     "label": "«Там-Там новости»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "3c048da1344ab90e219a7991a5483050",
+       "dur": 960,
+       "title": "Там-Там новости, эфир 26.05.94",
+       "up": "2025-04-30",
+       "src": "extra.tamtam"
+      },
+      {
+       "provider": "youtube",
+       "id": "0H_VUNpCCGE",
+       "dur": 3498,
+       "title": "Памяти кинорежиссера Д.Асановой. Спецвыпуск программы \"...До 16 и старше\" (1988)",
+       "up": "2018-12-09",
+       "src": "c1.teen.do16"
+      }
+     ]
+    },
+    {
+     "at": "18:30",
+     "label": "«Любовь с первого взгляда»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "AvJ2tv95GUc",
+       "dur": 1576,
+       "title": "любовь с первого взгляда Выпуск 1  -- 1996 г.",
+       "up": "2022-10-24",
+       "src": "c1.show.lyubov"
+      },
+      {
+       "provider": "youtube",
+       "id": "_MitIAi-oP0",
+       "dur": 1685,
+       "title": "любовь с первого взгляда. Выпуск 3  --1995 г.",
+       "up": "2022-10-24",
+       "src": "c1.show.lyubov"
+      }
+     ]
+    },
+    {
+     "at": "19:30",
+     "label": "«Угадай мелодию»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "A7psDJ3h4Sk",
+       "dur": 1380,
+       "title": "Угадай мелодию (30.01.1996)",
+       "up": "2017-09-19",
+       "src": "c1.prime.ugadaymelodiyu"
+      }
+     ]
+    },
+    {
+     "at": "20:45",
+     "label": "«Спокойной ночи, малыши!»",
+     "kind": "interstitial",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "d3139f961492820196a2f658dcd696f3",
+       "dur": 817,
+       "title": "Спокойной ночи, малыши! Приключения Степашки часть 1",
+       "up": "2022-06-06",
+       "src": "c1.anchor.spokoynoy"
+      }
+     ]
+    },
+    {
+     "at": "21:00",
+     "label": "Программа «Время»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "zoEHYXA5AFw",
+       "dur": 1137,
+       "title": "Программа Время     13-22 июня 1995 года",
+       "up": "2017-05-05",
+       "src": "c1.anchor.vremya"
+      }
+     ]
+    },
+    {
+     "at": "21:35",
+     "label": "Большое вечернее кино",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4613",
+       "kp": 6039,
+       "dur": 6060,
+       "title": "Маска (1994)",
+       "up": "2024-03-17",
+       "src": "c1.eve.maska",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "23:30",
+     "label": "«Маски-шоу»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "jdnbgecOzoM",
+       "dur": 1103,
+       "title": "Маски Шоу  Маски в Партизанском отряде 1 серия",
+       "up": "2014-04-17",
+       "src": "c1.humor.maskishow"
+      },
+      {
+       "provider": "rutube",
+       "id": "7fc80e6e8f22d522ad80a52578564383",
+       "dur": 1331,
+       "title": "Маски Шоу Маски на Рыбалке",
+       "up": "2023-08-02",
+       "src": "c1.humor.maskishow"
+      },
+      {
+       "provider": "rutube",
+       "id": "1bc6ecb5c854d8f3cdb574ef3537061e",
+       "dur": 1213,
+       "title": "Маски Шоу Серия 40 В Партизанском Отряде Часть 3",
+       "up": "2024-04-09",
+       "src": "c1.humor.maskishow"
+      }
+     ]
+    },
+    {
+     "at": "00:30",
+     "label": "«МузОБОЗ» и клипы 90-х",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "XBjH98rPfbQ",
+       "dur": 2155,
+       "title": "МузОБОЗ с Иваном Демидовым (20.09.1995)",
+       "up": "2021-06-17",
+       "src": "c1.night.muzoboz"
+      },
+      {
+       "provider": "rutube",
+       "id": "c212ca568bf5a2031ac95442f9859938",
+       "dur": 2865,
+       "title": "ХИТЫ 90-Х КЛИПЫ (2)",
+       "up": "2019-01-20",
+       "src": "c1.night.klipy"
+      }
+     ]
+    },
+    {
+     "at": "03:00",
+     "label": "Техническая пауза",
+     "kind": "technical",
+     "assets": [
+      {
+       "provider": "generated",
+       "id": "testcard",
+       "dur": 10800,
+       "title": "Настроечная таблица УЭИТ + 1000 Гц",
+       "src": "generated"
+      }
+     ]
+    }
+   ],
+   "C": [
+    {
+     "at": "06:00",
+     "label": "Утренние мультфильмы",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "201f8cce088ba6a51a5259e54dbb7ed0",
+       "dur": 599,
+       "title": "Лето кота Леопольда в HD качестве  (1983) Советский мультфильм ⭐⭐ | Золотая коллекция",
+       "up": "2022-04-06",
+       "src": "c1.mult.leopold"
+      },
+      {
+       "provider": "rutube",
+       "id": "edef150f6bd95162cf3ed5cd2fe12a20",
+       "dur": 608,
+       "title": "День рождения кота Леопольда в HD ⭐⭐ (1982). Советский мультфильм  | Золотая коллекция",
+       "up": "2022-04-06",
+       "src": "c1.mult.leopold"
+      },
+      {
+       "provider": "rutube",
+       "id": "7aa1c0b4268358e962075e26d47cc6a9",
+       "dur": 594,
+       "title": "Поликлиника кота Леопольда в HD качестве (1986) Советский мультфильм ⭐⭐ | Золотая коллекция",
+       "up": "2022-04-06",
+       "src": "c1.mult.leopold"
+      },
+      {
+       "provider": "rutube",
+       "id": "af4a0098fe16fbbbe11565e64107abf4",
+       "dur": 601,
+       "title": "Автомобиль кота Леопольда в HD качестве  (1987). Советский мультфильм ⭐ | Золотая коллекция",
+       "up": "2022-04-06",
+       "src": "c1.mult.leopold"
+      }
+     ]
+    },
+    {
+     "at": "07:00",
+     "label": "Утренний канал: «Утренняя почта»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "TFwUnS_FirA",
+       "dur": 1767,
+       "title": "Утренняя почта. Ретро. Музыкально-развлекательная программа (1990)",
+       "up": "2020-10-11",
+       "src": "c1.utro.pochta"
+      },
+      {
+       "provider": "rutube",
+       "id": "4c9082ae83b586d0cd37f5a10fdf52bc",
+       "dur": 420,
+       "title": "«Утренняя звезда», 1994",
+       "up": "2023-12-11",
+       "src": "c1.utro.zvezda"
+      }
+     ]
+    },
+    {
+     "at": "08:30",
+     "label": "Утреннее кино: «Петров и Васечкин»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "58f38c22fc046db36046ffff410f93b0",
+       "dur": 3816,
+       "title": "Приключения Петрова и Васечкина, обыкновенные и невероятные (1983). 1 серия",
+       "up": "2022-04-07",
+       "src": "c1.kino.petrov"
+      },
+      {
+       "provider": "youtube",
+       "id": "Jxy3z07DLzs",
+       "dur": 3918,
+       "title": "Приключения Петрова и Васечкина Каникулы",
+       "up": "2015-11-26",
+       "src": "c1.kino.petrov"
+      }
+     ]
+    },
+    {
+     "at": "10:00",
+     "label": "Теленовелла: «Дикая Роза»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "2965",
+       "kp": 294989,
+       "dur": null,
+       "title": "Дикая роза (1987) — 1×01",
+       "up": "2025-04-13",
+       "src": "c1.nov.dikayaroza",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "2965",
+       "kp": 294989,
+       "dur": null,
+       "title": "Дикая роза (1987) — 1×02",
+       "up": "2025-04-13",
+       "src": "c1.nov.dikayaroza",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "vibix",
+       "id": "2965",
+       "kp": 294989,
+       "dur": null,
+       "title": "Дикая роза (1987) — 1×03",
+       "up": "2025-04-13",
+       "src": "c1.nov.dikayaroza",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      },
+      {
+       "provider": "vibix",
+       "id": "2965",
+       "kp": 294989,
+       "dur": null,
+       "title": "Дикая роза (1987) — 1×04",
+       "up": "2025-04-13",
+       "src": "c1.nov.dikayaroza",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 4
+      }
+     ]
+    },
+    {
+     "at": "12:00",
+     "label": "«Брэйн ринг»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "rjs4AC4LZYQ",
+       "dur": 2040,
+       "title": "Брэйн-ринг. Четвёртый четвертьфинал (1990)",
+       "up": "2019-08-03",
+       "src": "extra.brainring"
+      }
+     ]
+    },
+    {
+     "at": "13:00",
+     "label": "«Пока все дома»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "ZjzNgcXy69c",
+       "dur": 1734,
+       "title": "Пока все дома (1-й канал Останкино, декабрь 1992) Игорь Угольников, Эдуард Успенский",
+       "up": "2018-09-18",
+       "src": "c1.fam.pokavse"
+      },
+      {
+       "provider": "youtube",
+       "id": "tbfdbH0V-pc",
+       "dur": 1638,
+       "title": "Пока все дома Татьяна Шмыга 1994",
+       "up": "2016-07-14",
+       "src": "c1.fam.pokavse"
+      }
+     ]
+    },
+    {
+     "at": "14:00",
+     "label": "Час Супонева: «Царь горы»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "N9ptAYsiJdg",
+       "dur": 1321,
+       "title": "Царь горы (телеигра, 1999-2003) - 1",
+       "up": "2013-02-25",
+       "src": "c1.sup.tsargory"
+      },
+      {
+       "provider": "youtube",
+       "id": "YWrLBhK7CKQ",
+       "dur": 1496,
+       "title": "Царь горы (телеигра, 1999-2003) - 2",
+       "up": "2013-02-25",
+       "src": "c1.sup.tsargory"
+      }
+     ]
+    },
+    {
+     "at": "15:00",
+     "label": "«Звёздный час»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "lYcD-3QfsVs",
+       "dur": 2007,
+       "title": "Звездный час 1997 (04.08.1997)",
+       "up": "2018-02-06",
+       "src": "c1.sup.zvezdnychas"
+      }
+     ]
+    },
+    {
+     "at": "16:00",
+     "label": "Disney Club: «Чёрный Плащ»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "3181",
+       "kp": 395106,
+       "dur": null,
+       "title": "Черный Плащ (1991) — 1×01",
+       "up": "2025-03-18",
+       "src": "c1.disney.chernyplashch",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "3181",
+       "kp": 395106,
+       "dur": null,
+       "title": "Черный Плащ (1991) — 1×02",
+       "up": "2025-03-18",
+       "src": "c1.disney.chernyplashch",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "vibix",
+       "id": "3181",
+       "kp": 395106,
+       "dur": null,
+       "title": "Черный Плащ (1991) — 1×03",
+       "up": "2025-03-18",
+       "src": "c1.disney.chernyplashch",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      }
+     ]
+    },
+    {
+     "at": "17:30",
+     "label": "«До 16 и старше»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "gzbNA9df-7s",
+       "dur": 2591,
+       "title": "До 16 и старше (ЦТ СССР, 1988) Фарцовщики",
+       "up": "2014-08-08",
+       "src": "c1.teen.do16"
+      }
+     ]
+    },
+    {
+     "at": "18:30",
+     "label": "«Любовь с первого взгляда»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "_9KArZ7ac6Y",
+       "dur": 1674,
+       "title": "Любовь с первого взгляда Выпуск 3  -- 1996 г.",
+       "up": "2022-10-24",
+       "src": "c1.show.lyubov"
+      },
+      {
+       "provider": "youtube",
+       "id": "_MitIAi-oP0",
+       "dur": 1685,
+       "title": "любовь с первого взгляда. Выпуск 3  --1995 г.",
+       "up": "2022-10-24",
+       "src": "c1.show.lyubov"
+      }
+     ]
+    },
+    {
+     "at": "19:30",
+     "label": "«Счастливый случай»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "4lN8yyDeCAo",
+       "dur": 3540,
+       "title": "Счастливый случай (ЦТ, 1991) — игра 1",
+       "up": "2012-08-22",
+       "src": "extra.schastlivyy"
+      }
+     ]
+    },
+    {
+     "at": "20:45",
+     "label": "«Спокойной ночи, малыши!»",
+     "kind": "interstitial",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "590e931bdfcc5ddf6db016e1c0ef649b",
+       "dur": 288,
+       "title": "✨Спокойной ночи, малыши✨ Везучий Степашка",
+       "up": "2023-02-10",
+       "src": "c1.anchor.spokoynoy"
+      }
+     ]
+    },
+    {
+     "at": "21:00",
+     "label": "Программа «Время»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "reMb3-savY8",
+       "dur": 746,
+       "title": "Программа Время  май 1995",
+       "up": "2017-04-24",
+       "src": "c1.anchor.vremya"
+      }
+     ]
+    },
+    {
+     "at": "21:35",
+     "label": "Большое вечернее кино",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "6201",
+       "kp": 15635,
+       "dur": 5220,
+       "title": "Бетховен (1991)",
+       "up": "2024-04-28",
+       "src": "c1.eve.bethoven",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "rutube",
+       "id": "2e2ca1e0e55f348f16dbacd633ef4d49",
+       "dur": 1121,
+       "title": "По следам НАШИХ бременских музыкантов. Часть 2",
+       "up": "2022-01-08",
+       "src": "c1.mult.bremen"
+      }
+     ]
+    },
+    {
+     "at": "23:30",
+     "label": "«Джентльмен-шоу»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "m3HnPEGLiDU",
+       "dur": 1387,
+       "title": "Джентльмен-шоу (ОРТ, декабрь 1996)",
+       "up": "2014-07-04",
+       "src": "c1.humor.dzhentlmen"
+      },
+      {
+       "provider": "rutube",
+       "id": "85e3cbc0f5eadf3bc8ae729f468a2982",
+       "dur": 1541,
+       "title": "Джентльмен-шоу. Выпуск 17.",
+       "up": "2024-01-12",
+       "src": "c1.humor.dzhentlmen"
+      }
+     ]
+    },
+    {
+     "at": "00:30",
+     "label": "«Акулы пера» и клипы 90-х",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "3d1fc16a598b2775a37f77428344930c",
+       "dur": 2558,
+       "title": "Акулы пера (ТВ6, 1997) Свинцовый Туман",
+       "up": "2013-08-01",
+       "src": "c1.night.akulypera"
+      },
+      {
+       "provider": "rutube",
+       "id": "51093638fd4f60bdcfccdf05a160d707",
+       "dur": 2870,
+       "title": "Акулы пера (ТВ6, 1998) Стрелки, Наив, Тараканы!",
+       "up": "2013-08-01",
+       "src": "c1.night.akulypera"
+      },
+      {
+       "provider": "rutube",
+       "id": "ea5fe7634e7859326a0c7751bbbb58d7",
+       "dur": 8186,
+       "title": "ДИСКОТЕКА 80-х 90-х Сборник клипы Русские Зарубежные.mp4",
+       "up": "2025-12-18",
+       "src": "c1.night.klipy"
+      }
+     ]
+    },
+    {
+     "at": "03:00",
+     "label": "Техническая пауза",
+     "kind": "technical",
+     "assets": [
+      {
+       "provider": "generated",
+       "id": "testcard",
+       "dur": 10800,
+       "title": "Настроечная таблица УЭИТ + 1000 Гц",
+       "src": "generated"
+      }
+     ]
+    }
+   ]
+  },
+  "shestaya": {
+   "title": "Шестая кнопка",
+   "A": [
+    {
+     "at": "06:00",
+     "label": "Аниме: «Сейлор Мун»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "8045",
+       "kp": 229704,
+       "dur": null,
+       "title": "Красавица-воин Сейлор Мун (1992) — 1×01",
+       "up": "2026-07-24",
+       "src": "c2.anime.sailormoon",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "8045",
+       "kp": 229704,
+       "dur": null,
+       "title": "Красавица-воин Сейлор Мун (1992) — 1×02",
+       "up": "2026-07-24",
+       "src": "c2.anime.sailormoon",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "vibix",
+       "id": "8045",
+       "kp": 229704,
+       "dur": null,
+       "title": "Красавица-воин Сейлор Мун (1992) — 1×03",
+       "up": "2026-07-24",
+       "src": "c2.anime.sailormoon",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      }
+     ]
+    },
+    {
+     "at": "07:30",
+     "label": "«Человек-паук» (1994)",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "52",
+       "kp": 95232,
+       "dur": null,
+       "title": "Человек-паук (1994) — 1×01",
+       "up": "2024-02-09",
+       "src": "c2.cart.spiderman",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "52",
+       "kp": 95232,
+       "dur": null,
+       "title": "Человек-паук (1994) — 1×02",
+       "up": "2024-02-09",
+       "src": "c2.cart.spiderman",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "vibix",
+       "id": "52",
+       "kp": 95232,
+       "dur": null,
+       "title": "Человек-паук (1994) — 1×03",
+       "up": "2024-02-09",
+       "src": "c2.cart.spiderman",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      },
+      {
+       "provider": "vibix",
+       "id": "52",
+       "kp": 95232,
+       "dur": null,
+       "title": "Человек-паук (1994) — 1×04",
+       "up": "2024-02-09",
+       "src": "c2.cart.spiderman",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 4
+      }
+     ]
+    },
+    {
+     "at": "09:00",
+     "label": "«Элен и ребята»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "0cd8e308fa5c8d55dd3d517d7228e19c",
+       "dur": 1310,
+       "title": "Элен и ребята — 1 серия «Встреча»",
+       "up": "2026-02-09",
+       "src": "extra.elen"
+      },
+      {
+       "provider": "rutube",
+       "id": "f19df5281f3a00982647855f3e9b0cae",
+       "dur": 1342,
+       "title": "Элен и ребята — 2 серия «День рождения Кати»",
+       "up": "2026-02-09",
+       "src": "extra.elen"
+      },
+      {
+       "provider": "rutube",
+       "id": "c5f37397173fec06b4a027c429d73a84",
+       "dur": 1628,
+       "title": "Элен и ребята — 4 серия «Вещий сон»",
+       "up": "2026-02-09",
+       "src": "extra.elen"
+      },
+      {
+       "provider": "rutube",
+       "id": "eca4f21d5d23dba61504c2b22ed1e0af",
+       "dur": 1524,
+       "title": "Элен и ребята — 14 серия",
+       "up": "2026-02-09",
+       "src": "extra.elen"
+      }
+     ]
+    },
+    {
+     "at": "11:00",
+     "label": "«Беверли-Хиллз, 90210»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "1974",
+       "kp": 80742,
+       "dur": null,
+       "title": "Беверли-Хиллз 90210 (1990) — 1×01",
+       "up": "2025-02-04",
+       "src": "c2.ser.beverly",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "1974",
+       "kp": 80742,
+       "dur": null,
+       "title": "Беверли-Хиллз 90210 (1990) — 1×02",
+       "up": "2025-02-04",
+       "src": "c2.ser.beverly",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      }
+     ]
+    },
+    {
+     "at": "13:00",
+     "label": "«От винта!»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "vA6_NCFB5vg",
+       "dur": 712,
+       "title": "От винта! 01 Пробный выпуск (Бонус и Гамовер)",
+       "up": "2018-05-02",
+       "src": "c2.game.otvinta"
+      },
+      {
+       "provider": "rutube",
+       "id": "65354206c12e471cb3286c2e17c523cd",
+       "dur": 713,
+       "title": "ОТ ВИНТА! Клонирование Гамовера, последний бой Бонуса и бесовские сказки про ведьм",
+       "up": "2021-10-11",
+       "src": "c2.game.otvinta"
+      }
+     ]
+    },
+    {
+     "at": "14:00",
+     "label": "Никелодеон: «Эй, Арнольд!»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "mseiQ9tPH1g",
+       "dur": 1325,
+       "title": "Эй, Арнольд! | 1 Cезон 14 Cерия | Nick Rewind Россия",
+       "up": "2020-08-27",
+       "src": "c2.nick.arnold"
+      },
+      {
+       "provider": "youtube",
+       "id": "exzVfcd8Qlk",
+       "dur": 1384,
+       "title": "Эй, Арнольд! | 1 Cезон 2 Cерия | Nick Rewind Россия",
+       "up": "2019-12-05",
+       "src": "c2.nick.arnold"
+      },
+      {
+       "provider": "youtube",
+       "id": "rloV8SOt5iM",
+       "dur": 1325,
+       "title": "Эй, Арнольд! | 1 Cезон 15 Cерия | Nick Rewind Россия",
+       "up": "2020-09-03",
+       "src": "c2.nick.arnold"
+      },
+      {
+       "provider": "youtube",
+       "id": "sOSFZ38Dad4",
+       "dur": 1395,
+       "title": "Эй, Арнольд! | 1 Cезон 4 Cерия | Nick Rewind Россия",
+       "up": "2020-01-02",
+       "src": "c2.nick.arnold"
+      }
+     ]
+    },
+    {
+     "at": "15:30",
+     "label": "«Удивительные странствия Геракла»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "1600c50bcb1e20d2a7174ac752269f37",
+       "dur": 2652,
+       "title": "Удивительные странствия Геракла — 1×01",
+       "up": "2023-11-19",
+       "src": "extra.gerakl"
+      },
+      {
+       "provider": "rutube",
+       "id": "41abda0201239ae4bfe0ed71e828b0d5",
+       "dur": 2650,
+       "title": "Удивительные странствия Геракла — 1×02",
+       "up": "2023-11-19",
+       "src": "extra.gerakl"
+      }
+     ]
+    },
+    {
+     "at": "17:00",
+     "label": "«Боишься ли ты темноты?»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "KKyx0Wsc6yM",
+       "dur": 1447,
+       "title": "Боишься ли ты темноты?1х08 История о ночных соседях",
+       "up": "2016-08-31",
+       "src": "c2.myst.temnota"
+      },
+      {
+       "provider": "youtube",
+       "id": "zqV2Vzyy3yQ",
+       "dur": 1471,
+       "title": "Боишься ли ты темноты? (1995) 4 сезон 12 серия — История о незаконченном рисунке",
+       "up": "2021-04-18",
+       "src": "c2.myst.temnota"
+      },
+      {
+       "provider": "youtube",
+       "id": "nXmN70yAcnY",
+       "dur": 1471,
+       "title": "Боишься ли ты темноты? (1995) 4 сезон 11 серия — История о стороже чулана",
+       "up": "2021-04-18",
+       "src": "c2.myst.temnota"
+      }
+     ]
+    },
+    {
+     "at": "18:30",
+     "label": "«Каламбур»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "872ced69be75c0105f21eeec0995c165",
+       "dur": 1057,
+       "title": "Журнал Каламбур. Деревня Дураков. Самые забавные эпизоды. Calambur. Best Episodes.",
+       "up": "2023-12-11",
+       "src": "c2.sketch.kalambur"
+      },
+      {
+       "provider": "rutube",
+       "id": "2abd509ee53384a7aa69f9003551aa73",
+       "dur": 1058,
+       "title": "Журнал Каламбур. Деревня Дураков. Самые уморительные эпизоды. Calambur. Best Episodes.",
+       "up": "2023-12-11",
+       "src": "c2.sketch.kalambur"
+      },
+      {
+       "provider": "rutube",
+       "id": "10b8764ffc20712523562b311d803d2d",
+       "dur": 968,
+       "title": "Журнал Каламбур. Деревня Дураков. Подборка лучших моментов. Calambur. Best Episodes.",
+       "up": "2023-12-11",
+       "src": "c2.sketch.kalambur"
+      }
+     ]
+    },
+    {
+     "at": "19:30",
+     "label": "«Секретные материалы»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "205",
+       "kp": 77046,
+       "dur": null,
+       "title": "Секретные материалы (1993) — 1×01",
+       "up": "2024-06-26",
+       "src": "c2.eve.xfiles",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "205",
+       "kp": 77046,
+       "dur": null,
+       "title": "Секретные материалы (1993) — 1×02",
+       "up": "2024-06-26",
+       "src": "c2.eve.xfiles",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      }
+     ]
+    },
+    {
+     "at": "21:30",
+     "label": "«Твин Пикс»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "338",
+       "kp": 84358,
+       "dur": null,
+       "title": "Твин Пикс (1990) — 1×01",
+       "up": "2024-08-11",
+       "src": "c2.sf.twinpeaks",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "338",
+       "kp": 84358,
+       "dur": null,
+       "title": "Твин Пикс (1990) — 1×02",
+       "up": "2024-08-11",
+       "src": "c2.sf.twinpeaks",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      }
+     ]
+    },
+    {
+     "at": "23:30",
+     "label": "Ночной MTV: «Бивис и Баттхед»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "2352",
+       "kp": 94667,
+       "dur": null,
+       "title": "Бивис и Батт-Хед (1993) — 1×01",
+       "up": "2025-03-01",
+       "src": "c2.mtv.bivis",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "2352",
+       "kp": 94667,
+       "dur": null,
+       "title": "Бивис и Батт-Хед (1993) — 1×02",
+       "up": "2025-03-01",
+       "src": "c2.mtv.bivis",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "youtube",
+       "id": "L3WgfQZYWAc",
+       "dur": 2679,
+       "title": "12 ЗЛОБНЫХ ЗРИТЕЛЕЙ (выпуск октябрь 1999) MTV Россия",
+       "up": "2018-03-04",
+       "src": "c2.mtv.12zritelei"
+      }
+     ]
+    },
+    {
+     "at": "01:30",
+     "label": "Рок нон-стоп 90-х",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "cf7481fc2feddd74c3db9d7d04a10d82",
+       "dur": 10980,
+       "title": "КЛИПЫ 90-х — сборник видеоклипов",
+       "up": "2022-04-10",
+       "src": "c2.rock.nonstop"
+      }
+     ]
+    },
+    {
+     "at": "03:00",
+     "label": "Техническая пауза",
+     "kind": "technical",
+     "assets": [
+      {
+       "provider": "generated",
+       "id": "testcard",
+       "dur": 10800,
+       "title": "Настроечная таблица УЭИТ + 1000 Гц",
+       "src": "generated"
+      }
+     ]
+    }
+   ],
+   "B": [
+    {
+     "at": "06:00",
+     "label": "Аниме: «Сейлор Мун»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "8045",
+       "kp": 229704,
+       "dur": null,
+       "title": "Красавица-воин Сейлор Мун (1992) — 1×04",
+       "up": "2026-07-24",
+       "src": "c2.anime.sailormoon",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 4
+      },
+      {
+       "provider": "vibix",
+       "id": "8045",
+       "kp": 229704,
+       "dur": null,
+       "title": "Красавица-воин Сейлор Мун (1992) — 1×05",
+       "up": "2026-07-24",
+       "src": "c2.anime.sailormoon",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 5
+      },
+      {
+       "provider": "vibix",
+       "id": "8045",
+       "kp": 229704,
+       "dur": null,
+       "title": "Красавица-воин Сейлор Мун (1992) — 1×06",
+       "up": "2026-07-24",
+       "src": "c2.anime.sailormoon",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 6
+      }
+     ]
+    },
+    {
+     "at": "07:30",
+     "label": "«Люди Икс» (1992)",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "28454b1afb3249d2269ed6d0adf9e748",
+       "dur": 1276,
+       "title": "Люди Икс 1 сезон 1 серия (мультсериал, 1992)",
+       "up": "2024-02-24",
+       "src": "c2.cart.xmen"
+      },
+      {
+       "provider": "rutube",
+       "id": "c3f0a19adb2f12e981cbb24da28f6157",
+       "dur": 1277,
+       "title": "Люди Икс 1 сезон 2 серия (мультсериал, 1992)",
+       "up": "2024-02-24",
+       "src": "c2.cart.xmen"
+      },
+      {
+       "provider": "rutube",
+       "id": "e4920db9e31601e202b0a9bd5e67d132",
+       "dur": 1278,
+       "title": "Люди Икс 1 сезон 3 серия (мультсериал, 1992)",
+       "up": "2024-02-24",
+       "src": "c2.cart.xmen"
+      },
+      {
+       "provider": "rutube",
+       "id": "0aa44802b1f2fce004c79ebd204d9018",
+       "dur": 1268,
+       "title": "Люди Икс 1 сезон 4 серия (мультсериал, 1992)",
+       "up": "2024-02-24",
+       "src": "c2.cart.xmen"
+      }
+     ]
+    },
+    {
+     "at": "09:00",
+     "label": "«Элен и ребята»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "04fde84a94ec86985c24ec65bf901181",
+       "dur": 1455,
+       "title": "Элен и ребята — 18 серия «Папа»",
+       "up": "2026-02-09",
+       "src": "extra.elen"
+      },
+      {
+       "provider": "rutube",
+       "id": "bd894222882fb176dd3759569029514b",
+       "dur": 1519,
+       "title": "Элен и ребята — 19 серия «Фотомодель»",
+       "up": "2026-02-09",
+       "src": "extra.elen"
+      },
+      {
+       "provider": "rutube",
+       "id": "d57e2b3a985c24677a1194e0f6536a59",
+       "dur": 1403,
+       "title": "Элен и ребята — 23 серия «Свадьба»",
+       "up": "2026-02-09",
+       "src": "extra.elen"
+      },
+      {
+       "provider": "rutube",
+       "id": "fc3bfea400743c7bcbcdaceae012211f",
+       "dur": 1453,
+       "title": "Элен и ребята — 36 серия",
+       "up": "2026-02-09",
+       "src": "extra.elen"
+      }
+     ]
+    },
+    {
+     "at": "11:00",
+     "label": "«Дикий ангел»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "7636",
+       "kp": 77191,
+       "dur": null,
+       "title": "Дикий ангел (1998) — 1×01",
+       "up": "2026-06-24",
+       "src": "c2.ser.dikiyangel",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "7636",
+       "kp": 77191,
+       "dur": null,
+       "title": "Дикий ангел (1998) — 1×02",
+       "up": "2026-06-24",
+       "src": "c2.ser.dikiyangel",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      }
+     ]
+    },
+    {
+     "at": "13:00",
+     "label": "«Денди — Новая реальность»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "f92c743a6d71af409e814b41f15f1fba",
+       "dur": 1503,
+       "title": "Денди Новая Реальность 2-й выпуск - Сергей Супонев (dendy / sega / snes) - ретро игры, старые игры",
+       "up": "2023-12-06",
+       "src": "c2.game.dendy"
+      },
+      {
+       "provider": "rutube",
+       "id": "e17347f8be1bd4eafe08564346c30fac",
+       "dur": 1021,
+       "title": "Денди   Новая реальность передача с Сергеем Супоневым  Выпуск №1",
+       "up": "2024-04-23",
+       "src": "c2.game.dendy"
+      }
+     ]
+    },
+    {
+     "at": "14:00",
+     "label": "Никелодеон: «Ох уж эти детки»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "6352",
+       "kp": 214312,
+       "dur": null,
+       "title": "Ох, уж эти детки! (1991) — 1×01",
+       "up": "2026-02-24",
+       "src": "c2.nick.rugrats",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "6352",
+       "kp": 214312,
+       "dur": null,
+       "title": "Ох, уж эти детки! (1991) — 1×02",
+       "up": "2026-02-24",
+       "src": "c2.nick.rugrats",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "vibix",
+       "id": "6352",
+       "kp": 214312,
+       "dur": null,
+       "title": "Ох, уж эти детки! (1991) — 1×03",
+       "up": "2026-02-24",
+       "src": "c2.nick.rugrats",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      },
+      {
+       "provider": "vibix",
+       "id": "6352",
+       "kp": 214312,
+       "dur": null,
+       "title": "Ох, уж эти детки! (1991) — 1×04",
+       "up": "2026-02-24",
+       "src": "c2.nick.rugrats",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 4
+      }
+     ]
+    },
+    {
+     "at": "15:30",
+     "label": "«Зена — королева воинов»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "cdb22a7605aeebdb41bcf46d329f9098",
+       "dur": 2580,
+       "title": "Зена — королева воинов — 1×01",
+       "up": "2023-11-15",
+       "src": "extra.zena"
+      },
+      {
+       "provider": "rutube",
+       "id": "b519fbc49e0d5bb5f6946801377e92fc",
+       "dur": 2520,
+       "title": "Зена — королева воинов — 1×02",
+       "up": "2023-11-15",
+       "src": "extra.zena"
+      }
+     ]
+    },
+    {
+     "at": "17:00",
+     "label": "«Мурашки»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "pA3utNGwvHA",
+       "dur": 1246,
+       "title": "Часы судьбы | Мурашки 1 сезон",
+       "up": "2016-04-01",
+       "src": "c2.myst.murashki"
+      },
+      {
+       "provider": "youtube",
+       "id": "kF1G1dEFFeY",
+       "dur": 1255,
+       "title": "Мурашки 2 сезон 6 серия",
+       "up": "2016-05-02",
+       "src": "c2.myst.murashki"
+      },
+      {
+       "provider": "youtube",
+       "id": "cWN3CvG69hQ",
+       "dur": 1292,
+       "title": "Мурашки  3 серия 4 сезон Goosebumps The Ghost Next Door   Part 1",
+       "up": "2022-04-16",
+       "src": "c2.myst.murashki"
+      }
+     ]
+    },
+    {
+     "at": "18:30",
+     "label": "«Осторожно, модерн!»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "0f8d2ce4cba1e335ce23c14bd4d1b41d",
+       "dur": 1197,
+       "title": "Осторожно модерн / Дела семейные / Дмитрий Нагиев / Сергей Рост",
+       "up": "2023-12-28",
+       "src": "c2.sketch.modern"
+      },
+      {
+       "provider": "youtube",
+       "id": "QNpuUXcm5zw",
+       "dur": 1288,
+       "title": "Осторожно модерн 2. Пропажа заначки",
+       "up": "2019-10-10",
+       "src": "c2.sketch.modern"
+      },
+      {
+       "provider": "youtube",
+       "id": "-ckaPGoQ6XU",
+       "dur": 1091,
+       "title": "Осторожно Модерн - Экзамен",
+       "up": "2015-08-06",
+       "src": "c2.sketch.modern"
+      }
+     ]
+    },
+    {
+     "at": "19:30",
+     "label": "«Секретные материалы»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "205",
+       "kp": 77046,
+       "dur": null,
+       "title": "Секретные материалы (1993) — 1×03",
+       "up": "2024-06-26",
+       "src": "c2.eve.xfiles",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      },
+      {
+       "provider": "vibix",
+       "id": "205",
+       "kp": 77046,
+       "dur": null,
+       "title": "Секретные материалы (1993) — 1×04",
+       "up": "2024-06-26",
+       "src": "c2.eve.xfiles",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 4
+      }
+     ]
+    },
+    {
+     "at": "21:30",
+     "label": "«Вавилон 5»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "201",
+       "kp": 77298,
+       "dur": null,
+       "title": "Вавилон 5 (1993) — 1×01",
+       "up": "2024-06-25",
+       "src": "c2.sf.babylon5",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "201",
+       "kp": 77298,
+       "dur": null,
+       "title": "Вавилон 5 (1993) — 1×02",
+       "up": "2024-06-25",
+       "src": "c2.sf.babylon5",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      }
+     ]
+    },
+    {
+     "at": "23:30",
+     "label": "Ночной MTV: «Бивис и Баттхед»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "2352",
+       "kp": 94667,
+       "dur": null,
+       "title": "Бивис и Батт-Хед (1993) — 1×03",
+       "up": "2025-03-01",
+       "src": "c2.mtv.bivis",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      },
+      {
+       "provider": "vibix",
+       "id": "2352",
+       "kp": 94667,
+       "dur": null,
+       "title": "Бивис и Батт-Хед (1993) — 1×04",
+       "up": "2025-03-01",
+       "src": "c2.mtv.bivis",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 4
+      },
+      {
+       "provider": "youtube",
+       "id": "J9djPDV6eqc",
+       "dur": 2698,
+       "title": "12 ЗЛОБНЫХ ЗРИТЕЛЕЙ – THE FLOW ЗАХВАТИЛ MTV (ВЫПУСК 33)",
+       "up": "2018-10-27",
+       "src": "c2.mtv.12zritelei"
+      }
+     ]
+    },
+    {
+     "at": "01:30",
+     "label": "Рок нон-стоп 90-х",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "1c4b1243e6582d034cf9df8f64af8ba0",
+       "dur": 9420,
+       "title": "Супер-дискотека 90-х — лучшие хиты",
+       "up": "2023-08-02",
+       "src": "c2.rock.nonstop"
+      }
+     ]
+    },
+    {
+     "at": "03:00",
+     "label": "Техническая пауза",
+     "kind": "technical",
+     "assets": [
+      {
+       "provider": "generated",
+       "id": "testcard",
+       "dur": 10800,
+       "title": "Настроечная таблица УЭИТ + 1000 Гц",
+       "src": "generated"
+      }
+     ]
+    }
+   ],
+   "C": [
+    {
+     "at": "06:00",
+     "label": "«Трансформеры: Битвы зверей»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "SlGewRKH9R0",
+       "dur": 1240,
+       "title": "Трансформеры: Битвы Зверей Сезон 1 Серия 1 \"Войны зверей, Часть 1\"",
+       "up": "2013-07-12",
+       "src": "c2.anime.transformers"
+      },
+      {
+       "provider": "youtube",
+       "id": "trRl40hI7hk",
+       "dur": 1306,
+       "title": "Трансформеры: Битвы Зверей Сезон 1 Серия 8 \"Двойная опасность\"",
+       "up": "2013-07-13",
+       "src": "c2.anime.transformers"
+      },
+      {
+       "provider": "youtube",
+       "id": "QrHofBARPko",
+       "dur": 1306,
+       "title": "Трансформеры: Битвы Зверей Сезон 1 Серия 13 \"Преступные замыслы\"",
+       "up": "2013-07-13",
+       "src": "c2.anime.transformers"
+      }
+     ]
+    },
+    {
+     "at": "07:30",
+     "label": "«Черепашки-ниндзя» (1987)",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "7713",
+       "kp": 94890,
+       "dur": null,
+       "title": "Черепашки-мутанты-ниндзя (1987) — 1×01",
+       "up": "2026-06-27",
+       "src": "c2.cart.tmnt",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "7713",
+       "kp": 94890,
+       "dur": null,
+       "title": "Черепашки-мутанты-ниндзя (1987) — 1×02",
+       "up": "2026-06-27",
+       "src": "c2.cart.tmnt",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "vibix",
+       "id": "7713",
+       "kp": 94890,
+       "dur": null,
+       "title": "Черепашки-мутанты-ниндзя (1987) — 1×03",
+       "up": "2026-06-27",
+       "src": "c2.cart.tmnt",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      },
+      {
+       "provider": "vibix",
+       "id": "7713",
+       "kp": 94890,
+       "dur": null,
+       "title": "Черепашки-мутанты-ниндзя (1987) — 1×04",
+       "up": "2026-06-27",
+       "src": "c2.cart.tmnt",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 4
+      }
+     ]
+    },
+    {
+     "at": "09:00",
+     "label": "«Элен и ребята»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "14adf40a8c179045d8e7860d52b4ac5a",
+       "dur": 1458,
+       "title": "Элен и ребята — 40 серия",
+       "up": "2026-02-09",
+       "src": "extra.elen"
+      },
+      {
+       "provider": "rutube",
+       "id": "dab39598f561635c09a2f635338a2221",
+       "dur": 1391,
+       "title": "Элен и ребята — 44 серия",
+       "up": "2026-02-17",
+       "src": "extra.elen"
+      },
+      {
+       "provider": "rutube",
+       "id": "6c330522c201457f87567032a752f346",
+       "dur": 1345,
+       "title": "Элен и ребята — 47 серия «Седрик»",
+       "up": "2026-02-17",
+       "src": "extra.elen"
+      },
+      {
+       "provider": "rutube",
+       "id": "55c699779ef52a6e2dadd939fbbc653d",
+       "dur": 1539,
+       "title": "Элен и ребята — 63 серия «Раскаяние»",
+       "up": "2026-02-17",
+       "src": "extra.elen"
+      }
+     ]
+    },
+    {
+     "at": "11:00",
+     "label": "«Беверли-Хиллз, 90210»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "1974",
+       "kp": 80742,
+       "dur": null,
+       "title": "Беверли-Хиллз 90210 (1990) — 1×03",
+       "up": "2025-02-04",
+       "src": "c2.ser.beverly",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      },
+      {
+       "provider": "vibix",
+       "id": "1974",
+       "kp": 80742,
+       "dur": null,
+       "title": "Беверли-Хиллз 90210 (1990) — 1×04",
+       "up": "2025-02-04",
+       "src": "c2.ser.beverly",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 4
+      }
+     ]
+    },
+    {
+     "at": "13:00",
+     "label": "«От винта!»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "1_eJvUD-2sE",
+       "dur": 715,
+       "title": "ОТ ВИНТА! Atomic Heart, Fallout Cascadia, кража лица у Гамовера и эпичный концерт Бонуса",
+       "up": "2021-06-21",
+       "src": "c2.game.otvinta"
+      },
+      {
+       "provider": "youtube",
+       "id": "vA6_NCFB5vg",
+       "dur": 712,
+       "title": "От винта! 01 Пробный выпуск (Бонус и Гамовер)",
+       "up": "2018-05-02",
+       "src": "c2.game.otvinta"
+      }
+     ]
+    },
+    {
+     "at": "14:00",
+     "label": "Никелодеон: «ААА!!! Настоящие монстры»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "0d7cb87fc65e57e841a844add38f6487",
+       "dur": 1440,
+       "title": "ААА!!! Настоящие монстры — 1×01",
+       "up": "2025-02-09",
+       "src": "extra.monsters"
+      },
+      {
+       "provider": "rutube",
+       "id": "250637e4b9da8ae8a49258bc14611514",
+       "dur": 1440,
+       "title": "ААА!!! Настоящие монстры — 1×02",
+       "up": "2025-02-09",
+       "src": "extra.monsters"
+      },
+      {
+       "provider": "rutube",
+       "id": "3c38ead0b4704903f218fe87e5fc3d14",
+       "dur": 1440,
+       "title": "ААА!!! Настоящие монстры — 1×03",
+       "up": "2025-02-09",
+       "src": "extra.monsters"
+      },
+      {
+       "provider": "rutube",
+       "id": "ba78c7853fd3b86ed866fb41b73f52d7",
+       "dur": 1440,
+       "title": "ААА!!! Настоящие монстры — 1×04",
+       "up": "2025-02-09",
+       "src": "extra.monsters"
+      }
+     ]
+    },
+    {
+     "at": "15:30",
+     "label": "«Удивительные странствия Геракла»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "23c3f8866566d1c39a686fd7d0d84a97",
+       "dur": 2650,
+       "title": "Удивительные странствия Геракла — 1×03",
+       "up": "2023-11-19",
+       "src": "extra.gerakl"
+      },
+      {
+       "provider": "rutube",
+       "id": "21ccf93a5ba469bc7477a52f754ebefa",
+       "dur": 2650,
+       "title": "Удивительные странствия Геракла — 1×04",
+       "up": "2023-11-19",
+       "src": "extra.gerakl"
+      }
+     ]
+    },
+    {
+     "at": "17:00",
+     "label": "«Боишься ли ты темноты?»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "rTR-vv29ydc",
+       "dur": 1471,
+       "title": "Боишься ли ты темноты? (1994) 4 сезон 3 серия — История о подводном демоне",
+       "up": "2021-04-18",
+       "src": "c2.myst.temnota"
+      },
+      {
+       "provider": "youtube",
+       "id": "FuYrVfYsH8M",
+       "dur": 1457,
+       "title": "Боишься ли ты темноты? (2000) 7 сезон 9 серия — История о фотофинише",
+       "up": "2022-05-07",
+       "src": "c2.myst.temnota"
+      },
+      {
+       "provider": "youtube",
+       "id": "qmQo4LsWvUQ",
+       "dur": 1462,
+       "title": "Боишься ли ты темноты? (2000) 7 сезон 7 серия — История о Реаниматоре",
+       "up": "2022-05-07",
+       "src": "c2.myst.temnota"
+      }
+     ]
+    },
+    {
+     "at": "18:30",
+     "label": "«ОСП-студия»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "youtube",
+       "id": "ClVtBdLR55c",
+       "dur": 2499,
+       "title": "ОСП   студия 2002   Выпуск 1",
+       "up": "2017-10-15",
+       "src": "c2.sketch.osp"
+      },
+      {
+       "provider": "youtube",
+       "id": "Ll__AAlVWos",
+       "dur": 2555,
+       "title": "ОСП  студия — 5 й выпуск",
+       "up": "2015-07-18",
+       "src": "c2.sketch.osp"
+      }
+     ]
+    },
+    {
+     "at": "19:30",
+     "label": "«Секретные материалы»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "205",
+       "kp": 77046,
+       "dur": null,
+       "title": "Секретные материалы (1993) — 1×05",
+       "up": "2024-06-26",
+       "src": "c2.eve.xfiles",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 5
+      },
+      {
+       "provider": "vibix",
+       "id": "205",
+       "kp": 77046,
+       "dur": null,
+       "title": "Секретные материалы (1993) — 1×06",
+       "up": "2024-06-26",
+       "src": "c2.eve.xfiles",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 6
+      }
+     ]
+    },
+    {
+     "at": "21:30",
+     "label": "«Квантовый скачок»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "1348",
+       "kp": 94222,
+       "dur": null,
+       "title": "Квантовый скачок (1989) — 1×01",
+       "up": "2024-12-15",
+       "src": "c2.sf.quantum",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "1348",
+       "kp": 94222,
+       "dur": null,
+       "title": "Квантовый скачок (1989) — 1×02",
+       "up": "2024-12-15",
+       "src": "c2.sf.quantum",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      }
+     ]
+    },
+    {
+     "at": "23:30",
+     "label": "Ночной MTV: «Бивис и Баттхед»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "2352",
+       "kp": 94667,
+       "dur": null,
+       "title": "Бивис и Батт-Хед (1993) — 1×05",
+       "up": "2025-03-01",
+       "src": "c2.mtv.bivis",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 5
+      },
+      {
+       "provider": "vibix",
+       "id": "2352",
+       "kp": 94667,
+       "dur": null,
+       "title": "Бивис и Батт-Хед (1993) — 1×06",
+       "up": "2025-03-01",
+       "src": "c2.mtv.bivis",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 6
+      },
+      {
+       "provider": "youtube",
+       "id": "L3WgfQZYWAc",
+       "dur": 2679,
+       "title": "12 ЗЛОБНЫХ ЗРИТЕЛЕЙ (выпуск октябрь 1999) MTV Россия",
+       "up": "2018-03-04",
+       "src": "c2.mtv.12zritelei"
+      }
+     ]
+    },
+    {
+     "at": "01:30",
+     "label": "Рок нон-стоп 90-х",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "rutube",
+       "id": "c365bb93dd5577cd05a0e41ef85abf96",
+       "dur": 8220,
+       "title": "Топ русских хитов 90-х",
+       "up": "2023-03-02",
+       "src": "c2.rock.nonstop"
+      }
+     ]
+    },
+    {
+     "at": "03:00",
+     "label": "Техническая пауза",
+     "kind": "technical",
+     "assets": [
+      {
+       "provider": "generated",
+       "id": "testcard",
+       "dur": 10800,
+       "title": "Настроечная таблица УЭИТ + 1000 Гц",
+       "src": "generated"
+      }
+     ]
+    }
+   ]
+  },
+  "kabelny": {
+   "title": "Кабельный видеосалон",
+   "A": [
+    {
+     "at": "06:00",
+     "label": "Марафон Disney",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "15613",
+       "kp": 2360,
+       "dur": 5280,
+       "title": "Король Лев (1994)",
+       "up": "2024-07-27",
+       "src": "c3.disney.korol-lev",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "vibix",
+       "id": "224688",
+       "kp": 2361,
+       "dur": 5400,
+       "title": "Аладдин (1992)",
+       "up": "2026-02-01",
+       "src": "c3.disney.aladdin",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "10:00",
+     "label": "Французская комедия",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "20817",
+       "kp": 57308,
+       "dur": 5400,
+       "title": "Жандарм из Сен-Тропе (1964)",
+       "up": "2024-08-22",
+       "src": "c3.com.zhandarm",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "vibix",
+       "id": "4773",
+       "kp": 80775,
+       "dur": 6660,
+       "title": "Разиня (1965)",
+       "up": "2024-03-23",
+       "src": "c3.com.razinya",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "13:00",
+     "label": "Эпоха боевых искусств",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "42299",
+       "kp": 24705,
+       "dur": 5280,
+       "title": "Доспехи Бога (1986)",
+       "up": "2026-09-14",
+       "src": "c3.ma.dospehi-boga",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "vibix",
+       "id": "4834",
+       "kp": 24726,
+       "dur": 6660,
+       "title": "Пьяный мастер (1978)",
+       "up": "2024-03-26",
+       "src": "c3.ma.pyanyy-master",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "16:00",
+     "label": "Фантастический боевик",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4681",
+       "kp": 6303,
+       "dur": 6240,
+       "title": "Хищник (1987)",
+       "up": "2024-03-20",
+       "src": "c3.sf.hishchnik",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "18:30",
+     "label": "Главный блокбастер дня",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "22293",
+       "kp": 444,
+       "dur": 8220,
+       "title": "Терминатор 2: Судный день (1991)",
+       "up": "2024-08-28",
+       "src": "c3.big.terminator2",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "21:00",
+     "label": "Культовый триллер",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "19891",
+       "kp": 389,
+       "dur": 7980,
+       "title": "Леон (1994)",
+       "up": "2024-08-19",
+       "src": "c3.thr.leon",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "23:15",
+     "label": "VHS-хоррор",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4986",
+       "kp": 5198,
+       "dur": 5520,
+       "title": "Кошмар на улице Вязов (1984)",
+       "up": "2026-07-31",
+       "src": "c3.hor.koshmar",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "01:00",
+     "label": "Категория «B»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "92363",
+       "kp": 12363,
+       "dur": 6120,
+       "title": "Универсальный солдат (1992)",
+       "up": "2026-09-14",
+       "src": "c3.b.universalnyy-soldat",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "03:00",
+     "label": "Техническая пауза",
+     "kind": "technical",
+     "assets": [
+      {
+       "provider": "generated",
+       "id": "testcard",
+       "dur": 10800,
+       "title": "Настроечная таблица УЭИТ + 1000 Гц",
+       "src": "generated"
+      }
+     ]
+    }
+   ],
+   "B": [
+    {
+     "at": "06:00",
+     "label": "Марафон Disney",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "224653",
+       "kp": 8147,
+       "dur": 4980,
+       "title": "Русалочка (1989)",
+       "up": "2026-02-01",
+       "src": "c3.disney.rusalochka",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "vibix",
+       "id": "16102",
+       "kp": 540,
+       "dur": 5040,
+       "title": "Красавица и чудовище (1991)",
+       "up": "2024-07-29",
+       "src": "c3.disney.krasavica",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "10:00",
+     "label": "Французская комедия",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4697",
+       "kp": 57004,
+       "dur": 5700,
+       "title": "Игрушка (1976)",
+       "up": "2024-03-21",
+       "src": "c3.com.igrushka",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "vibix",
+       "id": "4621",
+       "kp": 20908,
+       "dur": 5400,
+       "title": "Невезучие (1981)",
+       "up": "2024-03-18",
+       "src": "c3.com.nevezuchie",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "13:00",
+     "label": "Эпоха боевых искусств",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "5651",
+       "kp": 4777,
+       "dur": 5520,
+       "title": "Кровавый спорт (1988)",
+       "up": "2024-04-22",
+       "src": "c3.ma.krovavyy-sport",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "vibix",
+       "id": "220448",
+       "kp": 28131,
+       "dur": 5820,
+       "title": "Кикбоксер (1989)",
+       "up": "2026-01-23",
+       "src": "c3.ma.kikbokser",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "16:00",
+     "label": "Фантастический боевик",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "42685",
+       "kp": 2443,
+       "dur": 6780,
+       "title": "Вспомнить всё (1990)",
+       "up": "2024-11-02",
+       "src": "c3.sf.vspomnit-vse",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "18:30",
+     "label": "Главный блокбастер дня",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4469",
+       "kp": 301,
+       "dur": 8160,
+       "title": "Матрица (1999)",
+       "up": "2024-02-27",
+       "src": "c3.big.matrica",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "21:00",
+     "label": "Культовый триллер",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4795",
+       "kp": 1968,
+       "dur": 6960,
+       "title": "Скорость (1994)",
+       "up": "2024-03-24",
+       "src": "c3.thr.skorost",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "23:00",
+     "label": "VHS-хоррор",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "228154",
+       "kp": 5891,
+       "dur": 5220,
+       "title": "Детские игры (1988)",
+       "up": "2026-02-07",
+       "src": "c3.hor.detskie-igry",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "01:00",
+     "label": "Категория «B»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "240173",
+       "kp": 4010,
+       "dur": 5160,
+       "title": "Киборг (1989)",
+       "up": "2026-02-22",
+       "src": "c3.b.kiborg",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "03:00",
+     "label": "Техническая пауза",
+     "kind": "technical",
+     "assets": [
+      {
+       "provider": "generated",
+       "id": "testcard",
+       "dur": 10800,
+       "title": "Настроечная таблица УЭИТ + 1000 Гц",
+       "src": "generated"
+      }
+     ]
+    }
+   ],
+   "C": [
+    {
+     "at": "06:00",
+     "label": "Марафон Disney",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "153501",
+       "kp": 8133,
+       "dur": 4680,
+       "title": "Книга джунглей (1967)",
+       "up": "2025-07-28",
+       "src": "c3.disney.kniga-dzhungley",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "vibix",
+       "id": "116359",
+       "kp": 5213,
+       "dur": 4860,
+       "title": "Покахонтас (1995)",
+       "up": "2025-04-24",
+       "src": "c3.disney.pokahontas",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "10:00",
+     "label": "Итальянская комедия",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "15702",
+       "kp": 63912,
+       "dur": 6420,
+       "title": "Укрощение строптивого (1980)",
+       "up": "2024-07-28",
+       "src": "c3.com.ukroshchenie",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "vibix",
+       "id": "42196",
+       "kp": 10179,
+       "dur": 6600,
+       "title": "Блеф (1976)",
+       "up": "2024-11-01",
+       "src": "c3.com.blef",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "13:00",
+     "label": "Эпоха боевых искусств",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4779",
+       "kp": 24743,
+       "dur": 6120,
+       "title": "Выход Дракона (1973)",
+       "up": "2024-03-23",
+       "src": "c3.ma.vyhod-drakona",
+       "mediaType": "movie"
+      },
+      {
+       "provider": "vibix",
+       "id": "159553",
+       "kp": 22791,
+       "dur": 6360,
+       "title": "Полицейская история (1985)",
+       "up": "2025-08-14",
+       "src": "c3.ma.policeyskaya-istoriya",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "16:00",
+     "label": "Фантастический боевик",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "5193",
+       "kp": 7410,
+       "dur": 6120,
+       "title": "Робокоп (1987)",
+       "up": "2024-04-04",
+       "src": "c3.sf.robokop",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "18:30",
+     "label": "Главный блокбастер дня",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4528",
+       "kp": 2656,
+       "dur": 7560,
+       "title": "Пятый элемент (1997)",
+       "up": "2024-03-03",
+       "src": "c3.big.pyatyy-element",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "21:00",
+     "label": "Культовый триллер",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "4455",
+       "kp": 345,
+       "dur": 7080,
+       "title": "Молчание ягнят (1990)",
+       "up": "2024-02-27",
+       "src": "c3.thr.molchanie-yagnyat",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "23:00",
+     "label": "VHS-хоррор: «Байки из склепа»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "1947",
+       "kp": 271501,
+       "dur": null,
+       "title": "Байки из склепа (1989) — 1×01",
+       "up": "2025-01-29",
+       "src": "c3.hor.bayki-iz-sklepa",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 1
+      },
+      {
+       "provider": "vibix",
+       "id": "1947",
+       "kp": 271501,
+       "dur": null,
+       "title": "Байки из склепа (1989) — 1×02",
+       "up": "2025-01-29",
+       "src": "c3.hor.bayki-iz-sklepa",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 2
+      },
+      {
+       "provider": "vibix",
+       "id": "1947",
+       "kp": 271501,
+       "dur": null,
+       "title": "Байки из склепа (1989) — 1×03",
+       "up": "2025-01-29",
+       "src": "c3.hor.bayki-iz-sklepa",
+       "mediaType": "episode",
+       "season": 1,
+       "episode": 3
+      }
+     ]
+    },
+    {
+     "at": "01:00",
+     "label": "Категория «B»",
+     "kind": "program",
+     "assets": [
+      {
+       "provider": "vibix",
+       "id": "97409",
+       "kp": 8374,
+       "dur": 5700,
+       "title": "Безумный Макс 2: Воин дороги (1981)",
+       "up": "2025-03-15",
+       "src": "c3.b.bezumnyy-maks-2",
+       "mediaType": "movie"
+      }
+     ]
+    },
+    {
+     "at": "03:00",
+     "label": "Техническая пауза",
+     "kind": "technical",
+     "assets": [
+      {
+       "provider": "generated",
+       "id": "testcard",
+       "dur": 10800,
+       "title": "Настроечная таблица УЭИТ + 1000 Гц",
+       "src": "generated"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

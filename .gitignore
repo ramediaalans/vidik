@@ -32,3 +32,12 @@ tools/tv/vibix-embed.js
 
 # ��������� ��������� (rclone � ��.)
 tools/_bin/
+
+# Сырые дампы каталогов и выдача поиска: восстанавливаются скриптами
+tools/tv/collect/vibix-movie.json
+tools/tv/collect/vibix-serial.json
+tools/tv/collect/cand.json
+tools/tv/collect/cand2.json
+tools/tv/collect/_titles.txt
+tools/tv/collect/vv*.json
+tools/tv/collect/*.out

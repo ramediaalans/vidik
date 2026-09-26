@@ -1,0 +1,979 @@
+[
+ {
+  "key": "c1.eve.odin-doma2",
+  "kp": 5928,
+  "playerId": "4551",
+  "dataType": "movie",
+  "name": "Один дома 2: Затерянный в Нью-Йорке",
+  "year": "1992",
+  "dur": 119,
+  "q": "FullHD",
+  "up": "2024-03-14",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c1.eve.maska",
+  "kp": 6039,
+  "playerId": "4613",
+  "dataType": "movie",
+  "name": "Маска",
+  "year": "1994",
+  "dur": 101,
+  "q": "FullHD",
+  "up": "2024-03-17",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c1.eve.bethoven",
+  "kp": 15635,
+  "playerId": "6201",
+  "dataType": "movie",
+  "name": "Бетховен",
+  "year": "1991",
+  "dur": 87,
+  "q": "FullHD",
+  "up": "2024-04-28",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c1.disney.utinye",
+  "kp": 81426,
+  "playerId": "2159",
+  "dataType": "serial",
+  "name": "Утиные истории",
+  "year": "1987",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2025-02-16",
+  "voices": 2,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c1.disney.chipdale",
+  "kp": 95231,
+  "playerId": "322",
+  "dataType": "serial",
+  "name": "Чип и Дейл спешат на помощь",
+  "year": "1989",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2024-07-28",
+  "voices": 2,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c1.disney.chernyplashch",
+  "kp": 395106,
+  "playerId": "3181",
+  "dataType": "serial",
+  "name": "Черный Плащ",
+  "year": "1991",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2025-03-18",
+  "voices": 2,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c1.nov.dikayaroza",
+  "kp": 294989,
+  "playerId": "2965",
+  "dataType": "serial",
+  "name": "Дикая роза",
+  "year": "1987",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2025-04-13",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c1.kino.gostya",
+  "kp": 77185,
+  "playerId": "1204",
+  "dataType": "serial",
+  "name": "Гостья из будущего",
+  "year": "1984",
+  "dur": 315,
+  "q": "FullHD",
+  "up": "2024-12-04",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c1.kino.elektronik",
+  "kp": 77284,
+  "playerId": "1411",
+  "dataType": "serial",
+  "name": "Приключения Электроника",
+  "year": "1979",
+  "dur": 215,
+  "q": "FullHD",
+  "up": "2024-12-16",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.anime.sailormoon",
+  "kp": 229704,
+  "playerId": "8045",
+  "dataType": "serial",
+  "name": "Красавица-воин Сейлор Мун",
+  "year": "1992",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2026-07-24",
+  "voices": 3,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.cart.spiderman",
+  "kp": 95232,
+  "playerId": "52",
+  "dataType": "serial",
+  "name": "Человек-паук",
+  "year": "1994",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2024-02-09",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.cart.tmnt",
+  "kp": 94890,
+  "playerId": "7713",
+  "dataType": "serial",
+  "name": "Черепашки-мутанты-ниндзя",
+  "year": "1987",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2026-06-27",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.nick.rugrats",
+  "kp": 214312,
+  "playerId": "6352",
+  "dataType": "serial",
+  "name": "Ох, уж эти детки!",
+  "year": "1991",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2026-02-24",
+  "voices": 2,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.ser.beverly",
+  "kp": 80742,
+  "playerId": "1974",
+  "dataType": "serial",
+  "name": "Беверли-Хиллз 90210",
+  "year": "1990",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2025-02-04",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.ser.dikiyangel",
+  "kp": 77191,
+  "playerId": "7636",
+  "dataType": "serial",
+  "name": "Дикий ангел",
+  "year": "1998",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2026-06-24",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.eve.xfiles",
+  "kp": 77046,
+  "playerId": "205",
+  "dataType": "serial",
+  "name": "Секретные материалы",
+  "year": "1993",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2024-06-26",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.sf.twinpeaks",
+  "kp": 84358,
+  "playerId": "338",
+  "dataType": "serial",
+  "name": "Твин Пикс",
+  "year": "1990",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2024-08-11",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.sf.babylon5",
+  "kp": 77298,
+  "playerId": "201",
+  "dataType": "serial",
+  "name": "Вавилон 5",
+  "year": "1993",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2024-06-25",
+  "voices": 2,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.sf.quantum",
+  "kp": 94222,
+  "playerId": "1348",
+  "dataType": "serial",
+  "name": "Квантовый скачок",
+  "year": "1989",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2024-12-15",
+  "voices": 1,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c2.mtv.bivis",
+  "kp": 94667,
+  "playerId": "2352",
+  "dataType": "serial",
+  "name": "Бивис и Батт-Хед",
+  "year": "1993",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2025-03-01",
+  "voices": 3,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c3.disney.korol-lev",
+  "kp": 2360,
+  "playerId": "15613",
+  "dataType": "movie",
+  "name": "Король Лев",
+  "year": "1994",
+  "dur": 88,
+  "q": "FullHD",
+  "up": "2024-07-27",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.disney.aladdin",
+  "kp": 2361,
+  "playerId": "224688",
+  "dataType": "movie",
+  "name": "Аладдин",
+  "year": "1992",
+  "dur": 90,
+  "q": "FullHD",
+  "up": "2026-02-01",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.disney.rusalochka",
+  "kp": 8147,
+  "playerId": "224653",
+  "dataType": "movie",
+  "name": "Русалочка",
+  "year": "1989",
+  "dur": 83,
+  "q": "FullHD",
+  "up": "2026-02-01",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.disney.krasavica",
+  "kp": 540,
+  "playerId": "16102",
+  "dataType": "movie",
+  "name": "Красавица и чудовище",
+  "year": "1991",
+  "dur": 84,
+  "q": "FullHD",
+  "up": "2024-07-29",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.disney.kniga-dzhungley",
+  "kp": 8133,
+  "playerId": "153501",
+  "dataType": "movie",
+  "name": "Книга джунглей",
+  "year": "1967",
+  "dur": 78,
+  "q": "FullHD",
+  "up": "2025-07-28",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.disney.pokahontas",
+  "kp": 5213,
+  "playerId": "116359",
+  "dataType": "movie",
+  "name": "Покахонтас",
+  "year": "1995",
+  "dur": 81,
+  "q": "FullHD",
+  "up": "2025-04-24",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.com.zhandarm",
+  "kp": 57308,
+  "playerId": "20817",
+  "dataType": "movie",
+  "name": "Жандарм из Сен-Тропе",
+  "year": "1964",
+  "dur": 90,
+  "q": "FullHD",
+  "up": "2024-08-22",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.com.razinya",
+  "kp": 80775,
+  "playerId": "4773",
+  "dataType": "movie",
+  "name": "Разиня",
+  "year": "1965",
+  "dur": 111,
+  "q": "FullHD",
+  "up": "2024-03-23",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.com.igrushka",
+  "kp": 57004,
+  "playerId": "4697",
+  "dataType": "movie",
+  "name": "Игрушка",
+  "year": "1976",
+  "dur": 95,
+  "q": "FullHD",
+  "up": "2024-03-21",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.com.nevezuchie",
+  "kp": 20908,
+  "playerId": "4621",
+  "dataType": "movie",
+  "name": "Невезучие",
+  "year": "1981",
+  "dur": 90,
+  "q": "FullHD",
+  "up": "2024-03-18",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.com.ukroshchenie",
+  "kp": 63912,
+  "playerId": "15702",
+  "dataType": "movie",
+  "name": "Укрощение строптивого",
+  "year": "1980",
+  "dur": 107,
+  "q": "FullHD",
+  "up": "2024-07-28",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.com.blef",
+  "kp": 10179,
+  "playerId": "42196",
+  "dataType": "movie",
+  "name": "Блеф",
+  "year": "1976",
+  "dur": 110,
+  "q": "FullHD",
+  "up": "2024-11-01",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.ma.dospehi-boga",
+  "kp": 24705,
+  "playerId": "42299",
+  "dataType": "movie",
+  "name": "Доспехи Бога",
+  "year": "1986",
+  "dur": 88,
+  "q": "FullHD",
+  "up": "2026-09-14",
+  "voices": 2,
+  "seasons": null
+ },
+ {
+  "key": "c3.ma.pyanyy-master",
+  "kp": 24726,
+  "playerId": "4834",
+  "dataType": "movie",
+  "name": "Пьяный мастер",
+  "year": "1978",
+  "dur": 111,
+  "q": "FullHD",
+  "up": "2024-03-26",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.ma.krovavyy-sport",
+  "kp": 4777,
+  "playerId": "5651",
+  "dataType": "movie",
+  "name": "Кровавый спорт",
+  "year": "1988",
+  "dur": 92,
+  "q": "FullHD",
+  "up": "2024-04-22",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.ma.kikbokser",
+  "kp": 28131,
+  "playerId": "220448",
+  "dataType": "movie",
+  "name": "Кикбоксер",
+  "year": "1989",
+  "dur": 97,
+  "q": "FullHD",
+  "up": "2026-01-23",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.ma.vyhod-drakona",
+  "kp": 24743,
+  "playerId": "4779",
+  "dataType": "movie",
+  "name": "Выход Дракона",
+  "year": "1973",
+  "dur": 102,
+  "q": "FullHD",
+  "up": "2024-03-23",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.ma.policeyskaya-istoriya",
+  "kp": 22791,
+  "playerId": "159553",
+  "dataType": "movie",
+  "name": "Полицейская история",
+  "year": "1985",
+  "dur": 106,
+  "q": "FullHD",
+  "up": "2025-08-14",
+  "voices": 10,
+  "seasons": null
+ },
+ {
+  "key": "c3.sf.hishchnik",
+  "kp": 6303,
+  "playerId": "4681",
+  "dataType": "movie",
+  "name": "Хищник",
+  "year": "1987",
+  "dur": 104,
+  "q": "FullHD",
+  "up": "2024-03-20",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.sf.vspomnit-vse",
+  "kp": 2443,
+  "playerId": "42685",
+  "dataType": "movie",
+  "name": "Вспомнить всё",
+  "year": "1990",
+  "dur": 113,
+  "q": "FullHD",
+  "up": "2024-11-02",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.sf.robokop",
+  "kp": 7410,
+  "playerId": "5193",
+  "dataType": "movie",
+  "name": "Робокоп",
+  "year": "1987",
+  "dur": 102,
+  "q": "FullHD",
+  "up": "2024-04-04",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.big.terminator2",
+  "kp": 444,
+  "playerId": "22293",
+  "dataType": "movie",
+  "name": "Терминатор 2: Судный день",
+  "year": "1991",
+  "dur": 137,
+  "q": "FullHD",
+  "up": "2024-08-28",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.big.matrica",
+  "kp": 301,
+  "playerId": "4469",
+  "dataType": "movie",
+  "name": "Матрица",
+  "year": "1999",
+  "dur": 136,
+  "q": "FullHD",
+  "up": "2024-02-27",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.big.pyatyy-element",
+  "kp": 2656,
+  "playerId": "4528",
+  "dataType": "movie",
+  "name": "Пятый элемент",
+  "year": "1997",
+  "dur": 126,
+  "q": "FullHD",
+  "up": "2024-03-03",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.thr.leon",
+  "kp": 389,
+  "playerId": "19891",
+  "dataType": "movie",
+  "name": "Леон",
+  "year": "1994",
+  "dur": 133,
+  "q": "FullHD",
+  "up": "2024-08-19",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.thr.skorost",
+  "kp": 1968,
+  "playerId": "4795",
+  "dataType": "movie",
+  "name": "Скорость",
+  "year": "1994",
+  "dur": 116,
+  "q": "FullHD",
+  "up": "2024-03-24",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.thr.molchanie-yagnyat",
+  "kp": 345,
+  "playerId": "4455",
+  "dataType": "movie",
+  "name": "Молчание ягнят",
+  "year": "1990",
+  "dur": 118,
+  "q": "FullHD",
+  "up": "2024-02-27",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.hor.koshmar",
+  "kp": 5198,
+  "playerId": "4986",
+  "dataType": "movie",
+  "name": "Кошмар на улице Вязов",
+  "year": "1984",
+  "dur": 92,
+  "q": "FullHD",
+  "up": "2026-07-31",
+  "voices": 3,
+  "seasons": null
+ },
+ {
+  "key": "c3.hor.detskie-igry",
+  "kp": 5891,
+  "playerId": "228154",
+  "dataType": "movie",
+  "name": "Детские игры",
+  "year": "1988",
+  "dur": 87,
+  "q": "FullHD",
+  "up": "2026-02-07",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.hor.bayki-iz-sklepa",
+  "kp": 271501,
+  "playerId": "1947",
+  "dataType": "serial",
+  "name": "Байки из склепа",
+  "year": "1989",
+  "dur": null,
+  "q": "FullHD",
+  "up": "2025-01-29",
+  "voices": 4,
+  "seasons": [
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   },
+   {
+    "eps": null
+   }
+  ]
+ },
+ {
+  "key": "c3.b.universalnyy-soldat",
+  "kp": 12363,
+  "playerId": "92363",
+  "dataType": "movie",
+  "name": "Универсальный солдат",
+  "year": "1992",
+  "dur": 102,
+  "q": "FullHD",
+  "up": "2026-09-14",
+  "voices": 2,
+  "seasons": null
+ },
+ {
+  "key": "c3.b.kiborg",
+  "kp": 4010,
+  "playerId": "240173",
+  "dataType": "movie",
+  "name": "Киборг",
+  "year": "1989",
+  "dur": 86,
+  "q": "FullHD",
+  "up": "2026-02-22",
+  "voices": 1,
+  "seasons": null
+ },
+ {
+  "key": "c3.b.bezumnyy-maks-2",
+  "kp": 8374,
+  "playerId": "97409",
+  "dataType": "movie",
+  "name": "Безумный Макс 2: Воин дороги",
+  "year": "1981",
+  "dur": 95,
+  "q": "FullHD",
+  "up": "2025-03-15",
+  "voices": 1,
+  "seasons": null
+ }
+]
