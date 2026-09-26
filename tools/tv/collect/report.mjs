@@ -41,7 +41,8 @@ for (const [cid, ch] of Object.entries(pool.channels)) {
     L.push(`\n### День ${day}\n`);
     L.push('| Время | Блок | Контент | Источник | Длит. | Залито | ✔ | Ссылка |');
     L.push('|---|---|---|---|---|---|---|---|');
-    for (const b of ch[day]) {
+    const blocks = [...ch[day]].sort((a, b) => a.at.localeCompare(b.at));
+    for (const b of blocks) {
       b.assets.forEach((a, i) => {
         L.push(
           `| ${i === 0 ? b.at : ''} | ${i === 0 ? b.label : ''} | ${a.title.replace(/\|/g, '/')} | ${a.provider} | ${mmss(a.dur)} | ${a.up ?? '—'} | ${mark(a)} | ${link(a)} |`,

@@ -115,7 +115,15 @@ function toAsset(raw: RawAsset, kind: Slot['kind']): Asset {
           ? 'episode'
           : 'movie'
         : 'video';
-  const sec = raw.dur && raw.dur > 0 ? raw.dur : mediaType === 'episode' ? DEFAULT_EPISODE_SEC : 30 * 60;
+  // У сериалов балансер отдаёт длительность целиком — берём только правдоподобную серийную.
+  const sec =
+    mediaType === 'episode'
+      ? raw.dur && raw.dur >= 900 && raw.dur <= 4200
+        ? raw.dur
+        : DEFAULT_EPISODE_SEC
+      : raw.dur && raw.dur > 0
+        ? raw.dur
+        : 30 * 60;
   const publicRef =
     provider === 'youtube'
       ? `https://www.youtube.com/watch?v=${raw.id}`
@@ -150,16 +158,21 @@ function interstitialFor(channelId: string, rotation: RotationDay, n: number): A
 
 function blocksFor(channelId: string, rotation: RotationDay): Block[] {
   const channel = airtime.channels[channelId];
-  const raw = (channel?.[rotation] as RawBlock[] | undefined) ?? [];
+  // В источнике эфирный день начинается в 06:00, а ночные блоки стоят в конце списка.
+  // Сетка живёт в календарных сутках, поэтому сортируем по времени и тянем первый блок к 00:00.
+  const raw = [...((channel?.[rotation] as RawBlock[] | undefined) ?? [])].sort(
+    (a, b) => hhmmToSec(a.at) - hhmmToSec(b.at)
+  );
   let counter = 0;
-  return raw.map((block) => {
+  return raw.map((block, index) => {
     const kind = (block.kind as Slot['kind'] | undefined) ?? 'program';
     const programs = block.assets.map((a) => toAsset(a, kind));
     const assets: Asset[] =
       kind === 'program'
         ? programs.flatMap((a) => [a, interstitialFor(channelId, rotation, counter++)])
         : programs;
-    return { at: block.at, daypart: dayPartOf(block.at), label: block.label, assets, kind };
+    const at = index === 0 ? '00:00' : block.at;
+    return { at, daypart: dayPartOf(at), label: block.label, assets, kind };
   });
 }
 
