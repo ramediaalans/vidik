@@ -2358,8 +2358,6 @@ body.webamp-hidden #webamp {
 .tv__generated strong { margin-top: 42%; font-size: clamp(13px, 2vw, 21px); }
 .tv__generated span, .tv__generated small { color: var(--dust); }
 .tv__testMark { position: absolute; top: 15%; font: 900 clamp(30px, 7vw, 70px)/1 var(--font-display); color: #111; text-shadow: none; }
-.tv__mount--vibix, .tv__mount--vibix .vplayer, .tv__mount--vibix .vplayer__mount,
-.tv__mount--vibix ins, .tv__mount--vibix iframe { width: 100% !important; height: 100% !important; }
 .tv__remote {
   display: flex;
   flex-wrap: wrap;

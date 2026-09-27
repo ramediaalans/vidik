@@ -1,16 +1,24 @@
 // Сгенерировано tools/films/build-catalog.mjs — руками не править.
-// Источник метаданных и потока — балансер Vibix; идентификаторы плеера взяты из API embed_code.
+// Метаданные собраны из каталога; видеопотоки — из проверенных внешних источников.
 
 export interface FilmSeason {
   season: number;
   episodes: number;
 }
 
+export type FilmVideoProvider = 'vk' | 'rutube' | 'youtube';
+
+export interface FilmVideoSource {
+  provider: FilmVideoProvider;
+  id: string;
+  title: string;
+  duration: number;
+}
+
 export interface Film {
   slug: string;
   kpId: number;
-  vibixType: 'movie' | 'serial';
-  vibixId: string;
+  source: FilmVideoSource;
   title: string;
   titleOrig: string | null;
   year: number;
@@ -30,8 +38,12 @@ export const salon: Film[] = [
   {
     "slug": "terminator-2-sudnyy-den-1991",
     "kpId": 444,
-    "vibixType": "movie",
-    "vibixId": "22293",
+    "source": {
+      "provider": "vk",
+      "id": "-226712322_456239188",
+      "title": "Терминатор 2: Судный день (1991)",
+      "duration": 7996
+    },
     "title": "Терминатор 2: Судный день",
     "titleOrig": "Terminator 2: Judgment Day",
     "year": 1991,
@@ -55,8 +67,12 @@ export const salon: Film[] = [
   {
     "slug": "terminator-1984",
     "kpId": 507,
-    "vibixType": "movie",
-    "vibixId": "4627",
+    "source": {
+      "provider": "vk",
+      "id": "-230045948_456239973",
+      "title": "Терминатор 1 (1984)",
+      "duration": 6446
+    },
     "title": "Терминатор",
     "titleOrig": "The Terminator",
     "year": 1984,
@@ -80,8 +96,12 @@ export const salon: Film[] = [
   {
     "slug": "krepkiy-oreshek-1988",
     "kpId": 471,
-    "vibixType": "movie",
-    "vibixId": "4600",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456239639",
+      "title": "Крепкий орешек | Die Hard (1988)",
+      "duration": 7934
+    },
     "title": "Крепкий орешек",
     "titleOrig": "Die Hard",
     "year": 1988,
@@ -104,8 +124,12 @@ export const salon: Film[] = [
   {
     "slug": "hischnik-1987",
     "kpId": 6303,
-    "vibixType": "movie",
-    "vibixId": "4681",
+    "source": {
+      "provider": "vk",
+      "id": "-56028029_456244530",
+      "title": "Хищник (1987)",
+      "duration": 6395
+    },
     "title": "Хищник",
     "titleOrig": "Predator",
     "year": 1987,
@@ -129,8 +153,12 @@ export const salon: Film[] = [
   {
     "slug": "kommandos-1985",
     "kpId": 2238,
-    "vibixType": "movie",
-    "vibixId": "5551",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456244336",
+      "title": "Коммандос | Commando (1985)",
+      "duration": 5419
+    },
     "title": "Коммандос",
     "titleOrig": "Commando",
     "year": 1985,
@@ -153,8 +181,12 @@ export const salon: Film[] = [
   {
     "slug": "kobra-1986",
     "kpId": 18281,
-    "vibixType": "movie",
-    "vibixId": "226378",
+    "source": {
+      "provider": "vk",
+      "id": "-56028029_456249931",
+      "title": "Кобра (1986) 4K UHD Лицензия",
+      "duration": 5224
+    },
     "title": "Кобра",
     "titleOrig": "Cobra",
     "year": 1986,
@@ -178,8 +210,12 @@ export const salon: Film[] = [
   {
     "slug": "robokop-1987",
     "kpId": 7410,
-    "vibixType": "movie",
-    "vibixId": "5193",
+    "source": {
+      "provider": "vk",
+      "id": "-225299404_456240316",
+      "title": "Робокоп - «RoboCop», 1987 Directors Cut (7,7)",
+      "duration": 6196
+    },
     "title": "Робокоп",
     "titleOrig": "RoboCop",
     "year": 1987,
@@ -202,8 +238,12 @@ export const salon: Film[] = [
   {
     "slug": "krovavyy-sport-1988",
     "kpId": 4777,
-    "vibixType": "movie",
-    "vibixId": "5651",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456244761",
+      "title": "Кровавый спорт | Bloodsport (1988)",
+      "duration": 5537
+    },
     "title": "Кровавый спорт",
     "titleOrig": "Bloodsport",
     "year": 1988,
@@ -226,8 +266,12 @@ export const salon: Film[] = [
   {
     "slug": "kikbokser-1989",
     "kpId": 28131,
-    "vibixType": "movie",
-    "vibixId": "220448",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456244387",
+      "title": "Кикбоксер | Kickboxer (1989)",
+      "duration": 5896
+    },
     "title": "Кикбоксер",
     "titleOrig": "Kickboxer",
     "year": 1989,
@@ -250,8 +294,12 @@ export const salon: Film[] = [
   {
     "slug": "universalnyy-soldat-1992",
     "kpId": 12363,
-    "vibixType": "movie",
-    "vibixId": "92363",
+    "source": {
+      "provider": "vk",
+      "id": "-227267093_456239990",
+      "title": "Универсальный солдат | боевик | 1992 | 4К",
+      "duration": 6223
+    },
     "title": "Универсальный солдат",
     "titleOrig": "Universal Soldier",
     "year": 1992,
@@ -273,8 +321,12 @@ export const salon: Film[] = [
   {
     "slug": "razrushitel-1993",
     "kpId": 4827,
-    "vibixType": "movie",
-    "vibixId": "5270",
+    "source": {
+      "provider": "vk",
+      "id": "-218359460_456241363",
+      "title": "Разрушитель (1993) 4K UHD",
+      "duration": 6920
+    },
     "title": "Разрушитель",
     "titleOrig": "Demolition Man",
     "year": 1993,
@@ -297,8 +349,12 @@ export const salon: Film[] = [
   {
     "slug": "skalolaz-1993",
     "kpId": 8164,
-    "vibixType": "movie",
-    "vibixId": "292470",
+    "source": {
+      "provider": "vk",
+      "id": "-183801042_456239156",
+      "title": "Скалолаз 1993",
+      "duration": 6780
+    },
     "title": "Скалолаз",
     "titleOrig": "Cliffhanger",
     "year": 1993,
@@ -322,8 +378,12 @@ export const salon: Film[] = [
   {
     "slug": "smertelnaya-bitva-1995",
     "kpId": 22355,
-    "vibixType": "movie",
-    "vibixId": "5210",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456241354",
+      "title": "Смертельная битва | Mortal Kombat (1995)",
+      "duration": 6089
+    },
     "title": "Смертельная битва",
     "titleOrig": "Mortal Kombat",
     "year": 1995,
@@ -346,8 +406,12 @@ export const salon: Film[] = [
   {
     "slug": "stiratel-1996",
     "kpId": 6018,
-    "vibixType": "movie",
-    "vibixId": "225905",
+    "source": {
+      "provider": "vk",
+      "id": "-77901936_456242055",
+      "title": "Стиратель (Боевик 1996) А.Гаврилов",
+      "duration": 6592
+    },
     "title": "Стиратель",
     "titleOrig": "Eraser",
     "year": 1996,
@@ -370,8 +434,12 @@ export const salon: Film[] = [
   {
     "slug": "skorost-1994",
     "kpId": 1968,
-    "vibixType": "movie",
-    "vibixId": "4795",
+    "source": {
+      "provider": "vk",
+      "id": "-165630070_456240067",
+      "title": "Фильм скорость 1994",
+      "duration": 6737
+    },
     "title": "Скорость",
     "titleOrig": "Speed",
     "year": 1994,
@@ -394,8 +462,12 @@ export const salon: Film[] = [
   {
     "slug": "cherepashki-nindzya-1990",
     "kpId": 8137,
-    "vibixType": "movie",
-    "vibixId": "23652",
+    "source": {
+      "provider": "vk",
+      "id": "-155284657_456244233",
+      "title": "Черепашки-ниндзя (1990) [HD1080p] Любимые фильмы онлайн",
+      "duration": 5556
+    },
     "title": "Черепашки-ниндзя",
     "titleOrig": "Teenage Mutant Ninja Turtles",
     "year": 1990,
@@ -419,8 +491,12 @@ export const salon: Film[] = [
   {
     "slug": "nazad-v-buduschee-1985",
     "kpId": 476,
-    "vibixType": "movie",
-    "vibixId": "4487",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456240824",
+      "title": "Назад в будущее | Back to the Future (1985)",
+      "duration": 6966
+    },
     "title": "Назад в будущее",
     "titleOrig": "Back to the Future",
     "year": 1985,
@@ -443,8 +519,12 @@ export const salon: Film[] = [
   {
     "slug": "chuzhie-1986",
     "kpId": 406,
-    "vibixType": "movie",
-    "vibixId": "4589",
+    "source": {
+      "provider": "vk",
+      "id": "-183801042_456239313",
+      "title": "Чужие (1986)",
+      "duration": 8234
+    },
     "title": "Чужие",
     "titleOrig": "Aliens",
     "year": 1986,
@@ -468,8 +548,12 @@ export const salon: Film[] = [
   {
     "slug": "park-yurskogo-perioda-1993",
     "kpId": 7121,
-    "vibixType": "movie",
-    "vibixId": "4762",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456239197",
+      "title": "Парк Юрского периода | Jurassic Park (1993)",
+      "duration": 7600
+    },
     "title": "Парк Юрского периода",
     "titleOrig": "Jurassic Park",
     "year": 1993,
@@ -491,8 +575,12 @@ export const salon: Film[] = [
   {
     "slug": "pyatyy-element-1997",
     "kpId": 2656,
-    "vibixType": "movie",
-    "vibixId": "4528",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456243312",
+      "title": "Пятый элемент | The Fifth Element (1997)",
+      "duration": 7557
+    },
     "title": "Пятый элемент",
     "titleOrig": "The Fifth Element",
     "year": 1997,
@@ -516,8 +604,12 @@ export const salon: Film[] = [
   {
     "slug": "matrica-1999",
     "kpId": 301,
-    "vibixType": "movie",
-    "vibixId": "4469",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456240812",
+      "title": "Матрица | The Matrix (1999)",
+      "duration": 8182
+    },
     "title": "Матрица",
     "titleOrig": "The Matrix",
     "year": 1999,
@@ -540,8 +632,12 @@ export const salon: Film[] = [
   {
     "slug": "den-nezavisimosti-1996",
     "kpId": 2022,
-    "vibixType": "movie",
-    "vibixId": "5138",
+    "source": {
+      "provider": "vk",
+      "id": "-176294899_456240544",
+      "title": "День независимости (1996) 1080p",
+      "duration": 9213
+    },
     "title": "День независимости",
     "titleOrig": "Independence Day",
     "year": 1996,
@@ -564,8 +660,12 @@ export const salon: Film[] = [
   {
     "slug": "mumiya-1999",
     "kpId": 4484,
-    "vibixType": "movie",
-    "vibixId": "4753",
+    "source": {
+      "provider": "vk",
+      "id": "-213377389_456240804",
+      "title": "Мумия (1999)",
+      "duration": 7493
+    },
     "title": "Мумия",
     "titleOrig": "The Mummy",
     "year": 1999,
@@ -588,8 +688,12 @@ export const salon: Film[] = [
   {
     "slug": "odin-doma-1990",
     "kpId": 8124,
-    "vibixType": "movie",
-    "vibixId": "63592",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456248134",
+      "title": "Один дома | Home Alone (1990)",
+      "duration": 6183
+    },
     "title": "Один дома",
     "titleOrig": "Home Alone",
     "year": 1990,
@@ -611,8 +715,12 @@ export const salon: Film[] = [
   {
     "slug": "maska-1994",
     "kpId": 6039,
-    "vibixType": "movie",
-    "vibixId": "4613",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456241259",
+      "title": "Маска | The Mask (1994)",
+      "duration": 6076
+    },
     "title": "Маска",
     "titleOrig": "The Mask",
     "year": 1994,
@@ -635,8 +743,12 @@ export const salon: Film[] = [
   {
     "slug": "dzhumandzhi-1995",
     "kpId": 8161,
-    "vibixType": "movie",
-    "vibixId": "18530",
+    "source": {
+      "provider": "vk",
+      "id": "-230238921_456239515",
+      "title": "Джуманджи 1 (1995), приключения, фэнтези",
+      "duration": 6246
+    },
     "title": "Джуманджи",
     "titleOrig": "Jumanji",
     "year": 1995,
@@ -659,8 +771,12 @@ export const salon: Film[] = [
   {
     "slug": "mayor-peyn-1995",
     "kpId": 21503,
-    "vibixType": "movie",
-    "vibixId": "5192",
+    "source": {
+      "provider": "vk",
+      "id": "-45623687_456240491",
+      "title": "Майор Пэйн (1995)",
+      "duration": 5615
+    },
     "title": "Майор Пэйн",
     "titleOrig": "Major Payne",
     "year": 1995,
@@ -682,8 +798,12 @@ export const salon: Film[] = [
   {
     "slug": "tupoy-i-esche-tupee-1994",
     "kpId": 5185,
-    "vibixType": "movie",
-    "vibixId": "6292",
+    "source": {
+      "provider": "vk",
+      "id": "-34229261_456249221",
+      "title": "Тупой и еще тупее (1994) FHD",
+      "duration": 6147
+    },
     "title": "Тупой и еще тупее",
     "titleOrig": "Dumb and Dumber",
     "year": 1994,
@@ -704,8 +824,12 @@ export const salon: Film[] = [
   {
     "slug": "titanik-1997",
     "kpId": 2213,
-    "vibixType": "movie",
-    "vibixId": "4457",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456243275",
+      "title": "Титаник | Titanic (1997)",
+      "duration": 11693
+    },
     "title": "Титаник",
     "titleOrig": "Titanic",
     "year": 1997,
@@ -728,8 +852,12 @@ export const salon: Film[] = [
   {
     "slug": "kriminalnoe-chtivo-1994",
     "kpId": 342,
-    "vibixType": "movie",
-    "vibixId": "4432",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456239747",
+      "title": "Криминальное чтиво | Pulp Fiction (1994)",
+      "duration": 9300
+    },
     "title": "Криминальное чтиво",
     "titleOrig": "Pulp Fiction",
     "year": 1994,
@@ -751,8 +879,12 @@ export const salon: Film[] = [
   {
     "slug": "leon-1994",
     "kpId": 389,
-    "vibixType": "movie",
-    "vibixId": "19891",
+    "source": {
+      "provider": "vk",
+      "id": "-205644351_456239499",
+      "title": "Леон (1994)",
+      "duration": 7975
+    },
     "title": "Леон",
     "titleOrig": "Léon",
     "year": 1994,
@@ -776,8 +908,12 @@ export const salon: Film[] = [
   {
     "slug": "pobeg-iz-shoushenka-1994",
     "kpId": 326,
-    "vibixType": "movie",
-    "vibixId": "4422",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456243258",
+      "title": "Побег из Шоушенка | The Shawshank Redemption (1994)",
+      "duration": 8556
+    },
     "title": "Побег из Шоушенка",
     "titleOrig": "The Shawshank Redemption",
     "year": 1994,
@@ -798,8 +934,12 @@ export const salon: Film[] = [
   {
     "slug": "forrest-gamp-1994",
     "kpId": 448,
-    "vibixType": "movie",
-    "vibixId": "4424",
+    "source": {
+      "provider": "vk",
+      "id": "-220018529_456243272",
+      "title": "Форрест Гамп | Forrest Gump (1994)",
+      "duration": 8533
+    },
     "title": "Форрест Гамп",
     "titleOrig": "Forrest Gump",
     "year": 1994,
@@ -822,8 +962,12 @@ export const salon: Film[] = [
   {
     "slug": "brat-1997",
     "kpId": 41519,
-    "vibixType": "movie",
-    "vibixId": "51188",
+    "source": {
+      "provider": "vk",
+      "id": "-205290196_456239338",
+      "title": "Смотрим Брат",
+      "duration": 5901
+    },
     "title": "Брат",
     "titleOrig": "Брат",
     "year": 1997,
@@ -846,8 +990,12 @@ export const salon: Film[] = [
   {
     "slug": "brat-2-2000",
     "kpId": 41520,
-    "vibixType": "movie",
-    "vibixId": "51189",
+    "source": {
+      "provider": "vk",
+      "id": "-226111813_456239307",
+      "title": "Брат 2 (2000) 1080p",
+      "duration": 7362
+    },
     "title": "Брат 2",
     "titleOrig": "Брат 2",
     "year": 2000,
@@ -870,8 +1018,12 @@ export const salon: Film[] = [
   {
     "slug": "osobennosti-nacionalnoy-ohoty-1995",
     "kpId": 7653,
-    "vibixType": "movie",
-    "vibixId": "48997",
+    "source": {
+      "provider": "vk",
+      "id": "-203573050_456241691",
+      "title": "Особенности национальной охоты (1995) Жанр: комедия Страна: Россия",
+      "duration": 5146
+    },
     "title": "Особенности национальной охоты",
     "titleOrig": "Особенности национальной охоты",
     "year": 1995,
@@ -892,8 +1044,12 @@ export const salon: Film[] = [
   {
     "slug": "zhmurki-2005",
     "kpId": 84830,
-    "vibixType": "movie",
-    "vibixId": "51565",
+    "source": {
+      "provider": "vk",
+      "id": "-163774001_456240208",
+      "title": "Жмурки, 2005  Оцифровка VHS",
+      "duration": 6167
+    },
     "title": "Жмурки",
     "titleOrig": "Жмурки",
     "year": 2005,
@@ -915,8 +1071,12 @@ export const salon: Film[] = [
   {
     "slug": "bumer-2003",
     "kpId": 57166,
-    "vibixType": "movie",
-    "vibixId": "111031",
+    "source": {
+      "provider": "vk",
+      "id": "-215394060_456239431",
+      "title": "Бумер (2003) Страна: Россия. Жанр: преступление, драма  18+",
+      "duration": 6418
+    },
     "title": "Бумер",
     "titleOrig": "Бумер",
     "year": 2003,
@@ -941,8 +1101,12 @@ export const disney: Film[] = [
   {
     "slug": "utinye-istorii-1987",
     "kpId": 81426,
-    "vibixType": "serial",
-    "vibixId": "2159",
+    "source": {
+      "provider": "vk",
+      "id": "-227283941_456240163",
+      "title": "Утиные истории — все серии (1987–1990)",
+      "duration": 136980
+    },
     "title": "Утиные истории",
     "titleOrig": "DuckTales",
     "year": 1987,
@@ -984,8 +1148,12 @@ export const disney: Film[] = [
   {
     "slug": "chip-i-deyl-speshat-na-pomosch-1989",
     "kpId": 95231,
-    "vibixType": "serial",
-    "vibixId": "322",
+    "source": {
+      "provider": "vk",
+      "id": "-217873238_456245003",
+      "title": "Чип и Дейл спешат на помощь — все серии",
+      "duration": 89124
+    },
     "title": "Чип и Дейл спешат на помощь",
     "titleOrig": "Chip 'n Dale: Rescue Rangers",
     "year": 1989,
@@ -1022,8 +1190,12 @@ export const disney: Film[] = [
   {
     "slug": "chernyy-plasch-1991",
     "kpId": 395106,
-    "vibixType": "serial",
-    "vibixId": "3181",
+    "source": {
+      "provider": "vk",
+      "id": "-227283941_456240193",
+      "title": "Чёрный плащ — все серии (1991–1992)",
+      "duration": 119625
+    },
     "title": "Черный Плащ",
     "titleOrig": "Darkwing Duck",
     "year": 1991,
@@ -1061,8 +1233,12 @@ export const disney: Film[] = [
   {
     "slug": "gufi-i-ego-komanda-1992",
     "kpId": 94678,
-    "vibixType": "serial",
-    "vibixId": "4030",
+    "source": {
+      "provider": "vk",
+      "id": "-234282348_456240910",
+      "title": "Гуфи и его команда — коллекция серий",
+      "duration": 106819
+    },
     "title": "Гуфи и его команда",
     "titleOrig": "Goof Troop",
     "year": 1992,
@@ -1092,8 +1268,12 @@ export const disney: Film[] = [
   {
     "slug": "priklyucheniya-mishek-gammi-1985",
     "kpId": 81023,
-    "vibixType": "serial",
-    "vibixId": "1908",
+    "source": {
+      "provider": "vk",
+      "id": "-227283941_456240188",
+      "title": "Приключения мишек Гамми — все серии (1985–1991)",
+      "duration": 85900
+    },
     "title": "Приключения мишек Гамми",
     "titleOrig": "Adventures of the Gummi Bears",
     "year": 1985,
@@ -1143,8 +1323,12 @@ export const disney: Film[] = [
   {
     "slug": "aladdin-1994",
     "kpId": 229178,
-    "vibixType": "serial",
-    "vibixId": "7616",
+    "source": {
+      "provider": "vk",
+      "id": "-227283941_456240169",
+      "title": "Аладдин — все серии (1994–1995)",
+      "duration": 112375
+    },
     "title": "Аладдин",
     "titleOrig": "Aladdin",
     "year": 1994,
@@ -1182,8 +1366,12 @@ export const disney: Film[] = [
   {
     "slug": "timon-i-pumba-1995",
     "kpId": 94672,
-    "vibixType": "serial",
-    "vibixId": "3962",
+    "source": {
+      "provider": "vk",
+      "id": "-227283941_456240134",
+      "title": "Тимон и Пумба — все серии (1995–1999)",
+      "duration": 111367
+    },
     "title": "Тимон и Пумба",
     "titleOrig": "Timon & Pumbaa",
     "year": 1995,
@@ -1229,8 +1417,12 @@ export const disney: Film[] = [
   {
     "slug": "rusalochka-1992",
     "kpId": 229458,
-    "vibixType": "serial",
-    "vibixId": "6165",
+    "source": {
+      "provider": "vk",
+      "id": "-227283941_456239732",
+      "title": "Русалочка (1992-1994, мультсериал) FullHD ● Все 3 сезона! 📺 Все серии подряд! 📺 Приключения, фэнтези",
+      "duration": 41267
+    },
     "title": "Русалочка",
     "titleOrig": "The Little Mermaid",
     "year": 1992,
@@ -1268,8 +1460,12 @@ export const disney: Film[] = [
   {
     "slug": "101-dalmatinec-1997",
     "kpId": 471870,
-    "vibixType": "serial",
-    "vibixId": "6590",
+    "source": {
+      "provider": "vk",
+      "id": "-209040390_456292440",
+      "title": "101 далматинец — мультсериал полностью (1997–1998)",
+      "duration": 85448
+    },
     "title": "101 далматинец",
     "titleOrig": "101 Dalmatians: The Series",
     "year": 1997,
@@ -1299,8 +1495,12 @@ export const disney: Film[] = [
   {
     "slug": "myshinyy-dom-2001",
     "kpId": 580714,
-    "vibixType": "serial",
-    "vibixId": "7274",
+    "source": {
+      "provider": "vk",
+      "id": "-209040390_456292576",
+      "title": "Мышиный дом — 1–4 сезоны (2001–2003)",
+      "duration": 23489
+    },
     "title": "Мышиный дом",
     "titleOrig": "House of Mouse",
     "year": 2001,
@@ -1338,8 +1538,12 @@ export const disney: Film[] = [
   {
     "slug": "lilo-i-stich-2003",
     "kpId": 230374,
-    "vibixType": "serial",
-    "vibixId": "4056",
+    "source": {
+      "provider": "vk",
+      "id": "-192371408_456243740",
+      "title": "Лило и Стич — все серии и сезоны",
+      "duration": 84425
+    },
     "title": "Лило и Стич",
     "titleOrig": "Lilo & Stitch: The Series",
     "year": 2003,

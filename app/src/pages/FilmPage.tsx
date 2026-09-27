@@ -3,14 +3,13 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { asset } from '../media/asset';
 import { claimAudio } from '../media/playerContext';
-import { VibixPlayer } from '../components/VibixPlayer';
+import { ExternalVideoPlayer } from '../components/ExternalVideoPlayer';
 import { findFilm, salon, disney } from '../data/films';
 
 export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
   const { slug } = useParams();
   const film = findFilm(slug);
   const [on, setOn] = useState(false);
-  const [season, setSeason] = useState(1);
 
   const base = group === 'salon' ? '/videosalon' : '/disney-klub';
   const backLabel = group === 'salon' ? 'Назад на полку' : 'Назад в Клуб';
@@ -81,27 +80,10 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
       </section>
 
       <section className="section container">
-        {seasons.length > 1 ? (
-          <div className="row" style={{ marginBottom: 16 }}>
-            <span className="mono">Сезон:</span>
-            {seasons.map((s) => (
-              <button
-                key={s.season}
-                className={`chip${season === s.season ? ' chip--active' : ''}`}
-                onClick={() => setSeason(s.season)}
-              >
-                {s.season}
-              </button>
-            ))}
-          </div>
-        ) : null}
-
         {on ? (
-          <VibixPlayer
-            key={`${film.vibixType}-${film.vibixId}-${season}`}
-            type={film.vibixType}
-            id={film.vibixId}
-            season={seasons.length ? season : undefined}
+          <ExternalVideoPlayer
+            key={`${film.source.provider}-${film.source.id}`}
+            source={film.source}
             label={`Плеер: ${film.title}`}
           />
         ) : (
@@ -121,7 +103,7 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
         ) : null}
 
         <p className="muted" style={{ fontSize: 13, marginTop: 24 }}>
-          Видео идёт с стороннего плеера-балансера. Файлы не хранятся на наших серверах.
+          Источник: {film.source.provider === 'vk' ? 'VK Видео' : film.source.provider === 'rutube' ? 'RuTube' : 'YouTube'} · {film.source.title}. Файлы не хранятся на наших серверах.
         </p>
       </section>
 

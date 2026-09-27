@@ -19,6 +19,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '../..');
 const PUB = resolve(ROOT, 'app/public/films');
 const sel = JSON.parse(readFileSync(resolve(HERE, 'selection.json'), 'utf8'));
+const sourceOverrides = JSON.parse(readFileSync(resolve(HERE, 'source-overrides.json'), 'utf8'));
 
 const MAP = {
   а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh', з: 'z', и: 'i', й: 'y',
@@ -98,11 +99,13 @@ async function convert(rec, group) {
       .sort((a, b) => a.season - b.season);
   }
 
+  const source = sourceOverrides[slug];
+  if (!source) throw new Error(`Нет проверенного источника для ${rec.title} (${slug})`);
+
   return {
     slug,
     kpId: rec.kpId,
-    vibixType: rec.playerType,
-    vibixId: rec.playerId,
+    source,
     title: clean(rec.title),
     titleOrig: clean(rec.titleOrig) || null,
     year: rec.year,
@@ -127,18 +130,26 @@ const disney = [];
 for (const r of sel.disney) disney.push(await convert(r, 'disney'));
 
 const ts = `// Сгенерировано tools/films/build-catalog.mjs — руками не править.
-// Источник метаданных и потока — балансер Vibix; идентификаторы плеера взяты из API embed_code.
+// Метаданные собраны из каталога; видеопотоки — из проверенных внешних источников.
 
 export interface FilmSeason {
   season: number;
   episodes: number;
 }
 
+export type FilmVideoProvider = 'vk' | 'rutube' | 'youtube';
+
+export interface FilmVideoSource {
+  provider: FilmVideoProvider;
+  id: string;
+  title: string;
+  duration: number;
+}
+
 export interface Film {
   slug: string;
   kpId: number;
-  vibixType: 'movie' | 'serial';
-  vibixId: string;
+  source: FilmVideoSource;
   title: string;
   titleOrig: string | null;
   year: number;
