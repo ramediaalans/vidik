@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FilmVideoSource } from '../data/films';
+import { useFullscreen } from '../media/fullscreen';
+import { hotkeyChar, isTypingTarget } from '../media/hotkeys';
 
 type VkPlayerState = { time?: number; duration?: number };
 type VkPlayer = {
@@ -70,6 +72,11 @@ function VkVideoPlayer({ source, label, poster }: {
   const soundPrimed = useRef(false);
   const recommendationFixing = useRef(false);
   const [mode, setMode] = useState<PlayerMode>('loading');
+  const [soundOff, setSoundOff] = useState(false);
+  const { isFullscreen, pseudo, toggle: toggleFullscreen } = useFullscreen(container, {
+    autoLandscape: true,
+    active: mode === 'playing' || mode === 'paused'
+  });
   const start = Math.max(0, source.start ?? 0);
   const endAt = source.endTrim ? Math.max(start, source.duration - source.endTrim) : null;
 
@@ -172,6 +179,7 @@ function VkVideoPlayer({ source, label, poster }: {
       p.unmute();
       p.play();
     }
+    setSoundOff(false);
     setMode('playing');
   }, [start]);
   const replay = () => {
@@ -184,49 +192,67 @@ function VkVideoPlayer({ source, label, poster }: {
     setMode('loading');
   };
 
+  const seekBy = useCallback((delta: number) => {
+    const p = player.current;
+    if (!p) return;
+    const current = pauseAt.current ?? p.getCurrentTime();
+    const next = Math.min(endAt ?? source.duration, Math.max(start, current + delta));
+    if (pauseAt.current !== null) pauseAt.current = next;
+    else p.seek(next);
+  }, [endAt, source.duration, start]);
+
+  const togglePlay = useCallback(() => {
+    const p = player.current;
+    if (!p) return;
+    if (pauseAt.current === null) {
+      pauseAt.current = p.getCurrentTime();
+      p.mute();
+      setMode('paused');
+    } else {
+      resume();
+    }
+  }, [resume]);
+
+  const toggleSound = useCallback(() => {
+    const p = player.current;
+    if (!p) return;
+    if (p.isMuted()) { p.setVolume(1); p.unmute(); setSoundOff(false); }
+    else { p.mute(); setSoundOff(true); }
+  }, []);
+
+  // Хоткеи работают при любой раскладке: смотрим на физическую клавишу.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      const target = event.target;
-      if (target instanceof HTMLElement && target.closest('input, textarea, select, [contenteditable="true"]')) return;
-      const p = player.current;
-      if (!p) return;
+      if (isTypingTarget(event.target)) return;
+      if (!player.current) return;
+      const key = hotkeyChar(event);
 
-      if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
+      if (key === 'ArrowLeft' || key === 'ArrowRight') {
         event.preventDefault();
-        const delta = event.code === 'ArrowLeft' ? -10 : 10;
-        const current = pauseAt.current ?? p.getCurrentTime();
-        const next = Math.min(endAt ?? source.duration, Math.max(start, current + delta));
-        if (pauseAt.current !== null) pauseAt.current = next;
-        else p.seek(next);
+        seekBy(key === 'ArrowLeft' ? -10 : 10);
         return;
       }
-      if (event.code === 'Space') {
+      if (key === ' ' || event.code === 'Space') {
         event.preventDefault();
-        if (pauseAt.current === null) {
-          pauseAt.current = p.getCurrentTime();
-          p.mute();
-          setMode('paused');
-        } else {
-          resume();
-        }
+        togglePlay();
         return;
       }
-      if (event.key.toLowerCase() === 'm') {
+      if (key === 'm') {
         event.preventDefault();
-        if (p.isMuted()) p.unmute(); else p.mute();
+        toggleSound();
         return;
       }
-      if (event.key.toLowerCase() === 'f') {
+      if (key === 'f') {
         event.preventDefault();
-        void container.current?.requestFullscreen();
+        toggleFullscreen();
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [endAt, resume, source.duration, start]);
+  }, [seekBy, toggleFullscreen, togglePlay, toggleSound]);
 
   return (
-    <div className="vplayer" ref={container}>
+    <div className={`vplayer${isFullscreen ? ' is-fullscreen' : ''}${pseudo ? ' is-pseudoFullscreen' : ''}`} ref={container}>
       <div className="vplayer__mount">
         <iframe
           ref={frame}
@@ -245,6 +271,13 @@ function VkVideoPlayer({ source, label, poster }: {
         onClick={(event) => event.currentTarget.focus()}
         style={{ position: 'absolute', zIndex: 2, inset: 0, background: 'transparent' }}
       />
+      <div className="vplayer__bar" role="toolbar" aria-label="Управление плеером">
+        <button type="button" className="vplayer__barBtn" onClick={() => seekBy(-10)} aria-label="Назад 10 секунд">◀◀ 10</button>
+        <button type="button" className="vplayer__barBtn" onClick={togglePlay} aria-label={mode === 'paused' ? 'Продолжить' : 'Пауза'}>{mode === 'paused' ? '▶' : '❙❙'}</button>
+        <button type="button" className="vplayer__barBtn" onClick={() => seekBy(10)} aria-label="Вперёд 10 секунд">10 ▶▶</button>
+        <button type="button" className="vplayer__barBtn" onClick={toggleSound} aria-label={soundOff ? 'Включить звук' : 'Выключить звук'}>{soundOff ? 'Звук' : 'Тихо'}</button>
+        <button type="button" className="vplayer__barBtn" onClick={toggleFullscreen} aria-label={isFullscreen ? 'Выйти из полного экрана' : 'Полный экран'}>{isFullscreen ? '✕ Экран' : '⛶ Экран'}</button>
+      </div>
       {mode !== 'playing' ? (
         <div
           className={`vplayer__privacy vplayer__privacy--${mode}`}

@@ -19,6 +19,7 @@ const CartridgeShelf = lazy(() =>
 );
 const TapeDeck = lazy(() => import('./components/TapeDeck').then((m) => ({ default: m.TapeDeck })));
 import { movies, cartoons, games, music } from './data/catalog';
+import { hotkeyChar } from './media/hotkeys';
 import { PlayerProvider, PlayerTaskbar } from './media/player';
 
 function ScrollToTop() {
@@ -38,7 +39,7 @@ function KonamiEasterEgg() {
     ];
     let pos = 0;
     const onKey = (e: KeyboardEvent) => {
-      const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+      const key = hotkeyChar(e);
       pos = key === code[pos] ? pos + 1 : key === code[0] ? 1 : 0;
       if (pos === code.length) {
         setFound(true);

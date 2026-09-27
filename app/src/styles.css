@@ -2643,6 +2643,67 @@ body.webamp-hidden #webamp {
 }
 
 /* ---------- Линейный ТВ-эфир: помехи, тест-карта и пульт ---------- */
+.vplayer__bar {
+  position: absolute;
+  z-index: 4;
+  right: 8px;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  opacity: .85;
+}
+.vplayer:hover .vplayer__bar,
+.vplayer__bar:focus-within { opacity: 1; }
+.vplayer__barBtn {
+  min-width: 52px;
+  padding: 9px 11px;
+  border: 1px solid #0a0a0a;
+  border-radius: 8px;
+  color: #ded8c9;
+  background: rgba(20, 20, 18, .85);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .1);
+  font: 700 11px/1 var(--font-mono);
+  cursor: pointer;
+}
+.vplayer__barBtn:active { transform: translateY(1px); }
+.vplayer.is-pseudoFullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+}
+.tv__screen.is-pseudoFullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 200 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  aspect-ratio: auto !important;
+  border-radius: 0 !important;
+  background: #000;
+  box-shadow: none;
+}
+.tv__exitFs {
+  position: absolute;
+  z-index: 30;
+  top: 10px;
+  right: 10px;
+  min-width: 40px;
+  padding: 8px 11px;
+  border: 1px solid #0a0a0a;
+  border-radius: 8px;
+  color: #ded8c9;
+  background: rgba(20, 20, 18, .85);
+  font: 700 12px/1 var(--font-mono);
+  cursor: pointer;
+}
 .tv__static {
   position: absolute;
   inset: 0;

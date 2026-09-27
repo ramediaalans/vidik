@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { asset } from '../media/asset';
+import { useFullscreen } from '../media/fullscreen';
+import { hotkeyChar, isTypingTarget } from '../media/hotkeys';
 import { claimAudio } from '../media/playerContext';
 import { tvData } from './data';
 import {
@@ -290,7 +292,8 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
   const [on, setOn] = useState(false);
   const [warm, setWarm] = useState(false);
   const [staticBurst, setStaticBurst] = useState(false);
-  const [muted, setMuted] = useState(true);
+  // Телевизор включается со звуком: кнопка «Включить» — жест пользователя, автоплей разрешён.
+  const [muted, setMuted] = useState(false);
   const [readyFor, setReadyFor] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [date, setDate] = useState(() => broadcastDateISO());
@@ -352,27 +355,40 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
     window.setTimeout(() => setError(null), 1800);
   };
 
-  const enterFullscreen = useCallback(() => {
-    const screen = screenRef.current;
-    if (!screen || !document.fullscreenEnabled) {
-      setError('Полноэкранный режим недоступен в этом браузере');
-      return;
-    }
-    void screen.requestFullscreen().catch(() => setError('Не удалось открыть полный экран'));
-  }, []);
+  // На телефоне клавиатуры нет: есть кнопка на пульте и автораскрытие при повороте экрана.
+  const { isFullscreen, pseudo, toggle: toggleFullscreen } = useFullscreen(screenRef, {
+    autoLandscape: true,
+    active: on
+  });
+
+  // Горячие клавиши не зависят от раскладки: смотрим на физическую клавишу.
+  useEffect(() => {
+    if (!on) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (isTypingTarget(event.target)) return;
+      const key = hotkeyChar(event);
+      if (key === 'f') { event.preventDefault(); toggleFullscreen(); return; }
+      if (key === 'm') { event.preventDefault(); setMuted((v) => !v); return; }
+      if (key === 'ArrowLeft') { event.preventDefault(); onChannelStep?.(-1); return; }
+      if (key === 'ArrowRight') { event.preventDefault(); onChannelStep?.(1); }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [on, onChannelStep, toggleFullscreen]);
 
   if (!channel) return null;
   return (
     <div className="tv">
       <div className="tv__set">
         <div className="tv__screenFrame">
-          <div className="crt__screen scanlines tv__screen" ref={screenRef}>
+          <div className={`crt__screen scanlines tv__screen${isFullscreen ? ' is-fullscreen' : ''}${pseudo ? ' is-pseudoFullscreen' : ''}`} ref={screenRef}>
             {on && air ? <ScheduledMedia slot={air.slot} offset={air.offset} muted={muted} onReady={() => setReadyFor(airKey)} onError={mediaError} /> : null}
             {!on ? <button className="tv__power pixel" onClick={turnOn}><span className="tv__powerDot" />Включить телевизор</button> : null}
             {on && (warm || !mediaReady) ? <div className="tv__overlay tv__warm pixel">Прогревается кинескоп…</div> : null}
             {staticBurst ? <div className="tv__static" aria-hidden="true" /> : null}
             {error ? <div className="tv__overlay pixel">{error}</div> : null}
             {on && air ? <div className="tv__interactionShield" aria-hidden="true" /> : null}
+            {isFullscreen ? <button className="tv__exitFs mono" onClick={toggleFullscreen} aria-label="Выйти из полного экрана">✕</button> : null}
             <div className="crt__glass" aria-hidden="true" />
             {on ? <div className="tv__osd pixel"><span className="tv__osdNum">{channel.num}</span><span>{channel.name}</span><span className="tv__osdTime mono">{clock} UTC+3</span></div> : null}
           </div>
@@ -385,7 +401,7 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
         <button className="tv__remoteButton tv__remoteButton--power" onClick={() => { if (on) setOn(false); else turnOn(); }}>{on ? 'Выкл' : 'Вкл'}</button>
         <button className="tv__remoteButton" onClick={() => onChannelStep?.(1)} aria-label="Следующий канал">CH+</button>
         <button className="tv__remoteButton" onClick={() => setMuted((v) => !v)} disabled={!on}>{muted ? 'Звук' : 'Тихо'}</button>
-        <button className="tv__remoteButton" onClick={enterFullscreen} disabled={!on} aria-label="Открыть телевизор на весь экран">Полный экран</button>
+        <button className="tv__remoteButton" onClick={toggleFullscreen} disabled={!on} aria-label={isFullscreen ? 'Выйти из полного экрана' : 'Открыть телевизор на весь экран'}>{isFullscreen ? 'Окно' : 'Полный экран'}</button>
       </div>
 
       {air ? <p className="mono tv__onAir">Сейчас: {slotLabel(air.slot)} · {air.slot.title}
