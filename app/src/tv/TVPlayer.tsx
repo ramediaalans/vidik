@@ -15,7 +15,7 @@ import {
 type YTPlayer = {
   playVideo(): void; mute(): void; unMute(): void; setVolume(v: number): void;
   getCurrentTime(): number; seekTo(seconds: number, allowSeekAhead: boolean): void;
-  unloadModule(name: string): void; destroy(): void;
+  unloadModule(name: string): void; setOption(module: string, option: string, value: unknown): void; destroy(): void;
 };
 type YTNamespace = { Player: new (el: HTMLElement, opts: Record<string, unknown>) => YTPlayer };
 type YTWindow = Window & { YT?: YTNamespace; onYouTubeIframeAPIReady?: () => void };
@@ -71,7 +71,12 @@ function loadVkApi(): Promise<{ VideoPlayer: VkVideoPlayerFactory }> {
 }
 
 function killCaptions(player: YTPlayer) {
-  for (const module of ['captions', 'cc']) try { player.unloadModule(module); } catch { /* optional module */ }
+  // YouTube can restore a viewer's saved caption preference after onReady,
+  // so clear the active track first and then unload both caption modules.
+  for (const module of ['captions', 'cc']) {
+    try { player.setOption(module, 'track', {}); } catch { /* optional module */ }
+    try { player.unloadModule(module); } catch { /* optional module */ }
+  }
 }
 
 function YouTubeAir({ slot, offset, muted, onReady, onError }: {
@@ -111,6 +116,8 @@ function YouTubeAir({ slot, offset, muted, onReady, onError }: {
             p.playVideo();
             readyRef.current();
           },
+          onApiChange: () => killCaptions(p),
+          onStateChange: () => killCaptions(p),
           onError: () => errorRef.current()
         }
       });
@@ -130,6 +137,7 @@ function YouTubeAir({ slot, offset, muted, onReady, onError }: {
     const id = window.setInterval(() => {
       const p = player.current;
       if (!p) return;
+      killCaptions(p);
       const actual = p.getCurrentTime();
       if (actual > 0 && Math.abs(actual - expected.current) > 7) p.seekTo(expected.current, true);
     }, 4000);
@@ -197,7 +205,11 @@ function VkAir({ slot, offset, muted, onReady, onError }: {
   const readyRef = useRef(onReady);
   const errorRef = useRef(onError);
   const [ownerId, videoId] = slot.mediaId.split('_');
-  const src = `https://vk.com/video_ext.php?oid=${ownerId}&id=${videoId}&hd=2&js_api=1&t=${Math.floor(offset)}&autoplay=1`;
+  // Freeze the iframe URL for the scheduled item. `offset` advances every
+  // second; using it directly in src reloads VK on every clock tick.
+  const [src] = useState(
+    () => `https://vk.com/video_ext.php?oid=${ownerId}&id=${videoId}&hd=2&js_api=1&t=${Math.floor(offset)}&autoplay=1`
+  );
 
   useEffect(() => { expected.current = offset; }, [offset]);
   useEffect(() => { mutedRef.current = muted; }, [muted]);
@@ -247,7 +259,9 @@ function VkAir({ slot, offset, muted, onReady, onError }: {
 function ScheduledMedia({ slot, offset, muted, onReady, onError }: {
   slot: Slot; offset: number; muted: boolean; onReady: () => void; onError: () => void;
 }) {
-  if (slot.provider === 'youtube') return <YouTubeAir {...{ slot, offset, muted, onReady, onError }} />;
+  if (slot.provider === 'youtube') {
+    return <YouTubeAir key={`${slot.mediaId}:${slot.start}`} {...{ slot, offset, muted, onReady, onError }} />;
+  }
   if (slot.provider === 'rutube') {
     return <RutubeAir key={`${slot.mediaId}:${slot.start}`} slot={slot} offset={offset} muted={muted} onReady={onReady} />;
   }
