@@ -8,6 +8,7 @@ type VkPlayer = {
   mute(): void;
   unmute(): void;
   seek(seconds: number): void;
+  getCurrentTime(): number;
   getState(): string;
   getVolume(): number;
   setVolume(volume: number): void;
@@ -63,7 +64,9 @@ function VkVideoPlayer({ source, label, poster }: {
   const frame = useRef<HTMLIFrameElement>(null);
   const player = useRef<VkPlayer | null>(null);
   const ending = useRef(false);
-  const savedSound = useRef({ muted: false, volume: 1 });
+  const adActive = useRef(false);
+  const soundPrimed = useRef(false);
+  const recommendationFixing = useRef(false);
   const [mode, setMode] = useState<PlayerMode>('loading');
   const start = Math.max(0, source.start ?? 0);
   const endAt = source.endTrim ? Math.max(start, source.duration - source.endTrim) : null;
@@ -82,10 +85,17 @@ function VkVideoPlayer({ source, label, poster }: {
       const e = factory.Events;
 
       p.on(e.INITED, () => {
+        p.setVolume(1);
+        p.unmute();
         if (start > 0) p.seek(start);
       });
       p.on(e.STARTED, () => {
         ending.current = false;
+        if (!adActive.current && !soundPrimed.current) {
+          p.setVolume(1);
+          p.unmute();
+          soundPrimed.current = true;
+        }
         if (start > 0 && p.getState() === factory.States.PLAYING) p.seek(start);
         setMode('playing');
       });
@@ -97,20 +107,31 @@ function VkVideoPlayer({ source, label, poster }: {
       });
       p.on(e.ERROR, () => setMode('error'));
       p.on(e.ADSTARTED, () => {
-        savedSound.current = { muted: p.isMuted(), volume: p.getVolume() };
+        adActive.current = true;
+        soundPrimed.current = false;
         p.mute();
         setMode('loading');
       });
       p.on(e.ADCOMPLETED, () => {
-        if (!savedSound.current.muted) p.unmute();
-        p.setVolume(savedSound.current.volume);
+        adActive.current = false;
+        p.setVolume(1);
+        p.unmute();
         if (start > 0) p.seek(start);
         setMode('loading');
       });
       p.on(e.RECOMMENDATIONS_LOADED, () => {
+        if (recommendationFixing.current) return;
         const state = p.getState();
-        if (state === factory.States.ENDED) setMode('ended');
-        else if (state === factory.States.PAUSED) setMode('paused');
+        if (state === factory.States.ENDED) {
+          setMode('ended');
+          return;
+        }
+        recommendationFixing.current = true;
+        const current = p.getCurrentTime();
+        p.seek(Math.max(start, current + 0.1));
+        p.play();
+        setMode('playing');
+        window.setTimeout(() => { recommendationFixing.current = false; }, 2000);
       });
       p.on(e.TIMEUPDATE, (state) => {
         if (typeof state.time !== 'number') return;
@@ -135,8 +156,12 @@ function VkVideoPlayer({ source, label, poster }: {
 
   const resume = () => {
     ending.current = false;
+    const p = player.current;
+    if (p) {
+      p.seek(Math.max(start, p.getCurrentTime() + 0.1));
+      p.play();
+    }
     setMode('loading');
-    player.current?.play();
   };
   const replay = () => {
     ending.current = false;
@@ -157,6 +182,11 @@ function VkVideoPlayer({ source, label, poster }: {
           referrerPolicy="strict-origin-when-cross-origin"
         />
       </div>
+      <div
+        className="vplayer__contentShield"
+        aria-hidden="true"
+        style={{ position: 'absolute', zIndex: 2, inset: '0 0 64px', background: 'transparent' }}
+      />
       {mode !== 'playing' ? (
         <div
           className={`vplayer__privacy vplayer__privacy--${mode}`}
