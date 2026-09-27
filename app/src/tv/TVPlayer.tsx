@@ -21,6 +21,7 @@ const RESYNC_COOLDOWN_MS = 12_000;
 
 type YTPlayer = {
   playVideo(): void; mute(): void; unMute(): void; setVolume(v: number): void; isMuted(): boolean;
+  getPlayerState(): number;
   getCurrentTime(): number; seekTo(seconds: number, allowSeekAhead: boolean): void;
   unloadModule(name: string): void; setOption(module: string, option: string, value: unknown): void; destroy(): void;
 };
@@ -136,22 +137,28 @@ function YouTubeAir({ slot, offset, muted, onReady, onError }: {
       node.append(host);
       const p = new YT.Player(host, {
         host: 'https://www.youtube-nocookie.com', videoId: slot.mediaId,
-        playerVars: { autoplay: 1, mute: mutedRef.current ? 1 : 0, playsinline: 1, controls: 0, disablekb: 1, fs: 0, rel: 0,
+        // Автозапуск разрешён браузерами только без звука, поэтому стартуем в mute
+        // и снимаем заглушку сразу после того, как ролик реально пошёл.
+        playerVars: { autoplay: 1, mute: 1, playsinline: 1, controls: 0, disablekb: 1, fs: 0, rel: 0,
           modestbranding: 1, iv_load_policy: 3, cc_load_policy: 0, hl: 'ru', start: Math.floor(expected.current) },
         events: {
           onReady: () => {
             player.current = p;
             node.querySelector('iframe')?.setAttribute('tabindex', '-1');
             killCaptions(p);
-            applySound();
+            try { p.mute(); } catch { /* плеер ещё не готов */ }
             p.playVideo();
             lastSeek.current = Date.now();
             readyRef.current();
           },
           onApiChange: () => killCaptions(p),
           onStateChange: (event: { data?: number }) => {
-            // 1 = PLAYING: снова снимаем автоматическую заглушку и субтитры.
-            if (event?.data === 1) { applySound(); killCaptions(p); }
+            // 1 = PLAYING: ролик пошёл — включаем звук и гасим субтитры.
+            if (event?.data === 1) { applySound(); killCaptions(p); return; }
+            // -1 unstarted / 2 paused: автозапуск мог быть заблокирован — толкаем снова в тишине.
+            if (event?.data === -1 || event?.data === 2) {
+              try { p.mute(); p.playVideo(); } catch { /* плеер между состояниями */ }
+            }
           },
           onError: () => errorRef.current()
         }
@@ -163,6 +170,20 @@ function YouTubeAir({ slot, offset, muted, onReady, onError }: {
   }, [applySound, slot.mediaId, slot.start]);
 
   useEffect(() => { applySound(); }, [applySound, muted]);
+
+  // Сторож: если ролик застрял на заставке YouTube (заблокирован автозапуск), толкаем его.
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      const p = player.current;
+      if (!p) return;
+      let state = 1;
+      try { state = p.getPlayerState(); } catch { return; }
+      if (state === -1 || state === 2 || state === 5) {
+        try { p.mute(); p.playVideo(); } catch { /* плеер между состояниями */ }
+      }
+    }, 1500);
+    return () => window.clearInterval(id);
+  }, []);
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -271,6 +292,8 @@ function VkAir({ slot, offset, muted, onReady, onError }: {
       player.current = p;
       p.on(VK.VideoPlayer.Events.TIMEUPDATE, (state) => {
         if (cancelled || typeof state.time !== 'number') return;
+        // Стартуем без звука ради автозапуска и возвращаем его, как только эфир пошёл.
+        if (!mutedRef.current) { try { p.unmute(); } catch { /* между состояниями */ } }
         const now = Date.now();
         if (now - lastSeek.current < RESYNC_COOLDOWN_MS) return;
         if (Math.abs(state.time - expected.current) > RESYNC_TOLERANCE_SEC) {
@@ -278,7 +301,7 @@ function VkAir({ slot, offset, muted, onReady, onError }: {
           lastSeek.current = now;
         }
       });
-      if (mutedRef.current) p.mute(); else p.unmute();
+      p.mute();
       p.seek(expected.current);
       p.play();
       lastSeek.current = Date.now();
