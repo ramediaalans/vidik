@@ -7,7 +7,7 @@ export const DAY_SEC = 86_400;
 export const BROADCAST_UTC_OFFSET_HOURS = 3;
 export const ROTATION_EPOCH = '2026-01-01'; // день A
 export type RotationDay = 'A' | 'B' | 'C';
-export type Provider = 'youtube' | 'rutube' | 'vibix' | 'kodik' | 'generated';
+export type Provider = 'youtube' | 'rutube' | 'vk' | 'kodik' | 'generated';
 export type MediaType = 'video' | 'movie' | 'serial' | 'episode' | 'testcard';
 
 export type PoolItem = { p: string; id: string; t: string; ch: string; sec: number; year: number | null; kind: string };
@@ -94,8 +94,6 @@ export function rotationForDate(dateISO: string): RotationDay {
   return (['A', 'B', 'C'] as const)[n];
 }
 
-const DEFAULT_EPISODE_SEC = 24 * 60;
-
 function dayPartOf(at: string): string {
   const h = Math.floor(hhmmToSec(at) / 3600);
   if (h < 6) return 'Ночной эфир';
@@ -107,30 +105,15 @@ function dayPartOf(at: string): string {
 
 function toAsset(raw: RawAsset, kind: Slot['kind']): Asset {
   const provider = raw.provider as Provider;
-  const mediaType: MediaType =
-    provider === 'generated'
-      ? 'testcard'
-      : provider === 'vibix'
-        ? raw.mediaType === 'episode'
-          ? 'episode'
-          : 'movie'
-        : 'video';
-  // У сериалов балансер отдаёт длительность целиком — берём только правдоподобную серийную.
-  const sec =
-    mediaType === 'episode'
-      ? raw.dur && raw.dur >= 900 && raw.dur <= 4200
-        ? raw.dur
-        : DEFAULT_EPISODE_SEC
-      : raw.dur && raw.dur > 0
-        ? raw.dur
-        : 30 * 60;
+  const mediaType: MediaType = provider === 'generated' ? 'testcard' : 'video';
+  const sec = raw.dur && raw.dur > 0 ? raw.dur : 30 * 60;
   const publicRef =
     provider === 'youtube'
       ? `https://www.youtube.com/watch?v=${raw.id}`
       : provider === 'rutube'
         ? `https://rutube.ru/video/${raw.id}/`
-        : provider === 'vibix'
-          ? `https://vibix.org/kp/${raw.kp ?? ''}`
+        : provider === 'vk'
+          ? `https://vk.com/video${raw.id}`
           : 'local://tv-generator';
   return {
     provider,
@@ -141,8 +124,8 @@ function toAsset(raw: RawAsset, kind: Slot['kind']): Asset {
     publicRef,
     season: raw.season,
     episode: raw.episode,
-    canSeek: provider === 'youtube' || provider === 'rutube' || provider === 'generated',
-    reportsTime: provider === 'youtube' || provider === 'rutube' || provider === 'generated',
+    canSeek: provider === 'youtube' || provider === 'rutube' || provider === 'vk' || provider === 'generated',
+    reportsTime: provider === 'youtube' || provider === 'rutube' || provider === 'vk' || provider === 'generated',
     label: kind === 'interstitial' ? 'Реклама / заставка' : undefined
   };
 }

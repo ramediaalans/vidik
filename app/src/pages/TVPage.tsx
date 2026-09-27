@@ -64,7 +64,7 @@ export function TVPage() {
               })}
             </div>
             {next ? <p className="mono tv__next">Далее в {hhmm(next.start)} — {next.label ?? next.title}</p> : null}
-            <p className="tv__sourceNote mono">YouTube — архив · Vibix — кино и Disney · Kodik — аниме · локально — шум и тестовая таблица. У внешних плееров перемотка к текущей минуте зависит от их возможностей.</p>
+            <p className="tv__sourceNote mono">VK Видео — основной эфир · Rutube и YouTube — архив и резерв · локально — шум и тестовая таблица. Эфир синхронизирован с текущей минутой, перемотка отключена.</p>
           </div>
         </div>
       </section>

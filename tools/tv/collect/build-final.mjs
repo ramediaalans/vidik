@@ -5,12 +5,11 @@ const read = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const picked = read('tools/tv/collect/picked.json');
 const picked2 = read('tools/tv/collect/picked2.json');
 const extra = read('tools/tv/collect/extra.json');
-const vib = read('tools/tv/collect/vibix-resolved.json');
+const sourceOverrides = read('tools/tv/collect/source-overrides.json');
 
 const byKey = new Map();
 for (const r of picked) byKey.set(r.key, r.take);
 for (const r of picked2) if (r.take.length) byKey.set(r.key, r.take);
-const vibByKey = new Map(vib.map((v) => [v.key, v]));
 
 // Ручные переопределения — автоподбор взял не то (ремейки, не та передача, 18+)
 const MANUAL = {
@@ -50,13 +49,20 @@ function x(group, idx = 0) {
   if (!r) throw new Error(`нет extra ${group}[${idx}]`);
   return { provider: r.p, id: r.id, dur: r.dur, title: r.t, up: r.up, src: `extra.${group}` };
 }
-// Vibix: v('c3.big.matrica') или v('c1.disney.utinye', 1, 2) — сезон/серия
+// Проверенные замены балансера по приоритету VK → Rutube → YouTube → тематический аналог.
 function v(key, season, episode) {
-  const r = vibByKey.get(key);
-  if (!r) throw new Error(`нет vibix ${key}`);
-  const o = { provider: 'vibix', id: r.playerId, kp: r.kp, dur: r.dur ? r.dur * 60 : null, title: `${r.name} (${r.year})`, up: r.up, src: key, mediaType: r.dataType === 'serial' ? 'episode' : 'movie' };
-  if (season) { o.season = season; o.episode = episode; o.title += ` — ${season}×${String(episode).padStart(2, '0')}`; }
-  return o;
+  const overrideKey = [key, season ?? '', episode ?? ''].join('|');
+  const r = sourceOverrides[overrideKey];
+  if (!r) throw new Error(`нет проверенной замены ${overrideKey}`);
+  return {
+    provider: r.provider,
+    id: r.id,
+    dur: r.dur,
+    title: r.title,
+    up: r.up,
+    src: key,
+    mediaType: 'video'
+  };
 }
 const TC = { provider: 'generated', id: 'testcard', dur: 10800, title: 'Настроечная таблица УЭИТ + 1000 Гц', src: 'generated' };
 
@@ -228,7 +234,9 @@ const pool = {
   }
 };
 
-fs.writeFileSync('tools/tv/collect/pool-final.json', JSON.stringify(pool, null, 1), 'utf8');
+const serializedPool = JSON.stringify(pool, null, 1);
+fs.writeFileSync('tools/tv/collect/pool-final.json', serializedPool, 'utf8');
+fs.writeFileSync('app/src/tv/airtime.json', serializedPool, 'utf8');
 
 // плоский список для проверки
 const flat = new Map();

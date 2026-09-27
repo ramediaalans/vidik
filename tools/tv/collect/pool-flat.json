@@ -67,31 +67,25 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1204",
-  "kp": 77185,
-  "dur": 18900,
+  "provider": "rutube",
+  "id": "61a7accf419546037d3567ee6aecba41",
+  "dur": 3810,
   "title": "Гостья из будущего (1984) — 1×01",
-  "up": "2024-12-04",
+  "up": "2024-12-25",
   "src": "c1.kino.gostya",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "pervaya/A 08:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1204",
-  "kp": 77185,
-  "dur": 18900,
+  "provider": "rutube",
+  "id": "e07b63c4d7c024b92c938f8a6a7b626d",
+  "dur": 3831,
   "title": "Гостья из будущего (1984) — 1×02",
-  "up": "2024-12-04",
+  "up": "2024-12-25",
   "src": "c1.kino.gostya",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "pervaya/A 08:30"
   ]
@@ -185,46 +179,37 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2159",
-  "kp": 81426,
-  "dur": null,
-  "title": "Утиные истории (1987) — 1×01",
-  "up": "2025-02-16",
+  "provider": "vk",
+  "id": "-235797861_456244796",
+  "dur": 1289,
+  "title": "Утиные истории. Сезон 1. Серия 1",
+  "up": "2026-04-24",
   "src": "c1.disney.utinye",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "pervaya/A 16:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2159",
-  "kp": 81426,
-  "dur": null,
-  "title": "Утиные истории (1987) — 1×02",
-  "up": "2025-02-16",
+  "provider": "vk",
+  "id": "-235797861_456244819",
+  "dur": 1290,
+  "title": "Утиные истории. Сезон 1. Серия 2",
+  "up": "2026-04-24",
   "src": "c1.disney.utinye",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "pervaya/A 16:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2159",
-  "kp": 81426,
-  "dur": null,
-  "title": "Утиные истории (1987) — 1×03",
-  "up": "2025-02-16",
+  "provider": "vk",
+  "id": "-235797861_456244790",
+  "dur": 1276,
+  "title": "Утиные истории. Сезон 1. Серия 3",
+  "up": "2026-04-24",
   "src": "c1.disney.utinye",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "pervaya/A 16:00"
   ]
@@ -297,14 +282,13 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4551",
-  "kp": 5928,
-  "dur": 7140,
-  "title": "Один дома 2: Затерянный в Нью-Йорке (1992)",
-  "up": "2024-03-14",
+  "provider": "vk",
+  "id": "-220018529_456248133",
+  "dur": 7205,
+  "title": "Один дома 2: Затерянный в Нью-Йорке | Home Alone 2: Lost in New York (1992)",
+  "up": "2025-12-25",
   "src": "c1.eve.odin-doma2",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "pervaya/A 21:35"
   ]
@@ -438,31 +422,25 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1411",
-  "kp": 77284,
-  "dur": 12900,
+  "provider": "rutube",
+  "id": "a7334f4918823c1ac20b87e9449cf38b",
+  "dur": 4264,
   "title": "Приключения Электроника (1979) — 1×01",
-  "up": "2024-12-16",
+  "up": "2022-04-07",
   "src": "c1.kino.elektronik",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "pervaya/B 08:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1411",
-  "kp": 77284,
-  "dur": 12900,
+  "provider": "rutube",
+  "id": "c6d8ed47850f039e6034c28be532e812",
+  "dur": 3853,
   "title": "Приключения Электроника (1979) — 1×02",
-  "up": "2024-12-16",
+  "up": "2022-04-07",
   "src": "c1.kino.elektronik",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "pervaya/B 08:30"
   ]
@@ -556,46 +534,37 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "322",
-  "kp": 95231,
-  "dur": null,
-  "title": "Чип и Дейл спешат на помощь (1989) — 1×01",
-  "up": "2024-07-28",
+  "provider": "vk",
+  "id": "-240209558_456240252",
+  "dur": 1372,
+  "title": "Чип и Дейл спешат на помощь. 1 сезон, 1 серия «Подводные пираты» (1989)",
+  "up": "2026-09-19",
   "src": "c1.disney.chipdale",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "pervaya/B 16:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "322",
-  "kp": 95231,
-  "dur": null,
-  "title": "Чип и Дейл спешат на помощь (1989) — 1×02",
-  "up": "2024-07-28",
+  "provider": "vk",
+  "id": "-201396010_456241480",
+  "dur": 1364,
+  "title": "Чип и Дейл спешат на помощь. 1 сезон. 2 серия.",
+  "up": "2025-04-27",
   "src": "c1.disney.chipdale",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "pervaya/B 16:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "322",
-  "kp": 95231,
-  "dur": null,
-  "title": "Чип и Дейл спешат на помощь (1989) — 1×03",
-  "up": "2024-07-28",
+  "provider": "vk",
+  "id": "-240209558_456240254",
+  "dur": 1376,
+  "title": "Чип и Дейл спешат на помощь. 1 сезон, 3 серия «Дейл-инопланетянин»",
+  "up": "2026-09-19",
   "src": "c1.disney.chipdale",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "pervaya/B 16:00"
   ]
@@ -679,14 +648,13 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4613",
-  "kp": 6039,
-  "dur": 6060,
-  "title": "Маска (1994)",
-  "up": "2024-03-17",
+  "provider": "vk",
+  "id": "-220018529_456241259",
+  "dur": 6076,
+  "title": "Маска | The Mask (1994)",
+  "up": "2023-08-30",
   "src": "c1.eve.maska",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "pervaya/B 21:35"
   ]
@@ -824,61 +792,49 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2965",
-  "kp": 294989,
-  "dur": null,
-  "title": "Дикая роза (1987) — 1×01",
-  "up": "2025-04-13",
+  "provider": "vk",
+  "id": "-220320635_456239335",
+  "dur": 1310,
+  "title": "Дикая Роза [Rosa Salvaje] Сериал (1987-1988) 01. Серия",
+  "up": "2023-07-22",
   "src": "c1.nov.dikayaroza",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "pervaya/C 10:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2965",
-  "kp": 294989,
-  "dur": null,
-  "title": "Дикая роза (1987) — 1×02",
-  "up": "2025-04-13",
+  "provider": "vk",
+  "id": "-220320635_456239397",
+  "dur": 1302,
+  "title": "Дикая Роза [Rosa Salvaje] Сериал (1987-1988) 62. Серия",
+  "up": "2023-10-11",
   "src": "c1.nov.dikayaroza",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "pervaya/C 10:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2965",
-  "kp": 294989,
-  "dur": null,
-  "title": "Дикая роза (1987) — 1×03",
-  "up": "2025-04-13",
+  "provider": "vk",
+  "id": "-234512598_456242988",
+  "dur": 1278,
+  "title": "Дикая роза Серия 3",
+  "up": "2025-12-10",
   "src": "c1.nov.dikayaroza",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "pervaya/C 10:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2965",
-  "kp": 294989,
-  "dur": null,
-  "title": "Дикая роза (1987) — 1×04",
-  "up": "2025-04-13",
+  "provider": "vk",
+  "id": "-220320635_456239338",
+  "dur": 1288,
+  "title": "Дикая Роза [Rosa Salvaje] Сериал (1987-1988) 04. Серия",
+  "up": "2023-07-22",
   "src": "c1.nov.dikayaroza",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 4,
+  "mediaType": "video",
   "uses": [
    "pervaya/C 10:00"
   ]
@@ -950,46 +906,37 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "3181",
-  "kp": 395106,
-  "dur": null,
+  "provider": "rutube",
+  "id": "55a6bc0f30bfca634bc3a373f84f9c5e",
+  "dur": 1364,
   "title": "Черный Плащ (1991) — 1×01",
-  "up": "2025-03-18",
+  "up": "2023-12-03",
   "src": "c1.disney.chernyplashch",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "pervaya/C 16:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "3181",
-  "kp": 395106,
-  "dur": null,
-  "title": "Черный Плащ (1991) — 1×02",
-  "up": "2025-03-18",
+  "provider": "vk",
+  "id": "-240209558_456240275",
+  "dur": 1307,
+  "title": "Черный плащ 1 сезон 2 серия «Тайное становится явным. Часть 2» (1991)",
+  "up": "2026-09-20",
   "src": "c1.disney.chernyplashch",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "pervaya/C 16:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "3181",
-  "kp": 395106,
-  "dur": null,
-  "title": "Черный Плащ (1991) — 1×03",
-  "up": "2025-03-18",
+  "provider": "vk",
+  "id": "-239979259_456240709",
+  "dur": 1361,
+  "title": "Чёрный плащ 1 сезон 3 серия | в 4к (2 аудиодорожки)",
+  "up": "2026-09-22",
   "src": "c1.disney.chernyplashch",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "pervaya/C 16:00"
   ]
@@ -1039,14 +986,13 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "6201",
-  "kp": 15635,
-  "dur": 5220,
-  "title": "Бетховен (1991)",
-  "up": "2024-04-28",
+  "provider": "vk",
+  "id": "-220018529_456244524",
+  "dur": 5225,
+  "title": "Бетховен | Beethoven (1991)",
+  "up": "2025-03-01",
   "src": "c1.eve.bethoven",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "pervaya/C 21:35"
   ]
@@ -1118,106 +1064,85 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "8045",
-  "kp": 229704,
-  "dur": null,
-  "title": "Красавица-воин Сейлор Мун (1992) — 1×01",
-  "up": "2026-07-24",
+  "provider": "vk",
+  "id": "-24422005_456240436",
+  "dur": 1450,
+  "title": "Красавица-воин Сейлор Мун. 1 сезон: 1 серия.",
+  "up": "2026-04-20",
   "src": "c2.anime.sailormoon",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "8045",
-  "kp": 229704,
-  "dur": null,
-  "title": "Красавица-воин Сейлор Мун (1992) — 1×02",
-  "up": "2026-07-24",
+  "provider": "vk",
+  "id": "-24422005_456240437",
+  "dur": 1449,
+  "title": "Красавица-воин Сейлор Мун. 1 сезон: 2 серия.",
+  "up": "2026-04-20",
   "src": "c2.anime.sailormoon",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "8045",
-  "kp": 229704,
-  "dur": null,
-  "title": "Красавица-воин Сейлор Мун (1992) — 1×03",
-  "up": "2026-07-24",
+  "provider": "vk",
+  "id": "-221125211_456251911",
+  "dur": 1399,
+  "title": "Красавица-воин Сейлор Мун. 1 сезон. 3 серия.",
+  "up": "2024-11-27",
   "src": "c2.anime.sailormoon",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "52",
-  "kp": 95232,
-  "dur": null,
-  "title": "Человек-паук (1994) — 1×01",
-  "up": "2024-02-09",
+  "provider": "vk",
+  "id": "-15090835_456239737",
+  "dur": 1155,
+  "title": "Человек-паук 1994 [ сезон 1 | серия 1 ]",
+  "up": "2020-10-13",
   "src": "c2.cart.spiderman",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 07:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "52",
-  "kp": 95232,
-  "dur": null,
-  "title": "Человек-паук (1994) — 1×02",
-  "up": "2024-02-09",
+  "provider": "vk",
+  "id": "-136020824_456249478",
+  "dur": 1195,
+  "title": "Человек-паук 1994 - сезон 1 - серия 2 - Убийца пауков - VHSник",
+  "up": "2025-10-17",
   "src": "c2.cart.spiderman",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 07:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "52",
-  "kp": 95232,
-  "dur": null,
-  "title": "Человек-паук (1994) — 1×03",
-  "up": "2024-02-09",
+  "provider": "vk",
+  "id": "-15090835_456239739",
+  "dur": 1201,
+  "title": "Человек-паук 1994 [ сезон 1 | серия 3 ]",
+  "up": "2020-10-13",
   "src": "c2.cart.spiderman",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 07:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "52",
-  "kp": 95232,
-  "dur": null,
-  "title": "Человек-паук (1994) — 1×04",
-  "up": "2024-02-09",
+  "provider": "vk",
+  "id": "-15090835_456239740",
+  "dur": 1193,
+  "title": "Человек-паук 1994 [ сезон 1 | серия 4 ]",
+  "up": "2020-10-13",
   "src": "c2.cart.spiderman",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 4,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 07:30"
   ]
@@ -1267,31 +1192,25 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1974",
-  "kp": 80742,
-  "dur": null,
-  "title": "Беверли-Хиллз 90210 (1990) — 1×01",
-  "up": "2025-02-04",
+  "provider": "rutube",
+  "id": "d9003f047fedded3b8b0f47ebcaad0c5",
+  "dur": 2816,
+  "title": "Беверли-Хиллз 90210 — 1 сезон 11 серия «Вечеринка»",
+  "up": "2024-06-08",
   "src": "c2.ser.beverly",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 11:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1974",
-  "kp": 80742,
-  "dur": null,
+  "provider": "rutube",
+  "id": "5c4a9c675991c192d9e4890291d325ec",
+  "dur": 2766,
   "title": "Беверли-Хиллз 90210 (1990) — 1×02",
-  "up": "2025-02-04",
+  "up": "2024-06-08",
   "src": "c2.ser.beverly",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 11:00"
   ]
@@ -1452,91 +1371,73 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "205",
-  "kp": 77046,
-  "dur": null,
+  "provider": "rutube",
+  "id": "9502b6784378634fe9ea711081c9d19f",
+  "dur": 2894,
   "title": "Секретные материалы (1993) — 1×01",
-  "up": "2024-06-26",
+  "up": "2023-12-27",
   "src": "c2.eve.xfiles",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 19:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "205",
-  "kp": 77046,
-  "dur": null,
+  "provider": "rutube",
+  "id": "ea1d6913d73140f315bc13cd4879480c",
+  "dur": 2750,
   "title": "Секретные материалы (1993) — 1×02",
-  "up": "2024-06-26",
+  "up": "2023-12-27",
   "src": "c2.eve.xfiles",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 19:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "338",
-  "kp": 84358,
-  "dur": null,
+  "provider": "rutube",
+  "id": "eb418eb4c99652e1ec2560138b2f4b76",
+  "dur": 2214,
   "title": "Твин Пикс (1990) — 1×01",
-  "up": "2024-08-11",
+  "up": "2024-04-21",
   "src": "c2.sf.twinpeaks",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 21:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "338",
-  "kp": 84358,
-  "dur": null,
-  "title": "Твин Пикс (1990) — 1×02",
-  "up": "2024-08-11",
+  "provider": "rutube",
+  "id": "fd50f97127dca9917701f78e2f8e1231",
+  "dur": 2720,
+  "title": "Секретные материалы — 1 сезон 7 серия «Дух из машины»",
+  "up": "2023-12-27",
   "src": "c2.sf.twinpeaks",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 21:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2352",
-  "kp": 94667,
-  "dur": null,
+  "provider": "rutube",
+  "id": "013102c0a4a2419fd7dd7a868b1594a0",
+  "dur": 231,
   "title": "Бивис и Батт-Хед (1993) — 1×01",
-  "up": "2025-03-01",
+  "up": "2023-10-27",
   "src": "c2.mtv.bivis",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 23:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2352",
-  "kp": 94667,
-  "dur": null,
+  "provider": "youtube",
+  "id": "HqOuoQCBADw",
+  "dur": 259,
   "title": "Бивис и Батт-Хед (1993) — 1×02",
-  "up": "2025-03-01",
+  "up": "2025-10-03",
   "src": "c2.mtv.bivis",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/A 23:30"
   ]
@@ -1565,46 +1466,37 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "8045",
-  "kp": 229704,
-  "dur": null,
-  "title": "Красавица-воин Сейлор Мун (1992) — 1×04",
-  "up": "2026-07-24",
+  "provider": "vk",
+  "id": "-221125211_456251910",
+  "dur": 1403,
+  "title": "Красавица-воин Сейлор Мун. 1 сезон. 4 серия.",
+  "up": "2024-11-27",
   "src": "c2.anime.sailormoon",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 4,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "8045",
-  "kp": 229704,
-  "dur": null,
-  "title": "Красавица-воин Сейлор Мун (1992) — 1×05",
-  "up": "2026-07-24",
+  "provider": "vk",
+  "id": "-226802088_456258354",
+  "dur": 1447,
+  "title": "Красавица-воин Сейлор Мун. 5 серия.",
+  "up": "2025-06-21",
   "src": "c2.anime.sailormoon",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 5,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "8045",
-  "kp": 229704,
-  "dur": null,
-  "title": "Красавица-воин Сейлор Мун (1992) — 1×06",
-  "up": "2026-07-24",
+  "provider": "vk",
+  "id": "-221125211_456251912",
+  "dur": 1423,
+  "title": "Красавица-воин Сейлор Мун. 1 сезон. 6 серия.",
+  "up": "2024-11-27",
   "src": "c2.anime.sailormoon",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 6,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 06:00"
   ]
@@ -1698,31 +1590,25 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "7636",
-  "kp": 77191,
-  "dur": null,
+  "provider": "rutube",
+  "id": "97e771cf4f568857a17c62fc1c4152ab",
+  "dur": 1591,
   "title": "Дикий ангел (1998) — 1×01",
-  "up": "2026-06-24",
+  "up": "2023-09-11",
   "src": "c2.ser.dikiyangel",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 11:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "7636",
-  "kp": 77191,
-  "dur": null,
-  "title": "Дикий ангел (1998) — 1×02",
-  "up": "2026-06-24",
+  "provider": "rutube",
+  "id": "78fd146d5c568efa8ca965dc5ab5b5cc",
+  "dur": 2009,
+  "title": "Дикий ангел — серия 3",
+  "up": "2023-09-19",
   "src": "c2.ser.dikiyangel",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 11:00"
   ]
@@ -1750,61 +1636,49 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "6352",
-  "kp": 214312,
-  "dur": null,
-  "title": "Ох, уж эти детки! (1991) — 1×01",
-  "up": "2026-02-24",
+  "provider": "vk",
+  "id": "-226802088_456244562",
+  "dur": 1415,
+  "title": "Ох уж эти детки. 8 сезон. 1 серия.",
+  "up": "2024-09-09",
   "src": "c2.nick.rugrats",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 14:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "6352",
-  "kp": 214312,
-  "dur": null,
-  "title": "Ох, уж эти детки! (1991) — 1×02",
-  "up": "2026-02-24",
+  "provider": "vk",
+  "id": "-44712987_456240073",
+  "dur": 1415,
+  "title": "Ох уж эти детки! 2 сезон 2 серия - Чаки против Потти / Наконец вместе",
+  "up": "2025-07-19",
   "src": "c2.nick.rugrats",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 14:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "6352",
-  "kp": 214312,
-  "dur": null,
+  "provider": "rutube",
+  "id": "635b32cfa3c19769fc6692a42be25f46",
+  "dur": 1347,
   "title": "Ох, уж эти детки! (1991) — 1×03",
-  "up": "2026-02-24",
+  "up": "2025-03-10",
   "src": "c2.nick.rugrats",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 14:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "6352",
-  "kp": 214312,
-  "dur": null,
-  "title": "Ох, уж эти детки! (1991) — 1×04",
-  "up": "2026-02-24",
+  "provider": "vk",
+  "id": "-44712987_456240076",
+  "dur": 1423,
+  "title": "Ох уж эти детки! 2 сезон 4 серия - Разборки на Диком Западе / Зазеркалье",
+  "up": "2025-07-19",
   "src": "c2.nick.rugrats",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 4,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 14:00"
   ]
@@ -1898,91 +1772,73 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "205",
-  "kp": 77046,
-  "dur": null,
+  "provider": "rutube",
+  "id": "a644cce49645cce67361946664bc8414",
+  "dur": 2569,
   "title": "Секретные материалы (1993) — 1×03",
-  "up": "2024-06-26",
+  "up": "2023-12-27",
   "src": "c2.eve.xfiles",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 19:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "205",
-  "kp": 77046,
-  "dur": null,
+  "provider": "rutube",
+  "id": "e2a0a1d060b4c90b0faeb84d726fb0f0",
+  "dur": 2655,
   "title": "Секретные материалы (1993) — 1×04",
-  "up": "2024-06-26",
+  "up": "2023-12-27",
   "src": "c2.eve.xfiles",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 4,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 19:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "201",
-  "kp": 77298,
-  "dur": null,
+  "provider": "rutube",
+  "id": "2e7a87e7a4ac245bbb37368e4fd4a786",
+  "dur": 2633,
   "title": "Вавилон 5 (1993) — 1×01",
-  "up": "2024-06-25",
+  "up": "2024-08-19",
   "src": "c2.sf.babylon5",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 21:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "201",
-  "kp": 77298,
-  "dur": null,
+  "provider": "rutube",
+  "id": "b54dd1e4a818108716b28a5321f40abd",
+  "dur": 2633,
   "title": "Вавилон 5 (1993) — 1×02",
-  "up": "2024-06-25",
+  "up": "2024-08-19",
   "src": "c2.sf.babylon5",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 21:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2352",
-  "kp": 94667,
-  "dur": null,
+  "provider": "rutube",
+  "id": "37a7e0d07cd41c056dbdbec174bf732f",
+  "dur": 237,
   "title": "Бивис и Батт-Хед (1993) — 1×03",
-  "up": "2025-03-01",
+  "up": "2023-10-27",
   "src": "c2.mtv.bivis",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 23:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2352",
-  "kp": 94667,
-  "dur": null,
-  "title": "Бивис и Батт-Хед (1993) — 1×04",
-  "up": "2025-03-01",
+  "provider": "vk",
+  "id": "-172326782_456247652",
+  "dur": 954,
+  "title": "1 сезон 3-4 серии (Бивис и Батт-хед)",
+  "up": "2022-10-11",
   "src": "c2.mtv.bivis",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 4,
+  "mediaType": "video",
   "uses": [
    "shestaya/B 23:30"
   ]
@@ -2043,61 +1899,49 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "7713",
-  "kp": 94890,
-  "dur": null,
-  "title": "Черепашки-мутанты-ниндзя (1987) — 1×01",
-  "up": "2026-06-27",
+  "provider": "vk",
+  "id": "-138850976_456240570",
+  "dur": 1329,
+  "title": "Черепашки Мутанты Ниндзя: Новые Приключения - S01E01 - Всё Меняется [Full HD] [EA]",
+  "up": "2023-02-23",
   "src": "c2.cart.tmnt",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 07:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "7713",
-  "kp": 94890,
-  "dur": null,
-  "title": "Черепашки-мутанты-ниндзя (1987) — 1×02",
-  "up": "2026-06-27",
+  "provider": "vk",
+  "id": "-138850976_456240571",
+  "dur": 1327,
+  "title": "Черепашки Мутанты Ниндзя: Новые Приключения - S01E02 - Лучшая мышеловка [Full HD] [EA]",
+  "up": "2023-02-23",
   "src": "c2.cart.tmnt",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 07:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "7713",
-  "kp": 94890,
-  "dur": null,
-  "title": "Черепашки-мутанты-ниндзя (1987) — 1×03",
-  "up": "2026-06-27",
+  "provider": "vk",
+  "id": "-238771812_456244056",
+  "dur": 1276,
+  "title": "Мутанты черепашки ниндзя. Новые приключения!. Сезон 1. Серия 3",
+  "up": "2026-07-12",
   "src": "c2.cart.tmnt",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 07:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "7713",
-  "kp": 94890,
-  "dur": null,
-  "title": "Черепашки-мутанты-ниндзя (1987) — 1×04",
-  "up": "2026-06-27",
+  "provider": "vk",
+  "id": "-238771814_456239218",
+  "dur": 1293,
+  "title": "Мутанты черепашки ниндзя. Новые приключения!. Сезон 1. Серия 4",
+  "up": "2026-05-18",
   "src": "c2.cart.tmnt",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 4,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 07:30"
   ]
@@ -2147,31 +1991,25 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1974",
-  "kp": 80742,
-  "dur": null,
+  "provider": "rutube",
+  "id": "0d72a96c53bb85abd6297ff6539c5056",
+  "dur": 2765,
   "title": "Беверли-Хиллз 90210 (1990) — 1×03",
-  "up": "2025-02-04",
+  "up": "2024-06-08",
   "src": "c2.ser.beverly",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 11:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1974",
-  "kp": 80742,
-  "dur": null,
+  "provider": "rutube",
+  "id": "c532c1dc76d13a4c0879377f7402be70",
+  "dur": 2813,
   "title": "Беверли-Хиллз 90210 (1990) — 1×04",
-  "up": "2025-02-04",
+  "up": "2024-06-08",
   "src": "c2.ser.beverly",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 4,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 11:00"
   ]
@@ -2309,91 +2147,73 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "205",
-  "kp": 77046,
-  "dur": null,
+  "provider": "rutube",
+  "id": "ce933956311456633e7c9a934b21ce1b",
+  "dur": 2670,
   "title": "Секретные материалы (1993) — 1×05",
-  "up": "2024-06-26",
+  "up": "2023-12-27",
   "src": "c2.eve.xfiles",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 5,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 19:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "205",
-  "kp": 77046,
-  "dur": null,
+  "provider": "rutube",
+  "id": "dd17beb058ebb7f575d272c657f240c4",
+  "dur": 2745,
   "title": "Секретные материалы (1993) — 1×06",
-  "up": "2024-06-26",
+  "up": "2023-12-27",
   "src": "c2.eve.xfiles",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 6,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 19:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1348",
-  "kp": 94222,
-  "dur": null,
-  "title": "Квантовый скачок (1989) — 1×01",
-  "up": "2024-12-15",
+  "provider": "rutube",
+  "id": "38e22c209d8493831468bc627a3fd662",
+  "dur": 2875,
+  "title": "Квантовый скачок — 2 сезон 1 серия",
+  "up": "2024-08-09",
   "src": "c2.sf.quantum",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 21:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1348",
-  "kp": 94222,
-  "dur": null,
-  "title": "Квантовый скачок (1989) — 1×02",
-  "up": "2024-12-15",
+  "provider": "rutube",
+  "id": "44f393081223b30869ba4992163baaa8",
+  "dur": 2879,
+  "title": "Квантовый скачок — 2 сезон 2 серия",
+  "up": "2024-08-09",
   "src": "c2.sf.quantum",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 21:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2352",
-  "kp": 94667,
-  "dur": null,
-  "title": "Бивис и Батт-Хед (1993) — 1×05",
-  "up": "2025-03-01",
+  "provider": "rutube",
+  "id": "bc47c4545faae27e5b4e0fffa68e3310",
+  "dur": 300,
+  "title": "Бивис и Батт-Хед — 5 сезон 5 серия «Убежище»",
+  "up": "2023-10-27",
   "src": "c2.mtv.bivis",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 5,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 23:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "2352",
-  "kp": 94667,
-  "dur": null,
-  "title": "Бивис и Батт-Хед (1993) — 1×06",
-  "up": "2025-03-01",
+  "provider": "rutube",
+  "id": "d8cb5a0fb9e1a4dba02345edc4ecd3e0",
+  "dur": 710,
+  "title": "Бивис и Батт-Хед — 5 сезон 6 серия «Продавцы»",
+  "up": "2023-10-27",
   "src": "c2.mtv.bivis",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 6,
+  "mediaType": "video",
   "uses": [
    "shestaya/C 23:30"
   ]
@@ -2410,462 +2230,421 @@
   ]
  },
  {
-  "provider": "vibix",
-  "id": "15613",
-  "kp": 2360,
-  "dur": 5280,
+  "provider": "vk",
+  "id": "-213373960_456239154",
+  "dur": 5303,
   "title": "Король Лев (1994)",
-  "up": "2024-07-27",
+  "up": "2022-06-04",
   "src": "c3.disney.korol-lev",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "224688",
-  "kp": 2361,
-  "dur": 5400,
-  "title": "Аладдин (1992)",
-  "up": "2026-02-01",
+  "provider": "vk",
+  "id": "-218463181_456239248",
+  "dur": 5424,
+  "title": "Аладдин - Мультфильм (1992)",
+  "up": "2023-05-08",
   "src": "c3.disney.aladdin",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "20817",
-  "kp": 57308,
-  "dur": 5400,
-  "title": "Жандарм из Сен-Тропе (1964)",
-  "up": "2024-08-22",
+  "provider": "vk",
+  "id": "-241225115_456239017",
+  "dur": 5953,
+  "title": "Жандарм из Сен-Тропе 1964",
+  "up": "2026-09-02",
   "src": "c3.com.zhandarm",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 10:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4773",
-  "kp": 80775,
-  "dur": 6660,
-  "title": "Разиня (1965)",
-  "up": "2024-03-23",
+  "provider": "vk",
+  "id": "-106427901_456241412",
+  "dur": 6360,
+  "title": "Разиня (Франция, 1965) HD1080 комедия, Луи де Фюнес, Бурвиль, советский дубляж без вставок закадрового перевода",
+  "up": "2023-01-13",
   "src": "c3.com.razinya",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 10:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "42299",
-  "kp": 24705,
-  "dur": 5280,
-  "title": "Доспехи Бога (1986)",
-  "up": "2026-09-14",
+  "provider": "vk",
+  "id": "-220018529_456244591",
+  "dur": 5878,
+  "title": "Доспехи Бога | Lung hing foo dai (1986)",
+  "up": "2025-03-04",
   "src": "c3.ma.dospehi-boga",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 13:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4834",
-  "kp": 24726,
-  "dur": 6660,
-  "title": "Пьяный мастер (1978)",
-  "up": "2024-03-26",
+  "provider": "vk",
+  "id": "-220018529_456244953",
+  "dur": 6675,
+  "title": "Пьяный мастер | Jui kuen (1978)",
+  "up": "2025-03-15",
   "src": "c3.ma.pyanyy-master",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 13:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4681",
-  "kp": 6303,
-  "dur": 6240,
+  "provider": "vk",
+  "id": "-56028029_456244530",
+  "dur": 6395,
   "title": "Хищник (1987)",
-  "up": "2024-03-20",
+  "up": "2018-04-01",
   "src": "c3.sf.hishchnik",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 16:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "22293",
-  "kp": 444,
-  "dur": 8220,
+  "provider": "vk",
+  "id": "-226712322_456239188",
+  "dur": 7996,
   "title": "Терминатор 2: Судный день (1991)",
-  "up": "2024-08-28",
+  "up": "2025-05-04",
   "src": "c3.big.terminator2",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 18:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "19891",
-  "kp": 389,
-  "dur": 7980,
+  "provider": "vk",
+  "id": "-205644351_456239499",
+  "dur": 7975,
   "title": "Леон (1994)",
-  "up": "2024-08-19",
+  "up": "2022-02-04",
   "src": "c3.thr.leon",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 21:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4986",
-  "kp": 5198,
-  "dur": 5520,
-  "title": "Кошмар на улице Вязов (1984)",
-  "up": "2026-07-31",
+  "provider": "vk",
+  "id": "-220018529_456244912",
+  "dur": 5478,
+  "title": "Кошмар на улице Вязов | A Nightmare on Elm Street (1984)",
+  "up": "2025-03-15",
   "src": "c3.hor.koshmar",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 23:15"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "92363",
-  "kp": 12363,
-  "dur": 6120,
-  "title": "Универсальный солдат (1992)",
-  "up": "2026-09-14",
+  "provider": "vk",
+  "id": "-227267093_456239990",
+  "dur": 6223,
+  "title": "Универсальный солдат | боевик | 1992 | 4К",
+  "up": "2025-04-20",
   "src": "c3.b.universalnyy-soldat",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/A 01:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "224653",
-  "kp": 8147,
-  "dur": 4980,
-  "title": "Русалочка (1989)",
-  "up": "2026-02-01",
+  "provider": "vk",
+  "id": "-226802088_456246004",
+  "dur": 4970,
+  "title": "Русалочка | The Little Mermaid (1989)",
+  "up": "2024-11-20",
   "src": "c3.disney.rusalochka",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "16102",
-  "kp": 540,
-  "dur": 5040,
-  "title": "Красавица и чудовище (1991)",
-  "up": "2024-07-29",
+  "provider": "vk",
+  "id": "-218463181_456239645",
+  "dur": 5505,
+  "title": "Красавица и Чудовище - Мультфильм (1991)",
+  "up": "2024-01-14",
   "src": "c3.disney.krasavica",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4697",
-  "kp": 57004,
-  "dur": 5700,
-  "title": "Игрушка (1976)",
-  "up": "2024-03-21",
+  "provider": "vk",
+  "id": "-37492055_456251568",
+  "dur": 5633,
+  "title": "Игрушка. (1976. Франция. Советский дубляж).",
+  "up": "2021-11-12",
   "src": "c3.com.igrushka",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 10:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4621",
-  "kp": 20908,
-  "dur": 5400,
-  "title": "Невезучие (1981)",
-  "up": "2024-03-18",
+  "provider": "vk",
+  "id": "-229666527_456239339",
+  "dur": 5614,
+  "title": "Невезучие 4К 1981 (дублированный) Смотреть Онлайн Бесплатно ⭐⭐⭐⭐⭐",
+  "up": "2025-05-24",
   "src": "c3.com.nevezuchie",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 10:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "5651",
-  "kp": 4777,
-  "dur": 5520,
-  "title": "Кровавый спорт (1988)",
-  "up": "2024-04-22",
+  "provider": "vk",
+  "id": "-220018529_456244761",
+  "dur": 5537,
+  "title": "Кровавый спорт | Bloodsport (1988)",
+  "up": "2025-03-11",
   "src": "c3.ma.krovavyy-sport",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 13:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "220448",
-  "kp": 28131,
-  "dur": 5820,
-  "title": "Кикбоксер (1989)",
-  "up": "2026-01-23",
+  "provider": "vk",
+  "id": "-220018529_456244387",
+  "dur": 5896,
+  "title": "Кикбоксер | Kickboxer (1989)",
+  "up": "2025-02-27",
   "src": "c3.ma.kikbokser",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 13:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "42685",
-  "kp": 2443,
-  "dur": 6780,
-  "title": "Вспомнить всё (1990)",
-  "up": "2024-11-02",
+  "provider": "vk",
+  "id": "-176294899_456244339",
+  "dur": 6796,
+  "title": "Вспомнить всё (1990) 4К⭐",
+  "up": "2023-01-26",
   "src": "c3.sf.vspomnit-vse",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 16:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4469",
-  "kp": 301,
-  "dur": 8160,
-  "title": "Матрица (1999)",
-  "up": "2024-02-27",
+  "provider": "vk",
+  "id": "-220018529_456240812",
+  "dur": 8182,
+  "title": "Матрица | The Matrix (1999)",
+  "up": "2023-05-17",
   "src": "c3.big.matrica",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 18:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4795",
-  "kp": 1968,
-  "dur": 6960,
-  "title": "Скорость (1994)",
-  "up": "2024-03-24",
+  "provider": "vk",
+  "id": "-165630070_456240067",
+  "dur": 6737,
+  "title": "Фильм скорость 1994",
+  "up": "2022-06-15",
   "src": "c3.thr.skorost",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 21:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "228154",
-  "kp": 5891,
-  "dur": 5220,
-  "title": "Детские игры (1988)",
-  "up": "2026-02-07",
+  "provider": "vk",
+  "id": "-101758569_456239629",
+  "dur": 5227,
+  "title": "ДЕТСКИЕ ИГРЫ (КУКЛА ЧАКИ) 1988",
+  "up": "2016-03-18",
   "src": "c3.hor.detskie-igry",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 23:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "240173",
-  "kp": 4010,
-  "dur": 5160,
+  "provider": "vk",
+  "id": "-56028029_456244271",
+  "dur": 5184,
   "title": "Киборг (1989)",
-  "up": "2026-02-22",
+  "up": "2018-03-24",
   "src": "c3.b.kiborg",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/B 01:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "153501",
-  "kp": 8133,
-  "dur": 4680,
-  "title": "Книга джунглей (1967)",
-  "up": "2025-07-28",
+  "provider": "vk",
+  "id": "-201923051_456239370",
+  "dur": 4717,
+  "title": "КНИГА ДЖУНГЛЕЙ (1967)",
+  "up": "2022-06-13",
   "src": "c3.disney.kniga-dzhungley",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "116359",
-  "kp": 5213,
-  "dur": 4860,
-  "title": "Покахонтас (1995)",
-  "up": "2025-04-24",
+  "provider": "vk",
+  "id": "-222609266_456239117",
+  "dur": 4868,
+  "title": "Покахонтас / Pocahontas (Мультфильм 1995)",
+  "up": "2023-09-29",
   "src": "c3.disney.pokahontas",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 06:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "15702",
-  "kp": 63912,
-  "dur": 6420,
-  "title": "Укрощение строптивого (1980)",
-  "up": "2024-07-28",
+  "provider": "vk",
+  "id": "-92669970_456239215",
+  "dur": 6253,
+  "title": "Укрощение строптивого (Фильм, 1980)",
+  "up": "2025-12-15",
   "src": "c3.com.ukroshchenie",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 10:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "42196",
-  "kp": 10179,
-  "dur": 6600,
-  "title": "Блеф (1976)",
-  "up": "2024-11-01",
+  "provider": "vk",
+  "id": "-240523816_456239068",
+  "dur": 6221,
+  "title": "Блеф.mp4",
+  "up": "2026-08-24",
   "src": "c3.com.blef",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 10:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4779",
-  "kp": 24743,
-  "dur": 6120,
-  "title": "Выход Дракона (1973)",
-  "up": "2024-03-23",
+  "provider": "vk",
+  "id": "-220018529_456245886",
+  "dur": 6157,
+  "title": "Выход Дракона | Enter the Dragon (1973)",
+  "up": "2025-04-16",
   "src": "c3.ma.vyhod-drakona",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 13:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "159553",
-  "kp": 22791,
-  "dur": 6360,
-  "title": "Полицейская история (1985)",
-  "up": "2025-08-14",
+  "provider": "vk",
+  "id": "-225225538_456239064",
+  "dur": 5994,
+  "title": "Полицейская история (1985) UHD",
+  "up": "2024-04-22",
   "src": "c3.ma.policeyskaya-istoriya",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 13:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "5193",
-  "kp": 7410,
-  "dur": 6120,
-  "title": "Робокоп (1987)",
-  "up": "2024-04-04",
+  "provider": "vk",
+  "id": "-225299404_456240316",
+  "dur": 6196,
+  "title": "Робокоп - «RoboCop», 1987 Directors Cut (7,7)",
+  "up": "2024-12-11",
   "src": "c3.sf.robokop",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 16:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4528",
-  "kp": 2656,
-  "dur": 7560,
-  "title": "Пятый элемент (1997)",
-  "up": "2024-03-03",
+  "provider": "vk",
+  "id": "-220018529_456243312",
+  "dur": 7557,
+  "title": "Пятый элемент | The Fifth Element (1997)",
+  "up": "2024-12-26",
   "src": "c3.big.pyatyy-element",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 18:30"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "4455",
-  "kp": 345,
-  "dur": 7080,
-  "title": "Молчание ягнят (1990)",
-  "up": "2024-02-27",
+  "provider": "vk",
+  "id": "-233305174_456242079",
+  "dur": 6998,
+  "title": "Молчание ягнят | The Silence of the Lambs (1991)",
+  "up": "2026-03-18",
   "src": "c3.thr.molchanie-yagnyat",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 21:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1947",
-  "kp": 271501,
-  "dur": null,
-  "title": "Байки из склепа (1989) — 1×01",
-  "up": "2025-01-29",
+  "provider": "vk",
+  "id": "-222609266_456243873",
+  "dur": 1695,
+  "title": "Байки из склепа 1 сезон 1 серия «Человек, который был Смертью» (сериал, 1989)",
+  "up": "2026-04-22",
   "src": "c3.hor.bayki-iz-sklepa",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 1,
+  "mediaType": "video",
   "uses": [
    "kabelny/C 23:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1947",
-  "kp": 271501,
-  "dur": null,
-  "title": "Байки из склепа (1989) — 1×02",
-  "up": "2025-01-29",
+  "provider": "vk",
+  "id": "-103401382_171694452",
+  "dur": 1406,
+  "title": "Байки из склепа s01e02 http://vk.com/horror_for_all",
+  "up": "2015-11-08",
   "src": "c3.hor.bayki-iz-sklepa",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 2,
+  "mediaType": "video",
   "uses": [
    "kabelny/C 23:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "1947",
-  "kp": 271501,
-  "dur": null,
-  "title": "Байки из склепа (1989) — 1×03",
-  "up": "2025-01-29",
+  "provider": "vk",
+  "id": "-36903179_162383470",
+  "dur": 1683,
+  "title": "Байки из склепа: Сезон 1 Серия 3",
+  "up": "2012-04-02",
   "src": "c3.hor.bayki-iz-sklepa",
-  "mediaType": "episode",
-  "season": 1,
-  "episode": 3,
+  "mediaType": "video",
   "uses": [
    "kabelny/C 23:00"
   ]
  },
  {
-  "provider": "vibix",
-  "id": "97409",
-  "kp": 8374,
-  "dur": 5700,
-  "title": "Безумный Макс 2: Воин дороги (1981)",
+  "provider": "vk",
+  "id": "-220018529_456244891",
+  "dur": 5732,
+  "title": "Безумный Макс 2: Воин дороги | Mad Max 2 (1981)",
   "up": "2025-03-15",
   "src": "c3.b.bezumnyy-maks-2",
-  "mediaType": "movie",
+  "mediaType": "video",
   "uses": [
    "kabelny/C 01:00"
   ]
