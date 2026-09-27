@@ -14,8 +14,13 @@ import {
   type Slot
 } from './schedule';
 
+// Ресинхронизация с расписанием должна быть редкой: частые seek на старте ролика
+// дают зацикливание: плеер буферизуется, время «отстаёт» и мы секаем снова.
+const RESYNC_TOLERANCE_SEC = 12;
+const RESYNC_COOLDOWN_MS = 12_000;
+
 type YTPlayer = {
-  playVideo(): void; mute(): void; unMute(): void; setVolume(v: number): void;
+  playVideo(): void; mute(): void; unMute(): void; setVolume(v: number): void; isMuted(): boolean;
   getCurrentTime(): number; seekTo(seconds: number, allowSeekAhead: boolean): void;
   unloadModule(name: string): void; setOption(module: string, option: string, value: unknown): void; destroy(): void;
 };
@@ -90,36 +95,64 @@ function YouTubeAir({ slot, offset, muted, onReady, onError }: {
   const mutedRef = useRef(muted);
   const readyRef = useRef(onReady);
   const errorRef = useRef(onError);
+  const lastSeek = useRef(0);
 
   useEffect(() => { expected.current = offset; }, [offset]);
   useEffect(() => { mutedRef.current = muted; }, [muted]);
   useEffect(() => { readyRef.current = onReady; }, [onReady]);
   useEffect(() => { errorRef.current = onError; }, [onError]);
 
+  // Браузер может заглушить автозапуск, поэтому звук применяем повторно:
+  // на onReady, на старте воспроизведения и на первом действии пользователя.
+  const applySound = useCallback(() => {
+    const p = player.current;
+    if (!p) return;
+    try {
+      if (mutedRef.current) { p.mute(); return; }
+      p.unMute();
+      p.setVolume(70);
+    } catch { /* плеер между состояниями */ }
+  }, []);
+
+  useEffect(() => {
+    const onGesture = () => applySound();
+    window.addEventListener('pointerdown', onGesture);
+    window.addEventListener('keydown', onGesture);
+    return () => {
+      window.removeEventListener('pointerdown', onGesture);
+      window.removeEventListener('keydown', onGesture);
+    };
+  }, [applySound]);
+
   useEffect(() => {
     const node = mount.current;
     if (!node) return;
     let cancelled = false;
     let created: YTPlayer | null = null;
+    lastSeek.current = Date.now();
     void loadYouTubeApi().then((YT) => {
       if (cancelled) return;
       const host = document.createElement('div');
       node.append(host);
       const p = new YT.Player(host, {
         host: 'https://www.youtube-nocookie.com', videoId: slot.mediaId,
-        playerVars: { autoplay: 1, mute: 1, playsinline: 1, controls: 0, disablekb: 1, fs: 0, rel: 0,
+        playerVars: { autoplay: 1, mute: mutedRef.current ? 1 : 0, playsinline: 1, controls: 0, disablekb: 1, fs: 0, rel: 0,
           modestbranding: 1, iv_load_policy: 3, cc_load_policy: 0, hl: 'ru', start: Math.floor(expected.current) },
         events: {
           onReady: () => {
             player.current = p;
             node.querySelector('iframe')?.setAttribute('tabindex', '-1');
             killCaptions(p);
-            if (mutedRef.current) p.mute(); else { p.unMute(); p.setVolume(70); }
+            applySound();
             p.playVideo();
+            lastSeek.current = Date.now();
             readyRef.current();
           },
           onApiChange: () => killCaptions(p),
-          onStateChange: () => killCaptions(p),
+          onStateChange: (event: { data?: number }) => {
+            // 1 = PLAYING: снова снимаем автоматическую заглушку и субтитры.
+            if (event?.data === 1) { applySound(); killCaptions(p); }
+          },
           onError: () => errorRef.current()
         }
       });
@@ -127,22 +160,23 @@ function YouTubeAir({ slot, offset, muted, onReady, onError }: {
     }).catch(() => errorRef.current());
     return () => { cancelled = true; try { created?.destroy(); } catch { /* already gone */ } node.replaceChildren(); player.current = null; };
   // New scheduled item gets a new isolated player.
-  }, [slot.mediaId, slot.start]);
+  }, [applySound, slot.mediaId, slot.start]);
 
-  useEffect(() => {
-    const p = player.current;
-    if (!p) return;
-    if (muted) p.mute(); else { p.unMute(); p.setVolume(70); }
-  }, [muted]);
+  useEffect(() => { applySound(); }, [applySound, muted]);
 
   useEffect(() => {
     const id = window.setInterval(() => {
       const p = player.current;
       if (!p) return;
-      killCaptions(p);
-      const actual = p.getCurrentTime();
-      if (actual > 0 && Math.abs(actual - expected.current) > 7) p.seekTo(expected.current, true);
-    }, 4000);
+      const now = Date.now();
+      if (now - lastSeek.current < RESYNC_COOLDOWN_MS) return;
+      let actual = 0;
+      try { actual = p.getCurrentTime(); } catch { return; }
+      if (actual > 0 && Math.abs(actual - expected.current) > RESYNC_TOLERANCE_SEC) {
+        p.seekTo(expected.current, true);
+        lastSeek.current = now;
+      }
+    }, 5000);
     return () => window.clearInterval(id);
   }, []);
 
@@ -157,6 +191,7 @@ function RutubeAir({ slot, offset, muted, onReady }: {
   const expected = useRef(offset);
   const mutedRef = useRef(muted);
   const readyRef = useRef(onReady);
+  const lastSeek = useRef(0);
   const [src] = useState(
     () => `https://rutube.ru/play/embed/${slot.mediaId}/?t=${Math.floor(offset)}&autoStart=true`
   );
@@ -178,16 +213,21 @@ function RutubeAir({ slot, offset, muted, onReady }: {
         command(mutedRef.current ? 'player:mute' : 'player:unMute');
         command('player:setCurrentTime', { time: expected.current });
         command('player:play');
+        lastSeek.current = Date.now();
         readyRef.current();
       }
       if (message.type === 'player:currentTime') {
         const actual = message.data?.time;
-        if (typeof actual === 'number' && Math.abs(actual - expected.current) > 7) {
+        const now = Date.now();
+        if (now - lastSeek.current < RESYNC_COOLDOWN_MS) return;
+        if (typeof actual === 'number' && Math.abs(actual - expected.current) > RESYNC_TOLERANCE_SEC) {
           command('player:setCurrentTime', { time: expected.current });
+          lastSeek.current = now;
         }
       }
       if (message.type === 'player:changeState' && message.data?.state === 'paused') command('player:play');
     };
+    lastSeek.current = Date.now();
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
   }, [command]);
@@ -206,6 +246,7 @@ function VkAir({ slot, offset, muted, onReady, onError }: {
   const mutedRef = useRef(muted);
   const readyRef = useRef(onReady);
   const errorRef = useRef(onError);
+  const lastSeek = useRef(0);
   const [ownerId, videoId] = slot.mediaId.split('_');
   // Freeze the iframe URL for the scheduled item. `offset` advances every
   // second; using it directly in src reloads VK on every clock tick.
@@ -223,24 +264,37 @@ function VkAir({ slot, offset, muted, onReady, onError }: {
     if (!iframe) return;
     let cancelled = false;
     let timer = 0;
+    lastSeek.current = Date.now();
     void loadVkApi().then((VK) => {
       if (cancelled) return;
       const p = VK.VideoPlayer(iframe);
       player.current = p;
       p.on(VK.VideoPlayer.Events.TIMEUPDATE, (state) => {
         if (cancelled || typeof state.time !== 'number') return;
-        if (Math.abs(state.time - expected.current) > 7) p.seek(expected.current);
+        const now = Date.now();
+        if (now - lastSeek.current < RESYNC_COOLDOWN_MS) return;
+        if (Math.abs(state.time - expected.current) > RESYNC_TOLERANCE_SEC) {
+          p.seek(expected.current);
+          lastSeek.current = now;
+        }
       });
       if (mutedRef.current) p.mute(); else p.unmute();
       p.seek(expected.current);
       p.play();
+      lastSeek.current = Date.now();
       readyRef.current();
       timer = window.setInterval(() => {
         try {
-          if (Math.abs(p.getCurrentTime() - expected.current) > 7) p.seek(expected.current);
+          const now = Date.now();
+          if (now - lastSeek.current >= RESYNC_COOLDOWN_MS
+            && Math.abs(p.getCurrentTime() - expected.current) > RESYNC_TOLERANCE_SEC) {
+            p.seek(expected.current);
+            lastSeek.current = now;
+          }
           if (p.getState() !== VK.VideoPlayer.States.PLAYING) p.play();
+          if (!mutedRef.current) p.unmute();
         } catch { /* iframe can be between states */ }
-      }, 4000);
+      }, 5000);
     }).catch(() => errorRef.current());
     return () => {
       cancelled = true;
