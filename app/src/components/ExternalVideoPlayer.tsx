@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FilmVideoSource } from '../data/films';
 
 type VkPlayerState = { time?: number; duration?: number };
@@ -61,9 +61,11 @@ function VkVideoPlayer({ source, label, poster }: {
   label: string;
   poster?: string | null;
 }) {
+  const container = useRef<HTMLDivElement>(null);
   const frame = useRef<HTMLIFrameElement>(null);
   const player = useRef<VkPlayer | null>(null);
   const ending = useRef(false);
+  const pauseAt = useRef<number | null>(null);
   const adActive = useRef(false);
   const soundPrimed = useRef(false);
   const recommendationFixing = useRef(false);
@@ -99,8 +101,13 @@ function VkVideoPlayer({ source, label, poster }: {
         if (start > 0 && p.getState() === factory.States.PLAYING) p.seek(start);
         setMode('playing');
       });
-      p.on(e.RESUMED, () => setMode('playing'));
-      p.on(e.PAUSED, () => setMode(ending.current ? 'ended' : 'paused'));
+      p.on(e.RESUMED, () => {
+        if (pauseAt.current === null) setMode('playing');
+      });
+      p.on(e.PAUSED, () => {
+        if (pauseAt.current === null) pauseAt.current = p.getCurrentTime();
+        setMode(ending.current ? 'ended' : 'paused');
+      });
       p.on(e.ENDED, () => {
         ending.current = true;
         setMode('ended');
@@ -120,7 +127,7 @@ function VkVideoPlayer({ source, label, poster }: {
         setMode('loading');
       });
       p.on(e.RECOMMENDATIONS_LOADED, () => {
-        if (recommendationFixing.current) return;
+        if (pauseAt.current !== null || recommendationFixing.current) return;
         const state = p.getState();
         if (state === factory.States.ENDED) {
           setMode('ended');
@@ -154,24 +161,72 @@ function VkVideoPlayer({ source, label, poster }: {
     };
   }, [endAt, start]);
 
-  const resume = () => {
+  const resume = useCallback(() => {
     ending.current = false;
     const p = player.current;
     if (p) {
-      p.seek(Math.max(start, p.getCurrentTime() + 0.1));
+      const target = pauseAt.current ?? p.getCurrentTime();
+      pauseAt.current = null;
+      p.seek(Math.max(start, target));
+      p.setVolume(1);
+      p.unmute();
       p.play();
     }
-    setMode('loading');
-  };
+    setMode('playing');
+  }, [start]);
   const replay = () => {
     ending.current = false;
+    pauseAt.current = null;
     player.current?.seek(start);
+    player.current?.setVolume(1);
+    player.current?.unmute();
     player.current?.play();
     setMode('loading');
   };
 
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target;
+      if (target instanceof HTMLElement && target.closest('input, textarea, select, [contenteditable="true"]')) return;
+      const p = player.current;
+      if (!p) return;
+
+      if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
+        event.preventDefault();
+        const delta = event.code === 'ArrowLeft' ? -10 : 10;
+        const current = pauseAt.current ?? p.getCurrentTime();
+        const next = Math.min(endAt ?? source.duration, Math.max(start, current + delta));
+        if (pauseAt.current !== null) pauseAt.current = next;
+        else p.seek(next);
+        return;
+      }
+      if (event.code === 'Space') {
+        event.preventDefault();
+        if (pauseAt.current === null) {
+          pauseAt.current = p.getCurrentTime();
+          p.mute();
+          setMode('paused');
+        } else {
+          resume();
+        }
+        return;
+      }
+      if (event.key.toLowerCase() === 'm') {
+        event.preventDefault();
+        if (p.isMuted()) p.unmute(); else p.mute();
+        return;
+      }
+      if (event.key.toLowerCase() === 'f') {
+        event.preventDefault();
+        void container.current?.requestFullscreen();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [endAt, resume, source.duration, start]);
+
   return (
-    <div className="vplayer">
+    <div className="vplayer" ref={container}>
       <div className="vplayer__mount">
         <iframe
           ref={frame}
@@ -184,8 +239,11 @@ function VkVideoPlayer({ source, label, poster }: {
       </div>
       <div
         className="vplayer__contentShield"
-        aria-hidden="true"
-        style={{ position: 'absolute', zIndex: 2, inset: '0 0 64px', background: 'transparent' }}
+        role="application"
+        tabIndex={0}
+        aria-label="Плеер: стрелки влево и вправо — перемотка, пробел — пауза, M — звук, F — полный экран"
+        onClick={(event) => event.currentTarget.focus()}
+        style={{ position: 'absolute', zIndex: 2, inset: 0, background: 'transparent' }}
       />
       {mode !== 'playing' ? (
         <div

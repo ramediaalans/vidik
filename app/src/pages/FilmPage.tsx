@@ -96,6 +96,12 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
           </div>
         )}
 
+        {on ? (
+          <p className="muted" style={{ fontSize: 13, marginTop: 12 }}>
+            Управление: ←/→ — перемотка на 10 секунд · пробел — пауза · M — звук · F — полный экран.
+          </p>
+        ) : null}
+
         {film.description ? (
           <div className="film-text">
             <div className="mono" style={{ marginBottom: 8 }}>О чём это</div>
