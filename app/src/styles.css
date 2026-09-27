@@ -2653,10 +2653,15 @@ body.webamp-hidden #webamp {
   flex-wrap: wrap;
   gap: 6px;
   justify-content: center;
-  opacity: .85;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
 }
-.vplayer:hover .vplayer__bar,
-.vplayer__bar:focus-within { opacity: 1; }
+.vplayer__bar.is-on,
+.vplayer__bar:focus-within {
+  opacity: .92;
+  pointer-events: auto;
+}
 .vplayer__barBtn {
   min-width: 52px;
   padding: 9px 11px;
