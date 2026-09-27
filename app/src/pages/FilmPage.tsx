@@ -85,6 +85,7 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
             key={`${film.source.provider}-${film.source.id}`}
             source={film.source}
             label={`Плеер: ${film.title}`}
+            poster={film.backdrop ?? film.poster}
           />
         ) : (
           <div className="vplayer vplayer--off">
@@ -102,9 +103,6 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
           </div>
         ) : null}
 
-        <p className="muted" style={{ fontSize: 13, marginTop: 24 }}>
-          Источник: {film.source.provider === 'vk' ? 'VK Видео' : film.source.provider === 'rutube' ? 'RuTube' : 'YouTube'} · {film.source.title}. Файлы не хранятся на наших серверах.
-        </p>
       </section>
 
       {neighbours.length ? (

@@ -13,6 +13,8 @@ export interface FilmVideoSource {
   id: string;
   title: string;
   duration: number;
+  start?: number;
+  endTrim?: number;
 }
 
 export interface Film {
@@ -1272,7 +1274,9 @@ export const disney: Film[] = [
       "provider": "vk",
       "id": "-227283941_456240188",
       "title": "Приключения мишек Гамми — все серии (1985–1991)",
-      "duration": 85900
+      "duration": 85900,
+      "start": 13,
+      "endTrim": 13
     },
     "title": "Приключения мишек Гамми",
     "titleOrig": "Adventures of the Gummi Bears",

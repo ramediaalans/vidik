@@ -1,9 +1,53 @@
+import { useEffect, useRef, useState } from 'react';
 import type { FilmVideoSource } from '../data/films';
+
+type VkPlayerState = { time?: number; duration?: number };
+type VkPlayer = {
+  play(): void;
+  pause(): void;
+  mute(): void;
+  unmute(): void;
+  seek(seconds: number): void;
+  getState(): string;
+  getVolume(): number;
+  setVolume(volume: number): void;
+  isMuted(): boolean;
+  on(event: string, listener: (state: VkPlayerState) => void): void;
+  destroy(): void;
+};
+type VkFactory = {
+  (iframe: HTMLIFrameElement): VkPlayer;
+  Events: Record<string, string>;
+  States: Record<string, string>;
+};
+type VkWindow = Window & { VK?: { VideoPlayer?: VkFactory } };
+
+type PlayerMode = 'loading' | 'playing' | 'paused' | 'ended' | 'error';
+
+let vkApiPromise: Promise<VkFactory> | null = null;
+
+function loadVkApi(): Promise<VkFactory> {
+  if (vkApiPromise) return vkApiPromise;
+  vkApiPromise = new Promise((resolve, reject) => {
+    const w = window as VkWindow;
+    if (w.VK?.VideoPlayer) return resolve(w.VK.VideoPlayer);
+    const script = document.createElement('script');
+    script.src = 'https://vk.com/js/api/videoplayer.js';
+    script.async = true;
+    script.onload = () => w.VK?.VideoPlayer
+      ? resolve(w.VK.VideoPlayer)
+      : reject(new Error('VK Video API недоступен'));
+    script.onerror = () => reject(new Error('Не удалось загрузить VK Video API'));
+    document.head.appendChild(script);
+  });
+  return vkApiPromise;
+}
 
 function embedUrl(source: FilmVideoSource): string {
   if (source.provider === 'vk') {
     const [ownerId, videoId] = source.id.split('_');
-    return `https://vk.com/video_ext.php?oid=${ownerId}&id=${videoId}&hd=2&autoplay=1`;
+    const start = Math.max(0, Math.floor(source.start ?? 0));
+    return `https://vk.com/video_ext.php?oid=${ownerId}&id=${videoId}&hd=2&autoplay=1&js_api=1&t=${start}`;
   }
   if (source.provider === 'rutube') {
     return `https://rutube.ru/play/embed/${source.id}/?autoStart=true`;
@@ -11,7 +55,139 @@ function embedUrl(source: FilmVideoSource): string {
   return `https://www.youtube-nocookie.com/embed/${source.id}?autoplay=1&rel=0&cc_load_policy=0`;
 }
 
-export function ExternalVideoPlayer({ source, label }: { source: FilmVideoSource; label: string }) {
+function VkVideoPlayer({ source, label, poster }: {
+  source: FilmVideoSource;
+  label: string;
+  poster?: string | null;
+}) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  const player = useRef<VkPlayer | null>(null);
+  const ending = useRef(false);
+  const savedSound = useRef({ muted: false, volume: 1 });
+  const [mode, setMode] = useState<PlayerMode>('loading');
+  const start = Math.max(0, source.start ?? 0);
+  const endAt = source.endTrim ? Math.max(start, source.duration - source.endTrim) : null;
+
+  useEffect(() => {
+    const iframe = frame.current;
+    if (!iframe) return;
+    let cancelled = false;
+    let instance: VkPlayer | null = null;
+
+    void loadVkApi().then((factory) => {
+      if (cancelled) return;
+      const p = factory(iframe);
+      instance = p;
+      player.current = p;
+      const e = factory.Events;
+
+      p.on(e.INITED, () => {
+        if (start > 0) p.seek(start);
+      });
+      p.on(e.STARTED, () => {
+        ending.current = false;
+        if (start > 0 && p.getState() === factory.States.PLAYING) p.seek(start);
+        setMode('playing');
+      });
+      p.on(e.RESUMED, () => setMode('playing'));
+      p.on(e.PAUSED, () => setMode(ending.current ? 'ended' : 'paused'));
+      p.on(e.ENDED, () => {
+        ending.current = true;
+        setMode('ended');
+      });
+      p.on(e.ERROR, () => setMode('error'));
+      p.on(e.ADSTARTED, () => {
+        savedSound.current = { muted: p.isMuted(), volume: p.getVolume() };
+        p.mute();
+        setMode('loading');
+      });
+      p.on(e.ADCOMPLETED, () => {
+        if (!savedSound.current.muted) p.unmute();
+        p.setVolume(savedSound.current.volume);
+        if (start > 0) p.seek(start);
+        setMode('loading');
+      });
+      p.on(e.RECOMMENDATIONS_LOADED, () => {
+        const state = p.getState();
+        if (state === factory.States.ENDED) setMode('ended');
+        else if (state === factory.States.PAUSED) setMode('paused');
+      });
+      p.on(e.TIMEUPDATE, (state) => {
+        if (typeof state.time !== 'number') return;
+        if (start > 0 && state.time < start - 1) {
+          p.seek(start);
+          return;
+        }
+        if (endAt !== null && state.time >= endAt) {
+          ending.current = true;
+          p.pause();
+          setMode('ended');
+        }
+      });
+    }).catch(() => setMode('error'));
+
+    return () => {
+      cancelled = true;
+      try { instance?.destroy(); } catch { /* iframe already gone */ }
+      player.current = null;
+    };
+  }, [endAt, start]);
+
+  const resume = () => {
+    ending.current = false;
+    setMode('loading');
+    player.current?.play();
+  };
+  const replay = () => {
+    ending.current = false;
+    player.current?.seek(start);
+    player.current?.play();
+    setMode('loading');
+  };
+
+  return (
+    <div className="vplayer">
+      <div className="vplayer__mount">
+        <iframe
+          ref={frame}
+          src={embedUrl(source)}
+          title={label}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      </div>
+      {mode !== 'playing' ? (
+        <div
+          className={`vplayer__privacy vplayer__privacy--${mode}`}
+          style={poster ? { backgroundImage: `linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.82)), url(${poster})` } : undefined}
+        >
+          {mode === 'paused' ? (
+            <button className="btn btn--primary" onClick={resume}>Продолжить ▶</button>
+          ) : mode === 'ended' ? (
+            <>
+              <span className="mono">Просмотр завершён</span>
+              <button className="btn btn--primary" onClick={replay}>Смотреть сначала ↻</button>
+            </>
+          ) : mode === 'error' ? (
+            <span className="mono">Плеер не отвечает. Попробуйте обновить страницу.</span>
+          ) : (
+            <span className="mono">Подготавливаем кассету…</span>
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+export function ExternalVideoPlayer({ source, label, poster }: {
+  source: FilmVideoSource;
+  label: string;
+  poster?: string | null;
+}) {
+  if (source.provider === 'vk') {
+    return <VkVideoPlayer source={source} label={label} poster={poster} />;
+  }
   return (
     <div className="vplayer">
       <div className="vplayer__mount">

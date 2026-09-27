@@ -144,6 +144,8 @@ export interface FilmVideoSource {
   id: string;
   title: string;
   duration: number;
+  start?: number;
+  endTrim?: number;
 }
 
 export interface Film {
