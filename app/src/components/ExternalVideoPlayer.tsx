@@ -102,8 +102,14 @@ function VkVideoPlayer({ source, label, poster }: {
     const id = window.setInterval(() => {
       try { player.current?.mute(); } catch { /* рекламный плеер пересоздаётся */ }
     }, 400);
-    return () => window.clearInterval(id);
-  }, [adBlocked]);
+    // Защита от зависания заглушки: реклама не длится дольше полутора минут.
+    const watchdog = window.setTimeout(() => {
+      adActive.current = false;
+      setAdBlocked(false);
+      applySound();
+    }, 90_000);
+    return () => { window.clearInterval(id); window.clearTimeout(watchdog); };
+  }, [adBlocked, applySound]);
 
   useEffect(() => {
     const iframe = frame.current;
@@ -185,10 +191,11 @@ function VkVideoPlayer({ source, label, poster }: {
       });
       p.on(e.TIMEUPDATE, (state) => {
         if (typeof state.time !== 'number') return;
-        // Рекламный ролик отличается длительностью: это страховка, если AD-события не пришли.
+        // Страховка, если AD-события не пришли: рекламный ролик короткий (до 3 минут).
+        // Длительность самого VK-ролика сравнивать нельзя: серии часто вырезаны из сборников.
         const duration = state.duration;
-        const looksLikeAd = typeof duration === 'number' && duration > 0
-          && Math.abs(duration - source.duration) > Math.max(60, source.duration * 0.15);
+        const looksLikeAd = typeof duration === 'number' && duration > 0 && duration <= 180
+          && source.duration > 300;
         if (looksLikeAd) { beginAd(); return; }
         if (adActive.current) endAd();
         if (start > 0 && state.time < start - 1) {
@@ -346,7 +353,7 @@ function VkVideoPlayer({ source, label, poster }: {
           style={poster ? { backgroundImage: `linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.82)), url(${poster})` } : undefined}
         >
           {adBlocked ? (
-            <span className="mono">Реклама VK — переждём без звука…</span>
+            <span className="mono">Подготавливаем кассету…</span>
           ) : mode === 'paused' ? (
             <button className="btn btn--primary" onClick={resume}>Продолжить ▶</button>
           ) : mode === 'ended' ? (
