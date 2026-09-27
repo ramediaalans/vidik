@@ -117,6 +117,18 @@ try {
 
   await cdp.send('Page.enable');
   await cdp.send('Runtime.enable');
+  // --vw 390 --vh 844: телефонный вьюпорт с тачем (окно headless само по себе
+  // не даёт ни pointer: coarse, ни узкой ширины).
+  if (args.vw) {
+    await cdp.send('Emulation.setDeviceMetricsOverride', {
+      width: Number(args.vw),
+      height: Number(args.vh ?? 844),
+      deviceScaleFactor: Number(args.dpr ?? 2),
+      mobile: true
+    });
+    await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 }).catch(() => {});
+    await cdp.send('Emulation.setEmitTouchEventsForMouse', { enabled: true, configuration: 'mobile' }).catch(() => {});
+  }
   // headless Chrome reports the page as unfocused, which makes some apps ignore keys
   await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: true }).catch(() => {});
   await cdp.send('Page.bringToFront').catch(() => {});

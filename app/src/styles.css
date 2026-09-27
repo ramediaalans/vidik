@@ -849,6 +849,9 @@ button {
 
 .modal__win {
   width: min(1100px, 100%);
+  /* без min-width: 0 флекс-элемент растёт под самый широкий блок внутри */
+  min-width: 0;
+  max-width: 100%;
   max-height: 90vh;
   overflow: auto;
   background: var(--panel);
@@ -873,6 +876,26 @@ button {
   padding: var(--sp-5);
   display: grid;
   gap: var(--sp-5);
+}
+
+/* На телефоне каждые 24px отступа — это минус полтора сантиметра картинки. */
+@media (max-width: 560px) {
+  .modal {
+    padding: var(--sp-2);
+  }
+
+  .modal__bar {
+    padding: 10px var(--sp-3);
+  }
+
+  .modal__body {
+    padding: var(--sp-3);
+    gap: var(--sp-4);
+  }
+
+  .modal__body .crt {
+    padding: 10px;
+  }
 }
 
 .embed {
@@ -1336,6 +1359,21 @@ body.emu-active .header {
   aspect-ratio: var(--emu-ar, 4 / 3);
 }
 
+/* Телефон боком без полного экрана: картинка шириной во всю модалку при 4:3
+   получалась выше самого экрана, и игру приходилось прокручивать. */
+@media (pointer: coarse) and (orientation: landscape) {
+  .emu__frame {
+    display: grid;
+    place-items: center;
+  }
+
+  .emu__screen {
+    height: 62vh;
+    width: auto;
+    max-width: 100%;
+  }
+}
+
 /* Экран эмулятора: по умолчанию без VHS-текстур и blend-mode —
    полноэкранное смешивание поверх 60 fps съедает кадры и рвёт звук. */
 .emu__screen::before,
@@ -1507,10 +1545,32 @@ body.emu-active .header {
 @media (pointer: coarse), (max-width: 860px) {
   .emu__pad {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--sp-3);
     margin-top: var(--sp-4);
+  }
+
+  /* Кнопки тянем от ширины экрана: фиксированные 56px давали пульту
+     минимальную ширину около 430px и распирали модалку шире телефона. */
+  .emu__dpad {
+    grid-template-columns: repeat(3, clamp(44px, 14vw, 56px));
+  }
+
+  .emu__actions {
+    grid-template-columns: repeat(2, clamp(44px, 14vw, 56px));
+  }
+
+  .emu__padBtn {
+    min-height: clamp(44px, 13vw, 52px);
+  }
+
+  /* SELECT/START — отдельным рядом под крестовиной. */
+  .emu__padSide--center {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
   }
 
   .emu__keys {
@@ -1585,6 +1645,8 @@ body.emu-active .header {
 }
 
 :is(.emu:fullscreen, .emu--fs) .emu__padSide--center {
+  order: 0;
+  flex-basis: auto;
   align-self: flex-end;
   opacity: 0.8;
 }
