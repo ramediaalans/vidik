@@ -3,7 +3,19 @@ import { Nostalgist } from 'nostalgist';
 import { asset } from '../media/asset';
 import { getRefreshRate, installFramePacer } from '../media/framePacer';
 import { claimAudio } from '../media/playerContext';
-import { getSave, putSave } from '../media/saves';
+import {
+  MANUAL_SLOTS,
+  getSlot,
+  listSlots,
+  migrateLegacy,
+  putSlot,
+  slotKey,
+  type SaveRecord,
+  type SaveSlot
+} from '../media/saves';
+import { startGamepadLoop, type PadButton } from '../media/gamepad';
+import { SaveShelf } from './SaveShelf';
+import { GamepadSetup } from './GamepadSetup';
 import type { Rom, RomCore } from '../data/roms';
 
 type Status = 'loading' | 'running' | 'paused' | 'error';
@@ -15,6 +27,29 @@ const CORE_FPS: Record<RomCore, number> = {
   fceumm: 60.0988, // NES / Dendy, NTSC
   genesis_plus_gx: 59.9227, // Mega Drive, NTSC
   snes9x: 60.0988 // Super Nintendo, NTSC
+};
+
+// Сколько кнопок рисовать на сенсорном пульте. У Dendy их две, у Mega Drive три,
+// у SNES четыре плюс курки. Лишние кнопки на телефоне только мешают.
+const CORE_ACTIONS: Record<RomCore, PadButton[]> = {
+  fceumm: ['b', 'a'],
+  genesis_plus_gx: ['b', 'a', 'y'],
+  snes9x: ['b', 'a', 'y', 'x', 'l', 'r']
+};
+
+const ACTION_LABEL: Record<PadButton, string> = {
+  up: '↑',
+  down: '↓',
+  left: '←',
+  right: '→',
+  a: 'A',
+  b: 'B',
+  x: 'X',
+  y: 'C',
+  l: 'L',
+  r: 'R',
+  start: 'START',
+  select: 'SEL'
 };
 
 // RetroArch в браузере считает свой GL-viewport ровно один раз — на старте ядра —
@@ -80,28 +115,53 @@ const INPUT_CONFIG = {
   input_player2_select: 'p'
 };
 
-const PAD: Array<{ button: string; label: string; area: string }> = [
-  { button: 'up', label: '↑', area: 'up' },
-  { button: 'left', label: '←', area: 'left' },
-  { button: 'right', label: '→', area: 'right' },
-  { button: 'down', label: '↓', area: 'down' },
-  { button: 'b', label: 'B', area: 'b' },
-  { button: 'a', label: 'A', area: 'a' },
-  { button: 'select', label: 'SEL', area: 'sel' },
-  { button: 'start', label: 'START', area: 'start' }
-];
+const AUTOSAVE_EVERY_MS = 30_000;
+
+// Миниатюра для ячейки памяти. Скриншот ядра — это PNG во всю высоту буфера
+// (до половины мегабайта), а в списке он виден карточкой 160 пикселей шириной.
+async function makeThumb(source: Blob): Promise<Blob | undefined> {
+  try {
+    const bitmap = await createImageBitmap(source);
+    const width = 192;
+    const height = Math.max(1, Math.round((bitmap.height / bitmap.width) * width));
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext('2d');
+    if (!context) return undefined;
+    context.drawImage(bitmap, 0, 0, width, height);
+    bitmap.close();
+    return await new Promise<Blob | undefined>((resolve) => {
+      canvas.toBlob((blob) => resolve(blob ?? undefined), 'image/webp', 0.7);
+    });
+  } catch {
+    return undefined;
+  }
+}
 
 export function Emulator({ rom }: { rom: Rom }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const frameRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const screenRef = useRef<HTMLDivElement>(null);
   const emuRef = useRef<Nostalgist | null>(null);
+  const playedRef = useRef(0);
+  const sessionStartRef = useRef(0);
   const [status, setStatus] = useState<Status>('loading');
   const [note, setNote] = useState('Вставляем картридж…');
-  const [hasSave, setHasSave] = useState(false);
   const [fx, setFx] = useState(false);
   const [displayHz, setDisplayHz] = useState(0);
+  const [fullscreen, setFullscreen] = useState(false);
+  const [softFs, setSoftFs] = useState(false);
+  const [slots, setSlots] = useState<SaveRecord[]>([]);
+  const [resumeOffer, setResumeOffer] = useState<SaveRecord | null>(null);
+  const [pads, setPads] = useState<string[]>([]);
+  const [showPads, setShowPads] = useState(false);
+  const [showMemory, setShowMemory] = useState(false);
   const targetFps = CORE_FPS[rom.core] ?? 60;
+
+  const refreshSlots = useCallback(async () => {
+    setSlots(await listSlots(rom.id));
+  }, [rom.id]);
 
   useEffect(() => {
     let cancelled = false;
@@ -111,6 +171,7 @@ export function Emulator({ rom }: { rom: Rom }) {
       try {
         // Две звуковые дорожки разом — это каша, поэтому кассетник ставим на паузу.
         claimAudio();
+        await migrateLegacy();
         const response = await fetch(asset(rom.file));
         if (!response.ok) throw new Error(`Картридж не найден (${response.status})`);
         const fileContent = await response.blob();
@@ -118,8 +179,9 @@ export function Emulator({ rom }: { rom: Rom }) {
 
         setNote('Греется приставка…');
 
-        // Меряем монитор до запуска ядра: главный цикл эмулятора надо ограничить
-        // с самого первого кадра, иначе на 240 Гц игра стартует вчетверо быстрее.
+        // Родная «батарейка» картриджа: кормим её ядру ещё на старте, чтобы внутригровые
+        // сохранения работали так, как задумывали авторы игры.
+        const battery = await getSlot(rom.id, 'auto');
         const fps = CORE_FPS[rom.core] ?? 60;
         const refreshRate = await getRefreshRate();
         if (cancelled) return;
@@ -132,6 +194,7 @@ export function Emulator({ rom }: { rom: Rom }) {
         const nostalgist = await Nostalgist.launch({
           core: rom.core,
           rom: { fileName: rom.file.split('/').pop() ?? 'game.bin', fileContent },
+          ...(battery?.sram ? { sram: battery.sram } : {}),
           element: canvasRef.current ?? undefined,
           // Фиксированный буфер 4:3 на всю сессию — см. bufferSize().
           size: bufferSize(),
@@ -175,9 +238,16 @@ export function Emulator({ rom }: { rom: Rom }) {
         canvas.focus();
         // хук для визуального QA (tools/probe.mjs)
         (window as unknown as { __vidikEmu?: Nostalgist }).__vidikEmu = nostalgist;
+        sessionStartRef.current = Date.now();
         setStatus('running');
         setNote('Поехали.');
-        setHasSave(Boolean(await getSave(rom.id)));
+
+        const saved = await listSlots(rom.id);
+        if (cancelled) return;
+        setSlots(saved);
+        // Самое свежее состояние предлагаем одной кнопкой, чтобы человек не искал ячейку.
+        const freshest = saved.slice().sort((a, b) => b.savedAt - a.savedAt)[0];
+        if (freshest) setResumeOffer(freshest);
       } catch (error) {
         if (cancelled) return;
         setStatus('error');
@@ -210,43 +280,175 @@ export function Emulator({ rom }: { rom: Rom }) {
     if (!emu) return;
     if (status === 'running') {
       emu.pause();
+      playedRef.current += Date.now() - sessionStartRef.current;
       setStatus('paused');
     } else if (status === 'paused') {
       emu.resume();
+      sessionStartRef.current = Date.now();
       setStatus('running');
     }
   }, [status]);
 
-  const save = useCallback(async () => {
-    const emu = emuRef.current;
-    if (!emu) return;
-    const { state } = await emu.saveState();
-    await putSave(rom.id, state);
-    setHasSave(true);
-    setNote('Сохранили. Можно идти ужинать.');
-  }, [rom.id]);
+  const playedMs = useCallback(() => {
+    const running = status === 'running' && sessionStartRef.current
+      ? Date.now() - sessionStartRef.current
+      : 0;
+    return playedRef.current + running;
+  }, [status]);
 
-  const load = useCallback(async () => {
-    const emu = emuRef.current;
-    if (!emu) return;
-    const state = await getSave(rom.id);
-    if (!state) return;
-    await emu.loadState(state);
-    setNote('Загрузили сохранёнку.');
-  }, [rom.id]);
+  // Собираем сразу всё: состояние, батарейку и картинку экрана.
+  const writeSlot = useCallback(
+    async (slot: SaveSlot, quiet = false) => {
+      const emu = emuRef.current;
+      if (!emu) return;
+      try {
+        const { state, thumbnail } = await emu.saveState();
+        let sram: Blob | undefined;
+        try {
+          const battery = await emu.saveSRAM();
+          if (battery && battery.size > 0) sram = battery;
+        } catch {
+          // ядро без батарейки — нормально
+        }
+        let thumb = thumbnail ? await makeThumb(thumbnail) : undefined;
+        if (!thumb) {
+          try {
+            const shot = await emu.screenshot();
+            thumb = shot ? await makeThumb(shot) : undefined;
+          } catch {
+            // скриншот не обязателен
+          }
+        }
+        await putSlot({
+          key: slotKey(rom.id, slot),
+          romId: rom.id,
+          slot,
+          state,
+          sram,
+          thumb,
+          savedAt: Date.now(),
+          playedMs: playedMs()
+        });
+        await refreshSlots();
+        if (!quiet) setNote('Сохранили. Можно идти ужинать.');
+      } catch {
+        if (!quiet) setNote('Не получилось сохранить — попробуй ещё раз.');
+      }
+    },
+    [playedMs, refreshSlots, rom.id]
+  );
+
+  const readSlot = useCallback(
+    async (slot: SaveSlot) => {
+      const emu = emuRef.current;
+      if (!emu) return;
+      const record = await getSlot(rom.id, slot);
+      if (!record) return;
+      await emu.loadState(record.state);
+      playedRef.current = record.playedMs;
+      sessionStartRef.current = Date.now();
+      setResumeOffer(null);
+      setNote('Загрузили сохранёнку.');
+    },
+    [rom.id]
+  );
+
+  // Автосохранение: раз в полминуты и обязательно когда страницу сворачивают
+  // или закрывают: именно там теряется прогресс чаще всего.
+  useEffect(() => {
+    if (status !== 'running') return;
+    const timer = window.setInterval(() => void writeSlot('auto', true), AUTOSAVE_EVERY_MS);
+    const onHide = () => {
+      if (document.visibilityState === 'hidden') void writeSlot('auto', true);
+    };
+    document.addEventListener('visibilitychange', onHide);
+    window.addEventListener('pagehide', onHide);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener('visibilitychange', onHide);
+      window.removeEventListener('pagehide', onHide);
+      void writeSlot('auto', true);
+    };
+  }, [status, writeSlot]);
+
+  // Геймпады. Браузер показывает их только после первого нажатия кнопки —
+  // поэтому цикл живёт всю сессию и сам замечает подключение.
+  useEffect(() => {
+    if (status !== 'running' && status !== 'paused') return;
+    return startGamepadLoop({
+      onDown: (button, player) => emuRef.current?.pressDown({ button, player }),
+      onUp: (button, player) => emuRef.current?.pressUp({ button, player }),
+      onPadsChange: setPads
+    });
+  }, [status]);
 
   const restart = useCallback(() => {
     emuRef.current?.restart();
+    playedRef.current = 0;
+    sessionStartRef.current = Date.now();
+    setResumeOffer(null);
     setStatus('running');
     setNote('С начала.');
   }, []);
 
-  const fullscreen = useCallback(() => {
-    const frame = frameRef.current;
-    if (!frame) return;
-    if (document.fullscreenElement) void document.exitFullscreen();
-    else void frame.requestFullscreen?.();
-  }, []);
+  // Полный экран запрашиваем на внешней коробке, а не на рамке с картинкой:
+  // иначе сенсорный пульт остаётся снаружи полноэкранного элемента и физически
+  // не может быть показан — именно из-за этого на телефоне кнопки пропадали.
+  const toggleFullscreen = useCallback(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+      return;
+    }
+    if (softFs) {
+      setSoftFs(false);
+      setFullscreen(false);
+      return;
+    }
+    // iOS Safari не умеет полный экран для обычных блоков: там растягиваемся
+    // своими стилями (.emu--fs) — иначе кнопка просто ничего не делает.
+    const request = root.requestFullscreen?.();
+    if (!request) {
+      setSoftFs(true);
+      setFullscreen(true);
+      return;
+    }
+    request.catch(() => {
+      setSoftFs(true);
+      setFullscreen(true);
+    });
+    void request.then(() => {
+      // На телефоне играть удобно только боком. Android умеет зафиксировать
+      // ориентацию в полном экране, iOS просто проигнорирует — ошибку глотаем.
+      const orientation = screen.orientation as ScreenOrientation & {
+        lock?: (value: string) => Promise<void>;
+      };
+      orientation?.lock?.('landscape').catch(() => {});
+    });
+  }, [softFs]);
+
+  useEffect(() => {
+    const onChange = () => {
+      const native = Boolean(document.fullscreenElement);
+      if (native) setSoftFs(false);
+      setFullscreen(native || (!native && softFs));
+    };
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  }, [softFs]);
+
+  // В своём «полном экране» Escape браузер не обрабатывает сам.
+  useEffect(() => {
+    if (!softFs) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setSoftFs(false);
+      setFullscreen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [softFs]);
 
   // Геометрия канваса целиком на CSS. Две вещи, за которыми всё же надо следить:
   // 1) emscripten прописывает канвасу inline-размеры и леттербокс-паддинги,
@@ -257,9 +459,9 @@ export function Emulator({ rom }: { rom: Rom }) {
   //    телевизоре картинка сплющивается и съезжает.
   useEffect(() => {
     if (status !== 'running' && status !== 'paused') return;
-    const screen = screenRef.current;
+    const screenBox = screenRef.current;
     const canvas = canvasRef.current;
-    if (!screen || !canvas) return;
+    if (!screenBox || !canvas) return;
 
     /** Реальный GL-viewport ядра — только для диагностики. */
     const viewportOf = (el: HTMLCanvasElement): [number, number] | null => {
@@ -295,8 +497,8 @@ export function Emulator({ rom }: { rom: Rom }) {
     const syncAspect = () => {
       if (!canvas.width || !canvas.height) return;
       const ar = (canvas.width / canvas.height).toFixed(4);
-      if (screen.style.getPropertyValue('--emu-ar') !== ar) {
-        screen.style.setProperty('--emu-ar', ar);
+      if (screenBox.style.getPropertyValue('--emu-ar') !== ar) {
+        screenBox.style.setProperty('--emu-ar', ar);
       }
     };
 
@@ -321,7 +523,7 @@ export function Emulator({ rom }: { rom: Rom }) {
 
     // Ручка для диагностики из консоли браузера.
     (window as unknown as { __vidikEmuInfo?: () => unknown }).__vidikEmuInfo = () => {
-      const rect = screen.getBoundingClientRect();
+      const rect = screenBox.getBoundingClientRect();
       return {
         buffer: `${canvas.width}x${canvas.height}`,
         cssBox: `${Math.round(rect.width)}x${Math.round(rect.height)}`,
@@ -339,16 +541,36 @@ export function Emulator({ rom }: { rom: Rom }) {
     };
   }, [status]);
 
-  const hold = (button: string, down: boolean) => {
+  const hold = (button: PadButton, down: boolean) => {
     const emu = emuRef.current;
     if (!emu) return;
     if (down) emu.pressDown({ button });
     else emu.pressUp({ button });
   };
 
+  const padButton = (button: PadButton, extraClass = '') => (
+    <button
+      key={button}
+      className={`emu__padBtn emu__padBtn--${button}${extraClass ? ` ${extraClass}` : ''}`}
+      onPointerDown={(e) => {
+        e.preventDefault();
+        hold(button, true);
+      }}
+      onPointerUp={() => hold(button, false)}
+      onPointerCancel={() => hold(button, false)}
+      onPointerLeave={() => hold(button, false)}
+      onContextMenu={(e) => e.preventDefault()}
+      tabIndex={-1}
+    >
+      {ACTION_LABEL[button]}
+    </button>
+  );
+
+  const actions = CORE_ACTIONS[rom.core] ?? ['b', 'a'];
+
   return (
-    <div className="emu">
-      <div className="emu__frame crt" ref={frameRef}>
+    <div className={`emu${fullscreen ? ' emu--fs' : ''}`} ref={rootRef}>
+      <div className="emu__frame crt">
         <div
           ref={screenRef}
           className={`crt__screen scanlines emu__screen${fx ? ' emu__screen--fx' : ''}`}
@@ -362,40 +584,71 @@ export function Emulator({ rom }: { rom: Rom }) {
         </div>
       </div>
 
-      <div className="emu__pad" aria-hidden="true">
-        {PAD.map((key) => (
-          <button
-            key={key.button}
-            className={`emu__padBtn emu__padBtn--${key.area}`}
-            onPointerDown={(e) => {
-              e.preventDefault();
-              hold(key.button, true);
-            }}
-            onPointerUp={() => hold(key.button, false)}
-            onPointerLeave={() => hold(key.button, false)}
-            onContextMenu={(e) => e.preventDefault()}
-            tabIndex={-1}
-          >
-            {key.label}
+      {resumeOffer && status === 'running' ? (
+        <div className="emu__resume">
+          <span className="mono">
+            Есть сохранёнка от{' '}
+            {new Date(resumeOffer.savedAt).toLocaleString('ru-RU', {
+              day: 'numeric',
+              month: 'long',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </span>
+          <button className="btn btn--sm btn--primary" onClick={() => void readSlot(resumeOffer.slot)}>
+            Продолжить
           </button>
-        ))}
+          <button className="btn btn--sm" onClick={() => setResumeOffer(null)}>
+            С начала
+          </button>
+        </div>
+      ) : null}
+
+      {/* Сенсорный пульт. В полном экране раскладывается по краям поверх картинки. */}
+      <div className="emu__pad">
+        <div className="emu__padSide emu__padSide--left">
+          <div className="emu__dpad">
+            {padButton('up')}
+            {padButton('left')}
+            {padButton('right')}
+            {padButton('down')}
+          </div>
+        </div>
+
+        <div className="emu__padSide emu__padSide--center">
+          {padButton('select')}
+          {padButton('start')}
+        </div>
+
+        <div className="emu__padSide emu__padSide--right">
+          <div className="emu__actions">{actions.map((button) => padButton(button))}</div>
+        </div>
       </div>
 
-      <div className="row" style={{ marginTop: 20 }}>
+      {fullscreen ? (
+        <button className="emu__fsExit pixel" onClick={toggleFullscreen}>
+          ✕ Выйти
+        </button>
+      ) : null}
+
+      <div className="row emu__controls" style={{ marginTop: 20 }}>
         <button className="btn btn--primary" onClick={toggle} disabled={status === 'loading' || status === 'error'}>
           {status === 'paused' ? 'Продолжить' : 'Пауза'}
         </button>
-        <button className="btn" onClick={() => void save()} disabled={status === 'loading' || status === 'error'}>
-          Сохранить
+        <button className="btn" onClick={() => void writeSlot('s1')} disabled={status === 'loading' || status === 'error'}>
+          Быстрое сохранение
         </button>
-        <button className="btn" onClick={() => void load()} disabled={!hasSave}>
-          Загрузить
+        <button className="btn" onClick={() => setShowMemory(true)} disabled={status === 'error'}>
+          Память{slots.length ? ` · ${slots.length}` : ''}
         </button>
         <button className="btn" onClick={restart} disabled={status === 'loading' || status === 'error'}>
           Сброс
         </button>
-        <button className="btn" data-qa="fullscreen" onClick={fullscreen} disabled={status === 'error'}>
+        <button className="btn" data-qa="fullscreen" onClick={toggleFullscreen} disabled={status === 'error'}>
           На весь экран
+        </button>
+        <button className="btn" onClick={() => setShowPads(true)}>
+          Геймпад{pads.length ? ` · ${pads.length}` : ': нет'}
         </button>
         <button
           className={`btn${fx ? ' btn--primary' : ''}`}
@@ -407,11 +660,12 @@ export function Emulator({ rom }: { rom: Rom }) {
       </div>
 
       {status === 'running' || status === 'paused' ? (
-        <p className="mono" style={{ marginTop: 12, color: 'var(--amber)' }}>
+        <p className="mono emu__note" style={{ marginTop: 12, color: 'var(--amber)' }}>
           {note}
           {displayHz > targetFps * 1.05
             ? ` · Экран ${Math.round(displayHz)} Гц — держим ${Math.round(targetFps)} кадров в секунду.`
             : ''}
+          {pads.length ? ` · Геймпадов подключено: ${pads.length}` : ''}
         </p>
       ) : null}
 
@@ -441,6 +695,20 @@ export function Emulator({ rom }: { rom: Rom }) {
           </div>
         ) : null}
       </div>
+
+      {showMemory ? (
+        <SaveShelf
+          rom={rom}
+          slots={slots}
+          manualSlots={MANUAL_SLOTS}
+          onClose={() => setShowMemory(false)}
+          onSave={(slot) => void writeSlot(slot)}
+          onLoad={(slot) => void readSlot(slot)}
+          onChanged={() => void refreshSlots()}
+        />
+      ) : null}
+
+      {showPads ? <GamepadSetup pads={pads} onClose={() => setShowPads(false)} /> : null}
     </div>
   );
 }
