@@ -99,13 +99,16 @@ async function convert(rec, group) {
       .sort((a, b) => a.season - b.season);
   }
 
-  const source = sourceOverrides[slug];
-  if (!source) throw new Error(`Нет проверенного источника для ${rec.title} (${slug})`);
+  const override = sourceOverrides[slug];
+  if (!override) throw new Error(`Нет проверенного источника для ${rec.title} (${slug})`);
+  // episodes — плейлист серий (для сериалов, разрезанных на отдельные ролики).
+  const { episodes, ...source } = override;
 
   return {
     slug,
     kpId: rec.kpId,
     source,
+    episodes: episodes?.length ? episodes : undefined,
     title: clean(rec.title),
     titleOrig: clean(rec.titleOrig) || null,
     year: rec.year,
@@ -152,6 +155,7 @@ export interface Film {
   slug: string;
   kpId: number;
   source: FilmVideoSource;
+  episodes?: FilmVideoSource[];
   title: string;
   titleOrig: string | null;
   year: number;

@@ -2,49 +2,44 @@
 
 Сгенерировано `tools/report/inventory.mjs` — руками не править.
 
-Всего записей: **302** · видеосалон: 38 · Дисней-клуб: 11 · ТВ: 253.
-По источникам: vk — 117 · youtube — 81 · rutube — 103 · generated — 1.
+Всего записей: **300** · видеосалон: 33 · Дисней-клуб: 14 · ТВ: 253.
+По источникам: vk — 100 · rutube — 117 · youtube — 82 · generated — 1.
 
 | Блок | Название | Источник | Длительность | Страница сайта | Ссылка на видео |
 | --- | --- | --- | --- | --- | --- |
 | Видеосалон (/videosalon) | Терминатор 2: Судный день (1991) | vk | 2 ч 13 мин | /videosalon/terminator-2-sudnyy-den-1991 | https://vk.com/video-226712322_456239188 |
-| Видеосалон (/videosalon) | Терминатор (1984) | vk | 1 ч 47 мин | /videosalon/terminator-1984 | https://vk.com/video-230045948_456239973 |
-| Видеосалон (/videosalon) | Крепкий орешек (1988) | vk | 2 ч 12 мин | /videosalon/krepkiy-oreshek-1988 | https://vk.com/video-220018529_456239639 |
-| Видеосалон (/videosalon) | Хищник (1987) | vk | 1 ч 46 мин | /videosalon/hischnik-1987 | https://vk.com/video-56028029_456244530 |
-| Видеосалон (/videosalon) | Коммандос (1985) | vk | 1 ч 30 мин | /videosalon/kommandos-1985 | https://vk.com/video-220018529_456244336 |
+| Видеосалон (/videosalon) | Терминатор (1984) | rutube | 1 ч 47 мин | /videosalon/terminator-1984 | https://rutube.ru/video/bb88fa5b0d8092225806499b93e416cb/ |
+| Видеосалон (/videosalon) | Крепкий орешек (1988) | rutube | 2 ч 12 мин | /videosalon/krepkiy-oreshek-1988 | https://rutube.ru/video/30a9f9acbeff558b6b588e5ed5562f80/ |
+| Видеосалон (/videosalon) | Хищник (1987) | rutube | 1 ч 46 мин | /videosalon/hischnik-1987 | https://rutube.ru/video/09235c15043b98a9aba04a05fe2b6f63/ |
+| Видеосалон (/videosalon) | Коммандос (1985) | rutube | 1 ч 31 мин | /videosalon/kommandos-1985 | https://rutube.ru/video/a78342b803b06d7fb118391134110913/ |
 | Видеосалон (/videosalon) | Кобра (1986) | vk | 1 ч 27 мин | /videosalon/kobra-1986 | https://vk.com/video-56028029_456249931 |
-| Видеосалон (/videosalon) | Робокоп (1987) | vk | 1 ч 43 мин | /videosalon/robokop-1987 | https://vk.com/video-225299404_456240316 |
-| Видеосалон (/videosalon) | Кровавый спорт (1988) | vk | 1 ч 32 мин | /videosalon/krovavyy-sport-1988 | https://vk.com/video-220018529_456244761 |
-| Видеосалон (/videosalon) | Кикбоксер (1989) | vk | 1 ч 38 мин | /videosalon/kikbokser-1989 | https://vk.com/video-220018529_456244387 |
+| Видеосалон (/videosalon) | Робокоп (1987) | rutube | 1 ч 43 мин | /videosalon/robokop-1987 | https://rutube.ru/video/d1336998c1a08275c3402fd29fe1b807/ |
+| Видеосалон (/videosalon) | Кровавый спорт (1988) | rutube | 1 ч 32 мин | /videosalon/krovavyy-sport-1988 | https://rutube.ru/video/3f1f1752178aeb67d361fb9024b3cde2/ |
+| Видеосалон (/videosalon) | Кикбоксер (1989) | vk | 22 ч 28 мин | /videosalon/kikbokser-1989 | https://vk.com/video-230103894_456239384 |
 | Видеосалон (/videosalon) | Универсальный солдат (1992) | vk | 1 ч 43 мин | /videosalon/universalnyy-soldat-1992 | https://vk.com/video-227267093_456239990 |
 | Видеосалон (/videosalon) | Разрушитель (1993) | vk | 1 ч 55 мин | /videosalon/razrushitel-1993 | https://vk.com/video-218359460_456241363 |
 | Видеосалон (/videosalon) | Скалолаз (1993) | vk | 1 ч 53 мин | /videosalon/skalolaz-1993 | https://vk.com/video-183801042_456239156 |
-| Видеосалон (/videosalon) | Смертельная битва (1995) | vk | 1 ч 41 мин | /videosalon/smertelnaya-bitva-1995 | https://vk.com/video-220018529_456241354 |
-| Видеосалон (/videosalon) | Стиратель (1996) | vk | 1 ч 49 мин | /videosalon/stiratel-1996 | https://vk.com/video-77901936_456242055 |
+| Видеосалон (/videosalon) | Смертельная битва (1995) | rutube | 1 ч 41 мин | /videosalon/smertelnaya-bitva-1995 | https://rutube.ru/video/621ecff29382bda60875a23a0405d772/ |
 | Видеосалон (/videosalon) | Скорость (1994) | vk | 1 ч 52 мин | /videosalon/skorost-1994 | https://vk.com/video-165630070_456240067 |
-| Видеосалон (/videosalon) | Черепашки-ниндзя (1990) | vk | 1 ч 32 мин | /videosalon/cherepashki-nindzya-1990 | https://vk.com/video-155284657_456244233 |
-| Видеосалон (/videosalon) | Назад в будущее (1985) | vk | 1 ч 56 мин | /videosalon/nazad-v-buduschee-1985 | https://vk.com/video-220018529_456240824 |
-| Видеосалон (/videosalon) | Чужие (1986) | vk | 2 ч 17 мин | /videosalon/chuzhie-1986 | https://vk.com/video-183801042_456239313 |
-| Видеосалон (/videosalon) | Парк Юрского периода (1993) | vk | 2 ч 06 мин | /videosalon/park-yurskogo-perioda-1993 | https://vk.com/video-220018529_456239197 |
+| Видеосалон (/videosalon) | Назад в будущее (1985) | rutube | 1 ч 56 мин | /videosalon/nazad-v-buduschee-1985 | https://rutube.ru/video/1652cd924476f590ce6872387a23d868/ |
+| Видеосалон (/videosalon) | Чужие (1986) | rutube | 2 ч 34 мин | /videosalon/chuzhie-1986 | https://rutube.ru/video/b32ac5665032284813a9ca96f88c9d5c/ |
+| Видеосалон (/videosalon) | Парк Юрского периода (1993) | vk | 12 ч 27 мин | /videosalon/park-yurskogo-perioda-1993 | https://vk.com/video-230103894_456239286 |
+| Видеосалон (/videosalon) | Парк Юрского периода 2: Затерянный мир (1997) | vk | 12 ч 27 мин | /videosalon/park-yurskogo-perioda-2-zateryannyy-mir-1997 | https://vk.com/video-230103894_456239286 |
 | Видеосалон (/videosalon) | Пятый элемент (1997) | vk | 2 ч 05 мин | /videosalon/pyatyy-element-1997 | https://vk.com/video-220018529_456243312 |
-| Видеосалон (/videosalon) | Матрица (1999) | vk | 2 ч 16 мин | /videosalon/matrica-1999 | https://vk.com/video-220018529_456240812 |
-| Видеосалон (/videosalon) | День независимости (1996) | vk | 2 ч 33 мин | /videosalon/den-nezavisimosti-1996 | https://vk.com/video-176294899_456240544 |
-| Видеосалон (/videosalon) | Мумия (1999) | vk | 2 ч 04 мин | /videosalon/mumiya-1999 | https://vk.com/video-213377389_456240804 |
-| Видеосалон (/videosalon) | Один дома (1990) | vk | 1 ч 43 мин | /videosalon/odin-doma-1990 | https://vk.com/video-220018529_456248134 |
-| Видеосалон (/videosalon) | Маска (1994) | vk | 1 ч 41 мин | /videosalon/maska-1994 | https://vk.com/video-220018529_456241259 |
-| Видеосалон (/videosalon) | Джуманджи (1995) | vk | 1 ч 44 мин | /videosalon/dzhumandzhi-1995 | https://vk.com/video-230238921_456239515 |
-| Видеосалон (/videosalon) | Майор Пэйн (1995) | vk | 1 ч 33 мин | /videosalon/mayor-peyn-1995 | https://vk.com/video-45623687_456240491 |
+| Видеосалон (/videosalon) | Матрица (1999) | vk | 2 ч 05 мин | /videosalon/matrica-1999 | https://vk.com/video-227267093_456240097 |
+| Видеосалон (/videosalon) | День независимости (1996) | vk | 2 ч 30 мин | /videosalon/den-nezavisimosti-1996 | https://vk.com/video-168223031_456239243 |
+| Видеосалон (/videosalon) | Мумия (1999) | rutube | 2 ч 04 мин | /videosalon/mumiya-1999 | https://rutube.ru/video/5e8c591ff4ab91cafa306ca69ada442a/ |
+| Видеосалон (/videosalon) | Один дома (1990) | rutube | 1 ч 42 мин | /videosalon/odin-doma-1990 | https://rutube.ru/video/b590e1fc4daf9f25f44f7752d9c60295/ |
+| Видеосалон (/videosalon) | Маска (1994) | rutube | 1 ч 41 мин | /videosalon/maska-1994 | https://rutube.ru/video/a6a589fc6b97ec1fc7c7460e0c77b699/ |
 | Видеосалон (/videosalon) | Тупой и еще тупее (1994) | vk | 1 ч 42 мин | /videosalon/tupoy-i-esche-tupee-1994 | https://vk.com/video-34229261_456249221 |
-| Видеосалон (/videosalon) | Титаник (1997) | vk | 3 ч 14 мин | /videosalon/titanik-1997 | https://vk.com/video-220018529_456243275 |
-| Видеосалон (/videosalon) | Криминальное чтиво (1994) | vk | 2 ч 35 мин | /videosalon/kriminalnoe-chtivo-1994 | https://vk.com/video-220018529_456239747 |
-| Видеосалон (/videosalon) | Леон (1994) | vk | 2 ч 12 мин | /videosalon/leon-1994 | https://vk.com/video-205644351_456239499 |
-| Видеосалон (/videosalon) | Побег из Шоушенка (1994) | vk | 2 ч 22 мин | /videosalon/pobeg-iz-shoushenka-1994 | https://vk.com/video-220018529_456243258 |
-| Видеосалон (/videosalon) | Форрест Гамп (1994) | vk | 2 ч 22 мин | /videosalon/forrest-gamp-1994 | https://vk.com/video-220018529_456243272 |
+| Видеосалон (/videosalon) | Титаник (1997) | vk | 3 ч 14 мин | /videosalon/titanik-1997 | https://vk.com/video-218463181_456239225 |
+| Видеосалон (/videosalon) | Криминальное чтиво (1994) | vk | 2 ч 34 мин | /videosalon/kriminalnoe-chtivo-1994 | https://vk.com/video-229835954_456239025 |
+| Видеосалон (/videosalon) | Леон (1994) | vk | 2 ч 12 мин | /videosalon/leon-1994 | https://vk.com/video-45623687_456240433 |
+| Видеосалон (/videosalon) | Побег из Шоушенка (1994) | rutube | 2 ч 21 мин | /videosalon/pobeg-iz-shoushenka-1994 | https://rutube.ru/video/1a13ed24b9f105b43c8b9d19f1b6846a/ |
+| Видеосалон (/videosalon) | Форрест Гамп (1994) | rutube | 2 ч 22 мин | /videosalon/forrest-gamp-1994 | https://rutube.ru/video/57fbde6070148b48688ac620ec9475d5/ |
 | Видеосалон (/videosalon) | Брат (1997) | vk | 1 ч 38 мин | /videosalon/brat-1997 | https://vk.com/video-205290196_456239338 |
 | Видеосалон (/videosalon) | Брат 2 (2000) | vk | 2 ч 02 мин | /videosalon/brat-2-2000 | https://vk.com/video-226111813_456239307 |
-| Видеосалон (/videosalon) | Особенности национальной охоты (1995) | vk | 1 ч 25 мин | /videosalon/osobennosti-nacionalnoy-ohoty-1995 | https://vk.com/video-203573050_456241691 |
-| Видеосалон (/videosalon) | Жмурки (2005) | vk | 1 ч 42 мин | /videosalon/zhmurki-2005 | https://vk.com/video-163774001_456240208 |
-| Видеосалон (/videosalon) | Бумер (2003) | vk | 1 ч 46 мин | /videosalon/bumer-2003 | https://vk.com/video-215394060_456239431 |
+| Видеосалон (/videosalon) | Особенности национальной охоты (1995) | youtube | 1 ч 31 мин | /videosalon/osobennosti-nacionalnoy-ohoty-1995 | https://www.youtube.com/watch?v=oWK9K_RtRCM |
 | Дисней-клуб (/disney-klub) | Утиные истории (1987) | vk | 38 ч 03 мин | /disney-klub/utinye-istorii-1987 | https://vk.com/video-227283941_456240163 |
 | Дисней-клуб (/disney-klub) | Чип и Дейл спешат на помощь (1989) | vk | 24 ч 45 мин | /disney-klub/chip-i-deyl-speshat-na-pomosch-1989 | https://vk.com/video-217873238_456245003 |
 | Дисней-клуб (/disney-klub) | Черный Плащ (1991) | vk | 33 ч 13 мин | /disney-klub/chernyy-plasch-1991 | https://vk.com/video-227283941_456240193 |
@@ -53,9 +48,12 @@
 | Дисней-клуб (/disney-klub) | Аладдин (1994) | vk | 31 ч 12 мин | /disney-klub/aladdin-1994 | https://vk.com/video-227283941_456240169 |
 | Дисней-клуб (/disney-klub) | Тимон и Пумба (1995) | vk | 30 ч 56 мин | /disney-klub/timon-i-pumba-1995 | https://vk.com/video-227283941_456240134 |
 | Дисней-клуб (/disney-klub) | Русалочка (1992) | vk | 11 ч 27 мин | /disney-klub/rusalochka-1992 | https://vk.com/video-227283941_456239732 |
-| Дисней-клуб (/disney-klub) | 101 далматинец (1997) | vk | 23 ч 44 мин | /disney-klub/101-dalmatinec-1997 | https://vk.com/video-209040390_456292440 |
 | Дисней-клуб (/disney-klub) | Мышиный дом (2001) | vk | 6 ч 31 мин | /disney-klub/myshinyy-dom-2001 | https://vk.com/video-209040390_456292576 |
-| Дисней-клуб (/disney-klub) | Лило и Стич (2003) | vk | 23 ч 27 мин | /disney-klub/lilo-i-stich-2003 | https://vk.com/video-192371408_456243740 |
+| Дисней-клуб (/disney-klub) | Космические спасатели лейтенанта Марша (1993) | vk | 22 мин | /disney-klub/kosmicheskie-spasateli-leytenanta-marsha-1993 | https://vk.com/video-238771813_456239109 |
+| Дисней-клуб (/disney-klub) | Погонщики динозавров (1988) | vk | 4 ч 21 мин | /disney-klub/pogonschiki-dinozavrov-1988 | https://vk.com/video-229097667_456242074 |
+| Дисней-клуб (/disney-klub) | Дракулито-вампирёныш (1991) | vk | 9 ч 15 мин | /disney-klub/drakulito-vampirenysh-1991 | https://vk.com/video-58264493_456240974 |
+| Дисней-клуб (/disney-klub) | Настоящие охотники за привидениями (1986) | vk | 4 ч 46 мин | /disney-klub/nastoyaschie-ohotniki-za-privideniyami-1986 | https://vk.com/video-182437809_456244273 |
+| Дисней-клуб (/disney-klub) | Война гоботов (1984) | vk | 21 ч 21 мин | /disney-klub/voyna-gobotov-1984 | https://vk.com/video-58264493_456241230 |
 | ТВ · Первая кнопка | Ну, погоди! — 1 выпуск (1969) | youtube | 9 мин | /televizor | https://www.youtube.com/watch?v=e7AhYRhfhzw |
 | ТВ · Первая кнопка | Ну, погоди! — выпуск №3 | rutube | 10 мин | /televizor | https://rutube.ru/video/8d6531c3f50272910be2709877cb5a7e/ |
 | ТВ · Первая кнопка | Ну, погоди! — 14 выпуск | rutube | 10 мин | /televizor | https://rutube.ru/video/87cc20f4a2b82dbdc90717bea68d4690/ |

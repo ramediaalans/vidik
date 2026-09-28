@@ -10,6 +10,7 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
   const { slug } = useParams();
   const film = findFilm(slug);
   const [on, setOn] = useState(false);
+  const [episode, setEpisode] = useState(0);
 
   const base = group === 'salon' ? '/videosalon' : '/disney-klub';
   const backLabel = group === 'salon' ? 'Назад на полку' : 'Назад в Клуб';
@@ -31,7 +32,17 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
   const seasons = film.seasons ?? [];
   const totalEpisodes = seasons.reduce((n, s) => n + s.episodes, 0);
 
+  // Если сериал разрезан на отдельные ролики — крутим выбранную серию.
+  const playlist = film.episodes ?? [];
+  const source = playlist[episode] ?? film.source;
+
   const start = () => {
+    claimAudio();
+    setOn(true);
+  };
+
+  const pickEpisode = (index: number) => {
+    setEpisode(index);
     claimAudio();
     setOn(true);
   };
@@ -82,8 +93,8 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
       <section className="section container">
         {on ? (
           <ExternalVideoPlayer
-            key={`${film.source.provider}-${film.source.id}`}
-            source={film.source}
+            key={`${source.provider}-${source.id}`}
+            source={source}
             label={`Плеер: ${film.title}`}
             poster={film.backdrop ?? film.poster}
           />
@@ -95,6 +106,24 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
             </button>
           </div>
         )}
+
+        {playlist.length > 1 ? (
+          <div style={{ marginTop: 14 }}>
+            <div className="mono" style={{ marginBottom: 8 }}>Серии</div>
+            <div className="row" style={{ flexWrap: 'wrap', gap: 8 }}>
+              {playlist.map((e, i) => (
+                <button
+                  key={e.id}
+                  type="button"
+                  className={`chip${i === episode ? ' chip--active' : ''}`}
+                  onClick={() => pickEpisode(i)}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         {on ? (
           <p className="muted" style={{ fontSize: 13, marginTop: 12 }}>

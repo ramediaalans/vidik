@@ -3,31 +3,32 @@
     "provider": "vk",
     "id": "-226712322_456239188",
     "title": "Терминатор 2: Судный день (1991)",
-    "duration": 7996
+    "duration": 7996,
+    "start": 22
   },
   "terminator-1984": {
-    "provider": "vk",
-    "id": "-230045948_456239973",
-    "title": "Терминатор 1 (1984)",
-    "duration": 6446
+    "provider": "rutube",
+    "id": "bb88fa5b0d8092225806499b93e416cb",
+    "title": "Терминатор | The Terminator (1984)",
+    "duration": 6423
   },
   "krepkiy-oreshek-1988": {
-    "provider": "vk",
-    "id": "-220018529_456239639",
+    "provider": "rutube",
+    "id": "30a9f9acbeff558b6b588e5ed5562f80",
     "title": "Крепкий орешек | Die Hard (1988)",
-    "duration": 7934
+    "duration": 7930
   },
   "hischnik-1987": {
-    "provider": "vk",
-    "id": "-56028029_456244530",
-    "title": "Хищник (1987)",
-    "duration": 6395
+    "provider": "rutube",
+    "id": "09235c15043b98a9aba04a05fe2b6f63",
+    "title": "Хищник | Predator (1987)",
+    "duration": 6396
   },
   "kommandos-1985": {
-    "provider": "vk",
-    "id": "-220018529_456244336",
+    "provider": "rutube",
+    "id": "a78342b803b06d7fb118391134110913",
     "title": "Коммандос | Commando (1985)",
-    "duration": 5419
+    "duration": 5510
   },
   "kobra-1986": {
     "provider": "vk",
@@ -36,22 +37,24 @@
     "duration": 5224
   },
   "robokop-1987": {
-    "provider": "vk",
-    "id": "-225299404_456240316",
-    "title": "Робокоп - «RoboCop», 1987 Directors Cut (7,7)",
-    "duration": 6196
+    "provider": "rutube",
+    "id": "d1336998c1a08275c3402fd29fe1b807",
+    "title": "Робокоп | RoboCop (1987)",
+    "duration": 6195
   },
   "krovavyy-sport-1988": {
-    "provider": "vk",
-    "id": "-220018529_456244761",
+    "provider": "rutube",
+    "id": "3f1f1752178aeb67d361fb9024b3cde2",
     "title": "Кровавый спорт | Bloodsport (1988)",
-    "duration": 5537
+    "duration": 5540
   },
   "kikbokser-1989": {
     "provider": "vk",
-    "id": "-220018529_456244387",
-    "title": "Кикбоксер | Kickboxer (1989)",
-    "duration": 5896
+    "id": "-230103894_456239384",
+    "title": "Кикбоксер (1989)",
+    "duration": 80894,
+    "start": 5533,
+    "endTrim": 69501
   },
   "universalnyy-soldat-1992": {
     "provider": "vk",
@@ -63,7 +66,8 @@
     "provider": "vk",
     "id": "-218359460_456241363",
     "title": "Разрушитель (1993) 4K UHD",
-    "duration": 6920
+    "duration": 6920,
+    "start": 20
   },
   "skalolaz-1993": {
     "provider": "vk",
@@ -72,136 +76,117 @@
     "duration": 6780
   },
   "smertelnaya-bitva-1995": {
-    "provider": "vk",
-    "id": "-220018529_456241354",
+    "provider": "rutube",
+    "id": "621ecff29382bda60875a23a0405d772",
     "title": "Смертельная битва | Mortal Kombat (1995)",
-    "duration": 6089
-  },
-  "stiratel-1996": {
-    "provider": "vk",
-    "id": "-77901936_456242055",
-    "title": "Стиратель (Боевик 1996) А.Гаврилов",
-    "duration": 6592
+    "duration": 6115
   },
   "skorost-1994": {
     "provider": "vk",
     "id": "-165630070_456240067",
     "title": "Фильм скорость 1994",
-    "duration": 6737
-  },
-  "cherepashki-nindzya-1990": {
-    "provider": "vk",
-    "id": "-155284657_456244233",
-    "title": "Черепашки-ниндзя (1990) [HD1080p] Любимые фильмы онлайн",
-    "duration": 5556
+    "duration": 6737,
+    "start": 56
   },
   "nazad-v-buduschee-1985": {
-    "provider": "vk",
-    "id": "-220018529_456240824",
+    "provider": "rutube",
+    "id": "1652cd924476f590ce6872387a23d868",
     "title": "Назад в будущее | Back to the Future (1985)",
-    "duration": 6966
+    "duration": 6964
   },
   "chuzhie-1986": {
-    "provider": "vk",
-    "id": "-183801042_456239313",
-    "title": "Чужие (1986)",
-    "duration": 8234
+    "provider": "rutube",
+    "id": "b32ac5665032284813a9ca96f88c9d5c",
+    "title": "Чужие | Aliens (1986)",
+    "duration": 9297
   },
   "park-yurskogo-perioda-1993": {
     "provider": "vk",
-    "id": "-220018529_456239197",
-    "title": "Парк Юрского периода | Jurassic Park (1993)",
-    "duration": 7600
+    "id": "-230103894_456239286",
+    "title": "Парк Юрского периода (1993)",
+    "duration": 44844,
+    "endTrim": 37257
   },
   "pyatyy-element-1997": {
     "provider": "vk",
     "id": "-220018529_456243312",
     "title": "Пятый элемент | The Fifth Element (1997)",
-    "duration": 7557
+    "duration": 7557,
+    "start": 8
   },
   "matrica-1999": {
     "provider": "vk",
-    "id": "-220018529_456240812",
-    "title": "Матрица | The Matrix (1999)",
-    "duration": 8182
+    "id": "-227267093_456240097",
+    "title": "Матрица (1999)",
+    "duration": 7552
   },
   "den-nezavisimosti-1996": {
     "provider": "vk",
-    "id": "-176294899_456240544",
-    "title": "День независимости (1996) 1080p",
-    "duration": 9213
+    "id": "-168223031_456239243",
+    "title": "День независимости (1996)",
+    "duration": 9023
   },
   "mumiya-1999": {
-    "provider": "vk",
-    "id": "-213377389_456240804",
+    "provider": "rutube",
+    "id": "5e8c591ff4ab91cafa306ca69ada442a",
     "title": "Мумия (1999)",
-    "duration": 7493
+    "duration": 7495
   },
   "odin-doma-1990": {
-    "provider": "vk",
-    "id": "-220018529_456248134",
+    "provider": "rutube",
+    "id": "b590e1fc4daf9f25f44f7752d9c60295",
     "title": "Один дома | Home Alone (1990)",
-    "duration": 6183
+    "duration": 6173
   },
   "maska-1994": {
-    "provider": "vk",
-    "id": "-220018529_456241259",
+    "provider": "rutube",
+    "id": "a6a589fc6b97ec1fc7c7460e0c77b699",
     "title": "Маска | The Mask (1994)",
-    "duration": 6076
-  },
-  "dzhumandzhi-1995": {
-    "provider": "vk",
-    "id": "-230238921_456239515",
-    "title": "Джуманджи 1 (1995), приключения, фэнтези",
-    "duration": 6246
-  },
-  "mayor-peyn-1995": {
-    "provider": "vk",
-    "id": "-45623687_456240491",
-    "title": "Майор Пэйн (1995)",
-    "duration": 5615
+    "duration": 6103
   },
   "tupoy-i-esche-tupee-1994": {
     "provider": "vk",
     "id": "-34229261_456249221",
     "title": "Тупой и еще тупее (1994) FHD",
-    "duration": 6147
+    "duration": 6147,
+    "start": 20
   },
   "titanik-1997": {
     "provider": "vk",
-    "id": "-220018529_456243275",
-    "title": "Титаник | Titanic (1997)",
+    "id": "-218463181_456239225",
+    "title": "Титаник (1997)",
     "duration": 11693
   },
   "kriminalnoe-chtivo-1994": {
     "provider": "vk",
-    "id": "-220018529_456239747",
-    "title": "Криминальное чтиво | Pulp Fiction (1994)",
-    "duration": 9300
+    "id": "-229835954_456239025",
+    "title": "Криминальное чтиво (1994)",
+    "duration": 9270
   },
   "leon-1994": {
     "provider": "vk",
-    "id": "-205644351_456239499",
+    "id": "-45623687_456240433",
     "title": "Леон (1994)",
-    "duration": 7975
+    "duration": 7965
   },
   "pobeg-iz-shoushenka-1994": {
-    "provider": "vk",
-    "id": "-220018529_456243258",
-    "title": "Побег из Шоушенка | The Shawshank Redemption (1994)",
-    "duration": 8556
+    "provider": "rutube",
+    "id": "1a13ed24b9f105b43c8b9d19f1b6846a",
+    "title": "Побег из Шоушенка (1994)",
+    "duration": 8486
   },
   "forrest-gamp-1994": {
-    "provider": "vk",
-    "id": "-220018529_456243272",
-    "title": "Форрест Гамп | Forrest Gump (1994)",
-    "duration": 8533
+    "provider": "rutube",
+    "id": "57fbde6070148b48688ac620ec9475d5",
+    "title": "Форрест Гамп (1994)",
+    "duration": 8529
   },
   "brat-1997": {
     "provider": "vk",
     "id": "-205290196_456239338",
     "title": "Смотрим Брат",
-    "duration": 5901
+    "duration": 5901,
+    "start": 16
   },
   "brat-2-2000": {
     "provider": "vk",
@@ -210,22 +195,10 @@
     "duration": 7362
   },
   "osobennosti-nacionalnoy-ohoty-1995": {
-    "provider": "vk",
-    "id": "-203573050_456241691",
-    "title": "Особенности национальной охоты (1995) Жанр: комедия Страна: Россия",
-    "duration": 5146
-  },
-  "zhmurki-2005": {
-    "provider": "vk",
-    "id": "-163774001_456240208",
-    "title": "Жмурки, 2005  Оцифровка VHS",
-    "duration": 6167
-  },
-  "bumer-2003": {
-    "provider": "vk",
-    "id": "-215394060_456239431",
-    "title": "Бумер (2003) Страна: Россия. Жанр: преступление, драма  18+",
-    "duration": 6418
+    "provider": "youtube",
+    "id": "oWK9K_RtRCM",
+    "title": "Особенности национальной охоты (1995)",
+    "duration": 5511
   },
   "utinye-istorii-1987": {
     "provider": "vk",
@@ -277,22 +250,128 @@
     "title": "Русалочка (1992-1994, мультсериал) FullHD ● Все 3 сезона! 📺 Все серии подряд! 📺 Приключения, фэнтези",
     "duration": 41267
   },
-  "101-dalmatinec-1997": {
-    "provider": "vk",
-    "id": "-209040390_456292440",
-    "title": "101 далматинец — мультсериал полностью (1997–1998)",
-    "duration": 85448
-  },
   "myshinyy-dom-2001": {
     "provider": "vk",
     "id": "-209040390_456292576",
     "title": "Мышиный дом — 1–4 сезоны (2001–2003)",
     "duration": 23489
   },
-  "lilo-i-stich-2003": {
+  "park-yurskogo-perioda-2-zateryannyy-mir-1997": {
     "provider": "vk",
-    "id": "-192371408_456243740",
-    "title": "Лило и Стич — все серии и сезоны",
-    "duration": 84425
+    "id": "-230103894_456239286",
+    "title": "Парк Юрского периода 2: Затерянный мир (1997)",
+    "duration": 44844,
+    "start": 7600,
+    "endTrim": 29524
+  },
+  "pogonschiki-dinozavrov-1988": {
+    "provider": "vk",
+    "id": "-229097667_456242074",
+    "title": "Погонщики динозавров. Все серии",
+    "duration": 15680
+  },
+  "drakulito-vampirenysh-1991": {
+    "provider": "vk",
+    "id": "-58264493_456240974",
+    "title": "Дракулито-вампирёныш (1991)",
+    "duration": 33310
+  },
+  "nastoyaschie-ohotniki-za-privideniyami-1986": {
+    "provider": "vk",
+    "id": "-182437809_456244273",
+    "title": "Настоящие охотники за привидениями. 1 сезон",
+    "duration": 17174
+  },
+  "voyna-gobotov-1984": {
+    "provider": "vk",
+    "id": "-58264493_456241230",
+    "title": "Война гоботов (1984)",
+    "duration": 76861
+  },
+  "kosmicheskie-spasateli-leytenanta-marsha-1993": {
+    "provider": "vk",
+    "id": "-238771813_456239109",
+    "title": "Космические спасатели лейтенанта Марша. Серия 1",
+    "duration": 1320,
+    "episodes": [
+      {
+        "provider": "vk",
+        "id": "-238771813_456239109",
+        "title": "Серия 1",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239692",
+        "title": "Серия 2",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239699",
+        "title": "Серия 3",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239442",
+        "title": "Серия 4",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239488",
+        "title": "Серия 5",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239269",
+        "title": "Серия 6",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239497",
+        "title": "Серия 7",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239445",
+        "title": "Серия 8",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239190",
+        "title": "Серия 9",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239244",
+        "title": "Серия 10",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239161",
+        "title": "Серия 11",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239202",
+        "title": "Серия 12",
+        "duration": 1320
+      },
+      {
+        "provider": "vk",
+        "id": "-238771813_456239236",
+        "title": "Серия 13",
+        "duration": 1320
+      }
+    ]
   }
 }

@@ -49,13 +49,15 @@ function loadVkApi(): Promise<VkFactory> {
 function embedUrl(source: FilmVideoSource): string {
   if (source.provider === 'vk') {
     const [ownerId, videoId] = source.id.split('_');
-    const start = Math.max(0, Math.floor(source.start ?? 0));
-    return `https://vk.com/video_ext.php?oid=${ownerId}&id=${videoId}&hd=2&autoplay=1&js_api=1&t=${start}`;
+    const at = Math.max(0, Math.floor(source.start ?? 0));
+    return `https://vk.com/video_ext.php?oid=${ownerId}&id=${videoId}&hd=2&autoplay=1&js_api=1&t=${at}`;
   }
+  const start = Math.max(0, Math.floor(source.start ?? 0));
   if (source.provider === 'rutube') {
-    return `https://rutube.ru/play/embed/${source.id}/?autoStart=true`;
+    return `https://rutube.ru/play/embed/${source.id}/?autoStart=true${start > 0 ? `&t=${start}` : ''}`;
   }
-  return `https://www.youtube-nocookie.com/embed/${source.id}?autoplay=1&rel=0&cc_load_policy=0`;
+  const end = source.endTrim ? Math.max(start + 1, Math.floor(source.duration - source.endTrim)) : null;
+  return `https://www.youtube-nocookie.com/embed/${source.id}?autoplay=1&rel=0&cc_load_policy=0${start > 0 ? `&start=${start}` : ''}${end ? `&end=${end}` : ''}`;
 }
 
 function VkVideoPlayer({ source, label, poster }: {
