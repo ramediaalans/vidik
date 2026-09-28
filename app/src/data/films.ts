@@ -559,10 +559,9 @@ export const salon: Film[] = [
     "kpId": 2656,
     "source": {
       "provider": "vk",
-      "id": "-220018529_456243312",
+      "id": "-227267093_456240097",
       "title": "Пятый элемент | The Fifth Element (1997)",
-      "duration": 7557,
-      "start": 8
+      "duration": 7552
     },
     "title": "Пятый элемент",
     "titleOrig": "The Fifth Element",

@@ -30,8 +30,10 @@ Object.assign(d, {
   'maska-1994': rt('a6a589fc6b97ec1fc7c7460e0c77b699', 'Маска | The Mask (1994)', 6103),
   'pobeg-iz-shoushenka-1994': rt('1a13ed24b9f105b43c8b9d19f1b6846a', 'Побег из Шоушенка (1994)', 8486),
   'forrest-gamp-1994': rt('57fbde6070148b48688ac620ec9475d5', 'Форрест Гамп (1994)', 8529),
-  // VK-id -227267093_456240097 оказался «Пятым элементом», а не «Матрицей» — взяли rutube
+  // VK-id -227267093_456240097 оказался «Пятым элементом», а не «Матрицей»:
+  // Матрица переехала на rutube, а этот ролик отдан своему фильму.
   'matrica-1999': rt('06f4c1dd1b319392aedc768867b4980f', 'Матрица | The Matrix (1999)', 8178),
+  'pyatyy-element-1997': vk('-227267093_456240097', 'Пятый элемент | The Fifth Element (1997)', 7552),
   'den-nezavisimosti-1996': vk('-168223031_456239243', 'День независимости (1996)', 9023),
   'kriminalnoe-chtivo-1994': vk('-229835954_456239025', 'Криминальное чтиво (1994)', 9270),
   'leon-1994': vk('-45623687_456240433', 'Леон (1994)', 7965),
@@ -50,7 +52,7 @@ Object.assign(d, {
 });
 
 // Стартовые оффсеты: пропускаем заставки заливающих.
-for (const [slug, start] of [['terminator-2-sudnyy-den-1991', 22], ['razrushitel-1993', 20], ['skorost-1994', 56], ['pyatyy-element-1997', 8], ['tupoy-i-esche-tupee-1994', 20], ['brat-1997', 16]]) {
+for (const [slug, start] of [['terminator-2-sudnyy-den-1991', 22], ['razrushitel-1993', 20], ['skorost-1994', 56], ['tupoy-i-esche-tupee-1994', 20], ['brat-1997', 16]]) {
   if (d[slug]) d[slug] = { ...d[slug], start };
 }
 
