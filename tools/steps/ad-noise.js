@@ -7,8 +7,12 @@ return await (async () => {
   const poster = '/films/salon/matrica-1999-bg.webp';
   const cases = [
     ['ad', '<span class="mono">Подготавливаем кассету…</span>', false],
-    ['paused', '<button class="btn btn--primary">Продолжить ▶</button>', true],
-    ['ended', '<span class="mono">Просмотр завершён</span><button class="btn btn--primary">Смотреть сначала ↻</button>', true],
+    ['paused', '<button class="vplayer__osd"><span class="vplayer__osdGlyph">▶</span> PLAY</button>', true],
+    [
+      'ended',
+      '<span class="vplayer__osdNote">Конец кассеты</span><button class="vplayer__osd"><span class="vplayer__osdGlyph">◀◀</span> REW</button>',
+      true
+    ],
     ['error', '<span class="mono">Плеер не отвечает. Попробуйте обновить страницу.</span>', true]
   ];
 
@@ -45,8 +49,10 @@ return await (async () => {
     играютВсе: videos.every((v, i) => !v.paused && v.currentTime > marks[i]),
     ошибки: videos.filter((v) => v.error).length,
     прозрачность: videos.map((v) => getComputedStyle(v).opacity),
-    поверхШума: [...host.querySelectorAll('.mono, .btn')].every(
+    поверхШума: [...host.querySelectorAll('.mono, .vplayer__osd, .vplayer__osdNote')].every(
       (el) => Number(getComputedStyle(el).zIndex) >= 2
-    )
+    ),
+    размерOSD: [...host.querySelectorAll('.vplayer__osd')].map((el) => getComputedStyle(el).fontSize),
+    фонOSD: [...host.querySelectorAll('.vplayer__osd')].map((el) => getComputedStyle(el).backgroundColor)
   };
 })();

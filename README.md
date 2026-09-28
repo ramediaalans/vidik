@@ -123,6 +123,10 @@ node tools/films/build-catalog.mjs  # качает постеры в webp → ap
 | `app/public/video/vhs-noise-poster.webp` | первый кадр: виден до загрузки и при `prefers-reduced-motion` |
 | `ScreenNoise` в `app/src/components/ExternalVideoPlayer.tsx` | сам элемент `<video>` |
 
+Кнопки на заглушке оформлены как экранное меню видеомагнитофона (`.vplayer__osd`):
+крупный моноширинный `▶ PLAY` / `◀◀ REW` без плашки, с подсветкой и мигающим
+треугольником режима.
+
 Проверка в браузере (все четыре состояния собираются вручную):
 
 ```powershell

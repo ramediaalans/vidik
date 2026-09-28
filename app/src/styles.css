@@ -2684,9 +2684,53 @@ body.webamp-hidden #webamp {
   86% { opacity: .68; }
   88% { opacity: 1; }
 }
+/* Служебная надпись как на экранном меню видеомагнитофона: без плашки,
+   крупным моноширинным шрифтом с подсветкой люминофора. */
+.vplayer__osd {
+  padding: 4px 10px;
+  border: 0;
+  background: none;
+  color: #f2f7ff;
+  font: 700 clamp(30px, 6.5vw, 66px)/1 var(--font-mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, .95),
+    0 2px 6px rgba(0, 0, 0, .9),
+    0 0 22px rgba(150, 210, 255, .55);
+  cursor: pointer;
+  transition: color .15s ease, text-shadow .15s ease, transform .1s ease;
+}
+.vplayer__osd:hover,
+.vplayer__osd:focus-visible {
+  color: #fff;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, .95),
+    0 2px 6px rgba(0, 0, 0, .9),
+    0 0 30px rgba(180, 225, 255, .8);
+  outline: none;
+}
+.vplayer__osd:active { transform: translateY(1px); }
+.vplayer__osdGlyph {
+  /* Треугольник мигает, как индикатор режима на передней панели. */
+  animation: vplayer-osd-blink 1.6s steps(1, end) infinite;
+}
+@keyframes vplayer-osd-blink {
+  0%, 62% { opacity: 1; }
+  63%, 100% { opacity: .25; }
+}
+.vplayer__osdNote {
+  color: #e7eef7;
+  font: 700 clamp(13px, 1.6vw, 17px)/1.3 var(--font-mono);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  text-shadow: 0 0 2px rgba(0, 0, 0, .95), 0 2px 6px rgba(0, 0, 0, .9);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .vplayer__privacy::after,
-  .vplayer__privacy .mono { animation: none; }
+  .vplayer__privacy .mono,
+  .vplayer__osdGlyph { animation: none; }
 }
 
 .vplayer--off img {

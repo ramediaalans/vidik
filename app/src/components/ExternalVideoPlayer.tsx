@@ -361,11 +361,15 @@ function VkVideoPlayer({ source, label, poster }: {
           {adBlocked ? (
             <span className="mono">Подготавливаем кассету…</span>
           ) : mode === 'paused' ? (
-            <button className="btn btn--primary" onClick={resume}>Продолжить ▶</button>
+            <button className="vplayer__osd" onClick={resume} aria-label="Продолжить просмотр">
+              <span className="vplayer__osdGlyph" aria-hidden="true">▶</span> PLAY
+            </button>
           ) : mode === 'ended' ? (
             <>
-              <span className="mono">Просмотр завершён</span>
-              <button className="btn btn--primary" onClick={replay}>Смотреть сначала ↻</button>
+              <span className="vplayer__osdNote">Конец кассеты</span>
+              <button className="vplayer__osd" onClick={replay} aria-label="Смотреть сначала">
+                <span className="vplayer__osdGlyph" aria-hidden="true">◀◀</span> REW
+              </button>
             </>
           ) : mode === 'error' ? (
             <span className="mono">Плеер не отвечает. Попробуйте обновить страницу.</span>
