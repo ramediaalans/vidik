@@ -53,11 +53,13 @@ function embedUrl(source: FilmVideoSource): string {
     return `https://vk.com/video_ext.php?oid=${ownerId}&id=${videoId}&hd=2&autoplay=1&js_api=1&t=${at}`;
   }
   const start = Math.max(0, Math.floor(source.start ?? 0));
+  // Стартуем всегда без звука: браузеры блокируют автозапуск со звуком,
+  // а звук мы включаем сами сразу после реального начала воспроизведения.
   if (source.provider === 'rutube') {
-    return `https://rutube.ru/play/embed/${source.id}/?autoStart=true${start > 0 ? `&t=${start}` : ''}`;
+    return `https://rutube.ru/play/embed/${source.id}/?autoStart=true&mute=1${start > 0 ? `&t=${start}` : ''}`;
   }
   const end = source.endTrim ? Math.max(start + 1, Math.floor(source.duration - source.endTrim)) : null;
-  return `https://www.youtube-nocookie.com/embed/${source.id}?autoplay=1&rel=0&cc_load_policy=0&enablejsapi=1&controls=0&modestbranding=1${start > 0 ? `&start=${start}` : ''}${end ? `&end=${end}` : ''}`;
+  return `https://www.youtube-nocookie.com/embed/${source.id}?autoplay=1&mute=1&rel=0&cc_load_policy=0&enablejsapi=1&controls=0&modestbranding=1${start > 0 ? `&start=${start}` : ''}${end ? `&end=${end}` : ''}`;
 }
 
 function VkVideoPlayer({ source, label, poster }: {
@@ -382,9 +384,12 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
   const container = useRef<HTMLDivElement>(null);
   const frame = useRef<HTMLIFrameElement>(null);
   const at = useRef(Math.max(0, source.start ?? 0));
+  const pausedRef = useRef(false);
+  const soundOffRef = useRef(false);
   const [paused, setPaused] = useState(false);
   const [soundOff, setSoundOff] = useState(false);
   const [controlsOn, setControlsOn] = useState(true);
+  const [shielded, setShielded] = useState(true);
   const { isFullscreen, pseudo, toggle: toggleFullscreen } = useFullscreen(container, {
     autoLandscape: true,
     active: true
@@ -419,6 +424,9 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
     );
   }, [source.provider]);
 
+  // Пока плеер молчит, считаем, что воспроизведение ещё не началось.
+  const playing = useRef(false);
+
   // Собственного API у нас нет, поэтому текущую позицию берём из событий плеера.
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
@@ -434,11 +442,38 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
       const time = msg.type === 'player:currentTime'
         ? msg.data?.time ?? msg.data?.currentTime
         : msg.event === 'infoDelivery' ? msg.info?.currentTime : undefined;
-      if (typeof time === 'number' && time > 0) at.current = time;
+      if (typeof time !== 'number' || time <= 0) return;
+      at.current = time;
+      if (!playing.current) {
+        playing.current = true;
+        // Звук возвращаем только когда картинка уже пошла.
+        if (!soundOffRef.current) send('unmute');
+      }
     };
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
-  }, []);
+  }, [send]);
+
+  // Сторож автозапуска: если плеер встал на своей кнопке Play, жмём его сами.
+  useEffect(() => {
+    let tries = 0;
+    const id = window.setInterval(() => {
+      if (playing.current || pausedRef.current) {
+        window.clearInterval(id);
+        return;
+      }
+      if (tries >= 6) {
+        // Плеер не ответил: открываем ему клики, иначе запустить его будет нечем.
+        window.clearInterval(id);
+        setShielded(false);
+        return;
+      }
+      tries++;
+      send('mute');
+      send('play');
+    }, 1200);
+    return () => window.clearInterval(id);
+  }, [send]);
 
   const onFrameLoad = useCallback(() => {
     if (source.provider !== 'youtube') return;
@@ -455,7 +490,6 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
     send('seek', next);
   }, [endAt, send, startAt]);
 
-  const pausedRef = useRef(false);
   const togglePlay = useCallback(() => {
     const next = !pausedRef.current;
     pausedRef.current = next;
@@ -463,7 +497,6 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
     setPaused(next);
   }, [send]);
 
-  const soundOffRef = useRef(false);
   const toggleSound = useCallback(() => {
     const next = !soundOffRef.current;
     soundOffRef.current = next;
@@ -533,7 +566,7 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
         aria-label="Плеер: стрелки влево и вправо — перемотка, пробел — пауза, M — звук, F — полный экран"
         onClick={(event) => { event.currentTarget.focus(); revealControls(); }}
         onPointerMove={revealControls}
-        style={{ position: 'absolute', zIndex: 2, inset: 0, background: 'transparent' }}
+        style={{ position: 'absolute', zIndex: 2, inset: 0, background: 'transparent', pointerEvents: shielded ? 'auto' : 'none' }}
       />
       <div
         className={`vplayer__bar${controlsOn ? ' is-on' : ''}`}
