@@ -2576,6 +2576,105 @@ body.webamp-hidden #webamp {
   }
 }
 
+/* ---------- телевизор с видеомагнитофоном вокруг плеера ---------- */
+
+/* Картинка рамки — 1692×813 с прозрачным фоном и прозрачным окном кинескопа.
+   Плеер лежит под ней ровно в окне, так что скругления углов даёт сама маска. */
+.tvset {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1692 / 813;
+  /* чтобы рукописная наклейка масштабировалась от ширины телевизора, а не окна */
+  container-type: inline-size;
+}
+.tvset__frame {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+/* Окно — вся полупрозрачная область стекла, а не только полностью прозрачный
+   центр. Иначе блик изгиба у правого края ложится не на кадр, а на чёрный фон
+   и читается как глухая полоса. Границы измерены по альфа-каналу картинки. */
+.tvset__screen {
+  position: absolute;
+  left: 5.3%;
+  top: 10.7%;
+  width: 45.1%;
+  height: 62.4%;
+  background: #000;
+}
+.tvset__screen > * {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+}
+/* Наклейка на кассете, лежащей на видеомагнитофоне. */
+.tvset__label {
+  position: absolute;
+  left: 58%;
+  top: 57%;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: .15em;
+  justify-content: center;
+  width: 18%;
+  height: 12.6%;
+  padding: 0 1%;
+  border: 1px solid rgba(90, 84, 70, .55);
+  border-radius: 2px;
+  background: linear-gradient(#f0ead8, #ded7c2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .55);
+  /* Верхняя грань кассеты на фото идёт почти ровно (0,2°) — наклейка по ней. */
+  transform: rotate(0.2deg);
+  overflow: hidden;
+  pointer-events: none;
+}
+.tvset__labelTitle {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color: #1c1a18;
+  font-family: var(--font-hand);
+  font-size: clamp(11px, 2.05cqw, 27px);
+  font-weight: 700;
+  line-height: 1.05;
+}
+.tvset__labelYear {
+  color: #4a443c;
+  font-family: var(--font-hand);
+  font-size: clamp(9px, 1.5cqw, 20px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* На узких экранах кинескоп в 41% ширины становится несмотрибельным:
+   прячем мебель и отдаём всю ширину плееру. */
+@media (max-width: 860px) {
+  .tvset { aspect-ratio: auto; }
+  .tvset__frame,
+  .tvset__label { display: none; }
+  .tvset__screen {
+    position: static;
+    width: 100%;
+    height: auto;
+    background: none;
+  }
+  .tvset__screen > * {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+  }
+}
+
 /* ---------- плеер балансера ---------- */
 
 .vplayer {
@@ -2690,27 +2789,30 @@ body.webamp-hidden #webamp {
   padding: 4px 10px;
   border: 0;
   background: none;
-  color: #f2f7ff;
-  font: 700 clamp(30px, 6.5vw, 66px)/1 var(--font-mono);
+  color: var(--acid);
+  opacity: .72;
+  font: 700 clamp(17px, 3.1vw, 34px)/1 var(--font-mono);
   letter-spacing: .12em;
   text-transform: uppercase;
   text-shadow:
     0 0 2px rgba(0, 0, 0, .95),
     0 2px 6px rgba(0, 0, 0, .9),
-    0 0 22px rgba(150, 210, 255, .55);
+    0 0 18px rgba(201, 240, 58, .35);
   cursor: pointer;
-  transition: color .15s ease, text-shadow .15s ease, transform .1s ease;
+  /* transform сознательно не анимируется: кнопка центрирована через translate,
+     и любой свой transform сбивал её в угол. */
+  transition: opacity .15s ease, text-shadow .15s ease;
 }
 .vplayer__osd:hover,
 .vplayer__osd:focus-visible {
-  color: #fff;
+  opacity: 1;
   text-shadow:
     0 0 2px rgba(0, 0, 0, .95),
     0 2px 6px rgba(0, 0, 0, .9),
-    0 0 30px rgba(180, 225, 255, .8);
+    0 0 26px rgba(201, 240, 58, .55);
   outline: none;
 }
-.vplayer__osd:active { transform: translateY(1px); }
+.vplayer__osd:active { opacity: .5; }
 .vplayer__osdGlyph {
   /* Треугольник мигает, как индикатор режима на передней панели. */
   animation: vplayer-osd-blink 1.6s steps(1, end) infinite;

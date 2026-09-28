@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { asset } from '../media/asset';
 import { claimAudio } from '../media/playerContext';
 import { ExternalVideoPlayer } from '../components/ExternalVideoPlayer';
+import { TvSet } from '../components/TvSet';
 import { findFilm, salon, disney } from '../data/films';
 
 export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
@@ -91,21 +92,23 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
       </section>
 
       <section className="section container">
-        {on ? (
-          <ExternalVideoPlayer
-            key={`${source.provider}-${source.id}`}
-            source={source}
-            label={`Плеер: ${film.title}`}
-            poster={film.backdrop ?? film.poster}
-          />
-        ) : (
-          <div className="vplayer vplayer--off">
-            {film.backdrop ? <img src={asset(film.backdrop)} alt="" aria-hidden="true" /> : null}
-            <button className="btn btn--primary vplayer__start" onClick={start}>
-              {group === 'salon' ? 'Вставить кассету ▶' : 'Включить мультик ▶'}
-            </button>
-          </div>
-        )}
+        <TvSet title={film.title} year={film.year}>
+          {on ? (
+            <ExternalVideoPlayer
+              key={`${source.provider}-${source.id}`}
+              source={source}
+              label={`Плеер: ${film.title}`}
+              poster={film.backdrop ?? film.poster}
+            />
+          ) : (
+            <div className="vplayer vplayer--off">
+              {film.backdrop ? <img src={asset(film.backdrop)} alt="" aria-hidden="true" /> : null}
+              <button className="vplayer__osd vplayer__start" onClick={start}>
+                <span className="vplayer__osdGlyph" aria-hidden="true">▶</span> PLAY
+              </button>
+            </div>
+          )}
+        </TvSet>
 
         {playlist.length > 1 ? (
           <div style={{ marginTop: 14 }}>

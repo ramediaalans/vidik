@@ -63,6 +63,8 @@ function embedUrl(source: FilmVideoSource): string {
   return `https://www.youtube-nocookie.com/embed/${source.id}?autoplay=1&mute=1&rel=0&cc_load_policy=0&enablejsapi=1&controls=0&modestbranding=1${start > 0 ? `&start=${start}` : ''}${end ? `&end=${end}` : ''}`;
 }
 
+const VEIL_MS = 5200;
+
 function VkVideoPlayer({ source, label, poster }: {
   source: FilmVideoSource;
   label: string;
@@ -80,7 +82,10 @@ function VkVideoPlayer({ source, label, poster }: {
   const [soundOff, setSoundOff] = useState(false);
   const [adBlocked, setAdBlocked] = useState(false);
   const [controlsOn, setControlsOn] = useState(true);
+  const [veil, setVeil] = useState(false);
+  const veilTimer = useRef(0);
   const soundOffRef = useRef(false);
+  useEffect(() => () => window.clearTimeout(veilTimer.current), []);
   const { isFullscreen, pseudo, toggle: toggleFullscreen } = useFullscreen(container, {
     autoLandscape: true,
     active: mode === 'playing' || mode === 'paused'
@@ -166,6 +171,10 @@ function VkVideoPlayer({ source, label, poster }: {
         }
         if (start > 0 && p.getState() === factory.States.PLAYING) p.seek(start);
         setMode('playing');
+        // Держим шторку ещё пару секунд: за ней проходят чужие плашки плеера.
+        setVeil(true);
+        window.clearTimeout(veilTimer.current);
+        veilTimer.current = window.setTimeout(() => setVeil(false), VEIL_MS);
       });
       p.on(e.RESUMED, () => {
         if (pauseAt.current === null) setMode('playing');
@@ -351,9 +360,9 @@ function VkVideoPlayer({ source, label, poster }: {
         <button type="button" className="vplayer__barBtn" onClick={toggleSound} aria-label={soundOff ? 'Включить звук' : 'Выключить звук'}>{soundOff ? 'Звук' : 'Тихо'}</button>
         <button type="button" className="vplayer__barBtn" onClick={toggleFullscreen} aria-label={isFullscreen ? 'Выйти из полного экрана' : 'Полный экран'}>{isFullscreen ? '✕ Экран' : '⛶ Экран'}</button>
       </div>
-      {mode !== 'playing' || adBlocked ? (
+      {mode !== 'playing' || adBlocked || veil ? (
         <div
-          className={`vplayer__privacy vplayer__privacy--${adBlocked ? 'ad' : mode}`}
+          className={`vplayer__privacy vplayer__privacy--${adBlocked ? 'ad' : veil && mode === 'playing' ? 'loading' : mode}`}
           onPointerDown={revealControls}
           style={poster ? { backgroundImage: `linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.82)), url(${poster})` } : undefined}
         >
@@ -409,6 +418,10 @@ function ScreenNoise() {
   );
 }
 
+// Плашки чужого плеера («Звук включен», юридические дисклеймеры) живут внутри
+// iframe на другом домене — удалить их извне нельзя. Зато можно переждать
+// под своей шторкой с помехами: они висят только в первые секунды после старта,
+// а у нас это читается как разгон кассеты.
 type FrameCmd = 'play' | 'pause' | 'mute' | 'unmute' | 'seek';
 
 // Rutube и YouTube умеют postMessage, поэтому родные контролы убираем под щит
@@ -424,6 +437,9 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
   const [controlsOn, setControlsOn] = useState(true);
   const [shielded, setShielded] = useState(true);
   const [stuck, setStuck] = useState(false);
+  const [veil, setVeil] = useState(false);
+  const veilTimer = useRef(0);
+  useEffect(() => () => window.clearTimeout(veilTimer.current), []);
   const { isFullscreen, pseudo, toggle: toggleFullscreen } = useFullscreen(container, {
     autoLandscape: true,
     active: true
@@ -472,6 +488,10 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
       setStuck(false);
       // Звук возвращаем только когда картинка уже пошла.
       if (!soundOffRef.current) window.setTimeout(() => send('unmute'), 400);
+      // Шторка висит ещё пару секунд — за ней проходят чужие плашки.
+      setVeil(true);
+      window.clearTimeout(veilTimer.current);
+      veilTimer.current = window.setTimeout(() => setVeil(false), VEIL_MS);
     };
 
     const onMessage = (event: MessageEvent) => {
@@ -673,6 +693,12 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
         <button type="button" className="vplayer__barBtn" onClick={toggleSound} aria-label={soundOff ? 'Включить звук' : 'Выключить звук'}>{soundOff ? 'Звук' : 'Тихо'}</button>
         <button type="button" className="vplayer__barBtn" onClick={toggleFullscreen} aria-label={isFullscreen ? 'Выйти из полного экрана' : 'Полный экран'}>{isFullscreen ? '✕ Экран' : '⛶ Экран'}</button>
       </div>
+      {veil && !stuck ? (
+        <div className="vplayer__privacy vplayer__privacy--loading">
+          <ScreenNoise />
+          <span className="mono">Подготавливаем кассету…</span>
+        </div>
+      ) : null}
       {stuck ? (
         <p className="mono" style={{ marginTop: 10, fontSize: 13, opacity: 0.75 }}>
           Плеер не запустился сам — нажмите крупную кнопку воспроизведения на картинке.
