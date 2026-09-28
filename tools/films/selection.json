@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T10:13:36.283Z",
+  "generatedAt": "2026-09-28T11:05:36.984Z",
   "salon": [
     {
       "ask": {
@@ -4492,8 +4492,8 @@
       "countries": [
         "США"
       ],
-      "poster": null,
-      "backdrop": null,
+      "poster": "https://image.tmdb.org/t/p/w780/AnrESNGYTVsSZrT3Q5oJFgoNzSC.jpg",
+      "backdrop": "vk://frame",
       "short": "Боевые экзоскелеты, неосапиенсы и война за Солнечную систему — самый взрослый мультсериал утреннего блока",
       "description": "Середина XXII века: созданные человеком неосапиенсы поднимают мятеж и захватывают Землю. Отбивать планету предстоит эскадрилье лейтенанта Марша на боевых экзоскелетах.",
       "voiceovers": [],
@@ -4579,8 +4579,8 @@
       "countries": [
         "США"
       ],
-      "poster": null,
-      "backdrop": null,
+      "poster": "https://image.tmdb.org/t/p/w780/diRVQ9p90HPXTqKcxPYB3XQ3I6g.jpg",
+      "backdrop": "vk://frame",
       "short": "Динозавры в броне, земляне из будущего и рептоны — культовая игрушечная франшиза конца 80-х",
       "description": "Земляне и рептоны из будущего терпят крушение в мезозое и продолжают войну, посадив на динозавров лазерные пушки.",
       "voiceovers": [],
@@ -4658,7 +4658,7 @@
       "kpId": 0,
       "type": "serial",
       "title": "Дракулито-вампирёныш",
-      "titleOrig": "Draculito, mon saigneur",
+      "titleOrig": "Little Dracula / Draculito, mon saigneur",
       "year": 1991,
       "kpRating": null,
       "duration": null,
@@ -4668,10 +4668,11 @@
         "семейный"
       ],
       "countries": [
-        "Франция"
+        "Франция",
+        "США"
       ],
-      "poster": null,
-      "backdrop": null,
+      "poster": "https://image.tmdb.org/t/p/w780/7IUrFzZtmD84tyxCO2xfm5vRXFv.jpg",
+      "backdrop": "vk://frame",
       "short": "Сын Графа Дракулы отказывается кусаться — французский мультсериал из ранних 90-х",
       "description": "Маленький вампир Дракулито живёт среди людей, дружит с мальчишкой и постоянно разочаровывает свою кровожадную родню.",
       "voiceovers": [],
@@ -4809,8 +4810,8 @@
       "countries": [
         "США"
       ],
-      "poster": null,
-      "backdrop": null,
+      "poster": "https://image.tmdb.org/t/p/w780/kLquadlhGPfpKHkVNRgrq0tzHkL.jpg",
+      "backdrop": "vk://frame",
       "short": "Протонные ранцы, Лиггер и ловушки для призраков — мультсериал по легендарному фильму",
       "description": "Четвёрка охотников за привидениями вместе с духом-обжорой Лиггером расчищает Нью-Йорк от потусторонней нечисти.",
       "voiceovers": [],
@@ -4896,8 +4897,8 @@
       "countries": [
         "США"
       ],
-      "poster": null,
-      "backdrop": null,
+      "poster": "https://image.tmdb.org/t/p/w780/7mbE2Qy4ejloOLA1FMy8jHWi8CY.jpg",
+      "backdrop": "vk://frame",
       "short": "Роботы-трансформеры Гуардианы против Ренегатов — главный соперник трансформеров на кассетах",
       "description": "С планеты Гоботрон на Землю переносится война роботов: Гуардианы защищают людей от Ренегатов и их предводителя Циклонуса.",
       "voiceovers": [],

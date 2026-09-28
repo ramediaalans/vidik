@@ -409,6 +409,7 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
         seek: 'player:setCurrentTime'
       };
       win.postMessage(JSON.stringify({ type: names[cmd], data: cmd === 'seek' ? { time: value ?? 0 } : {} }), '*');
+      if (cmd === 'unmute') win.postMessage(JSON.stringify({ type: 'player:setVolume', data: { volume: 1 } }), '*');
       return;
     }
     const funcs: Record<FrameCmd, string> = {
@@ -427,32 +428,68 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
   // Пока плеер молчит, считаем, что воспроизведение ещё не началось.
   const playing = useRef(false);
 
-  // Собственного API у нас нет, поэтому текущую позицию берём из событий плеера.
+  // Оба плеера рассказывают о себе событиями: ждём готовности, жмём play,
+  // отслеживаем старт и текущее время.
   useEffect(() => {
+    const started = () => {
+      if (playing.current) return;
+      playing.current = true;
+      setShielded(true);
+      // Звук возвращаем только когда картинка уже пошла.
+      if (!soundOffRef.current) window.setTimeout(() => send('unmute'), 400);
+    };
+
     const onMessage = (event: MessageEvent) => {
       if (typeof event.data !== 'string') return;
       let payload: unknown;
       try { payload = JSON.parse(event.data); } catch { return; }
       const msg = payload as {
         type?: string;
-        data?: { time?: number; currentTime?: number };
+        data?: { time?: number; currentTime?: number; state?: string };
         event?: string;
-        info?: { currentTime?: number };
+        info?: { currentTime?: number; playerState?: number };
       };
-      const time = msg.type === 'player:currentTime'
-        ? msg.data?.time ?? msg.data?.currentTime
-        : msg.event === 'infoDelivery' ? msg.info?.currentTime : undefined;
-      if (typeof time !== 'number' || time <= 0) return;
-      at.current = time;
-      if (!playing.current) {
-        playing.current = true;
-        // Звук возвращаем только когда картинка уже пошла.
-        if (!soundOffRef.current) send('unmute');
+
+      // Rutube
+      if (msg.type === 'player:ready') {
+        send('mute');
+        send('play');
+        return;
+      }
+      if (msg.type === 'player:changeState' && msg.data?.state === 'playing') started();
+      if (msg.type === 'player:currentTime' || msg.type === 'player:changeState') {
+        const time = msg.data?.time ?? msg.data?.currentTime;
+        if (typeof time === 'number' && time > 0) {
+          at.current = time;
+          started();
+        }
+        return;
+      }
+
+      // YouTube
+      if (msg.event === 'onReady') {
+        send('mute');
+        send('play');
+        return;
+      }
+      const info = msg.info;
+      if (msg.event === 'infoDelivery' && info) {
+        if (typeof info.currentTime === 'number' && info.currentTime > 0) at.current = info.currentTime;
+        if (info.playerState === 1) started();
       }
     };
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
   }, [send]);
+
+  // Rutube сам время не шлёт — спрашиваем его, иначе перематывать будет не от чего.
+  useEffect(() => {
+    if (source.provider !== 'rutube') return;
+    const id = window.setInterval(() => {
+      frame.current?.contentWindow?.postMessage(JSON.stringify({ type: 'player:getCurrentTime', data: {} }), '*');
+    }, 2000);
+    return () => window.clearInterval(id);
+  }, [source.provider]);
 
   // Сторож автозапуска: если плеер встал на своей кнопке Play, жмём его сами.
   useEffect(() => {
@@ -478,10 +515,12 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
   const onFrameLoad = useCallback(() => {
     if (source.provider !== 'youtube') return;
     // Без этого YouTube не присылает infoDelivery с текущим временем.
-    frame.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }),
-      '*'
-    );
+    const win = frame.current?.contentWindow;
+    win?.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*');
+    window.setTimeout(() => {
+      win?.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
+      win?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
+    }, 600);
   }, [source.provider]);
 
   const seekBy = useCallback((delta: number) => {

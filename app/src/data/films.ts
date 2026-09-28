@@ -263,7 +263,7 @@ export const salon: Film[] = [
       "США"
     ],
     "poster": "/films/salon/krovavyy-sport-1988.webp",
-    "backdrop": null,
+    "backdrop": "/films/salon/krovavyy-sport-1988-bg.webp",
     "short": null,
     "description": "В Гонконге должны состояться подпольные соревнования по восточным единоборствам, к которым готовится и один из американских военнослужащих. В свое время, будучи ребенком, он стал приемным сыном японца - учителя каратэ, достиг совершенства путем упорных тренировок и в знак успеха получил священный японский меч. Он самовольно оставляет воинскую часть и отправляется в Гонконг на «Кумите». По следам молодого человека идет ФБР. Несмотря на все преграды, возникающие на пути каратиста, ему удается добиться победы и вступить в Братство Черного Дракона..."
   },
@@ -1168,7 +1168,7 @@ export const disney: Film[] = [
       "Корея Южная"
     ],
     "poster": "/films/disney/priklyucheniya-mishek-gammi-1985.webp",
-    "backdrop": null,
+    "backdrop": "/films/disney/priklyucheniya-mishek-gammi-1985-bg.webp",
     "short": null,
     "description": "Красочный и добрый мультсериал о приключениях Мишек Гамми – сказочных медведях, тайно живущих рядом с людьми, и о которых ходят легенды по всей земле, ведь они не раз спасали королевство и подданых короля от нападений злых гоблинов под руководством хитрого графа Игторна и другой нечистой силы. Этих медведей полюбят все дети. Сказки про них нам расскажет Дисней. Ловкие, смелые, добрые, милые - Преданней вы не встречали друзей. Мишки Гамми нас рассмешат Забавными прыжками.",
     "seasons": [
@@ -1360,7 +1360,7 @@ export const disney: Film[] = [
       "Япония"
     ],
     "poster": "/films/disney/myshinyy-dom-2001.webp",
-    "backdrop": null,
+    "backdrop": "/films/disney/myshinyy-dom-2001-bg.webp",
     "short": null,
     "description": "Микки Маус и его друзья приглашают персонажей из различных диснеевских полнометражек в свой клуб, где показывают классические мультфильмы студии Уолта Диснея. В промежутках между мультфильмами Микки помогает гостям решить их проблемы, улаживает конфликты и устраняет неполадки, вызванные Питом, который всеми способами пытается сорвать шоу и добиться закрытия заведения.",
     "seasons": [
@@ -1481,8 +1481,8 @@ export const disney: Film[] = [
     "countries": [
       "США"
     ],
-    "poster": null,
-    "backdrop": null,
+    "poster": "/films/disney/kosmicheskie-spasateli-leytenanta-marsha-1993.webp",
+    "backdrop": "/films/disney/kosmicheskie-spasateli-leytenanta-marsha-1993-bg.webp",
     "short": "Боевые экзоскелеты, неосапиенсы и война за Солнечную систему — самый взрослый мультсериал утреннего блока",
     "description": "Середина XXII века: созданные человеком неосапиенсы поднимают мятеж и захватывают Землю. Отбивать планету предстоит эскадрилье лейтенанта Марша на боевых экзоскелетах.",
     "seasons": [
@@ -1515,8 +1515,8 @@ export const disney: Film[] = [
     "countries": [
       "США"
     ],
-    "poster": null,
-    "backdrop": null,
+    "poster": "/films/disney/pogonschiki-dinozavrov-1988.webp",
+    "backdrop": "/films/disney/pogonschiki-dinozavrov-1988-bg.webp",
     "short": "Динозавры в броне, земляне из будущего и рептоны — культовая игрушечная франшиза конца 80-х",
     "description": "Земляне и рептоны из будущего терпят крушение в мезозое и продолжают войну, посадив на динозавров лазерные пушки.",
     "seasons": [
@@ -1536,7 +1536,7 @@ export const disney: Film[] = [
       "duration": 33310
     },
     "title": "Дракулито-вампирёныш",
-    "titleOrig": "Draculito, mon saigneur",
+    "titleOrig": "Little Dracula / Draculito, mon saigneur",
     "year": 1991,
     "kind": "serial",
     "duration": null,
@@ -1547,10 +1547,11 @@ export const disney: Film[] = [
       "семейный"
     ],
     "countries": [
-      "Франция"
+      "Франция",
+      "США"
     ],
-    "poster": null,
-    "backdrop": null,
+    "poster": "/films/disney/drakulito-vampirenysh-1991.webp",
+    "backdrop": "/films/disney/drakulito-vampirenysh-1991-bg.webp",
     "short": "Сын Графа Дракулы отказывается кусаться — французский мультсериал из ранних 90-х",
     "description": "Маленький вампир Дракулито живёт среди людей, дружит с мальчишкой и постоянно разочаровывает свою кровожадную родню.",
     "seasons": [
@@ -1583,8 +1584,8 @@ export const disney: Film[] = [
     "countries": [
       "США"
     ],
-    "poster": null,
-    "backdrop": null,
+    "poster": "/films/disney/nastoyaschie-ohotniki-za-privideniyami-1986.webp",
+    "backdrop": "/films/disney/nastoyaschie-ohotniki-za-privideniyami-1986-bg.webp",
     "short": "Протонные ранцы, Лиггер и ловушки для призраков — мультсериал по легендарному фильму",
     "description": "Четвёрка охотников за привидениями вместе с духом-обжорой Лиггером расчищает Нью-Йорк от потусторонней нечисти.",
     "seasons": [
@@ -1617,8 +1618,8 @@ export const disney: Film[] = [
     "countries": [
       "США"
     ],
-    "poster": null,
-    "backdrop": null,
+    "poster": "/films/disney/voyna-gobotov-1984.webp",
+    "backdrop": "/films/disney/voyna-gobotov-1984-bg.webp",
     "short": "Роботы-трансформеры Гуардианы против Ренегатов — главный соперник трансформеров на кассетах",
     "description": "С планеты Гоботрон на Землю переносится война роботов: Гуардианы защищают людей от Ренегатов и их предводителя Циклонуса.",
     "seasons": [
