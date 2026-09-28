@@ -390,6 +390,7 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
   const [soundOff, setSoundOff] = useState(false);
   const [controlsOn, setControlsOn] = useState(true);
   const [shielded, setShielded] = useState(true);
+  const [stuck, setStuck] = useState(false);
   const { isFullscreen, pseudo, toggle: toggleFullscreen } = useFullscreen(container, {
     autoLandscape: true,
     active: true
@@ -435,6 +436,7 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
       if (playing.current) return;
       playing.current = true;
       setShielded(true);
+      setStuck(false);
       // Звук возвращаем только когда картинка уже пошла.
       if (!soundOffRef.current) window.setTimeout(() => send('unmute'), 400);
     };
@@ -499,10 +501,11 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
         window.clearInterval(id);
         return;
       }
-      if (tries >= 6) {
+      if (tries >= 8) {
         // Плеер не ответил: открываем ему клики, иначе запустить его будет нечем.
         window.clearInterval(id);
         setShielded(false);
+        setStuck(true);
         return;
       }
       tries++;
@@ -529,12 +532,24 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
     send('seek', next);
   }, [endAt, send, startAt]);
 
+  // Клик пользователя — самый надёжный способ пробить запрет автозапуска.
+  const kick = useCallback(() => {
+    send('mute');
+    send('play');
+    pausedRef.current = false;
+    setPaused(false);
+  }, [send]);
+
   const togglePlay = useCallback(() => {
+    if (!playing.current) {
+      kick();
+      return;
+    }
     const next = !pausedRef.current;
     pausedRef.current = next;
     send(next ? 'pause' : 'play');
     setPaused(next);
-  }, [send]);
+  }, [kick, send]);
 
   const toggleSound = useCallback(() => {
     const next = !soundOffRef.current;
@@ -603,7 +618,11 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
         role="application"
         tabIndex={0}
         aria-label="Плеер: стрелки влево и вправо — перемотка, пробел — пауза, M — звук, F — полный экран"
-        onClick={(event) => { event.currentTarget.focus(); revealControls(); }}
+        onClick={(event) => {
+          event.currentTarget.focus();
+          revealControls();
+          if (!playing.current) kick();
+        }}
         onPointerMove={revealControls}
         style={{ position: 'absolute', zIndex: 2, inset: 0, background: 'transparent', pointerEvents: shielded ? 'auto' : 'none' }}
       />
@@ -621,6 +640,11 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
         <button type="button" className="vplayer__barBtn" onClick={toggleSound} aria-label={soundOff ? 'Включить звук' : 'Выключить звук'}>{soundOff ? 'Звук' : 'Тихо'}</button>
         <button type="button" className="vplayer__barBtn" onClick={toggleFullscreen} aria-label={isFullscreen ? 'Выйти из полного экрана' : 'Полный экран'}>{isFullscreen ? '✕ Экран' : '⛶ Экран'}</button>
       </div>
+      {stuck ? (
+        <p className="mono" style={{ marginTop: 10, fontSize: 13, opacity: 0.75 }}>
+          Плеер не запустился сам — нажмите крупную кнопку воспроизведения на картинке.
+        </p>
+      ) : null}
     </div>
   );
 }
