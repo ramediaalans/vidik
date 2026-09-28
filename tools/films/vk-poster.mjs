@@ -23,7 +23,12 @@ const JOBS = [
   ['kosmicheskie-spasateli-leytenanta-marsha-1993', '-238771813_456239109', 300, ['bg']],
   ['pogonschiki-dinozavrov-1988', '-229097667_456242074', 300, ['bg']],
   ['nastoyaschie-ohotniki-za-privideniyami-1986', '-182437809_456244273', 300, ['bg']],
-  ['voyna-gobotov-1984', '-58264493_456241230', 300, ['bg']]
+  ['voyna-gobotov-1984', '-58264493_456241230', 300, ['bg']],
+  // база каталога этих двух не знает вовсе — берём и обложку, и фон кадрами
+  ['novye-priklyucheniya-vinni-puha-1988', '-100084161_456244416', 240, ['poster', 'bg']],
+  ['chudesa-na-virazhah-1990', '-205333784_456240029', 420, ['poster', 'bg']],
+  // постер есть в базе, а фона нет — добираем кадром
+  ['tom-i-dzherri-1940', '-194007084_456241090', 150, ['bg']]
 ];
 
 async function mp4Url(id) {

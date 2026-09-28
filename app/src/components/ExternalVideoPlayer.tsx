@@ -3,6 +3,7 @@ import type { FilmVideoSource } from '../data/films';
 import { useFullscreen } from '../media/fullscreen';
 import { hotkeyChar, isTypingTarget } from '../media/hotkeys';
 import { asset } from '../media/asset';
+import { clearMark, saveMark, TAIL_SECONDS } from '../media/watchProgress';
 
 type VkPlayerState = { time?: number; duration?: number };
 type VkPlayer = {
@@ -47,13 +48,13 @@ function loadVkApi(): Promise<VkFactory> {
   return vkApiPromise;
 }
 
-function embedUrl(source: FilmVideoSource): string {
+// from — секунда, с которой продолжаем просмотр (закладка из localStorage).
+function embedUrl(source: FilmVideoSource, from = 0): string {
+  const start = Math.max(0, Math.floor(source.start ?? 0), Math.floor(from));
   if (source.provider === 'vk') {
     const [ownerId, videoId] = source.id.split('_');
-    const at = Math.max(0, Math.floor(source.start ?? 0));
-    return `https://vk.com/video_ext.php?oid=${ownerId}&id=${videoId}&hd=2&autoplay=1&js_api=1&t=${at}`;
+    return `https://vk.com/video_ext.php?oid=${ownerId}&id=${videoId}&hd=2&autoplay=1&js_api=1&t=${start}`;
   }
-  const start = Math.max(0, Math.floor(source.start ?? 0));
   // Стартуем всегда без звука: браузеры блокируют автозапуск со звуком,
   // а звук мы включаем сами сразу после реального начала воспроизведения.
   if (source.provider === 'rutube') {
@@ -66,11 +67,31 @@ function embedUrl(source: FilmVideoSource): string {
 const VEIL_MS = 5200;
 // После снятия паузы хватает короткой шторки: ждём только уход панели плеера.
 const RESUME_VEIL_MS = 1400;
+// Закладку пишем не чаще чем раз в 5 секунд просмотра.
+const MARK_STEP = 5;
 
-function VkVideoPlayer({ source, label, poster }: {
+// Общая для обоих плееров закладка: запоминаем секунду, а близко к финалу стираем:
+// досмотрели — значит в следующий раз кассета должна начаться сначала.
+function useWatchMark(progressKey: string | undefined, finishAt: number) {
+  const lastSaved = useRef(0);
+  return useCallback(
+    (time: number, force = false) => {
+      if (!progressKey || !Number.isFinite(time) || time <= 0) return;
+      if (!force && Math.abs(time - lastSaved.current) < MARK_STEP) return;
+      lastSaved.current = time;
+      if (time >= finishAt - TAIL_SECONDS) clearMark(progressKey);
+      else saveMark(progressKey, time);
+    },
+    [finishAt, progressKey]
+  );
+}
+
+function VkVideoPlayer({ source, label, poster, progressKey, resumeAt = 0 }: {
   source: FilmVideoSource;
   label: string;
   poster?: string | null;
+  progressKey?: string;
+  resumeAt?: number;
 }) {
   const container = useRef<HTMLDivElement>(null);
   const frame = useRef<HTMLIFrameElement>(null);
@@ -94,8 +115,24 @@ function VkVideoPlayer({ source, label, poster }: {
   });
   const start = Math.max(0, source.start ?? 0);
   const endAt = source.endTrim ? Math.max(start, source.duration - source.endTrim) : null;
+  // С какой секунды запускаем: закладка или начало ролика.
+  const [startFrom] = useState(() => Math.max(start, Math.floor(resumeAt)));
+  const mark = useWatchMark(progressKey, endAt ?? source.duration);
+  const lastTime = useRef(startFrom);
 
   useEffect(() => { soundOffRef.current = soundOff; }, [soundOff]);
+
+  // Уход со страницы или свёрнутая вкладка — тоже повод записать закладку.
+  useEffect(() => {
+    const flush = () => mark(lastTime.current, true);
+    document.addEventListener('visibilitychange', flush);
+    window.addEventListener('pagehide', flush);
+    return () => {
+      document.removeEventListener('visibilitychange', flush);
+      window.removeEventListener('pagehide', flush);
+      flush();
+    };
+  }, [mark]);
 
   // Единая точка управления звуком: во время рекламы всегда тишина.
   const applySound = useCallback(() => {
@@ -162,7 +199,7 @@ function VkVideoPlayer({ source, label, poster }: {
       p.on(e.INITED, () => {
         // До подтверждённого контента звука нет: первым может пойти преролл.
         try { p.mute(); } catch { /* нет доступа к звуку */ }
-        if (start > 0) p.seek(start);
+        if (startFrom > 0) p.seek(startFrom);
       });
       p.on(e.STARTED, () => {
         ending.current = false;
@@ -171,7 +208,7 @@ function VkVideoPlayer({ source, label, poster }: {
           applySound();
           soundPrimed.current = true;
         }
-        if (start > 0 && p.getState() === factory.States.PLAYING) p.seek(start);
+        if (startFrom > 0 && p.getState() === factory.States.PLAYING) p.seek(startFrom);
         setMode('playing');
         // Держим шторку ещё пару секунд: за ней проходят чужие плашки плеера.
         setVeil(true);
@@ -183,10 +220,12 @@ function VkVideoPlayer({ source, label, poster }: {
       });
       p.on(e.PAUSED, () => {
         if (pauseAt.current === null) pauseAt.current = p.getCurrentTime();
+        mark(pauseAt.current ?? 0, true);
         setMode(ending.current ? 'ended' : 'paused');
       });
       p.on(e.ENDED, () => {
         ending.current = true;
+        if (progressKey) clearMark(progressKey);
         setMode('ended');
       });
       p.on(e.ERROR, () => setMode('error'));
@@ -215,11 +254,14 @@ function VkVideoPlayer({ source, label, poster }: {
         if (looksLikeAd) { beginAd(); return; }
         if (adActive.current) endAd();
         if (start > 0 && state.time < start - 1) {
-          p.seek(start);
+          p.seek(startFrom);
           return;
         }
+        lastTime.current = state.time;
+        mark(state.time);
         if (endAt !== null && state.time >= endAt) {
           ending.current = true;
+          if (progressKey) clearMark(progressKey);
           p.pause();
           setMode('ended');
         }
@@ -231,7 +273,7 @@ function VkVideoPlayer({ source, label, poster }: {
       try { instance?.destroy(); } catch { /* iframe already gone */ }
       player.current = null;
     };
-  }, [applySound, endAt, source.duration, start]);
+  }, [applySound, endAt, mark, progressKey, source.duration, start, startFrom]);
 
   const resume = useCallback(() => {
     ending.current = false;
@@ -248,6 +290,7 @@ function VkVideoPlayer({ source, label, poster }: {
   const replay = () => {
     ending.current = false;
     pauseAt.current = null;
+    if (progressKey) clearMark(progressKey);
     player.current?.seek(start);
     player.current?.play();
     applySound();
@@ -332,7 +375,7 @@ function VkVideoPlayer({ source, label, poster }: {
       <div className="vplayer__mount">
         <iframe
           ref={frame}
-          src={embedUrl(source)}
+          src={embedUrl(source, startFrom)}
           title={label}
           allow="autoplay; encrypted-media; picture-in-picture"
           allowFullScreen
@@ -428,10 +471,15 @@ type FrameCmd = 'play' | 'pause' | 'mute' | 'unmute' | 'seek';
 
 // Rutube и YouTube умеют postMessage, поэтому родные контролы убираем под щит
 // и крутим их теми же кнопками и хоткеями, что и VK.
-function FramePlayer({ source, label }: { source: FilmVideoSource; label: string }) {
+function FramePlayer({ source, label, progressKey, resumeAt = 0 }: {
+  source: FilmVideoSource;
+  label: string;
+  progressKey?: string;
+  resumeAt?: number;
+}) {
   const container = useRef<HTMLDivElement>(null);
   const frame = useRef<HTMLIFrameElement>(null);
-  const at = useRef(Math.max(0, source.start ?? 0));
+  const at = useRef(Math.max(0, source.start ?? 0, Math.floor(resumeAt)));
   const pausedRef = useRef(false);
   const soundOffRef = useRef(false);
   const [paused, setPaused] = useState(false);
@@ -448,6 +496,21 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
   });
   const startAt = Math.max(0, source.start ?? 0);
   const endAt = source.endTrim ? Math.max(startAt, source.duration - source.endTrim) : source.duration;
+  // С какой секунды показываем в первый раз: закладка или начало.
+  const [startFrom] = useState(() => Math.max(startAt, Math.floor(resumeAt)));
+  const mark = useWatchMark(progressKey, endAt);
+
+  // Свёрнутая вкладка и уход со страницы — тоже повод записать закладку.
+  useEffect(() => {
+    const flush = () => mark(at.current, true);
+    document.addEventListener('visibilitychange', flush);
+    window.addEventListener('pagehide', flush);
+    return () => {
+      document.removeEventListener('visibilitychange', flush);
+      window.removeEventListener('pagehide', flush);
+      flush();
+    };
+  }, [mark]);
 
   const send = useCallback((cmd: FrameCmd, value?: number) => {
     const win = frame.current?.contentWindow;
@@ -518,6 +581,7 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
         const time = msg.data?.time ?? msg.data?.currentTime;
         if (typeof time === 'number' && time > 0) {
           at.current = time;
+          mark(time);
           started();
         }
         return;
@@ -531,13 +595,18 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
       }
       const info = msg.info;
       if (msg.event === 'infoDelivery' && info) {
-        if (typeof info.currentTime === 'number' && info.currentTime > 0) at.current = info.currentTime;
+        if (typeof info.currentTime === 'number' && info.currentTime > 0) {
+          at.current = info.currentTime;
+          mark(info.currentTime);
+        }
         if (info.playerState === 1) started();
+        // 0 — ролик доиграл до конца: закладка больше не нужна.
+        if (info.playerState === 0 && progressKey) clearMark(progressKey);
       }
     };
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
-  }, [send]);
+  }, [mark, progressKey, send]);
 
   // Rutube сам время не шлёт — спрашиваем его, иначе перематывать будет не от чего.
   useEffect(() => {
@@ -604,13 +673,14 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
     pausedRef.current = next;
     send(next ? 'pause' : 'play');
     setPaused(next);
+    if (next) mark(at.current, true);
     // При возврате из паузы чужая панель гаснет не сразу — прикрываем её помехами.
     if (!next) {
       setVeil(true);
       window.clearTimeout(veilTimer.current);
       veilTimer.current = window.setTimeout(() => setVeil(false), RESUME_VEIL_MS);
     }
-  }, [kick, send]);
+  }, [kick, mark, send]);
 
   const toggleSound = useCallback(() => {
     const next = !soundOffRef.current;
@@ -666,7 +736,7 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
       <div className="vplayer__mount">
         <iframe
           ref={frame}
-          src={embedUrl(source)}
+          src={embedUrl(source, startFrom)}
           title={label}
           onLoad={onFrameLoad}
           allow="autoplay; encrypted-media; picture-in-picture"
@@ -724,13 +794,17 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
   );
 }
 
-export function ExternalVideoPlayer({ source, label, poster }: {
+export function ExternalVideoPlayer({ source, label, poster, progressKey, resumeAt }: {
   source: FilmVideoSource;
   label: string;
   poster?: string | null;
+  /** ключ закладки «докуда досмотрели»; без него прогресс не пишется */
+  progressKey?: string;
+  /** секунда, с которой надо продолжить */
+  resumeAt?: number;
 }) {
   if (source.provider === 'vk') {
-    return <VkVideoPlayer source={source} label={label} poster={poster} />;
+    return <VkVideoPlayer source={source} label={label} poster={poster} progressKey={progressKey} resumeAt={resumeAt} />;
   }
-  return <FramePlayer source={source} label={label} />;
+  return <FramePlayer source={source} label={label} progressKey={progressKey} resumeAt={resumeAt} />;
 }

@@ -1026,9 +1026,9 @@ export const disney: Film[] = [
     "kpId": 95231,
     "source": {
       "provider": "vk",
-      "id": "-217873238_456245003",
-      "title": "Чип и Дейл спешат на помощь — все серии",
-      "duration": 89124
+      "id": "-194175662_456239323",
+      "title": "Чип и Дейл спешат на помощь. 1 часть (1989–1990), 1080p BDRip",
+      "duration": 38288
     },
     "title": "Чип и Дейл спешат на помощь",
     "titleOrig": "Chip 'n Dale: Rescue Rangers",
@@ -1070,7 +1070,8 @@ export const disney: Film[] = [
       "provider": "vk",
       "id": "-227283941_456240193",
       "title": "Чёрный плащ — все серии (1991–1992)",
-      "duration": 119625
+      "duration": 119625,
+      "start": 9
     },
     "title": "Черный Плащ",
     "titleOrig": "Darkwing Duck",
@@ -1149,7 +1150,7 @@ export const disney: Film[] = [
       "id": "-227283941_456240188",
       "title": "Приключения мишек Гамми — все серии (1985–1991)",
       "duration": 85900,
-      "start": 13,
+      "start": 14,
       "endTrim": 13
     },
     "title": "Приключения мишек Гамми",
@@ -1626,6 +1627,144 @@ export const disney: Film[] = [
       {
         "season": 1,
         "episodes": 65
+      }
+    ]
+  },
+  {
+    "slug": "zemlya-do-nachala-vremen-1988",
+    "kpId": 7107,
+    "source": {
+      "provider": "vk",
+      "id": "-217873238_456244350",
+      "title": "Земля до начала времен. Все части",
+      "duration": 58953
+    },
+    "title": "Земля до начала времён",
+    "titleOrig": "The Land Before Time",
+    "year": 1988,
+    "kind": "serial",
+    "duration": null,
+    "rating": 8,
+    "genres": [
+      "мультфильм",
+      "приключения",
+      "семейный"
+    ],
+    "countries": [
+      "США",
+      "Ирландия"
+    ],
+    "poster": "/films/disney/zemlya-do-nachala-vremen-1988.webp",
+    "backdrop": "/films/disney/zemlya-do-nachala-vremen-1988-bg.webp",
+    "short": "Одинокий малыш-динозавр ищет еду, а находит настоящих друзей — и все части культовой саги подряд",
+    "description": "Малыш-бронтозавр Литтлфут потерял маму и вместе с новыми друзьями идёт через выжженную землю в Великую долину. В плеере — склейка из всех частей саги, которые ходили по кассетам.",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 14
+      }
+    ]
+  },
+  {
+    "slug": "novye-priklyucheniya-vinni-puha-1988",
+    "kpId": 0,
+    "source": {
+      "provider": "vk",
+      "id": "-100084161_456244416",
+      "title": "Новые приключения медвежонка Винни и его друзей. 1 сезон (дубляж РТР)",
+      "duration": 29048
+    },
+    "title": "Новые приключения Винни-Пуха",
+    "titleOrig": "The New Adventures of Winnie the Pooh",
+    "year": 1988,
+    "kind": "serial",
+    "duration": null,
+    "rating": null,
+    "genres": [
+      "мультфильм",
+      "семейный",
+      "комедия"
+    ],
+    "countries": [
+      "США"
+    ],
+    "poster": "/films/disney/novye-priklyucheniya-vinni-puha-1988.webp",
+    "backdrop": "/films/disney/novye-priklyucheniya-vinni-puha-1988-bg.webp",
+    "short": "Винни, Пятачок и Тигруля в диснеевском Стоакровом лесу — дубляж РТР",
+    "description": "Диснеевский мультсериал по книгам Милна: медвежонок с опилками в голове, его друзья и мальчик Кристофер Робин попадают в истории на каждый день.",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 25
+      }
+    ]
+  },
+  {
+    "slug": "tom-i-dzherri-1940",
+    "kpId": 1372775,
+    "source": {
+      "provider": "vk",
+      "id": "-194007084_456241090",
+      "title": "Том и Джерри [1940–2005] 2K. Все серии",
+      "duration": 68545
+    },
+    "title": "Том и Джерри",
+    "titleOrig": "Tom and Jerry",
+    "year": 1940,
+    "kind": "serial",
+    "duration": null,
+    "rating": 8.7,
+    "genres": [
+      "мультфильм",
+      "комедия",
+      "семейный"
+    ],
+    "countries": [
+      "США"
+    ],
+    "poster": "/films/disney/tom-i-dzherri-1940.webp",
+    "backdrop": "/films/disney/tom-i-dzherri-1940-bg.webp",
+    "short": "Кот гоняется за мышонком без слов и без перевода — то, что смотрели всей квартирой",
+    "description": "Классические короткометражки MGM: кот Том придумывает очередную ловушку, а мышонок Джерри выкручивается из любой ситуации. В плеере — большая склейка серий 1940–2005 годов.",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 30
+      }
+    ]
+  },
+  {
+    "slug": "chudesa-na-virazhah-1990",
+    "kpId": 0,
+    "source": {
+      "provider": "vk",
+      "id": "-205333784_456240029",
+      "title": "Чудеса на виражах, 1–30 серия",
+      "duration": 39453,
+      "start": 58
+    },
+    "title": "Чудеса на виражах",
+    "titleOrig": "TaleSpin",
+    "year": 1990,
+    "kind": "serial",
+    "duration": null,
+    "rating": null,
+    "genres": [
+      "мультфильм",
+      "приключения",
+      "комедия"
+    ],
+    "countries": [
+      "США"
+    ],
+    "poster": "/films/disney/chudesa-na-virazhah-1990.webp",
+    "backdrop": "/films/disney/chudesa-na-virazhah-1990-bg.webp",
+    "short": "Лётчик Балу, Кит Облачный и грузовой самолёт над Кейп-Сьюзеттом",
+    "description": "Диснеевские воздушные приключения: медведь-лётчик Балу возит грузы на «Седой утке», отбиваясь от воздушных пиратов и помогая юному Киту Облачному.",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": 30
       }
     ]
   }
