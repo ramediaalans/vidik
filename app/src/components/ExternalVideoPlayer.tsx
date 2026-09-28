@@ -57,7 +57,7 @@ function embedUrl(source: FilmVideoSource): string {
     return `https://rutube.ru/play/embed/${source.id}/?autoStart=true${start > 0 ? `&t=${start}` : ''}`;
   }
   const end = source.endTrim ? Math.max(start + 1, Math.floor(source.duration - source.endTrim)) : null;
-  return `https://www.youtube-nocookie.com/embed/${source.id}?autoplay=1&rel=0&cc_load_policy=0${start > 0 ? `&start=${start}` : ''}${end ? `&end=${end}` : ''}`;
+  return `https://www.youtube-nocookie.com/embed/${source.id}?autoplay=1&rel=0&cc_load_policy=0&enablejsapi=1&controls=0&modestbranding=1${start > 0 ? `&start=${start}` : ''}${end ? `&end=${end}` : ''}`;
 }
 
 function VkVideoPlayer({ source, label, poster }: {
@@ -374,6 +374,185 @@ function VkVideoPlayer({ source, label, poster }: {
   );
 }
 
+type FrameCmd = 'play' | 'pause' | 'mute' | 'unmute' | 'seek';
+
+// Rutube и YouTube умеют postMessage, поэтому родные контролы убираем под щит
+// и крутим их теми же кнопками и хоткеями, что и VK.
+function FramePlayer({ source, label }: { source: FilmVideoSource; label: string }) {
+  const container = useRef<HTMLDivElement>(null);
+  const frame = useRef<HTMLIFrameElement>(null);
+  const at = useRef(Math.max(0, source.start ?? 0));
+  const [paused, setPaused] = useState(false);
+  const [soundOff, setSoundOff] = useState(false);
+  const [controlsOn, setControlsOn] = useState(true);
+  const { isFullscreen, pseudo, toggle: toggleFullscreen } = useFullscreen(container, {
+    autoLandscape: true,
+    active: true
+  });
+  const startAt = Math.max(0, source.start ?? 0);
+  const endAt = source.endTrim ? Math.max(startAt, source.duration - source.endTrim) : source.duration;
+
+  const send = useCallback((cmd: FrameCmd, value?: number) => {
+    const win = frame.current?.contentWindow;
+    if (!win) return;
+    if (source.provider === 'rutube') {
+      const names: Record<FrameCmd, string> = {
+        play: 'player:play',
+        pause: 'player:pause',
+        mute: 'player:mute',
+        unmute: 'player:unMute',
+        seek: 'player:setCurrentTime'
+      };
+      win.postMessage(JSON.stringify({ type: names[cmd], data: cmd === 'seek' ? { time: value ?? 0 } : {} }), '*');
+      return;
+    }
+    const funcs: Record<FrameCmd, string> = {
+      play: 'playVideo',
+      pause: 'pauseVideo',
+      mute: 'mute',
+      unmute: 'unMute',
+      seek: 'seekTo'
+    };
+    win.postMessage(
+      JSON.stringify({ event: 'command', func: funcs[cmd], args: cmd === 'seek' ? [value ?? 0, true] : [] }),
+      '*'
+    );
+  }, [source.provider]);
+
+  // Собственного API у нас нет, поэтому текущую позицию берём из событий плеера.
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
+      if (typeof event.data !== 'string') return;
+      let payload: unknown;
+      try { payload = JSON.parse(event.data); } catch { return; }
+      const msg = payload as {
+        type?: string;
+        data?: { time?: number; currentTime?: number };
+        event?: string;
+        info?: { currentTime?: number };
+      };
+      const time = msg.type === 'player:currentTime'
+        ? msg.data?.time ?? msg.data?.currentTime
+        : msg.event === 'infoDelivery' ? msg.info?.currentTime : undefined;
+      if (typeof time === 'number' && time > 0) at.current = time;
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, []);
+
+  const onFrameLoad = useCallback(() => {
+    if (source.provider !== 'youtube') return;
+    // Без этого YouTube не присылает infoDelivery с текущим временем.
+    frame.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }),
+      '*'
+    );
+  }, [source.provider]);
+
+  const seekBy = useCallback((delta: number) => {
+    const next = Math.min(endAt, Math.max(startAt, at.current + delta));
+    at.current = next;
+    send('seek', next);
+  }, [endAt, send, startAt]);
+
+  const pausedRef = useRef(false);
+  const togglePlay = useCallback(() => {
+    const next = !pausedRef.current;
+    pausedRef.current = next;
+    send(next ? 'pause' : 'play');
+    setPaused(next);
+  }, [send]);
+
+  const soundOffRef = useRef(false);
+  const toggleSound = useCallback(() => {
+    const next = !soundOffRef.current;
+    soundOffRef.current = next;
+    send(next ? 'mute' : 'unmute');
+    setSoundOff(next);
+  }, [send]);
+
+  const hideTimer = useRef(0);
+  const revealControls = useCallback(() => {
+    setControlsOn(true);
+    window.clearTimeout(hideTimer.current);
+    hideTimer.current = window.setTimeout(() => setControlsOn(false), 3000);
+  }, []);
+
+  useEffect(() => {
+    hideTimer.current = window.setTimeout(() => setControlsOn(false), 3000);
+    return () => window.clearTimeout(hideTimer.current);
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (isTypingTarget(event.target)) return;
+      const key = hotkeyChar(event);
+      if ([' ', 'm', 'f', 'ArrowLeft', 'ArrowRight'].includes(key) || event.code === 'Space') revealControls();
+
+      if (key === 'ArrowLeft' || key === 'ArrowRight') {
+        event.preventDefault();
+        seekBy(key === 'ArrowLeft' ? -10 : 10);
+        return;
+      }
+      if (key === ' ' || event.code === 'Space') {
+        event.preventDefault();
+        togglePlay();
+        return;
+      }
+      if (key === 'm') {
+        event.preventDefault();
+        toggleSound();
+        return;
+      }
+      if (key === 'f') {
+        event.preventDefault();
+        toggleFullscreen();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [revealControls, seekBy, toggleFullscreen, togglePlay, toggleSound]);
+
+  return (
+    <div className={`vplayer${isFullscreen ? ' is-fullscreen' : ''}${pseudo ? ' is-pseudoFullscreen' : ''}`} ref={container}>
+      <div className="vplayer__mount">
+        <iframe
+          ref={frame}
+          src={embedUrl(source)}
+          title={label}
+          onLoad={onFrameLoad}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+      </div>
+      <div
+        className="vplayer__contentShield"
+        role="application"
+        tabIndex={0}
+        aria-label="Плеер: стрелки влево и вправо — перемотка, пробел — пауза, M — звук, F — полный экран"
+        onClick={(event) => { event.currentTarget.focus(); revealControls(); }}
+        onPointerMove={revealControls}
+        style={{ position: 'absolute', zIndex: 2, inset: 0, background: 'transparent' }}
+      />
+      <div
+        className={`vplayer__bar${controlsOn ? ' is-on' : ''}`}
+        role="toolbar"
+        aria-label="Управление плеером"
+        onPointerDown={revealControls}
+        onPointerMove={revealControls}
+        onFocus={revealControls}
+      >
+        <button type="button" className="vplayer__barBtn" onClick={() => seekBy(-10)} aria-label="Назад 10 секунд">◀◀ 10</button>
+        <button type="button" className="vplayer__barBtn" onClick={togglePlay} aria-label={paused ? 'Продолжить' : 'Пауза'}>{paused ? '▶' : '❙❙'}</button>
+        <button type="button" className="vplayer__barBtn" onClick={() => seekBy(10)} aria-label="Вперёд 10 секунд">10 ▶▶</button>
+        <button type="button" className="vplayer__barBtn" onClick={toggleSound} aria-label={soundOff ? 'Включить звук' : 'Выключить звук'}>{soundOff ? 'Звук' : 'Тихо'}</button>
+        <button type="button" className="vplayer__barBtn" onClick={toggleFullscreen} aria-label={isFullscreen ? 'Выйти из полного экрана' : 'Полный экран'}>{isFullscreen ? '✕ Экран' : '⛶ Экран'}</button>
+      </div>
+    </div>
+  );
+}
+
 export function ExternalVideoPlayer({ source, label, poster }: {
   source: FilmVideoSource;
   label: string;
@@ -382,17 +561,5 @@ export function ExternalVideoPlayer({ source, label, poster }: {
   if (source.provider === 'vk') {
     return <VkVideoPlayer source={source} label={label} poster={poster} />;
   }
-  return (
-    <div className="vplayer">
-      <div className="vplayer__mount">
-        <iframe
-          src={embedUrl(source)}
-          title={label}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-          referrerPolicy="strict-origin-when-cross-origin"
-        />
-      </div>
-    </div>
-  );
+  return <FramePlayer source={source} label={label} />;
 }
