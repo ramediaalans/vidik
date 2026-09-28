@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FilmVideoSource } from '../data/films';
 import { useFullscreen } from '../media/fullscreen';
 import { hotkeyChar, isTypingTarget } from '../media/hotkeys';
+import { asset } from '../media/asset';
 
 type VkPlayerState = { time?: number; duration?: number };
 type VkPlayer = {
@@ -356,6 +357,7 @@ function VkVideoPlayer({ source, label, poster }: {
           onPointerDown={revealControls}
           style={poster ? { backgroundImage: `linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.82)), url(${poster})` } : undefined}
         >
+          {adBlocked ? <AdNoise /> : null}
           {adBlocked ? (
             <span className="mono">Подготавливаем кассету…</span>
           ) : mode === 'paused' ? (
@@ -373,6 +375,33 @@ function VkVideoPlayer({ source, label, poster }: {
         </div>
       ) : null}
     </div>
+  );
+}
+
+// Пока идёт рекламная вставка, поверх неё крутятся живые помехи VHS:
+// короткий немой луп вместо статичной заглушки. При prefers-reduced-motion
+// остаётся первый кадр (poster), движение не запускаем.
+function AdNoise() {
+  return (
+    <video
+      className="vplayer__noise"
+      src={asset('/video/vhs-noise.mp4')}
+      poster={asset('/video/vhs-noise-poster.webp')}
+      loop
+      muted
+      playsInline
+      preload="auto"
+      disablePictureInPicture
+      aria-hidden="true"
+      tabIndex={-1}
+      ref={(el) => {
+        if (!el) return;
+        el.muted = true;
+        el.defaultMuted = true;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        void el.play().catch(() => undefined);
+      }}
+    />
   );
 }
 

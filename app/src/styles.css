@@ -2618,10 +2618,63 @@ body.webamp-hidden #webamp {
   background-size: cover;
 }
 .vplayer__privacy .mono {
+  position: relative;
+  z-index: 2;
   max-width: 560px;
   padding: 9px 12px;
   border-radius: 4px;
   background: rgba(0, 0, 0, .72);
+}
+
+/* Рекламная вставка: вместо статичной заглушки — живые помехи и бегущая кадровая */
+.vplayer__privacy--ad {
+  background-color: #05060a;
+  background-image: none;
+}
+.vplayer__noise {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .92;
+  filter: saturate(.5) contrast(1.08) brightness(.92);
+  pointer-events: none;
+}
+.vplayer__privacy--ad::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, .3) 0 1px, rgba(0, 0, 0, 0) 1px 3px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, .09) 6%, rgba(255, 255, 255, 0) 12%);
+  background-size: 100% 3px, 100% 100%;
+  animation: vplayer-roll 6.5s linear infinite;
+}
+@keyframes vplayer-roll {
+  from { background-position: 0 0, 0 -30%; }
+  to { background-position: 0 3px, 0 130%; }
+}
+.vplayer__privacy--ad .mono {
+  border: 1px solid rgba(222, 216, 201, .25);
+  background: rgba(0, 0, 0, .78);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  animation: vplayer-flicker 2.6s steps(1, end) infinite;
+}
+@keyframes vplayer-flicker {
+  0%, 60%, 100% { opacity: 1; }
+  62% { opacity: .5; }
+  64% { opacity: 1; }
+  86% { opacity: .68; }
+  88% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vplayer__privacy--ad::after,
+  .vplayer__privacy--ad .mono { animation: none; }
 }
 
 .vplayer--off img {

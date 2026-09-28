@@ -106,6 +106,24 @@ node tools/films/build-catalog.mjs  # качает постеры в webp → ap
 «Settings → Secrets and variables → Actions → Variables»; без них плеер покажет сообщение
 «Плеер не настроен» вместо пустого блока.
 
+### Заглушка на рекламе
+
+Пока внешний плеер крутит рекламную вставку, экран закрыт своим слоем
+(`.vplayer__privacy--ad`). Вместо статичной плашки там играет короткий немой луп
+аналоговых помех плюс CSS-бегунок кадровой и мерцание надписи.
+
+| Файл | Роль |
+|---|---|
+| `app/public/video/vhs-noise.mp4` | луп помех, 480×270, 4 с, без звука (~145 КБ) |
+| `app/public/video/vhs-noise-poster.webp` | первый кадр: виден до загрузки и при `prefers-reduced-motion` |
+| `AdNoise` в `app/src/components/ExternalVideoPlayer.tsx` | сам элемент `<video>` |
+
+Проверка в браузере (состояние собирается вручную, без ожидания реальной рекламы):
+
+```powershell
+node tools/probe.mjs --url http://localhost:4173/videosalon --steps tools/steps/ad-noise.js --out qa/ad-noise.png
+```
+
 ### Сам плеер
 
 SDK балансера сам находит тег `<ins data-type="kp" data-id="{kinopoisk_id}">` и меняет его на iframe —
