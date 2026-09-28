@@ -2626,7 +2626,9 @@ body.webamp-hidden #webamp {
   background: rgba(0, 0, 0, .72);
 }
 
-/* Рекламная вставка: вместо статичной заглушки — живые помехи и бегущая кадровая */
+/* Любая заглушка плеера — живые помехи и бегущая кадровая. */
+/* На паузе и загрузке шум полупрозрачный — кадр фильма просвечивает; */
+/* на рекламе перекрываем экран полностью. */
 .vplayer__privacy--ad {
   background-color: #05060a;
   background-image: none;
@@ -2638,11 +2640,21 @@ body.webamp-hidden #webamp {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: .92;
-  filter: saturate(.5) contrast(1.08) brightness(.92);
+  opacity: .34;
+  mix-blend-mode: screen;
+  filter: saturate(.4) contrast(1.05) brightness(.9);
   pointer-events: none;
 }
-.vplayer__privacy--ad::after {
+.vplayer__privacy--ad .vplayer__noise {
+  opacity: .92;
+  mix-blend-mode: normal;
+}
+/* Кнопки и подписи — всегда поверх шума и сетки. */
+.vplayer__privacy > *:not(.vplayer__noise) {
+  position: relative;
+  z-index: 2;
+}
+.vplayer__privacy::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -2658,7 +2670,7 @@ body.webamp-hidden #webamp {
   from { background-position: 0 0, 0 -30%; }
   to { background-position: 0 3px, 0 130%; }
 }
-.vplayer__privacy--ad .mono {
+.vplayer__privacy .mono {
   border: 1px solid rgba(222, 216, 201, .25);
   background: rgba(0, 0, 0, .78);
   letter-spacing: .05em;
@@ -2673,8 +2685,8 @@ body.webamp-hidden #webamp {
   88% { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .vplayer__privacy--ad::after,
-  .vplayer__privacy--ad .mono { animation: none; }
+  .vplayer__privacy::after,
+  .vplayer__privacy .mono { animation: none; }
 }
 
 .vplayer--off img {

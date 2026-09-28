@@ -357,7 +357,7 @@ function VkVideoPlayer({ source, label, poster }: {
           onPointerDown={revealControls}
           style={poster ? { backgroundImage: `linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.82)), url(${poster})` } : undefined}
         >
-          {adBlocked ? <AdNoise /> : null}
+          <ScreenNoise />
           {adBlocked ? (
             <span className="mono">Подготавливаем кассету…</span>
           ) : mode === 'paused' ? (
@@ -378,10 +378,10 @@ function VkVideoPlayer({ source, label, poster }: {
   );
 }
 
-// Пока идёт рекламная вставка, поверх неё крутятся живые помехи VHS:
-// короткий немой луп вместо статичной заглушки. При prefers-reduced-motion
-// остаётся первый кадр (poster), движение не запускаем.
-function AdNoise() {
+// Живые помехи VHS на любой заглушке: загрузка, пауза, конец, ошибка
+// и рекламная вставка — короткий немой луп вместо статичной плашки.
+// При prefers-reduced-motion остаётся первый кадр (poster), движение не запускаем.
+function ScreenNoise() {
   return (
     <video
       className="vplayer__noise"
