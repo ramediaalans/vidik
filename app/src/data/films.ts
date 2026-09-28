@@ -949,10 +949,11 @@ export const salon: Film[] = [
     "slug": "osobennosti-nacionalnoy-ohoty-1995",
     "kpId": 7653,
     "source": {
-      "provider": "youtube",
-      "id": "oWK9K_RtRCM",
+      "provider": "vk",
+      "id": "-200019230_456241101",
       "title": "Особенности национальной охоты (1995)",
-      "duration": 5511
+      "duration": 5580,
+      "start": 17
     },
     "title": "Особенности национальной охоты",
     "titleOrig": "Особенности национальной охоты",
