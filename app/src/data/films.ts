@@ -588,10 +588,10 @@ export const salon: Film[] = [
     "slug": "matrica-1999",
     "kpId": 301,
     "source": {
-      "provider": "vk",
-      "id": "-227267093_456240097",
-      "title": "Матрица (1999)",
-      "duration": 7552
+      "provider": "rutube",
+      "id": "06f4c1dd1b319392aedc768867b4980f",
+      "title": "Матрица | The Matrix (1999)",
+      "duration": 8178
     },
     "title": "Матрица",
     "titleOrig": "The Matrix",

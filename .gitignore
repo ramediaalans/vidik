@@ -21,6 +21,7 @@ rel.json
 
 # ��������� ����� ��������� ��������
 tools/films/*.out
+tools/films/audit-sources.json
 
 # Скриншоты и дампы отладочных проб: воспроизводятся запуском скриптов
 tools/**/*.png
@@ -30,7 +31,7 @@ tools/**/*.jpg
 tools/tv/rendex-*.js
 tools/tv/vibix-embed.js
 
-# ��������� ��������� (rclone � ��.)
+# ��������� ��������� (rclone � ��.)
 tools/_bin/
 
 # Сырые дампы каталогов и выдача поиска: восстанавливаются скриптами
