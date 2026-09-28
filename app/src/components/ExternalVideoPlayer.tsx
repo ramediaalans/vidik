@@ -64,6 +64,8 @@ function embedUrl(source: FilmVideoSource): string {
 }
 
 const VEIL_MS = 5200;
+// После снятия паузы хватает короткой шторки: ждём только уход панели плеера.
+const RESUME_VEIL_MS = 1400;
 
 function VkVideoPlayer({ source, label, poster }: {
   source: FilmVideoSource;
@@ -602,6 +604,12 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
     pausedRef.current = next;
     send(next ? 'pause' : 'play');
     setPaused(next);
+    // При возврате из паузы чужая панель гаснет не сразу — прикрываем её помехами.
+    if (!next) {
+      setVeil(true);
+      window.clearTimeout(veilTimer.current);
+      veilTimer.current = window.setTimeout(() => setVeil(false), RESUME_VEIL_MS);
+    }
   }, [kick, send]);
 
   const toggleSound = useCallback(() => {
@@ -693,7 +701,15 @@ function FramePlayer({ source, label }: { source: FilmVideoSource; label: string
         <button type="button" className="vplayer__barBtn" onClick={toggleSound} aria-label={soundOff ? 'Включить звук' : 'Выключить звук'}>{soundOff ? 'Звук' : 'Тихо'}</button>
         <button type="button" className="vplayer__barBtn" onClick={toggleFullscreen} aria-label={isFullscreen ? 'Выйти из полного экрана' : 'Полный экран'}>{isFullscreen ? '✕ Экран' : '⛶ Экран'}</button>
       </div>
-      {veil && !stuck ? (
+      {paused && !stuck ? (
+        <div className="vplayer__privacy vplayer__privacy--paused" onPointerDown={revealControls}>
+          <ScreenNoise />
+          <button className="vplayer__osd" onClick={togglePlay} aria-label="Продолжить просмотр">
+            <span className="vplayer__osdGlyph" aria-hidden="true">▶</span> PLAY
+          </button>
+        </div>
+      ) : null}
+      {veil && !paused && !stuck ? (
         <div className="vplayer__privacy vplayer__privacy--loading">
           <ScreenNoise />
           <span className="mono">Подготавливаем кассету…</span>
