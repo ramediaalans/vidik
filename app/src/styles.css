@@ -2636,6 +2636,30 @@ body.webamp-hidden #webamp {
   overflow: hidden;
   pointer-events: none;
 }
+/* Дисплей счётчика деки: тёмная плашка прячет «запечённое» 12:00 на картинке,
+   поверх неё — живые цифры. Геометрия измерена по картинке рамки. */
+.tvset__clock {
+  position: absolute;
+  left: 86.3%;
+  top: 79.6%;
+  width: 4.8%;
+  height: 4.4%;
+  z-index: 6;
+  background: #180d0d;
+  box-shadow: 0 0 .5cqw .35cqw #180d0d;
+  pointer-events: none;
+}
+.vcrclock,
+.vcrclock svg { display: block; width: 100%; height: 100%; }
+.vcrclock svg { overflow: visible; }
+.vcrclock__seg line {
+  stroke: #ff5a24;
+  stroke-width: 2.1;
+  stroke-linecap: round;
+}
+.vcrclock__dot { fill: #ff5a24; }
+.vcrclock__seg { filter: drop-shadow(0 0 1.4px rgba(255, 70, 20, .75)); }
+
 .tvset__labelTitle {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -2660,6 +2684,7 @@ body.webamp-hidden #webamp {
 @media (max-width: 860px) {
   .tvset { aspect-ratio: auto; }
   .tvset__frame,
+  .tvset__clock,
   .tvset__label { display: none; }
   .tvset__screen {
     position: static;

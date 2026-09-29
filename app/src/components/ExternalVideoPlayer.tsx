@@ -4,6 +4,7 @@ import { useFullscreen } from '../media/fullscreen';
 import { hotkeyChar, isTypingTarget } from '../media/hotkeys';
 import { asset } from '../media/asset';
 import { clearMark, saveMark, TAIL_SECONDS } from '../media/watchProgress';
+import { setVcrTime } from '../media/vcrClock';
 
 type VkPlayerState = { time?: number; duration?: number };
 type VkPlayer = {
@@ -258,6 +259,7 @@ function VkVideoPlayer({ source, label, poster, progressKey, resumeAt = 0 }: {
           return;
         }
         lastTime.current = state.time;
+        setVcrTime(state.time - start);
         mark(state.time);
         if (endAt !== null && state.time >= endAt) {
           ending.current = true;
@@ -581,6 +583,7 @@ function FramePlayer({ source, label, progressKey, resumeAt = 0 }: {
         const time = msg.data?.time ?? msg.data?.currentTime;
         if (typeof time === 'number' && time > 0) {
           at.current = time;
+          setVcrTime(time - startAt, !pausedRef.current);
           mark(time);
           started();
         }
@@ -597,6 +600,7 @@ function FramePlayer({ source, label, progressKey, resumeAt = 0 }: {
       if (msg.event === 'infoDelivery' && info) {
         if (typeof info.currentTime === 'number' && info.currentTime > 0) {
           at.current = info.currentTime;
+          setVcrTime(info.currentTime - startAt, info.playerState === 1);
           mark(info.currentTime);
         }
         if (info.playerState === 1) started();
@@ -606,7 +610,7 @@ function FramePlayer({ source, label, progressKey, resumeAt = 0 }: {
     };
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
-  }, [mark, progressKey, send]);
+  }, [mark, progressKey, send, startAt]);
 
   // Rutube сам время не шлёт — спрашиваем его, иначе перематывать будет не от чего.
   useEffect(() => {
@@ -803,6 +807,11 @@ export function ExternalVideoPlayer({ source, label, poster, progressKey, resume
   /** секунда, с которой надо продолжить */
   resumeAt?: number;
 }) {
+  // Счётчик деки стартует с места закладки, а при выходе возвращается к «12:00».
+  useEffect(() => {
+    setVcrTime(Math.max(0, (resumeAt ?? 0) - (source.start ?? 0)));
+    return () => setVcrTime(null, false);
+  }, [resumeAt, source.start]);
   if (source.provider === 'vk') {
     return <VkVideoPlayer source={source} label={label} poster={poster} progressKey={progressKey} resumeAt={resumeAt} />;
   }

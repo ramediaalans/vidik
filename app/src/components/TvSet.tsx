@@ -3,6 +3,7 @@
 // Геометрия экрана и наклейки — в процентах от картинки (см. styles.css).
 import type { ReactNode } from 'react';
 import { asset } from '../media/asset';
+import { VcrClock } from './VcrClock';
 
 export function TvSet({ title, year, children }: { title: string; year?: number; children: ReactNode }) {
   return (
@@ -15,6 +16,9 @@ export function TvSet({ title, year, children }: { title: string; year?: number;
         aria-hidden="true"
         draggable={false}
       />
+      <div className="tvset__clock">
+        <VcrClock />
+      </div>
       <div className="tvset__label" aria-hidden="true">
         <span className="tvset__labelTitle">{title}</span>
         {year ? <span className="tvset__labelYear">{year}</span> : null}
