@@ -1,3 +1,5 @@
+import { romsMore } from './roms-more';
+
 export type RomCore = 'fceumm' | 'genesis_plus_gx' | 'snes9x';
 
 export type Rom = {
@@ -17,7 +19,7 @@ const NES = 'Dendy / NES';
 const MD = 'Sega Mega Drive';
 const SNES = 'Super Nintendo';
 
-export const roms: Rom[] = [
+const baseRoms: Rom[] = [
   {
     id: 'contra',
     file: 'roms/contra.nes',
@@ -379,5 +381,7 @@ export const roms: Rom[] = [
     memory: 'Рестлинг по РТР в субботу — и сразу за геймпад.'
   }
 ];
+
+export const roms: Rom[] = [...baseRoms, ...romsMore];
 
 export const romPlatforms = ['Все', NES, MD, SNES];

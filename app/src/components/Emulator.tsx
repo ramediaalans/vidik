@@ -16,6 +16,9 @@ import {
 import { startGamepadLoop, type PadButton } from '../media/gamepad';
 import { SaveShelf } from './SaveShelf';
 import { GamepadSetup } from './GamepadSetup';
+import { TouchPad } from './TouchPad';
+import { hotkeyChar, isTypingTarget } from '../media/hotkeys';
+import { romCart } from '../data/rom-carts';
 import type { Rom, RomCore } from '../data/roms';
 
 type Status = 'loading' | 'running' | 'paused' | 'error';
@@ -27,29 +30,6 @@ const CORE_FPS: Record<RomCore, number> = {
   fceumm: 60.0988, // NES / Dendy, NTSC
   genesis_plus_gx: 59.9227, // Mega Drive, NTSC
   snes9x: 60.0988 // Super Nintendo, NTSC
-};
-
-// Сколько кнопок рисовать на сенсорном пульте. У Dendy их две, у Mega Drive три,
-// у SNES четыре плюс курки. Лишние кнопки на телефоне только мешают.
-const CORE_ACTIONS: Record<RomCore, PadButton[]> = {
-  fceumm: ['b', 'a'],
-  genesis_plus_gx: ['b', 'a', 'y'],
-  snes9x: ['b', 'a', 'y', 'x', 'l', 'r']
-};
-
-const ACTION_LABEL: Record<PadButton, string> = {
-  up: '↑',
-  down: '↓',
-  left: '←',
-  right: '→',
-  a: 'A',
-  b: 'B',
-  x: 'X',
-  y: 'C',
-  l: 'L',
-  r: 'R',
-  start: 'START',
-  select: 'SEL'
 };
 
 // RetroArch в браузере считает свой GL-viewport ровно один раз — на старте ядра —
@@ -67,26 +47,49 @@ function bufferSize() {
   return { width: Math.round((height * 4) / 3), height };
 }
 
-const KEYS_P1: Array<[string, string]> = [
-  ['← ↑ → ↓', 'Движение'],
-  ['Z', 'Удар / прыжок (B)'],
-  ['X', 'Огонь / действие (A)'],
-  ['C', 'Третья кнопка (C / Y)'],
-  ['V', 'Четвёртая (X)'],
-  ['Q / W', 'Курки L / R'],
-  ['Enter', 'Start'],
-  ['Правый Shift', 'Select']
-];
+// Подписи клавиш — по надписям на реальных пультах. У Mega Drive в ядре Genesis Plus GX кнопки
+// лежат на RetroPad так: A=Y, B=B, C=A, X=L, Y=X, Z=R, Mode=Select.
+type KeyRow = [string, string];
 
-const KEYS_P2: Array<[string, string]> = [
-  ['W A S D', 'Движение'],
-  ['T', 'Удар / прыжок (B)'],
-  ['Y', 'Огонь / действие (A)'],
-  ['G', 'Третья кнопка (C / Y)'],
-  ['H', 'Четвёртая (X)'],
-  ['O', 'Start'],
-  ['P', 'Select']
-];
+function keyTable(core: RomCore, player: 1 | 2): KeyRow[] {
+  const p1 = player === 1;
+  const move: KeyRow = [p1 ? '← ↑ → ↓' : 'W A S D', 'Движение'];
+  const start: KeyRow = [p1 ? 'Enter' : 'O', 'Start'];
+  if (core === 'fceumm') {
+    return [
+      move,
+      [p1 ? 'Z' : 'T', 'B'],
+      [p1 ? 'X' : 'Y', 'A'],
+      start,
+      [p1 ? 'Правый Shift' : 'P', 'Select']
+    ];
+  }
+  if (core === 'genesis_plus_gx') {
+    return p1
+      ? [
+          move,
+          ['C', 'A'],
+          ['Z', 'B'],
+          ['X', 'C'],
+          ['Q', 'X'],
+          ['V', 'Y'],
+          ['W', 'Z'],
+          start,
+          ['Правый Shift', 'Mode']
+        ]
+      : [move, ['G', 'A'], ['T', 'B'], ['Y', 'C'], ['H', 'Y'], start, ['P', 'Mode']];
+  }
+  return [
+    move,
+    [p1 ? 'Z' : 'T', 'B'],
+    [p1 ? 'X' : 'Y', 'A'],
+    [p1 ? 'C' : 'G', 'Y'],
+    [p1 ? 'V' : 'H', 'X'],
+    ...(p1 ? ([['Q / W', 'L / R']] as KeyRow[]) : []),
+    start,
+    [p1 ? 'Правый Shift' : 'P', 'Select']
+  ];
+}
 
 // Явная раскладка: без неё RetroArch берёт свои дефолты, и клавиши приходится угадывать.
 const INPUT_CONFIG = {
@@ -112,7 +115,10 @@ const INPUT_CONFIG = {
   input_player2_y: 'g',
   input_player2_x: 'h',
   input_player2_start: 'o',
-  input_player2_select: 'p'
+  input_player2_select: 'p',
+
+  // у RetroArch F — свой полный экран; мы перехватываем F / «А» сами
+  input_toggle_fullscreen: 'nul'
 };
 
 const AUTOSAVE_EVERY_MS = 30_000;
@@ -146,6 +152,8 @@ export function Emulator({ rom }: { rom: Rom }) {
   const emuRef = useRef<Nostalgist | null>(null);
   const playedRef = useRef(0);
   const sessionStartRef = useRef(0);
+  // До нажатия PLAY эмулятор не грузим: как в видеосалоне, телевизор сначала выключен.
+  const [started, setStarted] = useState(false);
   const [status, setStatus] = useState<Status>('loading');
   const [note, setNote] = useState('Вставляем картридж…');
   const [fx, setFx] = useState(false);
@@ -164,6 +172,7 @@ export function Emulator({ rom }: { rom: Rom }) {
   }, [rom.id]);
 
   useEffect(() => {
+    if (!started) return;
     let cancelled = false;
     let detachPacer = () => {};
 
@@ -267,7 +276,7 @@ export function Emulator({ rom }: { rom: Rom }) {
       emuRef.current = null;
       detachPacer();
     };
-  }, [rom]);
+  }, [rom, started]);
 
   // Пока эмулятор открыт — выключаем тяжёлую косметику сайта (см. styles.css).
   useEffect(() => {
@@ -541,47 +550,67 @@ export function Emulator({ rom }: { rom: Rom }) {
     };
   }, [status]);
 
-  const hold = (button: PadButton, down: boolean) => {
+  // F или «А» (та же клавиша в русской раскладке) — полный экран.
+  // Ловим на фазе перехвата, чтобы эмулятор эту клавишу вообще не увидел.
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      if (hotkeyChar(event) !== 'f' || isTypingTarget(event.target)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      if (event.type === 'keydown' && !event.repeat && status !== 'error') toggleFullscreen();
+    };
+    window.addEventListener('keydown', onKey, true);
+    window.addEventListener('keyup', onKey, true);
+    return () => {
+      window.removeEventListener('keydown', onKey, true);
+      window.removeEventListener('keyup', onKey, true);
+    };
+  }, [status, toggleFullscreen]);
+
+  const hold = useCallback((button: PadButton, down: boolean) => {
     const emu = emuRef.current;
     if (!emu) return;
-    if (down) emu.pressDown({ button });
-    else emu.pressUp({ button });
-  };
-
-  const padButton = (button: PadButton, extraClass = '') => (
-    <button
-      key={button}
-      className={`emu__padBtn emu__padBtn--${button}${extraClass ? ` ${extraClass}` : ''}`}
-      onPointerDown={(e) => {
-        e.preventDefault();
-        hold(button, true);
-      }}
-      onPointerUp={() => hold(button, false)}
-      onPointerCancel={() => hold(button, false)}
-      onPointerLeave={() => hold(button, false)}
-      onContextMenu={(e) => e.preventDefault()}
-      tabIndex={-1}
-    >
-      {ACTION_LABEL[button]}
-    </button>
-  );
-
-  const actions = CORE_ACTIONS[rom.core] ?? ['b', 'a'];
+    if (down) void emu.pressDown({ button });
+    else void emu.pressUp({ button });
+  }, []);
 
   return (
     <div className={`emu${fullscreen ? ' emu--fs' : ''}`} ref={rootRef}>
-      <div className="emu__frame crt">
-        <div
-          ref={screenRef}
-          className={`crt__screen scanlines emu__screen${fx ? ' emu__screen--fx' : ''}`}
-        >
-          <canvas ref={canvasRef} className="emu__canvas" />
-          {status === 'loading' || status === 'error' ? (
-            <div className="emu__overlay pixel">{note}</div>
-          ) : null}
-          {status === 'paused' ? <div className="emu__overlay pixel">Пауза</div> : null}
-          <div className="crt__glass" aria-hidden="true" />
+      <div className="emu__stage">
+      {/* Телевизор с приставкой: картинка с прозрачным экраном лежит ПОВЕРХ игры.
+          В полном экране рамка прячется — остаётся одна игра. */}
+      <div className="emu__tv">
+        <div className="emu__tvHole">
+          <div className="emu__frame">
+            <div
+              ref={screenRef}
+              className={`crt__screen scanlines emu__screen${fx ? ' emu__screen--fx' : ''}`}
+            >
+              <canvas ref={canvasRef} className="emu__canvas" />
+              {!started ? (
+                <div className="emu__overlay emu__overlay--start">
+                  {romCart[rom.id] ? (
+                    <img className="emu__idleCart" src={asset(romCart[rom.id])} alt="" aria-hidden="true" />
+                  ) : null}
+                  <button className="vplayer__osd" onClick={() => setStarted(true)}>
+                    <span className="vplayer__osdGlyph" aria-hidden="true">▶</span> PLAY
+                  </button>
+                </div>
+              ) : status === 'loading' || status === 'error' ? (
+                <div className="emu__overlay pixel">{note}</div>
+              ) : null}
+              {status === 'paused' ? <div className="emu__overlay pixel">Пауза</div> : null}
+              <div className="crt__glass" aria-hidden="true" />
+            </div>
+          </div>
         </div>
+        <img
+          className="emu__tvImg"
+          src={asset('/images/tv/game-tv.webp')}
+          alt=""
+          draggable={false}
+        />
       </div>
 
       {resumeOffer && status === 'running' ? (
@@ -604,34 +633,18 @@ export function Emulator({ rom }: { rom: Rom }) {
         </div>
       ) : null}
 
-      {/* Сенсорный пульт. В полном экране раскладывается по краям поверх картинки. */}
-      <div className="emu__pad">
-        <div className="emu__padSide emu__padSide--left">
-          <div className="emu__dpad">
-            {padButton('up')}
-            {padButton('left')}
-            {padButton('right')}
-            {padButton('down')}
-          </div>
-        </div>
-
-        <div className="emu__padSide emu__padSide--center">
-          {padButton('select')}
-          {padButton('start')}
-        </div>
-
-        <div className="emu__padSide emu__padSide--right">
-          <div className="emu__actions">{actions.map((button) => padButton(button))}</div>
-        </div>
-      </div>
+      {/* Экранный пульт — только на сенсорных устройствах (скрыт CSS-ом при pointer: fine). */}
+      <TouchPad core={rom.core} onPress={hold} />
 
       {fullscreen ? (
         <button className="emu__fsExit pixel" onClick={toggleFullscreen}>
           ✕ Выйти
         </button>
       ) : null}
+      </div>
 
-      <div className="row emu__controls" style={{ marginTop: 20 }}>
+      <div className="emu__side">
+      <div className="row emu__controls">
         <button className="btn btn--primary" onClick={toggle} disabled={status === 'loading' || status === 'error'}>
           {status === 'paused' ? 'Продолжить' : 'Пауза'}
         </button>
@@ -645,7 +658,7 @@ export function Emulator({ rom }: { rom: Rom }) {
           Сброс
         </button>
         <button className="btn" data-qa="fullscreen" onClick={toggleFullscreen} disabled={status === 'error'}>
-          На весь экран
+          {fullscreen ? 'Свернуть' : 'На весь экран'}<span className="emu__hk"> · F</span>
         </button>
         <button className="btn" onClick={() => setShowPads(true)}>
           Геймпад{pads.length ? ` · ${pads.length}` : ': нет'}
@@ -673,7 +686,7 @@ export function Emulator({ rom }: { rom: Rom }) {
         <div>
           <div className="mono emu__keysTitle">Игрок 1</div>
           <div className="emu__keys">
-            {KEYS_P1.map(([key, action]) => (
+            {keyTable(rom.core, 1).map(([key, action]) => (
               <div className="emu__key" key={key}>
                 <span className="pixel">{key}</span>
                 <span className="mono">{action}</span>
@@ -685,7 +698,7 @@ export function Emulator({ rom }: { rom: Rom }) {
           <div>
             <div className="mono emu__keysTitle">Игрок 2 · на той же клавиатуре</div>
             <div className="emu__keys">
-              {KEYS_P2.map(([key, action]) => (
+              {keyTable(rom.core, 2).map(([key, action]) => (
                 <div className="emu__key" key={key}>
                   <span className="pixel">{key}</span>
                   <span className="mono">{action}</span>
@@ -694,6 +707,7 @@ export function Emulator({ rom }: { rom: Rom }) {
             </div>
           </div>
         ) : null}
+      </div>
       </div>
 
       {showMemory ? (

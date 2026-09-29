@@ -1318,6 +1318,59 @@ html, body { overflow-x: hidden; max-width: 100%; }
   color: var(--dust);
 }
 
+/* Карточка с настоящим картриджем: PNG с прозрачностью, без рамки-плашки */
+.cart--real {
+  min-height: 0;
+  justify-content: flex-start;
+  padding: 6px 4px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  box-shadow: none;
+}
+
+.cart--real:hover,
+.cart--real:focus-visible {
+  box-shadow: none;
+  transform: translateY(-6px) rotate(-0.6deg);
+}
+
+.cart__pic {
+  display: block;
+  aspect-ratio: 640 / 400;
+  display: grid;
+  place-items: center;
+}
+
+.cart__pic img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  filter: drop-shadow(0 14px 14px rgba(0, 0, 0, 0.55));
+  transition: filter var(--t-mid) var(--ease);
+}
+
+.cart--real:hover .cart__pic img,
+.cart--real:focus-visible .cart__pic img {
+  filter: drop-shadow(0 24px 22px rgba(0, 0, 0, 0.6));
+}
+
+.cart--real .cart__art {
+  display: none;
+}
+
+.cart--real .cart__label {
+  margin-top: 0;
+  padding: 0;
+  color: var(--cream, #efe6d2);
+  background: none;
+  box-shadow: none;
+}
+
+.cart--real .cart__meta {
+  color: var(--amber);
+}
+
 /* Эмулятор */
 /* Пока игра запущена, глушим всю косметику, которая пересчитывается
    каждый кадр поверх канваса: анимированное зерно с blend-mode и размытие
@@ -1359,19 +1412,52 @@ body.emu-active .header {
   aspect-ratio: var(--emu-ar, 4 / 3);
 }
 
-/* Телефон боком без полного экрана: картинка шириной во всю модалку при 4:3
-   получалась выше самого экрана, и игру приходилось прокручивать. */
-@media (pointer: coarse) and (orientation: landscape) {
-  .emu__frame {
-    display: grid;
-    place-items: center;
-  }
+/* Телевизор с приставкой. Картинка 1236x1024 с прозрачным экраном (x118..918, y93..628)
+   лежит поверх игры. Окно чуть шире выреза (на 6px с каждой стороны), чтобы игра подходила
+   под край рамки без щелей. */
+.emu__tv {
+  position: relative;
+  width: min(100%, calc(72vh * 1.207));
+  aspect-ratio: 1236 / 1024;
+  margin-inline: auto;
+}
 
-  .emu__screen {
-    height: 62vh;
-    width: auto;
-    max-width: 100%;
-  }
+.emu__tvHole {
+  position: absolute;
+  left: 9.06%;
+  top: 8.5%;
+  width: 65.7%;
+  height: 53.4%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  container-type: size;
+  background: #000;
+}
+
+.emu__frame {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.emu__tvHole .crt__screen {
+  height: min(100cqh, calc(100cqw / var(--emu-ar, 1.3333)));
+  width: auto;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.emu__tvImg {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 /* Экран эмулятора: по умолчанию без VHS-текстур и blend-mode —
@@ -1496,179 +1582,341 @@ body.emu-active .header {
   background: var(--panel-2);
 }
 
-.emu__pad {
-  display: none;
-}
-
-.emu__padBtn {
-  min-height: 52px;
-  font: inherit;
-  font-size: 15px;
-  color: var(--bone);
-  background: var(--panel-2);
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  touch-action: none;
-  user-select: none;
-}
-
-.emu__padBtn:active {
-  background: var(--acid);
-  color: var(--ink);
-}
-
-.emu__padBtn--up {
-  grid-area: up;
-}
-.emu__padBtn--down {
-  grid-area: down;
-}
-.emu__padBtn--left {
-  grid-area: left;
-}
-.emu__padBtn--right {
-  grid-area: right;
-}
-.emu__padBtn--a {
-  grid-area: a;
-}
-.emu__padBtn--b {
-  grid-area: b;
-}
-.emu__padBtn--sel {
-  grid-area: sel;
-}
-.emu__padBtn--start {
-  grid-area: start;
-}
-
-@media (pointer: coarse), (max-width: 860px) {
-  .emu__pad {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--sp-3);
-    margin-top: var(--sp-4);
-  }
-
-  /* Кнопки тянем от ширины экрана: фиксированные 56px давали пульту
-     минимальную ширину около 430px и распирали модалку шире телефона. */
-  .emu__dpad {
-    grid-template-columns: repeat(3, clamp(44px, 14vw, 56px));
-  }
-
-  .emu__actions {
-    grid-template-columns: repeat(2, clamp(44px, 14vw, 56px));
-  }
-
-  .emu__padBtn {
-    min-height: clamp(44px, 13vw, 52px);
-  }
-
-  /* SELECT/START — отдельным рядом под крестовиной. */
-  .emu__padSide--center {
-    order: 3;
-    flex-basis: 100%;
-    justify-content: center;
-  }
-
-  .emu__keys {
-    display: none;
-  }
-}
-
-/* Крестовина слева, кнопки действий справа, Start/Select по центру. */
-.emu__padSide {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.emu__padSide--center {
-  flex-direction: row;
-  align-items: center;
-}
-
-.emu__dpad {
+/* Страница игры: слева телевизор, справа кнопки и подсказки по клавишам. */
+.emu__side {
   display: grid;
-  gap: 6px;
-  grid-template-columns: repeat(3, 56px);
-  grid-template-areas:
-    '. up .'
-    'left . right'
-    '. down .';
+  gap: var(--sp-4);
+  margin-top: var(--sp-5);
 }
 
-.emu__dpad .emu__padBtn--up {
-  grid-area: up;
-}
-.emu__dpad .emu__padBtn--down {
-  grid-area: down;
-}
-.emu__dpad .emu__padBtn--left {
-  grid-area: left;
-}
-.emu__dpad .emu__padBtn--right {
-  grid-area: right;
+.emu__side .emu__keysWrap {
+  margin-top: 0;
 }
 
-.emu__actions {
-  display: grid;
-  gap: 6px;
-  grid-template-columns: repeat(2, 56px);
-  justify-items: stretch;
+@media (min-width: 1080px) {
+  .emu:not(.emu--fs):not(:fullscreen) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: var(--sp-6);
+    align-items: start;
+  }
+
+  .emu:not(.emu--fs):not(:fullscreen) .emu__side {
+    margin-top: 0;
+  }
 }
 
-/* У кнопок A/B/X/Y есть grid-area для старой раскладки пульта; в сетке
-   действий таких областей нет, и кнопки накладываются друг на друга. */
-.emu__actions .emu__padBtn,
-.emu__padSide--center .emu__padBtn {
-  grid-area: auto;
+/* Выключенный экран до PLAY: темно, с картриджем в глубине. */
+.emu__overlay--start {
+  background: #000;
 }
 
-/* На телефоне в полном экране пульт висит поверх картинки по краям экрана,
-   чтобы большие пальцы не закрывали игру. */
-:is(.emu:fullscreen, .emu--fs) .emu__pad {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
-  margin: 0;
+.emu__idleCart {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 62%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  filter: saturate(0.7);
   pointer-events: none;
 }
 
-:is(.emu:fullscreen, .emu--fs) .emu__padSide {
-  pointer-events: auto;
+.emu__overlay--start .vplayer__osd {
+  position: relative;
+  z-index: 1;
 }
 
-:is(.emu:fullscreen, .emu--fs) .emu__padSide--center {
-  order: 0;
-  flex-basis: auto;
-  align-self: flex-end;
-  opacity: 0.8;
+.game-hero__grid {
+  grid-template-columns: minmax(180px, 340px) 1fr;
 }
 
-:is(.emu:fullscreen, .emu--fs) .emu__padBtn {
-  background: rgba(12, 14, 18, 0.55);
-  border-color: rgba(233, 230, 214, 0.35);
-  backdrop-filter: blur(2px);
+.game-cart {
+  width: 100%;
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.6));
 }
 
-:is(.emu:fullscreen, .emu--fs) .emu__dpad {
-  grid-template-columns: repeat(3, clamp(56px, 11vh, 84px));
+@media (max-width: 720px) {
+  .game-hero__grid {
+    grid-template-columns: 130px 1fr;
+  }
 }
 
-:is(.emu:fullscreen, .emu--fs) .emu__dpad .emu__padBtn,
-:is(.emu:fullscreen, .emu--fs) .emu__actions .emu__padBtn {
-  height: clamp(56px, 11vh, 84px);
-  font-size: clamp(16px, 2.4vh, 22px);
+/* Полный экран: только игра, без рамки телевизора. */
+:is(.emu:fullscreen, .emu--fs) .emu__stage {
+  width: 100%;
+  height: 100%;
 }
 
-:is(.emu:fullscreen, .emu--fs) .emu__actions {
-  grid-template-columns: repeat(2, clamp(56px, 11vh, 84px));
+:is(.emu:fullscreen, .emu--fs) .emu__side {
+  display: none;
+}
+
+:is(.emu:fullscreen, .emu--fs) .emu__tv {
+  position: static;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+:is(.emu:fullscreen, .emu--fs) .emu__tvHole {
+  position: static;
+  width: 100%;
+  height: 100%;
+}
+
+:is(.emu:fullscreen, .emu--fs) .emu__tvImg {
+  display: none;
+}
+
+/* Экранный пульт. Только тач-устройства (pointer: coarse): в окне браузера на компьютере
+   и в полном экране на компьютере он не нужен. */
+.tpad {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .emu__keys,
+  .emu__hk {
+    display: none;
+  }
+
+  .tpad {
+    --u: clamp(48px, 15vw, 64px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    margin-top: var(--sp-4);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+  }
+
+  .tpad__mid {
+    order: 3;
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--u) * 0.4);
+  }
+
+  .tpad__shoulders {
+    order: -1;
+    flex-basis: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tpad__dpad {
+    position: relative;
+    width: calc(var(--u) * 2.6);
+    height: calc(var(--u) * 2.6);
+    touch-action: none;
+  }
+
+  .tpad__cross {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(#2c3039, #2c3039) center / 100% 36% no-repeat,
+      linear-gradient(#2c3039, #2c3039) center / 36% 100% no-repeat;
+    border-radius: 10px;
+    filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.6));
+  }
+
+  .tpad__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    border: calc(var(--u) * 0.2) solid transparent;
+  }
+
+  .tpad__arrow--up {
+    top: 6%;
+    left: 50%;
+    margin-left: calc(var(--u) * -0.2);
+    border-bottom-color: #6b7180;
+    border-top-width: 0;
+  }
+
+  .tpad__arrow--down {
+    bottom: 6%;
+    left: 50%;
+    margin-left: calc(var(--u) * -0.2);
+    border-top-color: #6b7180;
+    border-bottom-width: 0;
+  }
+
+  .tpad__arrow--left {
+    left: 6%;
+    top: 50%;
+    margin-top: calc(var(--u) * -0.2);
+    border-right-color: #6b7180;
+    border-left-width: 0;
+  }
+
+  .tpad__arrow--right {
+    right: 6%;
+    top: 50%;
+    margin-top: calc(var(--u) * -0.2);
+    border-left-color: #6b7180;
+    border-right-width: 0;
+  }
+
+  .tpad__arrow.is-on {
+    filter: brightness(1.9);
+  }
+
+  .tpad__actions {
+    display: grid;
+    gap: calc(var(--u) * 0.24);
+    align-items: center;
+    justify-items: center;
+  }
+
+  .tpad__actions--nes {
+    grid-template-columns: repeat(2, var(--u));
+  }
+
+  .tpad__actions--md {
+    grid-template-columns: repeat(3, var(--u));
+  }
+
+  .tpad__actions--snes {
+    grid-template-columns: repeat(3, calc(var(--u) * 0.95));
+    grid-template-areas:
+      '. x .'
+      'y . a'
+      '. b .';
+  }
+
+  .tpad__actions--snes .tpad__btn--x {
+    grid-area: x;
+  }
+
+  .tpad__actions--snes .tpad__btn--y {
+    grid-area: y;
+  }
+
+  .tpad__actions--snes .tpad__btn--a {
+    grid-area: a;
+  }
+
+  .tpad__actions--snes .tpad__btn--b {
+    grid-area: b;
+  }
+
+  /* Без transition и backdrop-filter: отклик должен быть мгновенным. */
+  .tpad__btn {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    width: var(--u);
+    height: var(--u);
+    border-radius: 50%;
+    color: #3a1c12;
+    background: radial-gradient(circle at 35% 30%, #efe6d2, #c9b994);
+    box-shadow: 0 3px 0 #5b4d36, 0 6px 10px rgba(0, 0, 0, 0.45);
+    font-family: var(--font-display, inherit);
+    line-height: 1;
+    touch-action: none;
+  }
+
+  .tpad__btn b {
+    font-size: calc(var(--u) * 0.36);
+    font-weight: 800;
+    pointer-events: none;
+  }
+
+  .tpad__btn small {
+    margin-top: 2px;
+    font-size: calc(var(--u) * 0.15);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  /* Турбо-кнопки «Денди» — красные */
+  .tpad__btn--turbo {
+    color: #fff1e6;
+    background: radial-gradient(circle at 35% 30%, #e0523f, #a3271a);
+    box-shadow: 0 3px 0 #5e140c, 0 6px 10px rgba(0, 0, 0, 0.45);
+  }
+
+  /* верхний ряд X Y Z у Mega Drive — помельче */
+  .tpad__btn--small {
+    width: calc(var(--u) * 0.82);
+    height: calc(var(--u) * 0.82);
+  }
+
+  .tpad__btn--pill {
+    width: auto;
+    min-width: calc(var(--u) * 1.3);
+    height: calc(var(--u) * 0.5);
+    padding: 0 12px;
+    border-radius: 999px;
+    color: var(--bone);
+    background: #3a3f4b;
+    box-shadow: 0 2px 0 #14161b, 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .tpad__btn--pill b {
+    font-size: calc(var(--u) * 0.2);
+    letter-spacing: 0.06em;
+  }
+
+  .tpad__btn.is-on {
+    transform: translateY(2px) scale(0.94);
+    filter: brightness(1.3);
+    box-shadow: 0 1px 0 #5b4d36;
+  }
+
+  /* Полный экран: пульт поверх картинки, по краям, чтобы пальцы не закрывали игру. */
+  :is(.emu:fullscreen, .emu--fs) .tpad {
+    --u: clamp(52px, 12vh, 78px);
+    position: fixed;
+    inset: 0;
+    z-index: 6;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    padding: max(14px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-right))
+      max(14px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+    margin: 0;
+    pointer-events: none;
+  }
+
+  :is(.emu:fullscreen, .emu--fs) .tpad__side,
+  :is(.emu:fullscreen, .emu--fs) .tpad__mid,
+  :is(.emu:fullscreen, .emu--fs) .tpad__shoulders .tpad__btn {
+    pointer-events: auto;
+  }
+
+  :is(.emu:fullscreen, .emu--fs) .tpad__mid {
+    order: 0;
+    flex-basis: auto;
+    align-self: flex-end;
+    opacity: 0.75;
+  }
+
+  :is(.emu:fullscreen, .emu--fs) .tpad__shoulders {
+    position: absolute;
+    left: max(18px, env(safe-area-inset-left));
+    right: max(18px, env(safe-area-inset-right));
+    bottom: calc(var(--u) * 3.6);
+    pointer-events: none;
+  }
+
+  :is(.emu:fullscreen, .emu--fs) .tpad__side {
+    opacity: 0.82;
+  }
 }
 
 .emu__fsExit {

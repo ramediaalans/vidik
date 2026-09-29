@@ -14,6 +14,7 @@ const YearsPage = lazy(() => import('./pages/YearsPage').then((m) => ({ default:
 const SalonPage = lazy(() => import('./pages/SalonPage').then((m) => ({ default: m.SalonPage })));
 const DisneyPage = lazy(() => import('./pages/DisneyPage').then((m) => ({ default: m.DisneyPage })));
 const FilmPage = lazy(() => import('./pages/FilmPage').then((m) => ({ default: m.FilmPage })));
+const GamePage = lazy(() => import('./pages/GamePage').then((m) => ({ default: m.GamePage })));
 const CartridgeShelf = lazy(() =>
   import('./components/CartridgeShelf').then((m) => ({ default: m.CartridgeShelf }))
 );
@@ -143,6 +144,7 @@ export default function App() {
               />
             }
           />
+          <Route path="/igry/:id" element={<GamePage />} />
           <Route
             path="/muzyka"
             element={
