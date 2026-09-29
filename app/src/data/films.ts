@@ -1688,8 +1688,8 @@ export const disney: Film[] = [
     "countries": [
       "США"
     ],
-    "poster": "/films/disney/novye-priklyucheniya-vinni-puha-1988.webp",
-    "backdrop": "/films/disney/novye-priklyucheniya-vinni-puha-1988-bg.webp",
+    "poster": "/films/disney/novye-priklyucheniya-vinni-puha-1988-v2.webp",
+    "backdrop": "/films/disney/novye-priklyucheniya-vinni-puha-1988-v2-bg.webp",
     "short": "Винни, Пятачок и Тигруля в диснеевском Стоакровом лесу — дубляж РТР",
     "description": "Диснеевский мультсериал по книгам Милна: медвежонок с опилками в голове, его друзья и мальчик Кристофер Робин попадают в истории на каждый день.",
     "seasons": [
@@ -1757,8 +1757,8 @@ export const disney: Film[] = [
     "countries": [
       "США"
     ],
-    "poster": "/films/disney/chudesa-na-virazhah-1990.webp",
-    "backdrop": "/films/disney/chudesa-na-virazhah-1990-bg.webp",
+    "poster": "/films/disney/chudesa-na-virazhah-1990-v2.webp",
+    "backdrop": "/films/disney/chudesa-na-virazhah-1990-v2-bg.webp",
     "short": "Лётчик Балу, Кит Облачный и грузовой самолёт над Кейп-Сьюзеттом",
     "description": "Диснеевские воздушные приключения: медведь-лётчик Балу возит грузы на «Седой утке», отбиваясь от воздушных пиратов и помогая юному Киту Облачному.",
     "seasons": [

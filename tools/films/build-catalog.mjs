@@ -87,8 +87,11 @@ const clean = (s) =>
 
 async function convert(rec, group) {
   const slug = slugify(`${rec.title}-${rec.year}`);
-  const poster = rec.poster ? await grab(rec.poster, `${group}/${slug}`, 400) : null;
-  const backdrop = rec.backdrop ? await grab(rec.backdrop, `${group}/${slug}-bg`, 1100) : null;
+  // имена файлов immutable-кэшируются на CDN: при замене арта поднимаем версию здесь
+  const ART_VER = { 'novye-priklyucheniya-vinni-puha-1988': 2, 'chudesa-na-virazhah-1990': 2 };
+  const v = ART_VER[slug] ? `-v${ART_VER[slug]}` : '';
+  const poster = rec.poster ? await grab(rec.poster, `${group}/${slug}${v}`, 400) : null;
+  const backdrop = rec.backdrop ? await grab(rec.backdrop, `${group}/${slug}${v}-bg`, 1100) : null;
 
   let seasons;
   const raw = rec.seasons?.seasons;
