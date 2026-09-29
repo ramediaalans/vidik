@@ -43,3 +43,4 @@ tools/tv/collect/_titles.txt
 tools/tv/collect/vv*.json
 tools/tv/collect/*.out
 tools/games/.cache/ 
+__pycache__/ 
