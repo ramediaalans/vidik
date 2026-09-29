@@ -1417,17 +1417,48 @@ body.emu-active .header {
    под край рамки без щелей. */
 .emu__tv {
   position: relative;
-  width: min(100%, calc(72vh * 1.207));
-  aspect-ratio: 1236 / 1024;
+  width: min(100%, 1240px);
+  aspect-ratio: var(--tv-ratio, 1536 / 1560);
   margin-inline: auto;
+}
+
+/* Слои: игра -> телевизор (прозрачный экран) -> приставка -> картридж -> передняя кромка слота.
+   Приставка стоит под телевизором и экран не перекрывает. Размеры и положение слотов —
+   app/src/data/consoles.ts (tools/games/build-consoles.py). */
+.emu__console {
+  position: absolute;
+  bottom: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.emu__consoleImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.emu__cart {
+  position: absolute;
+  display: block;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.45));
+}
+
+.emu__cart img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .emu__tvHole {
   position: absolute;
-  left: 9.06%;
-  top: 8.5%;
-  width: 65.7%;
-  height: 53.4%;
+  left: var(--hole-l, 8%);
+  top: var(--hole-t, 6%);
+  width: var(--hole-w, 70%);
+  height: var(--hole-h, 50%);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -1451,10 +1482,11 @@ body.emu-active .header {
 
 .emu__tvImg {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   z-index: 5;
   width: 100%;
-  height: 100%;
+  height: auto;
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
@@ -1667,7 +1699,8 @@ body.emu-active .header {
   height: 100%;
 }
 
-:is(.emu:fullscreen, .emu--fs) .emu__tvImg {
+:is(.emu:fullscreen, .emu--fs) .emu__tvImg,
+:is(.emu:fullscreen, .emu--fs) .emu__console {
   display: none;
 }
 

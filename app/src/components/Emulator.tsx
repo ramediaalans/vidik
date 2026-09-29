@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { Nostalgist } from 'nostalgist';
 import { asset } from '../media/asset';
 import { getRefreshRate, installFramePacer } from '../media/framePacer';
@@ -19,6 +19,7 @@ import { GamepadSetup } from './GamepadSetup';
 import { TouchPad } from './TouchPad';
 import { hotkeyChar, isTypingTarget } from '../media/hotkeys';
 import { romCart } from '../data/rom-carts';
+import { consoles, tvHole, TV_BOX_RATIO, TV_SCREEN_CENTER_X, type ConsoleKind } from '../data/consoles';
 import type { Rom, RomCore } from '../data/roms';
 
 type Status = 'loading' | 'running' | 'paused' | 'error';
@@ -575,12 +576,26 @@ export function Emulator({ rom }: { rom: Rom }) {
     else void emu.pressUp({ button });
   }, []);
 
+  const consoleKind: ConsoleKind = rom.platform.includes('NES')
+    ? 'nes'
+    : rom.platform.includes('Sega')
+      ? 'md'
+      : 'snes';
+  const consoleSpec = consoles[consoleKind];
+  const tvVars = {
+    '--tv-ratio': TV_BOX_RATIO,
+    '--hole-l': `${tvHole.left}%`,
+    '--hole-t': `${tvHole.top}%`,
+    '--hole-w': `${tvHole.width}%`,
+    '--hole-h': `${tvHole.height}%`,
+  } as CSSProperties;
+
   return (
     <div className={`emu${fullscreen ? ' emu--fs' : ''}`} ref={rootRef}>
       <div className="emu__stage">
       {/* Телевизор с приставкой: картинка с прозрачным экраном лежит ПОВЕРХ игры.
           В полном экране рамка прячется — остаётся одна игра. */}
-      <div className="emu__tv">
+      <div className="emu__tv" style={tvVars}>
         <div className="emu__tvHole">
           <div className="emu__frame">
             <div
@@ -590,9 +605,6 @@ export function Emulator({ rom }: { rom: Rom }) {
               <canvas ref={canvasRef} className="emu__canvas" />
               {!started ? (
                 <div className="emu__overlay emu__overlay--start">
-                  {romCart[rom.id] ? (
-                    <img className="emu__idleCart" src={asset(romCart[rom.id])} alt="" aria-hidden="true" />
-                  ) : null}
                   <button className="vplayer__osd" onClick={() => setStarted(true)}>
                     <span className="vplayer__osdGlyph" aria-hidden="true">▶</span> PLAY
                   </button>
@@ -607,10 +619,42 @@ export function Emulator({ rom }: { rom: Rom }) {
         </div>
         <img
           className="emu__tvImg"
-          src={asset('/images/tv/game-tv.webp')}
+          src={asset('/images/tv/tv-plain.webp')}
           alt=""
           draggable={false}
         />
+        {/* Приставка нужного типа с вставленным картриджем — отдельный слой под экраном. */}
+        <div
+          className="emu__console"
+          style={{
+            width: `${consoleSpec.width * 100}%`,
+            left: `${TV_SCREEN_CENTER_X - (consoleSpec.width * 100) / 2}%`,
+            aspectRatio: `${consoleSpec.ratio[0]} / ${consoleSpec.ratio[1]}`,
+          }}
+        >
+          <img className="emu__consoleImg" src={asset(consoleSpec.src)} alt="" draggable={false} />
+          {romCart[rom.id] ? (
+            <span
+              className="emu__cart"
+              style={{
+                left: `${consoleSpec.cart.left}%`,
+                width: `${consoleSpec.cart.width}%`,
+                bottom: `${consoleSpec.cart.bottom}%`,
+                clipPath: `inset(0 0 ${consoleSpec.cart.hide * 100}% 0)`,
+                transform: `translateY(${consoleSpec.cart.hide * 100}%)`,
+              }}
+            >
+              <img src={asset(romCart[rom.id])} alt="" draggable={false} />
+            </span>
+          ) : null}
+          <img
+            className="emu__consoleImg emu__consoleLip"
+            src={asset(consoleSpec.src)}
+            alt=""
+            draggable={false}
+            style={{ clipPath: `inset(${consoleSpec.lip.top}% 0 ${consoleSpec.lip.bottom}% 0)` }}
+          />
+        </div>
       </div>
 
       {resumeOffer && status === 'running' ? (
