@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Компьютерный клуб — ВИДИК</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/pc/desk/desk.css">
+</head>
+<body class="club">
+<div class="club-bg"></div>
+<div class="club-top">
+  <a class="logo" href="/">ВИДИК</a>
+  <span class="sign">Компьютерный клуб</span>
+  <a class="back" href="/">← на главный сайт</a>
+</div>
+
+<div class="rig">
+  <div class="pc">
+    <div id="screen" class="off">
+      <div class="desktop" id="desktop">
+        <div class="icons" id="icons" role="listbox" aria-label="Игры"></div>
+        <div class="wallmark">ВИДИК 98<br>компьютерный клуб</div>
+        <div class="startmenu bevel" id="startmenu">
+          <div class="band"><b>ВИДИК</b><i>98</i></div>
+          <div id="menu-games"></div>
+          <div class="menu-sep"></div>
+          <button class="menu-item" data-act="fs"><span class="ico">⛶</span>Полный экран (F)</button>
+          <a class="menu-item" href="/pc/list.html"><span class="ico">▤</span>Список игр</a>
+          <div class="menu-sep"></div>
+          <a class="menu-item" href="/"><span class="ico">⏻</span>Выход на сайт ВИДИК</a>
+        </div>
+        <div class="taskbar">
+          <button class="start bevel" id="start"><svg viewBox="0 0 17 15" aria-hidden="true"><path d="M1 2.5l6-1v5.5H1z" fill="#f33"/><path d="M8 1.3l7-1.1V7H8z" fill="#3c3"/><path d="M1 8h6v5.5l-6-1z" fill="#36f"/><path d="M8 8h7v6.8l-7-1.1z" fill="#fc0"/></svg>Пуск</button>
+          <div class="tasks" id="tasks"></div>
+          <div class="tray bevel-in"><span class="pad" id="tray-pad" title="Геймпад подключён">🎮</span><span id="clock">12:00</span></div>
+        </div>
+      </div>
+      <div class="gamewin" id="gamewin" hidden>
+        <div class="title"><img id="gw-ico" alt=""><span class="t"><span id="gw-title"></span> <span class="s" id="gw-status"></span></span><button class="bevel" data-act="min" title="Свернуть">_</button><button class="bevel" data-act="fs" title="Полный экран (F)">□</button><button class="bevel x" data-act="close" title="Закрыть">×</button></div>
+        <div class="gw-body" id="gw-body"></div>
+      </div>
+      <div class="toast" id="toast" hidden></div>
+      <div class="crt"></div>
+    </div>
+    <img class="pc-img" src="/pc/desk/pc.webp" alt="Компьютер 90-х" draggable="false">
+  </div>
+</div>
+<div class="hint">Клик по значку — <b>запустить</b> · <b>F</b> (<b>А</b>) — полный экран · <span id="hint-pad">🎮 подключите геймпад и нажмите любую кнопку</span></div>
+<div class="mobile-only"><h1>Только для ПК</h1><p>Компьютерный клуб работает на компьютере с клавиатурой и мышью.</p><p><a href="/" style="color:#b9a6ff">← на главный сайт</a></p></div>
+<script src="/pc/desk/desk.js"></script>
+<script src="/pc/desk/parallax.js"></script>
+</body>
+</html>

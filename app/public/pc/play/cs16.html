@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head><script src="/pc/media.js"></script><script src="/pc/embed.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Counter-Strike 1.6 — Компьютерный клуб</title>
+<link rel="stylesheet" href="/pc/pc.css">
+<script src="/pc/engines/xash/raw.js"></script>
+<script src="/pc/engines/vendor/jszip.min.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/">ВИДИК</a><a class="back" href="/pc/">← Компьютерный клуб</a></div></header>
+<div class="mobile-block"><h1>Только для ПК</h1></div>
+<main class="wrap desk">
+<h1 style="font-size:32px;margin-top:32px">Counter-Strike 1.6</h1>
+<div class="panel" id="pick">
+<p id="status" data-embed="Выберите карту и число ботов, затем «Играть» (Enter). После загрузки выберите команду цифрой. Esc — меню игры, там же выход.">Нужен архив <code>valve.zip</code> с папками <code>valve</code> и <code>cstrike</code> из Steam. Положите его в <code>pc/games/cs16/valve.zip</code> или выберите файл здесь: он останется в вашем браузере.</p>
+<p class="cs-opts">
+<label>Карта: <select id="map">
+<option>de_dust2</option><option>de_dust</option><option>de_inferno</option><option>de_nuke</option><option>de_train</option><option>de_aztec</option><option>de_cbble</option><option>de_prodigy</option>
+<option>cs_assault</option><option>cs_italy</option><option>cs_office</option><option>cs_militia</option>
+</select></label>
+<label>Ботов: <select id="bots"><option>0</option><option>2</option><option>4</option><option selected>6</option><option>8</option><option>10</option></select></label>
+<label>Сложность: <select id="diff"><option value="0">лёгкая</option><option value="1" selected>нормальная</option><option value="2">трудная</option><option value="3">эксперт</option></select></label>
+</p>
+<input type="file" id="file" accept=".zip"> <button id="go">Играть с ботами</button>
+</div>
+<style>.cs-opts{display:flex;flex-wrap:wrap;gap:6px 14px}.cs-opts select{font:inherit}html.embed .cs-opts select{background:#fff;color:#000;border:0;box-shadow:inset -1px -1px #dfdfdf,inset 1px 1px #808080,inset -2px -2px #fff,inset 2px 2px #0a0a0a;padding:2px 3px}</style>
+<div class="stage"><canvas id="canvas"></canvas></div>
+</main>
+<script>
+const E='/pc/engines/xash/';
+const status=t=>document.getElementById('status').textContent=t;
+function quitGame(code){
+  status('Игра завершена.');
+  if(window.pcGameQuit) window.pcGameQuit('xash '+code); else location.href='/pc/';
+}
+async function getZip(){
+  const f=document.getElementById('file').files[0];
+  if(f) return f.arrayBuffer();
+  const b=await pcFetchGame('games/cs16/valve.zip',pcProgress); pcProgressStep('Распаковываю игру…'); return b;
+}
+const qMap=new URLSearchParams(location.search).get('map');
+if(qMap&&/^[a-z0-9_]+$/i.test(qMap)){const o=document.createElement('option'); o.textContent=qMap; document.getElementById('map').prepend(o); document.getElementById('map').value=qMap;}
+if(window.PC_EMBED){const s=document.getElementById('status'); s.textContent=s.dataset.embed; setTimeout(()=>document.getElementById('map').focus(),300);}
+document.getElementById('pick').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!document.getElementById('go').disabled){ e.preventDefault(); document.getElementById('go').click(); } });
+document.getElementById('go').onclick=async()=>{
+  const map=document.getElementById('map').value, bots=+document.getElementById('bots').value, diff=document.getElementById('diff').value;
+  // после нажатия прячем кнопку и выбор файла — повторный клик не запустит вторую загрузку; при ошибке вернём
+  const showGo=v=>{ for(const id of ['go','file']){ const el=document.getElementById(id); el.disabled=!v; el.style.display=v?'':'none'; } document.querySelector('.cs-opts').style.display=v?'':'none'; };
+  if(document.getElementById('go').disabled) return;
+  showGo(false);
+  try{
+    status('Читаю архив…');
+    const zip=await JSZip.loadAsync(await getZip()); const files={};
+    await Promise.all(Object.keys(zip.files).map(async p=>{const z=zip.files[p]; if(z.dir) return; files['/rodir/'+p]=await z.async('uint8array');}));
+    const extras=await (await fetch(E+'cstrike/extras.pk3')).arrayBuffer();
+    status('Запуск движка…'); pcProgressDone();
+    Xash3D({
+      // офлайн: только локальная игра, без сети; боты включаются консольными командами
+      // карта, число ботов и сложность — из окна запуска (или ?map= в адресе)
+      arguments:['-windowed','-game','cstrike','+_vgui_menus','0','-ref','webgl2','-language','russian','+ui_language','russian','+joy_enable','0','+ui_renderworld','1','+sv_lan','1',
+        '+maxplayers',String(Math.max(2,bots+2)),'+bot_quota',String(bots),'+bot_difficulty',diff,'+bot_join_after_player','1','+mp_autoteambalance','0','+exec','pad.cfg','+map',map],
+      // «Выход» из меню игры: на экране ПК закрываем окно, на отдельной странице — возвращаемся в клуб
+      onQuit:quitGame,
+      canvas:document.getElementById('canvas'),
+      dynamicLibraries:['filesystem_stdio.wasm','libref_webgl2.wasm','cl_dlls/menu_emscripten_wasm32.wasm','dlls/cs_emscripten_wasm32.wasm','cl_dlls/client_emscripten_wasm32.wasm','/rodir/filesystem_stdio.wasm'],
+      onRuntimeInitialized:function(){window.__xash=this;
+        Object.keys(files).forEach(k=>{this.FS.mkdirTree(k.split('/').slice(0,-1).join('/')); this.FS.writeFile(k,files[k]);});
+        this.FS.writeFile('/rodir/cstrike/extras.pk3',new Uint8Array(extras));
+        this.FS.writeFile('/rodir/cstrike/pad.cfg','unbind f\nunbind enter\nbind l "impulse 100"\nbind j "+attack"\nbind k "+attack2"\nbind w "+forward"\nbind s "+back"\nbind a "+moveleft"\nbind d "+moveright"\nbind uparrow "+forward"\nbind downarrow "+back"\nbind leftarrow "+left"\nbind rightarrow "+right"\nbind pgup "+lookup"\nbind pgdn "+lookdown"\nbind space "+jump"\nbind ctrl "+duck"\nbind e "+use"\nbind r "+reload"\nbind shift "+speed"\nbind "[" "invprev"\nbind "]" "invnext"\nbind mwheelup "invprev"\nbind mwheeldown "invnext"\nhud_fastswitch 1\nbind b "buy"\nbind tab "+showscores"\n');
+        this.FS.mkdir('/rwdir'); this.FS.chdir('/rodir');
+      },
+      locateFile:p=>({'xash.wasm':E+'xash.wasm','/rodir/filesystem_stdio.wasm':E+'filesystem_stdio.wasm','filesystem_stdio.wasm':E+'filesystem_stdio.wasm','libref_webgl2.wasm':E+'libref_webgl2.wasm','cl_dlls/menu_emscripten_wasm32.wasm':E+'cstrike/cl_dlls/menu_emscripten_wasm32.wasm','dlls/cs_emscripten_wasm32.wasm':E+'cstrike/dlls/cs_emscripten_wasm32.wasm','cl_dlls/client_emscripten_wasm32.wasm':E+'cstrike/cl_dlls/client_emscripten_wasm32.wasm'}[p]||p)
+    });
+    status('Игра запущена. Клик по экрану — захват мыши; F11 — полный экран.');
+  }catch(e){pcProgressDone(); status('Ошибка: '+e.message); showGo(true);}
+};
+</script>
+</body>
+</html>

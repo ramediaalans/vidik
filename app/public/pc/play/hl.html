@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head><script src="/pc/media.js"></script><script src="/pc/embed.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Half-Life — Компьютерный клуб</title>
+<link rel="stylesheet" href="/pc/pc.css">
+<script src="/pc/engines/xash/raw.js"></script>
+<script src="/pc/engines/vendor/jszip.min.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/">ВИДИК</a><a class="back" href="/pc/">← Компьютерный клуб</a></div></header>
+<div class="mobile-block"><h1>Только для ПК</h1></div>
+<main class="wrap desk">
+<h1 style="font-size:32px;margin-top:32px">Half-Life</h1>
+<div class="panel" id="pick">
+<p id="status">Одиночная кампания с русской озвучкой. Загрузка ≈300 МБ. Управление: WASD, мышь, E — использовать, Пробел — прыжок, Ctrl — присесть, L — фонарик, F — полный экран, F6/F9 — быстрое сохранение/загрузка (до закрытия вкладки), Esc — меню.</p>
+<input type="file" id="file" accept=".zip"> <button id="go">Играть</button>
+</div>
+<div class="stage"><canvas id="canvas"></canvas></div>
+</main>
+<script>
+const E='/pc/engines/xash/';
+const V=E+'valve/';
+const status=t=>document.getElementById('status').textContent=t;
+function quitGame(code){
+  status('Игра завершена.');
+  if(window.pcGameQuit) window.pcGameQuit('xash '+code); else location.href='/pc/';
+}
+async function getZip(){
+  const f=document.getElementById('file').files[0];
+  if(f) return f.arrayBuffer();
+  const b=await pcFetchGame('games/hl/valve.zip',pcProgress); pcProgressStep('Распаковываю игру…'); return b;
+}
+document.getElementById('go').onclick=async()=>{
+  // после запуска прячем кнопку и выбор файла — чтобы не запустить движок дважды (при ошибке вернём)
+  const showGo=v=>{ for(const id of ['go','file']){ const el=document.getElementById(id); el.disabled=!v; el.style.display=v?'':'none'; } };
+  if(document.getElementById('go').disabled) return;
+  showGo(false);
+  try{
+    status('Загружаю и распаковываю игру…');
+    const zip=await JSZip.loadAsync(await getZip()); const files={};
+    await Promise.all(Object.keys(zip.files).map(async p=>{const z=zip.files[p]; if(z.dir) return; files['/rodir/'+p]=await z.async('uint8array');}));
+    const extras=await (await fetch(V+'extras.pk3')).arrayBuffer();
+    const map=new URLSearchParams(location.search).get('map');
+    const args=['-windowed','-game','valve','-ref','webgl2','-language','russian','+ui_language','russian','+joy_enable','0','+sv_lan','1','+maxplayers','1'];
+    if(new URLSearchParams(location.search).has('debug')) args.unshift('-dev','2','-log');
+    args.push('+exec','pad.cfg');
+    if(map&&/^[a-z0-9_]+$/i.test(map)) args.push('+map',map);
+    status('Запуск движка…'); pcProgressDone();
+    const lib={'xash.wasm':E+'xash.wasm','/rodir/filesystem_stdio.wasm':E+'filesystem_stdio.wasm','filesystem_stdio.wasm':E+'filesystem_stdio.wasm','libref_webgl2.wasm':E+'libref_webgl2.wasm',
+      'cl_dlls/menu_emscripten_wasm32.wasm':V+'cl_dlls/menu_emscripten_wasm32.wasm','dlls/hl_emscripten_wasm32.wasm':V+'dlls/hl_emscripten_wasm32.wasm','cl_dlls/client_emscripten_wasm32.wasm':V+'cl_dlls/client_emscripten_wasm32.wasm'};
+    Xash3D({
+      // офлайн: только одиночная игра, без сети
+      arguments:args,
+      // «Выход» из меню игры: движок останавливается (чёрный экран) — на экране ПК закрываем окно, на отдельной странице — в клуб
+      onQuit:quitGame,
+      canvas:document.getElementById('canvas'),
+      print:t=>console.log(t), printErr:t=>console.warn(t),
+      dynamicLibraries:['filesystem_stdio.wasm','libref_webgl2.wasm','cl_dlls/menu_emscripten_wasm32.wasm','dlls/hl_emscripten_wasm32.wasm','cl_dlls/client_emscripten_wasm32.wasm','/rodir/filesystem_stdio.wasm'],
+      onRuntimeInitialized:function(){
+        window.__xash=this;
+        Object.keys(files).forEach(k=>{this.FS.mkdirTree(k.split('/').slice(0,-1).join('/')); this.FS.writeFile(k,files[k]); delete files[k];});
+        this.FS.writeFile('/rodir/valve/extras.pk3',new Uint8Array(extras));
+        this.FS.writeFile('/rodir/valve/pad.cfg','unbind f\nunbind enter\nbind l "impulse 100"\nbind j "+attack"\nbind k "+attack2"\nbind w "+forward"\nbind s "+back"\nbind a "+moveleft"\nbind d "+moveright"\nbind uparrow "+forward"\nbind downarrow "+back"\nbind leftarrow "+left"\nbind rightarrow "+right"\nbind pgup "+lookup"\nbind pgdn "+lookdown"\nbind space "+jump"\nbind ctrl "+duck"\nbind e "+use"\nbind r "+reload"\nbind shift "+speed"\nbind "[" "invprev"\nbind "]" "invnext"\nbind mwheelup "invprev"\nbind mwheeldown "invnext"\nhud_fastswitch 1\n');
+        this.FS.mkdir('/rwdir'); this.FS.chdir('/rodir');
+      },
+      locateFile:p=>lib[p]||p
+    });
+    status('Игра запущена. Клик по экрану — захват мыши; F11 — полный экран.');
+  }catch(e){pcProgressDone(); status('Ошибка: '+e.message); showGo(true);}
+};
+</script>
+</body>
+</html>

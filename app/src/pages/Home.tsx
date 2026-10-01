@@ -110,6 +110,13 @@ export function Home() {
               </div>
             </Link>
           ))}
+          <a className="tile tile--wide" href="/pc/">
+            <img src={asset('/images/pc/section-pc.webp')} alt="Компьютер 90-х в компьютерном клубе" loading="lazy" />
+            <div className="tile__content">
+              <h3 className="display display--m">Компьютерный клуб</h3>
+              <p className="mono" style={{ marginTop: 6 }}>Doom, Half-Life, CS 1.6, Quake III и Diablo — на мониторе с Windows 98</p>
+            </div>
+          </a>
         </div>
       </section>
 

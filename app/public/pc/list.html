@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head><link rel="icon" href="data:,">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Компьютерный клуб — ВИДИК</title>
+<link rel="stylesheet" href="/pc/pc.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/">ВИДИК</a><a class="back" href="/">← на главный сайт</a></div></header>
+<div class="mobile-block"><h1>Только для ПК</h1><p class="lead">Компьютерный клуб работает на компьютере с клавиатурой и мышью. Откройте страницу с ПК.</p></div>
+<main class="desk">
+<section class="wrap hero">
+<h1>Компьютерный клуб</h1>
+<p class="lead">Легенды ПК 1990–2005 прямо в браузере. Без установки, без сети: только одиночная игра и матчи с ботами.</p>
+<span class="pcnote">только ПК · клавиатура и мышь</span>
+</section>
+<section class="wrap"><div class="grid" id="grid"></div></section>
+</main>
+<script>
+const labels={'playable':'можно играть','needs-files':'нужны файлы игры','needs-build':'нужна сборка'};
+fetch('/pc/games.json').then(r=>r.json()).then(list=>{
+  document.getElementById('grid').innerHTML=list.map(g=>`<a class="card" href="/pc/${g.page}">
+    <span class="badge ${g.status}">${labels[g.status]||g.status}</span>
+    <h3>${g.title}</h3>
+    <span class="meta">${g.year} · ${g.engine} · ${g.mode}</span>
+    <p class="note">${g.note}</p>
+    <span class="meta">Файлы: ${g.files}</span></a>`).join('');
+});
+</script>
+</body>
+</html>

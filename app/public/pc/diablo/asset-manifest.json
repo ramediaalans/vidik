@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/pc/diablo/static/css/main.11e929e9.chunk.css",
+    "main.js": "/pc/diablo/static/js/main.46fee33b.chunk.js",
+    "runtime~main.js": "/pc/diablo/static/js/runtime~main.d1da6b7a.js",
+    "runtime~storage.js": "/pc/diablo/static/js/runtime~storage.0f28c095.js",
+    "storage.js": "/pc/diablo/static/js/storage.8840bbe2.chunk.js",
+    "static/js/4.755737a9.chunk.js": "/pc/diablo/static/js/4.755737a9.chunk.js",
+    "7896271ce873d3b4e737.worker.js": "/pc/diablo/7896271ce873d3b4e737.worker.js",
+    "ac2a156d217a19a47ded.worker.js": "/pc/diablo/ac2a156d217a19a47ded.worker.js",
+    "index.html": "/pc/diablo/index.html",
+    "precache-manifest.d6af82a7121888078a93753c9f9f9392.js": "/pc/diablo/precache-manifest.d6af82a7121888078a93753c9f9f9392.js",
+    "service-worker.js": "/pc/diablo/service-worker.js",
+    "static/media/Diablo.wasm": "/pc/diablo/static/media/Diablo.570bd59a.wasm",
+    "static/media/DiabloSpawn.wasm": "/pc/diablo/static/media/DiabloSpawn.9c2373b2.wasm",
+    "static/media/ListFile.txt": "/pc/diablo/static/media/ListFile.b370797d.txt",
+    "static/media/MpqCmp.wasm": "/pc/diablo/static/media/MpqCmp.8aa3c6dc.wasm",
+    "static/media/App.scss": "/pc/diablo/static/media/shift.b40e4a63.svg",
+    "storage.html": "/pc/diablo/storage.html"
+  }
+}

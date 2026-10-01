@@ -29,6 +29,8 @@ export function Header() {
               {l.label}
             </NavLink>
           ))}
+          {/* Компьютерный клуб — отдельные статические страницы (свои заголовки COOP/COEP), поэтому обычная ссылка с перезагрузкой, а не роут SPA. Только для ПК. */}
+          <a className="nav__pc" href="/pc/">Компьютерный клуб</a>
         </nav>
 
         <div className="header__actions">

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru">
+<head><script src="/pc/embed.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Компьютерный клуб</title>
+<link rel="stylesheet" href="/pc/pc.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/">ВИДИК</a><a class="back" href="/pc/">← Компьютерный клуб</a></div></header>
+<main class="wrap desk">
+<h1 id="t" style="font-size:32px;margin-top:32px">Игра</h1>
+<div class="panel"><p id="n"></p><p class="meta" id="f"></p><p class="meta">Статус: игра ещё не подключена, движок будет добавлен на следующем шаге.</p></div>
+</main>
+<script>
+const id=new URLSearchParams(location.search).get('g');
+fetch('/pc/games.json').then(r=>r.json()).then(l=>{const g=l.find(x=>x.id===id); if(!g) return;
+ document.getElementById('t').textContent=g.title; document.getElementById('n').textContent=g.note; document.getElementById('f').textContent='Файлы: '+g.files;});
+</script>
+</body>
+</html>
