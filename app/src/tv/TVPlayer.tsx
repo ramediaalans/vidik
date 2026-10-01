@@ -386,8 +386,9 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
     const current = nowPlaying(slots, broadcastSecondsOfDay());
     if (!current) return null;
     let i = current.index;
-    let offset = current.offsetSec;
-    while (i < slots.length && failed.current.has(`${slots[i].provider}:${slots[i].mediaId}`)) { i++; offset = 0; }
+    // offset — позиция внутри исходника: слот может начинаться с середины сборника (slot.from).
+    let offset = slots[i].from + current.offsetSec;
+    while (i < slots.length && failed.current.has(`${slots[i].provider}:${slots[i].mediaId}`)) { i++; offset = slots[i]?.from ?? 0; }
     return i < slots.length ? { slot: slots[i], offset } : null;
   }, [slots]);
 
