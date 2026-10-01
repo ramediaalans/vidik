@@ -22,6 +22,8 @@
     screenEl.style.setProperty('--k', k.toFixed(4));
     desk.style.width = (W / k) + 'px';
     desk.style.height = (H / k) + 'px';
+    // игра в окне рисуется как минимум в 640 px ширины и уменьшается под экран ПК; в полном экране — 1:1
+    screenEl.style.setProperty('--gs', Math.min(1, W / 640).toFixed(4));
   }
   if (window.ResizeObserver) new ResizeObserver(layout).observe(screenEl); else window.addEventListener('resize', layout);
   layout();
@@ -112,7 +114,7 @@
     f.setAttribute('allow', 'autoplay; fullscreen; gamepad');
     f.title = g.title;
     f.addEventListener('load', function () { if (cur && cur.iframe === f) focusGame(); });
-    gw.appendChild(f);
+    $('gw-body').appendChild(f);
     $('gw-ico').src = '/pc/' + g.icon;
     $('gw-title').textContent = g.title;
     gwStatus.textContent = '— загрузка…';

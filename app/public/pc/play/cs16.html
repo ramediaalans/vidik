@@ -39,8 +39,7 @@ function quitGame(code){
 async function getZip(){
   const f=document.getElementById('file').files[0];
   if(f) return f.arrayBuffer();
-  const r=await fetch((window.PC_MEDIA||'/pc/')+'games/cs16/valve.zip'); if(!r.ok) throw new Error('valve.zip не найден');
-  return r.arrayBuffer();
+  const b=await pcFetchGame('games/cs16/valve.zip',pcProgress); pcProgressStep('Распаковываю игру…'); return b;
 }
 const qMap=new URLSearchParams(location.search).get('map');
 if(qMap&&/^[a-z0-9_]+$/i.test(qMap)){const o=document.createElement('option'); o.textContent=qMap; document.getElementById('map').prepend(o); document.getElementById('map').value=qMap;}
@@ -57,17 +56,17 @@ document.getElementById('go').onclick=async()=>{
     const zip=await JSZip.loadAsync(await getZip()); const files={};
     await Promise.all(Object.keys(zip.files).map(async p=>{const z=zip.files[p]; if(z.dir) return; files['/rodir/'+p]=await z.async('uint8array');}));
     const extras=await (await fetch(E+'cstrike/extras.pk3')).arrayBuffer();
-    status('Запуск движка…');
+    status('Запуск движка…'); pcProgressDone();
     Xash3D({
       // офлайн: только локальная игра, без сети; боты включаются консольными командами
       // карта, число ботов и сложность — из окна запуска (или ?map= в адресе)
-      arguments:['-windowed','-game','cstrike','+_vgui_menus','0','-ref','webgl2','-language','russian','+ui_language','russian','+joy_enable','0','+sv_lan','1',
+      arguments:['-windowed','-game','cstrike','+_vgui_menus','0','-ref','webgl2','-language','russian','+ui_language','russian','+joy_enable','0','+ui_renderworld','1','+sv_lan','1',
         '+maxplayers',String(Math.max(2,bots+2)),'+bot_quota',String(bots),'+bot_difficulty',diff,'+bot_join_after_player','1','+mp_autoteambalance','0','+exec','pad.cfg','+map',map],
       // «Выход» из меню игры: на экране ПК закрываем окно, на отдельной странице — возвращаемся в клуб
       onQuit:quitGame,
       canvas:document.getElementById('canvas'),
       dynamicLibraries:['filesystem_stdio.wasm','libref_webgl2.wasm','cl_dlls/menu_emscripten_wasm32.wasm','dlls/cs_emscripten_wasm32.wasm','cl_dlls/client_emscripten_wasm32.wasm','/rodir/filesystem_stdio.wasm'],
-      onRuntimeInitialized:function(){
+      onRuntimeInitialized:function(){window.__xash=this;
         Object.keys(files).forEach(k=>{this.FS.mkdirTree(k.split('/').slice(0,-1).join('/')); this.FS.writeFile(k,files[k]);});
         this.FS.writeFile('/rodir/cstrike/extras.pk3',new Uint8Array(extras));
         this.FS.writeFile('/rodir/cstrike/pad.cfg','unbind f\nunbind enter\nbind l "impulse 100"\nbind j "+attack"\nbind k "+attack2"\nbind w "+forward"\nbind s "+back"\nbind a "+moveleft"\nbind d "+moveright"\nbind uparrow "+forward"\nbind downarrow "+back"\nbind leftarrow "+left"\nbind rightarrow "+right"\nbind pgup "+lookup"\nbind pgdn "+lookdown"\nbind space "+jump"\nbind ctrl "+duck"\nbind e "+use"\nbind r "+reload"\nbind shift "+speed"\nbind "[" "invprev"\nbind "]" "invnext"\nbind mwheelup "invprev"\nbind mwheeldown "invnext"\nhud_fastswitch 1\nbind b "buy"\nbind tab "+showscores"\n');
@@ -76,7 +75,7 @@ document.getElementById('go').onclick=async()=>{
       locateFile:p=>({'xash.wasm':E+'xash.wasm','/rodir/filesystem_stdio.wasm':E+'filesystem_stdio.wasm','filesystem_stdio.wasm':E+'filesystem_stdio.wasm','libref_webgl2.wasm':E+'libref_webgl2.wasm','cl_dlls/menu_emscripten_wasm32.wasm':E+'cstrike/cl_dlls/menu_emscripten_wasm32.wasm','dlls/cs_emscripten_wasm32.wasm':E+'cstrike/dlls/cs_emscripten_wasm32.wasm','cl_dlls/client_emscripten_wasm32.wasm':E+'cstrike/cl_dlls/client_emscripten_wasm32.wasm'}[p]||p)
     });
     status('Игра запущена. Клик по экрану — захват мыши; F11 — полный экран.');
-  }catch(e){status('Ошибка: '+e.message); showGo(true);}
+  }catch(e){pcProgressDone(); status('Ошибка: '+e.message); showGo(true);}
 };
 </script>
 </body>

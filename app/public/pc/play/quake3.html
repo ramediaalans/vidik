@@ -32,12 +32,9 @@ if (!present.some((u) => u.endsWith('pak0.pk3'))) {
 } else { say('Готово к запуску (' + present.length + ' pk3).'); $('go').hidden = false; $('quick').hidden = false; }
 
 async function getBytes(url, onBytes) {
-  const r = await fetch(url); if (!r.ok) throw new Error(url + ': ' + r.status);
-  const total = +r.headers.get('content-length') || 0;
-  if (!total) { const b = new Uint8Array(await r.arrayBuffer()); onBytes(b.length); return b; }
-  const out = new Uint8Array(total); let off = 0; const rd = r.body.getReader();
-  for (;;) { const { done, value } = await rd.read(); if (done) break; out.set(value, off); off += value.length; onBytes(value.length); }
-  return out;
+  // с кэшем браузера (media.js): повторный запуск без скачивания
+  let prev = 0;
+  return pcFetchGame(url, (got) => { onBytes(got - prev); prev = got; });
 }
 
 const run = async (quick) => {
