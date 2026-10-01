@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head><script src="/pc/media.js"></script><script src="/pc/embed.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Quake III Arena — Компьютерный клуб</title>
+<link rel="stylesheet" href="/pc/pc.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/">ВИДИК</a><a class="back" href="/pc/">← Компьютерный клуб</a></div></header>
+<div class="mobile-block"><h1>Только для ПК</h1></div>
+<main class="wrap desk">
+<h1 style="font-size:32px;margin-top:32px">Quake III Arena</h1>
+<div class="stage" style="aspect-ratio:16/9;max-width:1280px"><canvas id="canvas" tabindex="0" width="1280" height="720" oncontextmenu="event.preventDefault()"></canvas></div>
+<div class="panel">
+  <p id="status">Проверяю файлы игры…</p>
+  <progress id="bar" max="100" value="0" hidden style="width:100%"></progress>
+  <button id="go" hidden>Играть (меню)</button> <button id="quick" hidden>Сразу в бой с ботами</button>
+  <button id="fs" hidden>Полный экран</button>
+  <p class="meta">Только одиночная игра с ботами: в главном меню выберите SKIRMISH. Сеть отключена. Клик по экрану — захват мыши, Esc — меню/освободить мышь. Первая загрузка ≈ 480 МБ, дальше — из кэша браузера.</p>
+</div>
+</main>
+<script type="module">
+const $ = (id) => document.getElementById(id);
+const say = (t) => { $('status').textContent = t; };
+const PAKS = ['pak0','pak1','pak2','pak3','pak4','pak5','pak6','pak7','pak8'].map((n) => `${(window.PC_MEDIA||'/pc/')}games/quake3/baseq3/${n}.pk3`);
+const present = [];
+for (const u of PAKS) { const r = await fetch(u, { method: 'HEAD' }); if (r.ok) present.push(u); }
+if (!present.some((u) => u.endsWith('pak0.pk3'))) {
+  say('Нет файлов игры. Положите baseq3/pak0.pk3 (и pak1–pak8) в pc/games/quake3/baseq3/.');
+} else { say('Готово к запуску (' + present.length + ' pk3).'); $('go').hidden = false; $('quick').hidden = false; }
+
+async function getBytes(url, onBytes) {
+  const r = await fetch(url); if (!r.ok) throw new Error(url + ': ' + r.status);
+  const total = +r.headers.get('content-length') || 0;
+  if (!total) { const b = new Uint8Array(await r.arrayBuffer()); onBytes(b.length); return b; }
+  const out = new Uint8Array(total); let off = 0; const rd = r.body.getReader();
+  for (;;) { const { done, value } = await rd.read(); if (done) break; out.set(value, off); off += value.length; onBytes(value.length); }
+  return out;
+}
+
+const run = async (quick) => {
+  $('go').hidden = true; $('quick').hidden = true; $('bar').hidden = false;
+  try {
+    const sizes = await Promise.all(present.map(async (u) => +(await fetch(u, { method: 'HEAD' })).headers.get('content-length') || 0));
+    const all = sizes.reduce((a, b) => a + b, 0) || 1; let done = 0;
+    const tick = (n) => { done += n; $('bar').value = Math.min(100, done * 100 / all); say('Загрузка данных игры: ' + Math.round(done / 1048576) + ' / ' + Math.round(all / 1048576) + ' МБ'); };
+    const mod = await import('/pc/engines/q3/ioquake3.js');
+    const canvas = $('canvas');
+    const logs = window.__q3log = [];
+    const Q = await mod.default({
+      canvas, noInitialRun: true, elementPointerLock: true,
+      // выход из игры (QUIT в меню) — закрыть окно на рабочем столе / вернуться в клуб
+      onQuit: (code) => { say('Игра завершена.'); if (window.pcGameQuit) window.pcGameQuit('q3 ' + code); else location.href = '/pc/'; },
+      print: (m) => { logs.push(m); console.log(m); },
+      printErr: (m) => { logs.push('ERR ' + m); console.warn(m); },
+      locateFile: (p) => '/pc/engines/q3/' + p,
+    });
+    window.__q3 = Q;
+    Q.FS.mkdirTree('/q3/baseq3'); Q.FS.mkdirTree('/home/baseq3'); Q.FS.writeFile('/home/baseq3/q3key', '2222222222222222');
+    Q.FS.writeFile('/home/baseq3/autoexec.cfg', 'unbind f\nunbind enter\nbind w +forward\nbind s +back\nbind a +moveleft\nbind d +moveright\nbind uparrow +forward\nbind downarrow +back\nbind leftarrow +left\nbind rightarrow +right\nbind pgup +lookup\nbind pgdn +lookdown\nbind j +attack\nbind k +zoom\nbind space +moveup\nbind ctrl +movedown\nbind shift +speed\nbind [ weapprev\nbind ] weapnext\nbind tab +scores\nbind e +button2\nbind mwheelup weapprev\nbind mwheeldown weapnext\n');
+    for (const u of present) { const b = await getBytes(u, tick); Q.FS.writeFile('/q3/baseq3/' + u.split('/').pop(), b); }
+    $('bar').hidden = true; say('Запуск движка…');
+    const set = (k, v) => ['+set', k, String(v)];
+    const args = [
+      ...set('fs_basepath', '/q3'), ...set('fs_homepath', '/home'), ...set('fs_basegame', 'baseq3'), ...set('com_basegame', 'baseq3'),
+      ...set('sv_pure', 0), ...set('net_enabled', 0), ...set('com_introplayed', 1), ...set('r_fullscreen', 0),
+      ...set('r_mode', -1), ...set('r_customwidth', 1280), ...set('r_customheight', 720), ...set('cl_allowDownload', 0),
+      ...set('s_musicvolume', 0.3), ...set('com_maxfps', 125),
+    ];
+    if (quick) args.push(...set('bot_minplayers', 8), ...set('g_gametype', 0), ...set('fraglimit', 20), '+devmap', 'q3dm17');
+    Q.callMain(args);
+    canvas.focus(); say(quick ? 'Игра запущена. Карта q3dm17, 8 игроков (с ботами).' : 'Игра запущена. Выберите SKIRMISH → карта → боты.');
+    $('fs').hidden = false; $('fs').onclick = () => canvas.requestFullscreen?.();
+  } catch (e) { console.error(e); say('Ошибка: ' + (e && e.message || e)); $('go').hidden = false; $('quick').hidden = false; }
+};
+$('go').onclick = () => run(false);
+$('quick').onclick = () => run(true);
+</script>
+</body>
+</html>

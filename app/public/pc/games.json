@@ -1,0 +1,203 @@
+[
+  {
+    "id": "doom-freedoom1",
+    "title": "Freedoom: Phase 1",
+    "year": 1993,
+    "engine": "prboom (libretro)",
+    "mode": "Одиночная",
+    "page": "play/libretro.html?g=doom-freedoom1",
+    "core": "prboom",
+    "romFiles": [
+      "games/doom/freedoom1.wad"
+    ],
+    "files": "freedoom1.wad — свободные данные, уже лежат в проекте",
+    "status": "playable",
+    "note": "Свободная замена Doom. Можно играть уже сейчас.",
+    "label": "Freedoom 1",
+    "icon": "desk/icons/doom-freedoom1.png",
+    "pad": "native",
+    "mouseY": false
+  },
+  {
+    "id": "doom-freedoom2",
+    "title": "Freedoom: Phase 2",
+    "year": 1994,
+    "engine": "prboom (libretro)",
+    "mode": "Одиночная",
+    "page": "play/libretro.html?g=doom-freedoom2",
+    "core": "prboom",
+    "romFiles": [
+      "games/doom/freedoom2.wad"
+    ],
+    "files": "freedoom2.wad — свободные данные, уже лежат в проекте",
+    "status": "playable",
+    "note": "Свободная замена Doom II.",
+    "label": "Freedoom 2",
+    "icon": "desk/icons/doom-freedoom2.png",
+    "pad": "native",
+    "mouseY": false
+  },
+  {
+    "id": "doom",
+    "title": "Doom",
+    "year": 1993,
+    "engine": "prboom (libretro)",
+    "mode": "Одиночная",
+    "page": "play/libretro.html?g=doom",
+    "core": "prboom",
+    "romFiles": [
+      "games/doom/doom.wad"
+    ],
+    "files": "doom.wad",
+    "status": "playable",
+    "note": "Ultimate Doom, 4 эпизода.",
+    "label": "Doom",
+    "icon": "desk/icons/doom.png",
+    "pad": "native",
+    "mouseY": false
+  },
+  {
+    "id": "doom2",
+    "title": "Doom II: Hell on Earth",
+    "year": 1994,
+    "engine": "prboom (libretro)",
+    "mode": "Одиночная",
+    "page": "play/libretro.html?g=doom2",
+    "core": "prboom",
+    "romFiles": [
+      "games/doom/doom2.wad"
+    ],
+    "files": "doom2.wad",
+    "status": "playable",
+    "note": "30 уровней.",
+    "label": "Doom II",
+    "icon": "desk/icons/doom2.png",
+    "pad": "native",
+    "mouseY": false
+  },
+  {
+    "id": "plutonia",
+    "title": "Final Doom: Plutonia",
+    "year": 1996,
+    "engine": "prboom (libretro)",
+    "mode": "Одиночная",
+    "page": "play/libretro.html?g=plutonia",
+    "core": "prboom",
+    "romFiles": [
+      "games/doom/plutonia.wad"
+    ],
+    "files": "plutonia.wad",
+    "status": "playable",
+    "note": "Сложные уровни.",
+    "label": "Plutonia",
+    "icon": "desk/icons/plutonia.png",
+    "pad": "native",
+    "mouseY": false
+  },
+  {
+    "id": "tnt",
+    "title": "Final Doom: TNT Evilution",
+    "year": 1996,
+    "engine": "prboom (libretro)",
+    "mode": "Одиночная",
+    "page": "play/libretro.html?g=tnt",
+    "core": "prboom",
+    "romFiles": [
+      "games/doom/tnt.wad"
+    ],
+    "files": "tnt.wad",
+    "status": "playable",
+    "note": "Дополнение к Doom II.",
+    "label": "TNT Evilution",
+    "icon": "desk/icons/tnt.png",
+    "pad": "native",
+    "mouseY": false
+  },
+  {
+    "id": "wolf3d",
+    "title": "Wolfenstein 3D",
+    "year": 1992,
+    "engine": "js-dos (DOSBox-X)",
+    "mode": "Одиночная",
+    "page": "play/dos.html?g=wolf3d",
+    "files": "games/dos/wolf3d.jsdos",
+    "status": "playable",
+    "note": "Оригинальная DOS-версия (GOG), мышь и клавиатура.",
+    "label": "Wolfenstein 3D",
+    "icon": "desk/icons/wolf3d-dos.png",
+    "pad": "wolf3d",
+    "mouseY": false
+  },
+  {
+    "id": "half-life",
+    "title": "Half-Life",
+    "year": 1998,
+    "engine": "Xash3D FWGS (WASM)",
+    "mode": "Одиночная кампания",
+    "page": "play/hl.html",
+    "files": "games/hl/valve.zip",
+    "status": "playable",
+    "note": "Русская озвучка и субтитры. Загрузка ≈300 МБ, сохранения живут до закрытия вкладки.",
+    "label": "Half-Life",
+    "icon": "desk/icons/half-life.png",
+    "pad": "hl"
+  },
+  {
+    "id": "cs16",
+    "title": "Counter-Strike 1.6",
+    "year": 2003,
+    "engine": "Xash3D FWGS (WASM)",
+    "mode": "Только с ботами",
+    "page": "play/cs16.html",
+    "files": "games/cs16/valve.zip",
+    "status": "playable",
+    "note": "Только с ботами, без сети. Русская рация и тексты. Архив грузится в память браузера целиком.",
+    "label": "Counter-Strike",
+    "icon": "desk/icons/cs16.png",
+    "pad": "cs",
+    "start": "manual"
+  },
+  {
+    "id": "duke3d",
+    "title": "Duke Nukem 3D",
+    "year": 1996,
+    "engine": "js-dos (DOSBox-X)",
+    "mode": "Одиночная",
+    "page": "play/dos.html?g=duke3d",
+    "files": "games/dos/duke3d.jsdos",
+    "status": "playable",
+    "note": "Оригинальная DOS-версия Duke Nukem 3D (v1.3D), без сети. Стрелки ↑↓ — ходьба, ←→ — шаг в сторону, мышь — поворот и обзор вверх/вниз, Ctrl/левая кнопка — огонь, Пробел — открыть, Num5 — взгляд прямо.",
+    "label": "Duke Nukem 3D",
+    "icon": "desk/icons/duke3d.png",
+    "pad": "duke3d",
+    "mouseY": "invert"
+  },
+  {
+    "id": "quake3",
+    "title": "Quake III Arena",
+    "year": 1999,
+    "engine": "ioquake3 (WASM, Emscripten)",
+    "mode": "Только с ботами",
+    "page": "play/quake3.html",
+    "files": "baseq3/pak0.pk3 (или OpenArena 0.8.8)",
+    "status": "playable",
+    "note": "Только с ботами. Первая загрузка большая (pak0 ≈ 450 МБ).",
+    "label": "Quake III Arena",
+    "icon": "desk/icons/quake3.png",
+    "pad": "q3"
+  },
+  {
+    "id": "diablo",
+    "title": "Diablo",
+    "year": 1996,
+    "engine": "DiabloWeb (WASM)",
+    "mode": "Одиночная",
+    "page": "diablo/index.html?auto=1",
+    "files": "games/diablo/DIABDAT.MPQ",
+    "status": "playable",
+    "note": "Одиночная игра, сохранения в браузере.",
+    "label": "Diablo",
+    "icon": "desk/icons/diablo.png",
+    "pad": "diablo"
+  }
+]

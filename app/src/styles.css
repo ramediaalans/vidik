@@ -1122,6 +1122,16 @@ html, body { overflow-x: hidden; max-width: 100%; }
   color: var(--beige);
 }
 
+/* широкая плитка «Компьютерный клуб» на всю строку сетки */
+.tile--wide {
+  grid-column: 1 / -1;
+  min-height: 300px;
+}
+
+.tile--wide img {
+  object-position: 50% 42%;
+}
+
 /* --- dial-up overlay --- */
 .dialup {
   position: absolute;

@@ -1,0 +1,93 @@
+/* Компьютерный клуб: ПК 90-х на фоне клуба, на экране — рабочий стол Windows 98 */
+:root{--w98:#c0c0c0;--w98-dark:#808080;--w98-navy:#000080;--teal:#008080;--k:1}
+html,body{height:100%}
+body.club{margin:0;overflow:hidden;background:#050506;color:#d8c9ac;font:14px/1.4 Onest,system-ui,Segoe UI,Arial,sans-serif}
+/* фон — зал интернет-кафе: лёгкое размытие (глубина резкости — ПК в фокусе), стол фона под клавиатурой,
+   виньетка и затемнение сверху/снизу — чтобы читались шапка и подсказка и края уходили в цвет страницы */
+.club-bg{position:fixed;inset:-72px -32px;background:#050506 url(/pc/desk/club-bg.webp) 50% 58%/cover no-repeat;z-index:0} /* размытие/затемнение запечены в картинку — без CSS filter, чтобы не нагружать GPU */
+.club-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(5,5,6,.78) 0,rgba(5,5,6,0) 13%,rgba(5,5,6,0) 84%,rgba(5,5,6,.85) 100%),
+  radial-gradient(ellipse 62% 58% at 50% 50%,rgba(5,5,6,0) 0,rgba(5,5,6,.35) 58%,rgba(5,5,6,.9) 100%)}
+.club-top{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;pointer-events:none}
+.club-top a{pointer-events:auto;text-decoration:none;color:inherit}
+.club-top .logo{font:800 20px Unbounded,system-ui,sans-serif;text-transform:uppercase;letter-spacing:-.02em;color:#ede6d6}
+.club-top .sign{font:700 13px 'JetBrains Mono',Consolas,monospace;letter-spacing:.2em;text-transform:uppercase;color:#b9a6ff;text-shadow:0 0 12px rgba(150,120,255,.6)}
+.club-top .back{font:13px 'JetBrains Mono',Consolas,monospace;color:#8a8580}
+.club-top .back:hover{color:#ede6d6}
+.rig{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1;padding:44px 24px 34px}
+.pc{position:relative;aspect-ratio:1526/1003;height:min(100%,calc((100vw - 48px) * 1003 / 1526));max-width:100%}
+.pc-img{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;user-select:none;filter:drop-shadow(0 28px 36px rgba(0,0,0,.7))}
+.hint{position:fixed;left:0;right:0;bottom:10px;z-index:5;text-align:center;font:12px 'JetBrains Mono',Consolas,monospace;color:#6f6a64}
+.hint b{color:#b3aa9c;font-weight:400}
+.hint .pad-on{color:#c9f03a}
+
+/* экран (под рамкой кинескопа) */
+#screen{position:absolute;left:24%;top:16.95%;width:35.3%;height:39.9%;z-index:1;overflow:hidden;background:#000;border-radius:1.6%/2.2%}
+#screen:fullscreen{border-radius:0;width:100%;height:100%;left:0;top:0}
+.crt{position:absolute;inset:0;z-index:40;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0,rgba(0,0,0,.14) 1px,rgba(0,0,0,0) 1px,rgba(0,0,0,0) 3px),
+  radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 62%,rgba(0,0,0,.45) 100%),
+  linear-gradient(160deg,rgba(255,255,255,.07) 0,rgba(255,255,255,0) 38%)}
+#screen:fullscreen .crt{background:repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0,rgba(0,0,0,.08) 1px,rgba(0,0,0,0) 1px,rgba(0,0,0,0) 3px)}
+#screen.off .crt{background:#000}
+#screen.boot .crt{animation:crt-on .9s ease-out both}
+#screen.boot .crt::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:#fff;box-shadow:0 0 18px 4px #fff;animation:crt-line .6s ease-out both}
+@keyframes crt-on{0%{background-color:#000}35%{background-color:#000}55%{background-color:rgba(255,255,255,.35)}100%{background-color:rgba(0,0,0,0)}}
+@keyframes crt-line{0%{transform:scaleX(0);opacity:1}45%{transform:scaleX(1);opacity:1}100%{transform:scaleY(160);opacity:0}}
+
+/* рабочий стол: логические 512px ширины, масштаб --k */
+.desktop{position:absolute;left:0;top:0;width:512px;transform-origin:0 0;transform:scale(var(--k));background:var(--teal);
+  font:11px/1.25 Tahoma,"MS Sans Serif","Microsoft Sans Serif",Arial,sans-serif;color:#000;user-select:none;-webkit-font-smoothing:none}
+.icons{position:absolute;left:4px;top:4px;bottom:32px;display:grid;grid-auto-flow:column;grid-template-rows:repeat(auto-fill,66px);grid-auto-columns:76px;gap:2px 2px}
+.icon{display:flex;flex-direction:column;align-items:center;gap:3px;padding:2px 1px;cursor:pointer;border:0;background:none;font:inherit;color:#fff;text-align:center;outline:none}
+.icon img{width:32px;height:32px;image-rendering:pixelated}
+.icon span{padding:1px 2px;line-height:1.2;text-shadow:1px 1px 0 rgba(0,0,0,.35);max-width:74px}
+.icon.sel img{filter:brightness(.55) sepia(1) hue-rotate(190deg) saturate(5)}
+.icon.sel span{background:var(--w98-navy);outline:1px dotted #ff0;outline-offset:-1px;text-shadow:none}
+.icon:hover span{text-decoration:underline}
+.wallmark{position:absolute;right:10px;bottom:36px;color:rgba(255,255,255,.3);font:700 10px Tahoma,Arial,sans-serif;text-align:right;letter-spacing:.04em}
+
+.bevel{box-shadow:inset -1px -1px #0a0a0a,inset 1px 1px #fff,inset -2px -2px #808080,inset 2px 2px #dfdfdf}
+.bevel-in{box-shadow:inset -1px -1px #fff,inset 1px 1px #808080}
+.taskbar{position:absolute;left:0;right:0;bottom:0;height:28px;background:var(--w98);box-shadow:inset 0 1px #dfdfdf,inset 0 2px #fff;display:flex;align-items:center;gap:4px;padding:2px 2px 0}
+.start{height:22px;display:flex;align-items:center;gap:3px;padding:0 5px 0 3px;background:var(--w98);border:0;font:700 11px Tahoma,Arial,sans-serif;cursor:pointer;color:#000}
+.start.on{box-shadow:inset 1px 1px #0a0a0a,inset -1px -1px #fff,inset 2px 2px #808080}
+.start svg{width:17px;height:15px}
+.tasks{flex:1;display:flex;gap:3px;min-width:0}
+.task{height:22px;max-width:150px;flex:1;display:flex;align-items:center;gap:4px;padding:0 6px;background:var(--w98);border:0;font:11px Tahoma,Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;color:#000}
+.task img{width:16px;height:16px;image-rendering:pixelated}
+.task.on{box-shadow:inset 1px 1px #0a0a0a,inset -1px -1px #fff,inset 2px 2px #808080;background:repeating-conic-gradient(#c0c0c0 0 25%,#fff 0 50%) 0 0/2px 2px;font-weight:700}
+.tray{height:22px;display:flex;align-items:center;gap:6px;padding:0 8px;font:11px Tahoma,Arial,sans-serif}
+.tray .pad{display:none;font-size:13px;line-height:1}
+.tray .pad.on{display:inline}
+
+.startmenu{position:absolute;left:2px;bottom:27px;display:none;background:var(--w98);padding:3px 3px 3px 25px;min-width:190px;z-index:5;max-height:calc(100% - 34px);overflow:hidden auto;scrollbar-width:none}
+.startmenu.open{display:block}
+.startmenu::before{content:"";position:absolute;left:3px;top:3px;bottom:3px;width:21px;background:linear-gradient(0deg,#000080,#1084d0)}
+.startmenu .band{position:absolute;left:3px;bottom:6px;width:21px;writing-mode:vertical-rl;transform:rotate(180deg);color:#fff;font:700 15px Arial,sans-serif;letter-spacing:.02em;text-align:left}
+.startmenu .band i{font-style:normal;color:#c0c0c0;font-weight:400}
+.menu-item{display:flex;align-items:center;gap:8px;width:100%;height:20px;text-decoration:none;box-sizing:border-box;padding:0 10px 0 4px;background:none;border:0;font:11px Tahoma,Arial,sans-serif;color:#000;cursor:pointer;text-align:left;white-space:nowrap}
+.menu-item img{width:16px;height:16px;image-rendering:pixelated}
+.menu-item:hover,.menu-item.sel{background:var(--w98-navy);color:#fff}
+.menu-sep{height:0;margin:3px 2px;border-top:1px solid #808080;border-bottom:1px solid #fff}
+.menu-item .ico{width:16px;text-align:center;font-size:13px}
+
+/* окно игры поверх рабочего стола (без масштабирования, чтобы мышь и картинка были точными) */
+.gamewin{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;background:var(--w98);padding:calc(3px * var(--k))}
+.gamewin[hidden]{display:none}
+.gamewin .title{flex:none;height:calc(18px * var(--k));display:flex;align-items:center;gap:calc(4px * var(--k));padding:0 calc(2px * var(--k)) 0 calc(3px * var(--k));background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font:700 calc(11px * var(--k))/1 Tahoma,Arial,sans-serif;white-space:nowrap;overflow:hidden}
+.gamewin .title img{width:calc(16px * var(--k));height:calc(16px * var(--k));image-rendering:pixelated}
+.gamewin .title .t{flex:1;overflow:hidden;text-overflow:ellipsis}
+.gamewin .title .s{font-weight:400;opacity:.85}
+.gamewin .title button{width:calc(16px * var(--k));height:calc(14px * var(--k));padding:0;border:0;background:var(--w98);color:#000;font:700 calc(9px * var(--k))/1 Tahoma,Arial,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.gamewin .title button.x{margin-left:calc(2px * var(--k))}
+.gamewin iframe{flex:1;width:100%;border:0;display:block;background:#000;margin-top:calc(2px * var(--k))}
+#screen:fullscreen .gamewin{padding:0;background:#000}
+#screen:fullscreen .gamewin .title{display:none}
+#screen:fullscreen .gamewin iframe{margin:0}
+
+.toast{position:absolute;right:8px;bottom:34px;z-index:6;background:#ffffe1;color:#000;border:1px solid #000;padding:4px 8px;font:11px Tahoma,Arial,sans-serif;max-width:260px;box-shadow:2px 2px 0 rgba(0,0,0,.3)}
+.toast[hidden]{display:none}
+
+.mobile-only{display:none}
+@media (max-width:1023px){.rig,.hint{display:none}.mobile-only{display:block;position:fixed;inset:auto 24px 40% 24px;z-index:5;text-align:center}.mobile-only h1{font:800 28px Unbounded,system-ui,sans-serif;text-transform:uppercase;color:#ede6d6;margin:0 0 8px}}

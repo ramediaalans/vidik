@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head><script src="/pc/media.js"></script><script src="/pc/embed.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>DOS-игра — Компьютерный клуб</title>
+<link rel="stylesheet" href="/pc/pc.css">
+<link rel="stylesheet" href="/pc/engines/js-dos/js-dos.css">
+<style>
+/* на экране ПК подсказка js-dos «Нажмите, чтобы захватить мышь» закрывает почти всю игру — прячем, подсказка есть в заголовке окна */
+html.embed #dos .bg-black\/70{display:none!important}
+/* и боковой слайдер чувствительности мыши, фоновую картинку и отступ слева — игра занимает всё окно */
+html.embed #dos .sidebar-slider,html.embed #dos .background-image,html.embed #dos .w-2.flex-shrink-0{display:none!important}
+html.embed #dos .window{background:#000!important}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/">ВИДИК</a><a class="back" href="/pc/">← Компьютерный клуб</a></div></header>
+<div class="mobile-block"><h1>Только для ПК</h1></div>
+<main class="wrap desk">
+<h1 id="title" style="font-size:32px;margin-top:32px">DOS-игра</h1>
+<div class="stage"><div id="dos"></div></div>
+<div class="panel" id="msg"></div>
+</main>
+<script src="/pc/engines/js-dos/js-dos.js"></script>
+<script>
+const id=new URLSearchParams(location.search).get('g')||'';
+if(!/^[a-z0-9_-]+$/.test(id)){document.getElementById('msg').textContent='Игра не указана.';}
+else{
+  // ?v= — версия бандла: js-dos хранит изменённые файлы игры (в т.ч. старый .CFG) в браузере по адресу бандла;
+  // при пересборке бандла увеличить DOS_VER, иначе у игроков останутся старые настройки
+  const DOS_VER=4;
+  const url=`${(window.PC_MEDIA||'/pc/')}games/dos/${id}.jsdos?v=${DOS_VER}`;
+  // Wolf3D: в игре нет отдельной клавиши «шаг в сторону» — стрелки ←→ превращаем в Alt+стрелка (стрейф),
+  // поворот — мышью или Num4/Num6 (их жмёт правый стик геймпада)
+  const REMAP=id==='wolf3d'?{ArrowLeft:[342,263],ArrowRight:[342,262],Numpad4:[263],Numpad6:[262]}:null;
+  if(REMAP){
+    const down={};
+    const onKey=e=>{
+      const m=REMAP[e.code]; const ci=window.__ci;
+      if(!m||!ci) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      const press=e.type==='keydown';
+      if(press){ if(down[e.code]) return; down[e.code]=1; m.forEach(k=>ci.sendKeyEvent(k,true)); }
+      else{ if(!down[e.code]) return; delete down[e.code];
+        ci.sendKeyEvent(m[m.length-1],false);
+        if(m.length>1&&!Object.keys(down).some(c=>REMAP[c].length>1)) ci.sendKeyEvent(m[0],false); }
+    };
+    window.addEventListener('keydown',onKey,true); window.addEventListener('keyup',onKey,true);
+  }
+  // Duke3D: мышь вверх/вниз — обзор. В DUKE3D.CFG MouseAiming = 1 (прицеливание мышью, пока зажата клавиша O):
+  // держим O «зажатой» всегда (повторно — при фокусе/клике, если эмулятор отпустил клавиши), настоящую O глушим
+  const AIM_KEY=id==='duke3d'?79:0;
+  const holdAim=()=>{ const ci=window.__ci; if(AIM_KEY&&ci&&!ci.exited) try{ ci.sendKeyEvent(AIM_KEY,true); }catch(e){} };
+  if(AIM_KEY){
+    const eatO=e=>{ if(e.code==='KeyO'){ e.preventDefault(); e.stopImmediatePropagation(); } };
+    window.addEventListener('keydown',eatO,true); window.addEventListener('keyup',eatO,true);
+    window.addEventListener('focus',holdAim); window.addEventListener('pointerdown',holdAim,true);
+  }
+  document.getElementById('title').textContent=id;
+  fetch('/pc/games.json').then(r=>r.json()).then(a=>{const g=a.find(x=>x.id===id); if(g){document.getElementById('title').textContent=g.title; document.title=g.title+' — Компьютерный клуб';}}).catch(()=>{});
+  fetch(url,{method:'HEAD'}).then(r=>{
+    if(!r.ok) throw new Error('nofile');
+    document.getElementById('msg').textContent=window.PC_EMBED?'Игра запущена. Клик по экрану — захват мыши, Esc — освободить.':'Нажмите Start в окне игры. Управление: клавиатура и мышь. Сохранения хранятся в браузере.';
+    window.__dos=Dos(document.getElementById('dos'),{url,theme:'dark',autoStart:!!window.PC_EMBED,kiosk:!!window.PC_EMBED,pathPrefix:'/pc/engines/js-dos/emulators/',
+      // выход из игры: после игры в autoexec стоит exit — DOSBox завершается, закрываем окно вместо DOS-консоли
+            // events().onExit в js-dos 8.5 не срабатывает (на экране остаётся последний кадр DOS) — опрашиваем флаг ci.exited
+      onEvent:(ev,ci)=>{ if(ev!=='ci-ready'||!ci) return; window.__ci=ci;
+        const quit=()=>{ clearInterval(t); window.pcGameQuit&&window.pcGameQuit('dos-exit'); };
+        const t=setInterval(()=>{ if(ci.exited) quit(); },400);
+        if(AIM_KEY){ setTimeout(holdAim,1500); setTimeout(holdAim,8000); }
+        try{ ci.events().onExit(quit); }catch(e){} }});
+    if(window.PC_EMBED&&window.pcEmbedRunning) window.pcEmbedRunning();
+  }).catch((e)=>{
+    document.getElementById('msg').innerHTML=e&&e.message==='nofile'?`Файл игры не найден. Положите бандл в <code>pc/games/dos/${id}.jsdos</code>.`:('Ошибка запуска: '+(e&&e.message||e));
+  });
+}
+</script>
+</body>
+</html>

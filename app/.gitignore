@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Компьютерный клуб: данные игр лежат в R2 (media.art-ai.studio/pc/games), в git не коммитить.
+# Движки (public/pc/engines) коммитятся — они должны быть same-origin (workers, import()).
+public/pc/games/
+# оригиналы движков до патчей (только для сверки, не публиковать)
+public/pc/**/*.orig

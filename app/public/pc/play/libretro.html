@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head><script src="/pc/media.js"></script><script src="/pc/embed.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Компьютерный клуб — ВИДИК</title>
+<link rel="stylesheet" href="/pc/pc.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/">ВИДИК</a><a class="back" href="/pc/">← Компьютерный клуб</a></div></header>
+<div class="mobile-block"><h1>Только для ПК</h1></div>
+<main class="wrap desk">
+<h1 id="title" style="font-size:32px;margin-top:32px">Игра</h1>
+<div class="stage" style="aspect-ratio:4/3;max-width:1100px"><canvas id="canvas" tabindex="0"></canvas></div>
+<div class="panel">
+  <p id="status">Загрузка каталога…</p>
+  <button id="go" hidden>Играть</button>
+  <button id="fs" hidden>Полный экран</button>
+  <p class="meta"><b>Управление:</b> стрелки — ходьба и поворот, <b>Z</b> — огонь, <b>Пробел</b> — открыть/использовать, <b>Shift</b> — бег, <b>X</b> — боковой шаг (со стрелками), <b>, .</b> — шаг влево/вправо, <b>[ ]</b> — смена оружия, <b>Tab</b> — карта, <b>Esc</b> — меню, мышь — поворот и огонь (клик по экрану — захват). В меню: стрелки, <b>Enter</b> или Пробел — выбрать. Перед игрой кликните по экрану.</p>
+</div>
+</main>
+<script type="module">
+import { Nostalgist } from '/pc/engines/nostalgist/nostalgist.js';
+const $ = (id) => document.getElementById(id);
+const say = (t) => { $('status').textContent = t; };
+const id = new URLSearchParams(location.search).get('g');
+let g;
+try {
+  g = (await (await fetch('/pc/games.json')).json()).find((x) => x.id === id && x.core);
+  if (!g) throw new Error('Игра не найдена в каталоге');
+  $('title').textContent = g.title;
+  const missing = [];
+  for (const f of g.romFiles) { const r = await fetch((window.PC_MEDIA||'/pc/') + f, { method: 'HEAD' }); if (!r.ok) missing.push(f); }
+  if (missing.length) {
+    say('Нет файлов игры. Положите в pc/: ' + missing.join(', '));
+  } else {
+    say('Готово к запуску.'); $('go').hidden = false;
+  }
+} catch (e) { say('Ошибка: ' + e.message); }
+
+const quit = (why) => { say('Игра завершена.'); if (window.pcGameQuit) window.pcGameQuit(why); else location.href = '/pc/'; };
+let raStarts = 0;
+function raLog(t) {
+  t = String(t);
+  if (/\[INFO\] RetroArch \d/.test(t) && ++raStarts > 1) quit('retroarch restart');
+  else if (/Unloading core|Content ran for a total|SHUTDOWN/i.test(t) && raStarts) quit('retroarch: ' + t.slice(0, 60));
+}
+$('go').onclick = async () => {
+  $('go').hidden = true;
+  try {
+    say('Загрузка игры…');
+    const rom = await Promise.all(g.romFiles.map(async (f) => {
+      const r = await fetch((window.PC_MEDIA||'/pc/') + f); if (!r.ok) throw new Error(f + ': ' + r.status);
+      return { fileName: f.split('/').pop(), fileContent: await r.blob() };
+    }));
+    const emu = await Nostalgist.launch({
+      core: g.core,
+      rom: rom.length === 1 ? rom[0] : rom,
+      element: $('canvas'),
+      size: { width: 1280, height: 960 },
+      respondToGlobalEvents: true,
+      retroarchConfig: { pause_nonactive: false, savestate_auto_load: false, savestate_auto_save: false, video_smooth: false, audio_latency: 128, input_toggle_fullscreen: 'nul',
+        // Quit Game в игре → RetroArch завершается (а не показывает своё меню Load Content) → onQuit закрывает окно
+        quit_on_close_content: 1, menu_driver: 'null', log_verbosity: true, frontend_log_level: 1,
+        input_player1_a: 'space', input_player1_b: 'x', input_player1_x: 'z', input_player1_y: 'lshift',
+        input_player1_l: 'comma', input_player1_r: 'period', input_player1_l2: 'leftbracket', input_player1_r2: 'rightbracket',
+        input_player1_l3: 'enter', input_player1_r3: 'nul', input_player1_start: 'escape', input_player1_select: 'tab',
+        input_player1_up: 'up', input_player1_down: 'down', input_player1_left: 'left', input_player1_right: 'right',
+        // Doom (prboom): L/R — шаг в сторону, крестовина ←→ — поворот: стрелки ←→ делаем стрейфом, поворот — мышь и «,» / «.»
+        ...(g.core === 'prboom' ? { input_player1_l: 'left', input_player1_r: 'right', input_player1_left: 'comma', input_player1_right: 'period' } : {}) },
+      // мышь: поворот (вертикаль на экране ПК гасит embed.js), левая кнопка — огонь
+      // выход из игры (Quit Game → Y): движок завершается — закрыть окно на рабочем столе / вернуться в клуб
+      // Признаки: в журнале RetroArch «выгрузка ядра» / повторный запуск без игры, либо движок остановился (onQuit).
+      emscriptenModule: { print: raLog, printErr: raLog, onQuit: (code) => quit('libretro ' + code) },
+      retroarchCoreConfig: g.core === 'prboom' ? { 'prboom-mouse_on': 'enabled' } : {},
+      resolveCoreJs: (c) => `/pc/engines/cores/${c}_libretro.js`,
+      resolveCoreWasm: (c) => `/pc/engines/cores/${c}_libretro.wasm`,
+    });
+    $('canvas').focus();
+    // клик по экрану — захват мыши (Esc в браузере освобождает)
+    const cv = emu.getCanvas();
+    cv.addEventListener('mousedown', () => { if (document.pointerLockElement !== cv) cv.requestPointerLock?.()?.catch?.(() => {}); });
+    say(window.PC_EMBED ? 'Игра запущена. Клик по экрану — захват мыши.' : 'Игра запущена.');
+    $('fs').hidden = false;
+    $('fs').onclick = () => emu.getCanvas().requestFullscreen?.();
+  } catch (e) { say('Ошибка запуска: ' + e.message); $('go').hidden = false; }
+};
+</script>
+</body>
+</html>
