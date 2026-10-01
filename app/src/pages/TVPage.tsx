@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { SectionHeader } from '../components/core';
 import { asset } from '../media/asset';
 import { TVPlayer } from '../tv/TVPlayer';
+import { TvNewspaper } from '../tv/TvNewspaper';
 import { tvChannels, tvData } from '../tv/data';
 import {
   broadcastDateISO,
@@ -29,7 +30,6 @@ export function TVPage() {
 
   const dayByChannel = useMemo(() => new Map(tvChannels.map((c) => [c.id, buildDay(tvData, c.id, date)])), [date]);
   const rows = useMemo(() => guide(dayByChannel.get(channelId) ?? []), [dayByChannel, channelId]);
-  const nowIndex = rows.findIndex((row) => nowSec >= row.start && nowSec < row.end);
   const next = rows.find((row) => row.start > nowSec);
   const rotation = rotationForDate(date);
 
@@ -70,15 +70,8 @@ export function TVPage() {
       </section>
 
       <section className="section container">
-        <SectionHeader index={`Программа · ${rotation}`} title="Что идёт сегодня" note="Время каноническое: Минск / Москва (UTC+3). Реклама скрыта из газетной программы." />
-        <ol className="guide">
-          {rows.map((row, i) => <li key={`${row.start}-${row.provider}-${row.mediaId}`} className={`guide__row${i === nowIndex ? ' is-now' : ''}${row.end <= nowSec ? ' is-past' : ''}`}>
-            <span className="guide__time pixel">{hhmm(row.start)}</span>
-            <span className="guide__title"><span className="guide__tag mono">{row.daypart}</span>{row.title}</span>
-            <span className="guide__meta mono">{row.provider} · {Math.ceil((row.end - row.start) / 60)} мин</span>
-            {i === nowIndex ? <span className="guide__live mono">в эфире</span> : null}
-          </li>)}
-        </ol>
+        <SectionHeader index="Программа" title="Что идёт по телевизору" note="Как в газете: три кнопки на сегодня и два следующих дня. Реклама и заставки в программу не входят." />
+        <TvNewspaper />
       </section>
     </>
   );
