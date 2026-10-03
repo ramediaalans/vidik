@@ -37,7 +37,6 @@ function RoomLink({ room, className, onClick, children, onEnter }: {
 export function Header() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [preview, setPreview] = useState(ROOMS[0].image);
   const clock = useClock();
   const { pathname } = useLocation();
@@ -52,16 +51,12 @@ export function Header() {
   }
 
   useEffect(() => {
-    let last = window.scrollY;
     let raf = 0;
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         const y = window.scrollY;
         setSolid(y > 40);
-        setHidden(y > 320 && y > last + 4);
-        if (y < last - 4) setHidden(false);
-        last = y;
       });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -90,7 +85,7 @@ export function Header() {
 
   return (
     <>
-      <header className={`vhead${solid ? ' is-solid' : ''}${hidden && !open ? ' is-hidden' : ''}${open ? ' is-open' : ''}`}>
+      <header className={`vhead${solid ? ' is-solid' : ''}${open ? ' is-open' : ''}`}>
         <div className="vhead__inner">
           <Link to="/" className="vlogo" aria-label="ВИДИК — на главную">
             <span className="vlogo__rec" aria-hidden="true" />

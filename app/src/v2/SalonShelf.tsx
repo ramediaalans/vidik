@@ -152,7 +152,7 @@ export function SalonShelf({ films }: { films: Film[] }) {
   // Параллакс: фон салона уезжает сильнее, шкаф — слабее. Только CSS-переменные.
   useEffect(() => {
     const el = ref.current;
-    if (!el || reduceMotion()) return;
+    if (!el || reduceMotion() || window.matchMedia('(max-width: 860px), (pointer: coarse)').matches) return;
     let raf = 0;
     let mx = 0;
     let my = 0;

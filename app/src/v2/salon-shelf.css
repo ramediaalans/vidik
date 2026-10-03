@@ -324,3 +324,10 @@
     transform: scale(1.12);
   }
 }
+
+
+/* Телефоны и планшеты: без параллакса фона и шкафа */
+@media (max-width: 860px), (pointer: coarse) {
+  .salon-cab__room { transform: scale(1.06); will-change: auto; }
+  .salon-cab__stage { transform: none; will-change: auto; }
+}
