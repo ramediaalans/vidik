@@ -352,7 +352,7 @@ export function RetroDesktop() {
           <div className="w98-view">
             {net === 'on' ? (
               <>
-                <iframe key={site.id} src={site.embedUrl} title={`${site.title}, ${site.year}`} onLoad={() => setPage('ready')} referrerPolicy="no-referrer" />
+                <iframe key={site.id} src={site.embedUrl} title={`${site.title}, ${site.year}`} onLoad={() => setPage('ready')} referrerPolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox" />
                 {page !== 'ready' ? (
                   <div className="w98-loading">
                     {page === 'loading' ? (

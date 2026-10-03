@@ -6,62 +6,7 @@ import { matchPath, useLocation } from 'react-router-dom';
 // Карточки фильмов, мультфильмов и игр, поиск и 404 закрыты от индексации (noindex).
 // Список индексируемых адресов должен совпадать с public/sitemap.xml.
 
-const ORIGIN = 'https://art-ai.studio';
-
-type Meta = { title: string; description: string; index: boolean };
-
-const SECTIONS: Array<[string, Meta]> = [
-  ['/', {
-    title: 'ВИДИК — кассеты, мультики, приставка и музыка 90-х',
-    description: 'Вечер из детства 90-х: кассеты из видеосалона, мультики по выходным, игры на приставке, музыка с магнитофона и телевизор по старой программе.',
-    index: true,
-  }],
-  ['/videosalon', {
-    title: 'Видеосалон: кино 80-х и 90-х на кассетах — ВИДИК',
-    description: 'Полка с видеокассетами, как в прокате 90-х: боевики, комедии, фантастика и семейное кино, которое смотрели всем двором.',
-    index: true,
-  }],
-  ['/multklub', {
-    title: 'Мультклуб: мультфильмы 90-х по выходным — ВИДИК',
-    description: 'Мультсериалы и мультфильмы, которые в 90-е показывали по воскресеньям утром. Выбирай серию и включай.',
-    index: true,
-  }],
-  ['/igry', {
-    title: 'Приставка: игры на картриджах 90-х — ВИДИК',
-    description: 'Игры с картриджей прямо в браузере: платформеры, гонки, драки и всё, во что играли после школы.',
-    index: true,
-  }],
-  ['/muzyka', {
-    title: 'Музыка 80-х и 90-х на кассетах — ВИДИК',
-    description: 'Магнитофон и полка кассет: поп, евродиско, рок и всё, что переписывали друг у друга в 90-е.',
-    index: true,
-  }],
-  ['/televizor', {
-    title: 'Телевизор 90-х: каналы по старой программе — ВИДИК',
-    description: 'Телевизор на три кнопки. На каналах идут передачи, мультики и кино по расписанию, как в 90-е.',
-    index: true,
-  }],
-  ['/istorii', {
-    title: 'Дневник двора: истории про детство в 90-е — ВИДИК',
-    description: 'Ключ на шнурке, карандаш в кассете, третий канал. Короткие истории про детство в 90-е и начале 2000-х.',
-    index: true,
-  }],
-  ['/nostalgiya', {
-    title: 'Ностальгия по 90-м — ВИДИК',
-    description: 'Детство 90-х и начала 2000-х по мелочам: как проходил день и что было почти у всех.',
-    index: true,
-  }],
-  ['/retrointernet', {
-    title: 'Ретроинтернет: интернет, который пищал — ВИДИК',
-    description: 'Модем, чаты, первые порталы и сайты конца 90-х. Подключись, как тогда.',
-    index: true,
-  }],
-  ['/po-godam', {
-    title: 'По годам: календарь 90-х и 2000-х — ВИДИК',
-    description: 'Отрывной календарь: что смотрели, во что играли и что слушали в каждый год.',
-    index: true,
-  }],
-];
+import { ORIGIN, SECTIONS, type Meta } from './seoSections';
 
 // Страницы, которые не должны попадать в поиск. Заголовки общие, без названий.
 const HIDDEN: Array<[string, string]> = [
@@ -127,6 +72,8 @@ export function RouteMeta() {
     setMetaTag('property', 'og:url', ORIGIN + path);
     setMetaTag('name', 'robots', meta.index ? null : 'noindex, follow');
     setCanonical(meta.index ? ORIGIN + path : null);
+    const ld = document.getElementById('ld-page');
+    if (ld && ld.dataset.path !== path) ld.remove();
   }, [pathname]);
   return null;
 }

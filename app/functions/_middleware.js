@@ -1,8 +1,17 @@
 // Cloudflare Pages Function. Срабатывает только для адресов страниц: статика исключена в public/_routes.json.
-// Задача одна: www.art-ai.studio -> art-ai.studio, постоянное перенаправление 301 с сохранением пути и параметров.
-// Остальные запросы проходят дальше без изменений (статика, _redirects, _headers, приложение).
+// 1) www.art-ai.studio -> art-ai.studio, постоянное перенаправление 301 с сохранением пути и параметров.
+// 2) Настоящий 404 для несуществующих адресов. Pages на любой неизвестный путь отдаёт index.html с кодом 200,
+//    из-за этого поисковики видят «мягкие 404». Тело ответа не меняется: приложение само показывает страницу «не найдено».
+// Список адресов должен совпадать с маршрутами в src/App.tsx.
 const WWW = 'www.art-ai.studio';
 const APEX = 'art-ai.studio';
+
+const SECTIONS = 'videosalon|multklub|igry|muzyka|televizor|istorii|nostalgiya|retrointernet|po-godam|poisk';
+const KNOWN = [
+  /^\/$/,
+  new RegExp(`^/(?:${SECTIONS})/?$`),
+  /^\/(?:videosalon|multklub|igry)\/[^/]+\/?$/,
+];
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
@@ -11,5 +20,24 @@ export async function onRequest(context) {
     url.protocol = 'https:';
     return Response.redirect(url.toString(), 301);
   }
-  return context.next();
+
+  const res = await context.next();
+  if (res.status !== 200) return res; // редиректы из _redirects, 304 и прочее не трогаем
+  if (!(res.headers.get('content-type') || '').includes('text/html')) return res;
+  if (KNOWN.some((re) => re.test(url.pathname))) return res;
+
+  // Путь с расширением может быть настоящим файлом (например, подтверждение для поисковиков).
+  // Отдаём 404, только если вместо файла пришла запасная страница приложения.
+  const last = url.pathname.split('/').pop() || '';
+  if (last.includes('.')) {
+    try {
+      const fallback = await context.env.ASSETS.fetch(new URL('/', url));
+      const [a, b] = await Promise.all([res.clone().text(), fallback.text()]);
+      if (a !== b) return res;
+    } catch {
+      return res;
+    }
+  }
+
+  return new Response(res.body, { status: 404, statusText: 'Not Found', headers: res.headers });
 }
