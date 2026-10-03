@@ -1326,7 +1326,8 @@ main > section.hero:first-child {
   margin-top: clamp(50px, 9vh, 100px);
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 31vw;
+  /* 31vw, но не шире контейнера: при мелком масштабе слово вылезало за блок и плакат обрезался справа */
+  font-size: min(31vw, calc((var(--container) + 2 * var(--gutter)) * 0.31));
   line-height: 0.8;
   padding-bottom: 0.1em;
   letter-spacing: -0.015em;
