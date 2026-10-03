@@ -44,3 +44,6 @@ tools/tv/collect/vv*.json
 tools/tv/collect/*.out
 tools/games/.cache/ 
 __pycache__/ 
+
+# Local agent documentation (not published)
+/AGENTS.local.md
