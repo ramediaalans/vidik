@@ -1,32 +1,21 @@
-# React + TypeScript + Vite
+# ВИДИК — приложение
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Это рабочее приложение проекта, не стартовый шаблон Vite.
 
-Currently, two official plugins are available:
+Общие правила и структура — [корневой README](../README.md). Публикация — [DEPLOY.md](../DEPLOY.md). Конвейеры контента и плееры — [docs/project-guide.md](../docs/project-guide.md). Дизайн — [DESIGN.md](../DESIGN.md).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Команды из этой папки
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```powershell
+npm ci
+npm run dev
+npm run lint
+npm run build
+npm run preview -- --port 4173 --host
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Сборка: TypeScript + Vite → `dist/`. Preview использует уже собранный dist; после правок нужна пересборка. Версии зависимостей — `package.json` и `package-lock.json`. Не обновлять их без задачи.
+
+`vite.config.ts` использует корневой envDir. Для production медиа идут через `VITE_MEDIA_BASE=https://media.art-ai.studio`; локальные music/roms/cores исключены из Git. Секреты нельзя хранить в переменных VITE.
+
+Хостинг — Cloudflare Pages, push в main запускает деплой. Не коммитить/пушить/публиковать без явного разрешения пользователя.

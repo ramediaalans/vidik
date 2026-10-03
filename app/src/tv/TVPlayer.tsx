@@ -419,7 +419,11 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
 
   useEffect(() => {
     if (!on) return;
-    const begin = window.setTimeout(() => { setStaticBurst(true); setReadyFor(null); setError(null); }, 0);
+    // readyFor здесь не сбрасываем: он привязан к airKey, и новая передача и так
+    // не совпадёт со старым ключом. Сброс через setTimeout мог прийти уже после
+    // onReady плеера (VK с закэшированным API отвечает почти мгновенно), и тогда
+    // плашка «Прогревается кинескоп…» оставалась поверх идущего эфира.
+    const begin = window.setTimeout(() => { setStaticBurst(true); setError(null); }, 0);
     const end = window.setTimeout(() => setStaticBurst(false), 320);
     return () => { window.clearTimeout(begin); window.clearTimeout(end); };
   }, [channelId, on]);

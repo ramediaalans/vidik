@@ -2,8 +2,8 @@
 
 Сгенерировано `tools/report/inventory.mjs` — руками не править.
 
-Всего записей: **300** · видеосалон: 33 · Дисней-клуб: 14 · ТВ: 253.
-По источникам: vk — 100 · rutube — 117 · youtube — 82 · generated — 1.
+Всего записей: **304** · видеосалон: 33 · Дисней-клуб: 18 · ТВ: 253.
+По источникам: vk — 104 · rutube — 118 · youtube — 81 · generated — 1.
 
 | Блок | Название | Источник | Длительность | Страница сайта | Ссылка на видео |
 | --- | --- | --- | --- | --- | --- |
@@ -25,8 +25,8 @@
 | Видеосалон (/videosalon) | Чужие (1986) | rutube | 2 ч 34 мин | /videosalon/chuzhie-1986 | https://rutube.ru/video/b32ac5665032284813a9ca96f88c9d5c/ |
 | Видеосалон (/videosalon) | Парк Юрского периода (1993) | vk | 12 ч 27 мин | /videosalon/park-yurskogo-perioda-1993 | https://vk.com/video-230103894_456239286 |
 | Видеосалон (/videosalon) | Парк Юрского периода 2: Затерянный мир (1997) | vk | 12 ч 27 мин | /videosalon/park-yurskogo-perioda-2-zateryannyy-mir-1997 | https://vk.com/video-230103894_456239286 |
-| Видеосалон (/videosalon) | Пятый элемент (1997) | vk | 2 ч 05 мин | /videosalon/pyatyy-element-1997 | https://vk.com/video-220018529_456243312 |
-| Видеосалон (/videosalon) | Матрица (1999) | vk | 2 ч 05 мин | /videosalon/matrica-1999 | https://vk.com/video-227267093_456240097 |
+| Видеосалон (/videosalon) | Пятый элемент (1997) | vk | 2 ч 05 мин | /videosalon/pyatyy-element-1997 | https://vk.com/video-227267093_456240097 |
+| Видеосалон (/videosalon) | Матрица (1999) | rutube | 2 ч 16 мин | /videosalon/matrica-1999 | https://rutube.ru/video/06f4c1dd1b319392aedc768867b4980f/ |
 | Видеосалон (/videosalon) | День независимости (1996) | vk | 2 ч 30 мин | /videosalon/den-nezavisimosti-1996 | https://vk.com/video-168223031_456239243 |
 | Видеосалон (/videosalon) | Мумия (1999) | rutube | 2 ч 04 мин | /videosalon/mumiya-1999 | https://rutube.ru/video/5e8c591ff4ab91cafa306ca69ada442a/ |
 | Видеосалон (/videosalon) | Один дома (1990) | rutube | 1 ч 42 мин | /videosalon/odin-doma-1990 | https://rutube.ru/video/b590e1fc4daf9f25f44f7752d9c60295/ |
@@ -39,9 +39,9 @@
 | Видеосалон (/videosalon) | Форрест Гамп (1994) | rutube | 2 ч 22 мин | /videosalon/forrest-gamp-1994 | https://rutube.ru/video/57fbde6070148b48688ac620ec9475d5/ |
 | Видеосалон (/videosalon) | Брат (1997) | vk | 1 ч 38 мин | /videosalon/brat-1997 | https://vk.com/video-205290196_456239338 |
 | Видеосалон (/videosalon) | Брат 2 (2000) | vk | 2 ч 02 мин | /videosalon/brat-2-2000 | https://vk.com/video-226111813_456239307 |
-| Видеосалон (/videosalon) | Особенности национальной охоты (1995) | youtube | 1 ч 31 мин | /videosalon/osobennosti-nacionalnoy-ohoty-1995 | https://www.youtube.com/watch?v=oWK9K_RtRCM |
+| Видеосалон (/videosalon) | Особенности национальной охоты (1995) | vk | 1 ч 33 мин | /videosalon/osobennosti-nacionalnoy-ohoty-1995 | https://vk.com/video-200019230_456241101 |
 | Дисней-клуб (/disney-klub) | Утиные истории (1987) | vk | 38 ч 03 мин | /disney-klub/utinye-istorii-1987 | https://vk.com/video-227283941_456240163 |
-| Дисней-клуб (/disney-klub) | Чип и Дейл спешат на помощь (1989) | vk | 24 ч 45 мин | /disney-klub/chip-i-deyl-speshat-na-pomosch-1989 | https://vk.com/video-217873238_456245003 |
+| Дисней-клуб (/disney-klub) | Чип и Дейл спешат на помощь (1989) | vk | 10 ч 38 мин | /disney-klub/chip-i-deyl-speshat-na-pomosch-1989 | https://vk.com/video-194175662_456239323 |
 | Дисней-клуб (/disney-klub) | Черный Плащ (1991) | vk | 33 ч 13 мин | /disney-klub/chernyy-plasch-1991 | https://vk.com/video-227283941_456240193 |
 | Дисней-клуб (/disney-klub) | Гуфи и его команда (1992) | vk | 29 ч 40 мин | /disney-klub/gufi-i-ego-komanda-1992 | https://vk.com/video-234282348_456240910 |
 | Дисней-клуб (/disney-klub) | Приключения мишек Гамми (1985) | vk | 23 ч 51 мин | /disney-klub/priklyucheniya-mishek-gammi-1985 | https://vk.com/video-227283941_456240188 |
@@ -54,6 +54,10 @@
 | Дисней-клуб (/disney-klub) | Дракулито-вампирёныш (1991) | vk | 9 ч 15 мин | /disney-klub/drakulito-vampirenysh-1991 | https://vk.com/video-58264493_456240974 |
 | Дисней-клуб (/disney-klub) | Настоящие охотники за привидениями (1986) | vk | 4 ч 46 мин | /disney-klub/nastoyaschie-ohotniki-za-privideniyami-1986 | https://vk.com/video-182437809_456244273 |
 | Дисней-клуб (/disney-klub) | Война гоботов (1984) | vk | 21 ч 21 мин | /disney-klub/voyna-gobotov-1984 | https://vk.com/video-58264493_456241230 |
+| Дисней-клуб (/disney-klub) | Земля до начала времён (1988) | vk | 16 ч 22 мин | /disney-klub/zemlya-do-nachala-vremen-1988 | https://vk.com/video-217873238_456244350 |
+| Дисней-клуб (/disney-klub) | Новые приключения Винни-Пуха (1988) | vk | 8 ч 04 мин | /disney-klub/novye-priklyucheniya-vinni-puha-1988 | https://vk.com/video-100084161_456244416 |
+| Дисней-клуб (/disney-klub) | Том и Джерри (1940) | vk | 19 ч 02 мин | /disney-klub/tom-i-dzherri-1940 | https://vk.com/video-194007084_456241090 |
+| Дисней-клуб (/disney-klub) | Чудеса на виражах (1990) | vk | 10 ч 57 мин | /disney-klub/chudesa-na-virazhah-1990 | https://vk.com/video-205333784_456240029 |
 | ТВ · Первая кнопка | Ну, погоди! — 1 выпуск (1969) | youtube | 9 мин | /televizor | https://www.youtube.com/watch?v=e7AhYRhfhzw |
 | ТВ · Первая кнопка | Ну, погоди! — выпуск №3 | rutube | 10 мин | /televizor | https://rutube.ru/video/8d6531c3f50272910be2709877cb5a7e/ |
 | ТВ · Первая кнопка | Ну, погоди! — 14 выпуск | rutube | 10 мин | /televizor | https://rutube.ru/video/87cc20f4a2b82dbdc90717bea68d4690/ |
