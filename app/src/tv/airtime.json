@@ -1307,11 +1307,11 @@
        "mediaType": "video"
       },
       {
-       "provider": "rutube",
-       "id": "2e2ca1e0e55f348f16dbacd633ef4d49",
-       "dur": 1121,
-       "title": "По следам НАШИХ бременских музыкантов. Часть 2",
-       "up": "2022-01-08",
+       "provider": "youtube",
+       "id": "3o4YFNIKlSA",
+       "dur": 1113,
+       "title": "По следам бременских музыкантов (1973)",
+       "up": "2023-11-16",
        "src": "c1.mult.bremen"
       }
      ]
