@@ -139,7 +139,7 @@ export function SearchPage() {
       {show('cartoon') ? (
         <div style={{ marginBottom: 48 }}>
           <SectionHeader index="Дисней-клуб" title={`Мультфильмы · ${count('cartoon')}`} />
-          {filmGrid(res!.cartoon, '/disney-klub')}
+          {filmGrid(res!.cartoon, '/multklub')}
           {more('cartoon')}
         </div>
       ) : null}

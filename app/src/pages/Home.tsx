@@ -382,7 +382,7 @@ export function Home() {
           </ShelfRow>
           <ShelfRow label="Дисней-клуб" speed={95}>
             {toons.map((f) => (
-              <Link key={f.slug} className="wcard wcard--poster" to={`/disney-klub/${f.slug}`}>
+              <Link key={f.slug} className="wcard wcard--poster" to={`/multklub/${f.slug}`}>
                 <img src={asset(f.poster!)} alt={`Постер: ${f.title}`} loading="lazy" decoding="async" />
                 <span className="wcard__cap">
                   {f.title} <i>{f.year}</i>

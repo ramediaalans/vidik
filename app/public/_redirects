@@ -1,0 +1,5 @@
+# Постоянные перенаправления (Cloudflare Pages). Срабатывают до того, как отдаётся приложение.
+/filmy               /videosalon         301
+/multfilmy           /multklub           301
+/disney-klub         /multklub           301
+/disney-klub/*       /multklub/:splat    301

@@ -127,7 +127,7 @@ const CARTOONS: Pick[] = disney.map((f) => ({
   sub: f.kind === 'serial' ? 'Мультсериал' : 'Мультфильм',
   label: 'Мультики',
   image: f.poster ?? undefined,
-  to: `/disney-klub/${f.slug}`
+  to: `/multklub/${f.slug}`
 }));
 
 const GAMES: Pick[] = roms

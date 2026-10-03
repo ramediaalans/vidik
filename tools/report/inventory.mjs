@@ -106,7 +106,7 @@ function buildDay(channelId, rotation) {
 // ---------- отчёт 1: инвентарь ----------
 const rows = [];
 for (const f of salon) rows.push({ block: 'Видеосалон (/videosalon)', title: f.title + (f.year ? ` (${f.year})` : ''), provider: f.source.provider, id: f.source.id, sec: f.source.duration, url: link(f.source.provider, f.source.id), page: `/videosalon/${f.slug}` });
-for (const f of disney) rows.push({ block: 'Дисней-клуб (/disney-klub)', title: f.title + (f.year ? ` (${f.year})` : ''), provider: f.source.provider, id: f.source.id, sec: f.source.duration, url: link(f.source.provider, f.source.id), page: `/disney-klub/${f.slug}` });
+for (const f of disney) rows.push({ block: 'Дисней-клуб (/multklub)', title: f.title + (f.year ? ` (${f.year})` : ''), provider: f.source.provider, id: f.source.id, sec: f.source.duration, url: link(f.source.provider, f.source.id), page: `/multklub/${f.slug}` });
 
 const tvSeen = new Map();
 for (const channelId of Object.keys(channelsCfg)) {

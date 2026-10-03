@@ -55,8 +55,8 @@ Preview показывает сборку, не исходники: после �
 ## Разделы и источники данных
 
 - `/televizor`: три линейных канала (Первая кнопка, Шестая кнопка, Кабельный), цикл A → B → C, каноническое время UTC+3. Эфир строится из `app/src/tv/grid.json` (пересборка — `tools/tv/xlsx_to_grid.py` из мастер-таблицы) логикой `schedule.ts`; газетная программа и подписи на кнопках каналов — `program.ts` через `onAir.ts`. Источники — VK, Rutube, YouTube. Перемотки нет.
-- `/videosalon` и `/disney-klub`: каталоги (SalonShelf — полка кассет) и страницы просмотра `FilmPage` → TvSet → ExternalVideoPlayer (VK/Rutube/YouTube). VibixPlayer и runtime-балансера нет.
-- `/filmy` → редирект на `/videosalon`, `/multfilmy` → на `/disney-klub`. Старые архивные страницы удалены.
+- `/videosalon` и `/multklub`: каталоги (SalonShelf — полка кассет) и страницы просмотра `FilmPage` → TvSet → ExternalVideoPlayer (VK/Rutube/YouTube). VibixPlayer и runtime-балансера нет.
+- `/filmy` → редирект на `/videosalon`, `/multfilmy` → на `/multklub`. Старые архивные страницы удалены.
 - `/igry` — раздел «Приставка»: CartridgeShelf; `/igry/:id`: GamePage + Emulator. Список — `roms.ts` + `roms-more.ts`; картриджи — `rom-carts.ts`; приставки — `consoles.ts`.
 - `/muzyka`: магнитофон Boombox (кнопка питания, крутящиеся ролики, бегущая строка, горячие клавиши) + плейлист под ним; звук играет через Webamp (`media/player.tsx`), который живёт вне React и сохраняется при навигации. Плейлист — `tracks.ts`, генерируется импортом. Видео/игры освобождают звук через `claimAudio()` / `vidik:audio-claim`.
 - `/istorii` — истории (`data/stories.ts`); `/nostalgiya` — «Собери вечер» (EveningBuilder) и сборник MixTape из реальных треков; `/po-godam` — автолента годов и настенный календарь WallCalendar; `/retrointernet` — рабочий стол ПК (RetroDesktop: «Мой компьютер» ведёт в разделы сайта, полноэкранный режим по F/А); `/poisk` — поиск по фильмам, играм, музыке и историям сайта.

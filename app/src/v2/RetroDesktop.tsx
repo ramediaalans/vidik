@@ -390,7 +390,7 @@ export function RetroDesktop() {
           <p className="w98-small">Диск C: · 1,2 ГБ · свободно 37 МБ</p>
           {[
             ['Видеосалон', '/videosalon'],
-            ['Диснеевские мультики', '/disney-klub'],
+            ['Диснеевские мультики', '/multklub'],
             ['Приставка', '/igry'],
             ['Телевизор', '/televizor'],
             ['Сборник на кассете', '/nostalgiya'],

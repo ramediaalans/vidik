@@ -21,7 +21,7 @@ export const ROOMS: Room[] = [
     when: 'Воскресенье, утро',
     image: '/images/v2/ch-disney.webp',
     alt: 'Воскресное утро: солнце сквозь тюль, телевизор с мультфильмом, тарелка каши на ковре',
-    to: '/disney-klub'
+    to: '/multklub'
   },
   {
     id: 'games',

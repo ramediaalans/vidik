@@ -47,3 +47,6 @@ __pycache__/
 
 # Local agent documentation (not published)
 /AGENTS.local.md
+ 
+# local Cloudflare dev server state (wrangler pages dev) 
+.wrangler/ 

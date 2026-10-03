@@ -33,7 +33,7 @@ export function DisneyPage() {
           {disney.map((f) => {
             const eps = (f.seasons ?? []).reduce((m, s) => m + s.episodes, 0);
             return (
-              <Link key={f.slug} className="toon" to={`/disney-klub/${f.slug}`}>
+              <Link key={f.slug} className="toon" to={`/multklub/${f.slug}`}>
                 <span className="toon__art">
                   {f.poster ? (
                     <img src={asset(f.poster)} alt={`Постер: ${f.title}`} loading="lazy" decoding="async" />

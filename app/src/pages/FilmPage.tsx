@@ -22,7 +22,7 @@ export function FilmPage({ group }: { group: 'salon' | 'disney' }) {
   const progressKey = film ? watchKey(film.slug, hasPlaylist ? episode : 0) : '';
   const mark = progressKey ? getMark(progressKey) : null;
 
-  const base = group === 'salon' ? '/videosalon' : '/disney-klub';
+  const base = group === 'salon' ? '/videosalon' : '/multklub';
   const backLabel = group === 'salon' ? 'Назад на полку' : 'Назад в Клуб';
 
   if (!film) {

@@ -40,24 +40,24 @@
 | Видеосалон (/videosalon) | Брат (1997) | vk | 1 ч 38 мин | /videosalon/brat-1997 | https://vk.com/video-205290196_456239338 |
 | Видеосалон (/videosalon) | Брат 2 (2000) | vk | 2 ч 02 мин | /videosalon/brat-2-2000 | https://vk.com/video-226111813_456239307 |
 | Видеосалон (/videosalon) | Особенности национальной охоты (1995) | vk | 1 ч 33 мин | /videosalon/osobennosti-nacionalnoy-ohoty-1995 | https://vk.com/video-200019230_456241101 |
-| Дисней-клуб (/disney-klub) | Утиные истории (1987) | vk | 38 ч 03 мин | /disney-klub/utinye-istorii-1987 | https://vk.com/video-227283941_456240163 |
-| Дисней-клуб (/disney-klub) | Чип и Дейл спешат на помощь (1989) | vk | 10 ч 38 мин | /disney-klub/chip-i-deyl-speshat-na-pomosch-1989 | https://vk.com/video-194175662_456239323 |
-| Дисней-клуб (/disney-klub) | Черный Плащ (1991) | vk | 33 ч 13 мин | /disney-klub/chernyy-plasch-1991 | https://vk.com/video-227283941_456240193 |
-| Дисней-клуб (/disney-klub) | Гуфи и его команда (1992) | vk | 29 ч 40 мин | /disney-klub/gufi-i-ego-komanda-1992 | https://vk.com/video-234282348_456240910 |
-| Дисней-клуб (/disney-klub) | Приключения мишек Гамми (1985) | vk | 23 ч 51 мин | /disney-klub/priklyucheniya-mishek-gammi-1985 | https://vk.com/video-227283941_456240188 |
-| Дисней-клуб (/disney-klub) | Аладдин (1994) | vk | 31 ч 12 мин | /disney-klub/aladdin-1994 | https://vk.com/video-227283941_456240169 |
-| Дисней-клуб (/disney-klub) | Тимон и Пумба (1995) | vk | 30 ч 56 мин | /disney-klub/timon-i-pumba-1995 | https://vk.com/video-227283941_456240134 |
-| Дисней-клуб (/disney-klub) | Русалочка (1992) | vk | 11 ч 27 мин | /disney-klub/rusalochka-1992 | https://vk.com/video-227283941_456239732 |
-| Дисней-клуб (/disney-klub) | Мышиный дом (2001) | vk | 6 ч 31 мин | /disney-klub/myshinyy-dom-2001 | https://vk.com/video-209040390_456292576 |
-| Дисней-клуб (/disney-klub) | Космические спасатели лейтенанта Марша (1993) | vk | 22 мин | /disney-klub/kosmicheskie-spasateli-leytenanta-marsha-1993 | https://vk.com/video-238771813_456239109 |
-| Дисней-клуб (/disney-klub) | Погонщики динозавров (1988) | vk | 4 ч 21 мин | /disney-klub/pogonschiki-dinozavrov-1988 | https://vk.com/video-229097667_456242074 |
-| Дисней-клуб (/disney-klub) | Дракулито-вампирёныш (1991) | vk | 9 ч 15 мин | /disney-klub/drakulito-vampirenysh-1991 | https://vk.com/video-58264493_456240974 |
-| Дисней-клуб (/disney-klub) | Настоящие охотники за привидениями (1986) | vk | 4 ч 46 мин | /disney-klub/nastoyaschie-ohotniki-za-privideniyami-1986 | https://vk.com/video-182437809_456244273 |
-| Дисней-клуб (/disney-klub) | Война гоботов (1984) | vk | 21 ч 21 мин | /disney-klub/voyna-gobotov-1984 | https://vk.com/video-58264493_456241230 |
-| Дисней-клуб (/disney-klub) | Земля до начала времён (1988) | vk | 16 ч 22 мин | /disney-klub/zemlya-do-nachala-vremen-1988 | https://vk.com/video-217873238_456244350 |
-| Дисней-клуб (/disney-klub) | Новые приключения Винни-Пуха (1988) | vk | 8 ч 04 мин | /disney-klub/novye-priklyucheniya-vinni-puha-1988 | https://vk.com/video-100084161_456244416 |
-| Дисней-клуб (/disney-klub) | Том и Джерри (1940) | vk | 19 ч 02 мин | /disney-klub/tom-i-dzherri-1940 | https://vk.com/video-194007084_456241090 |
-| Дисней-клуб (/disney-klub) | Чудеса на виражах (1990) | vk | 10 ч 57 мин | /disney-klub/chudesa-na-virazhah-1990 | https://vk.com/video-205333784_456240029 |
+| Дисней-клуб (/multklub) | Утиные истории (1987) | vk | 38 ч 03 мин | /multklub/utinye-istorii-1987 | https://vk.com/video-227283941_456240163 |
+| Дисней-клуб (/multklub) | Чип и Дейл спешат на помощь (1989) | vk | 10 ч 38 мин | /multklub/chip-i-deyl-speshat-na-pomosch-1989 | https://vk.com/video-194175662_456239323 |
+| Дисней-клуб (/multklub) | Черный Плащ (1991) | vk | 33 ч 13 мин | /multklub/chernyy-plasch-1991 | https://vk.com/video-227283941_456240193 |
+| Дисней-клуб (/multklub) | Гуфи и его команда (1992) | vk | 29 ч 40 мин | /multklub/gufi-i-ego-komanda-1992 | https://vk.com/video-234282348_456240910 |
+| Дисней-клуб (/multklub) | Приключения мишек Гамми (1985) | vk | 23 ч 51 мин | /multklub/priklyucheniya-mishek-gammi-1985 | https://vk.com/video-227283941_456240188 |
+| Дисней-клуб (/multklub) | Аладдин (1994) | vk | 31 ч 12 мин | /multklub/aladdin-1994 | https://vk.com/video-227283941_456240169 |
+| Дисней-клуб (/multklub) | Тимон и Пумба (1995) | vk | 30 ч 56 мин | /multklub/timon-i-pumba-1995 | https://vk.com/video-227283941_456240134 |
+| Дисней-клуб (/multklub) | Русалочка (1992) | vk | 11 ч 27 мин | /multklub/rusalochka-1992 | https://vk.com/video-227283941_456239732 |
+| Дисней-клуб (/multklub) | Мышиный дом (2001) | vk | 6 ч 31 мин | /multklub/myshinyy-dom-2001 | https://vk.com/video-209040390_456292576 |
+| Дисней-клуб (/multklub) | Космические спасатели лейтенанта Марша (1993) | vk | 22 мин | /multklub/kosmicheskie-spasateli-leytenanta-marsha-1993 | https://vk.com/video-238771813_456239109 |
+| Дисней-клуб (/multklub) | Погонщики динозавров (1988) | vk | 4 ч 21 мин | /multklub/pogonschiki-dinozavrov-1988 | https://vk.com/video-229097667_456242074 |
+| Дисней-клуб (/multklub) | Дракулито-вампирёныш (1991) | vk | 9 ч 15 мин | /multklub/drakulito-vampirenysh-1991 | https://vk.com/video-58264493_456240974 |
+| Дисней-клуб (/multklub) | Настоящие охотники за привидениями (1986) | vk | 4 ч 46 мин | /multklub/nastoyaschie-ohotniki-za-privideniyami-1986 | https://vk.com/video-182437809_456244273 |
+| Дисней-клуб (/multklub) | Война гоботов (1984) | vk | 21 ч 21 мин | /multklub/voyna-gobotov-1984 | https://vk.com/video-58264493_456241230 |
+| Дисней-клуб (/multklub) | Земля до начала времён (1988) | vk | 16 ч 22 мин | /multklub/zemlya-do-nachala-vremen-1988 | https://vk.com/video-217873238_456244350 |
+| Дисней-клуб (/multklub) | Новые приключения Винни-Пуха (1988) | vk | 8 ч 04 мин | /multklub/novye-priklyucheniya-vinni-puha-1988 | https://vk.com/video-100084161_456244416 |
+| Дисней-клуб (/multklub) | Том и Джерри (1940) | vk | 19 ч 02 мин | /multklub/tom-i-dzherri-1940 | https://vk.com/video-194007084_456241090 |
+| Дисней-клуб (/multklub) | Чудеса на виражах (1990) | vk | 10 ч 57 мин | /multklub/chudesa-na-virazhah-1990 | https://vk.com/video-205333784_456240029 |
 | ТВ · Первая кнопка | Ну, погоди! — 1 выпуск (1969) | youtube | 9 мин | /televizor | https://www.youtube.com/watch?v=e7AhYRhfhzw |
 | ТВ · Первая кнопка | Ну, погоди! — выпуск №3 | rutube | 10 мин | /televizor | https://rutube.ru/video/8d6531c3f50272910be2709877cb5a7e/ |
 | ТВ · Первая кнопка | Ну, погоди! — 14 выпуск | rutube | 10 мин | /televizor | https://rutube.ru/video/87cc20f4a2b82dbdc90717bea68d4690/ |

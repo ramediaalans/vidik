@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/assets/*",
+    "/images/*",
+    "/fonts/*",
+    "/films/*",
+    "/video/*",
+    "/music/*",
+    "/ui/*",
+    "/cores/*",
+    "/roms/*",
+    "/pc/*",
+    "/favicon.svg",
+    "/icons.svg",
+    "/og-cover.jpg"
+  ]
+}

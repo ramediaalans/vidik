@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Только разделы. Карточки фильмов, мультфильмов и игр сюда не входят (noindex). Список совпадает с SECTIONS в src/seo.tsx. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://art-ai.studio/</loc></url>
+  <url><loc>https://art-ai.studio/videosalon</loc></url>
+  <url><loc>https://art-ai.studio/multklub</loc></url>
+  <url><loc>https://art-ai.studio/igry</loc></url>
+  <url><loc>https://art-ai.studio/muzyka</loc></url>
+  <url><loc>https://art-ai.studio/televizor</loc></url>
+  <url><loc>https://art-ai.studio/istorii</loc></url>
+  <url><loc>https://art-ai.studio/nostalgiya</loc></url>
+  <url><loc>https://art-ai.studio/retrointernet</loc></url>
+  <url><loc>https://art-ai.studio/po-godam</loc></url>
+</urlset>

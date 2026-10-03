@@ -66,7 +66,7 @@ function sheetFor(year: number) {
         title: cleanTitle(f.title),
         sub: f.kind === 'serial' ? 'мультсериал' : 'мультфильм',
         image: f.poster ?? undefined,
-        to: `/disney-klub/${f.slug}`
+        to: `/multklub/${f.slug}`
       }))
   ];
   const carts: Cart[] = roms

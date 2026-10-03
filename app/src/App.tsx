@@ -1,9 +1,10 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { Header, Footer } from './components/Layout';
 import { BootScreen, Grain } from './components/core';
 import { Home } from './pages/Home';
 import { RevealObserver, RouteNoise } from './v2/fx';
+import { RouteMeta } from './seo';
 
 const MusicPage = lazy(() => import('./pages/MusicPage').then((m) => ({ default: m.MusicPage })));
 const GamesPage = lazy(() => import('./pages/GamesPage').then((m) => ({ default: m.GamesPage })));
@@ -26,6 +27,13 @@ function ScrollToTop() {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [pathname]);
   return null;
+}
+
+// Старый адрес карточки мультфильма. Основное перенаправление (301) делает public/_redirects,
+// этот маршрут страхует переходы внутри приложения и локальную разработку.
+function LegacyCartoon() {
+  const { slug } = useParams();
+  return <Navigate to={`/multklub/${slug ?? ''}`} replace />;
 }
 
 function KonamiEasterEgg() {
@@ -88,6 +96,7 @@ export default function App() {
       <KonamiEasterEgg />
       {!booted ? <BootScreen onDone={finishBoot} /> : null}
       <ScrollToTop />
+      <RouteMeta />
       <a className="skip-link" href="#main">К основному содержанию</a>
       <Header />
       <main id="main">
@@ -101,14 +110,16 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/filmy" element={<Navigate to="/videosalon" replace />} />
-          <Route path="/multfilmy" element={<Navigate to="/disney-klub" replace />} />
+          <Route path="/multfilmy" element={<Navigate to="/multklub" replace />} />
+          <Route path="/disney-klub" element={<Navigate to="/multklub" replace />} />
+          <Route path="/disney-klub/:slug" element={<LegacyCartoon />} />
           <Route path="/igry" element={<GamesPage />} />
           <Route path="/igry/:id" element={<GamePage />} />
           <Route path="/muzyka" element={<MusicPage />} />
           <Route path="/videosalon" element={<SalonPage />} />
           <Route path="/videosalon/:slug" element={<FilmPage group="salon" />} />
-          <Route path="/disney-klub" element={<DisneyPage />} />
-          <Route path="/disney-klub/:slug" element={<FilmPage group="disney" />} />
+          <Route path="/multklub" element={<DisneyPage />} />
+          <Route path="/multklub/:slug" element={<FilmPage group="disney" />} />
           <Route path="/televizor" element={<TVPage />} />
           <Route path="/istorii" element={<StoriesPage />} />
           <Route path="/nostalgiya" element={<NostalgiaPage />} />
