@@ -1,0 +1,15 @@
+/* ВИДИК v2 — только визуал шапки и подсказки компьютерного клуба в стиле основного сайта.
+   Геометрия экрана, монитора и рабочего стола не меняются. */
+.club-top{padding:12px 24px}
+.club-top .logo{display:inline-flex;align-items:center;gap:9px;font:900 26px/1 'Fira Sans Extra Condensed','Arial Narrow',sans-serif;letter-spacing:.04em}
+.club-top .logo::before{content:"";width:9px;height:9px;border-radius:50%;background:#ff4a3d;box-shadow:0 0 12px #ff4a3d;animation:v2rec 1.6s ease-in-out infinite}
+.club-top .sign{font:700 12px 'JetBrains Mono',Consolas,monospace;letter-spacing:.22em;color:#ffb23f;text-shadow:0 0 14px rgba(255,178,63,.45)}
+.club-top .sign::before{content:"17:40 · ";color:#ede6d6;text-shadow:none}
+.club-top .back{font:600 14px/1 'Fira Sans Extra Condensed','Arial Narrow',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#ede6d6;padding:9px 16px;border:1px solid rgba(237,230,214,.25);border-radius:999px;background:rgba(7,7,8,.35);transition:border-color .3s,color .3s}
+.club-top .back:hover{color:#ffb23f;border-color:#ffb23f}
+.hint{font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.hint b{color:#ffb23f}
+.mobile-only h1{font-family:'Fira Sans Extra Condensed','Arial Narrow',sans-serif!important;font-weight:900!important;font-size:44px!important;line-height:.9}
+.mobile-only a{color:#ffb23f!important}
+@keyframes v2rec{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.club-top .logo::before{animation:none}}

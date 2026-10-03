@@ -1,0 +1,129 @@
+/* «Собери свой вечер» — вопросы слева, расписание справа */
+.eve {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) 1.2fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.eve__ask { display: grid; gap: 22px; position: sticky; top: calc(var(--head-h, 76px) + 24px); }
+.eve__q { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.eve__qlabel { flex: 0 0 100%; color: var(--amber, #f2a83b); letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; }
+.eve__again { justify-self: start; }
+
+.eve__plan { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(237, 230, 214, 0.14); }
+.eve__row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  grid-template-areas: 'time slot' 'time item';
+  column-gap: 24px;
+  row-gap: 10px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(237, 230, 214, 0.14);
+}
+.eve__time {
+  grid-area: time;
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+  color: var(--bone, #ede6d6);
+  font-variant-numeric: tabular-nums;
+}
+.eve__slot { grid-area: slot; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(237, 230, 214, 0.55); }
+.eve__item {
+  grid-area: item;
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.eve__item img {
+  width: 72px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+  transition: transform 0.25s ease;
+}
+.eve__item:hover img, .eve__item:focus-visible img { transform: translateY(-3px) rotate(-1.5deg); }
+.eve__txt { display: grid; gap: 6px; }
+.eve__title { font-family: var(--font-display); font-size: clamp(22px, 2vw, 30px); line-height: 1.05; text-transform: uppercase; }
+.eve__title i { font-style: normal; font-size: 0.6em; color: var(--amber, #f2a83b); margin-left: 6px; }
+.eve__item:hover .eve__title { color: var(--amber, #f2a83b); }
+.eve__note { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.35; color: rgba(237, 230, 214, 0.78); }
+
+@media (max-width: 860px) {
+  .eve { grid-template-columns: 1fr; }
+  .eve__ask { position: static; }
+  .eve__row { grid-template-columns: 64px 1fr; column-gap: 14px; }
+  .eve__time { font-size: 28px; }
+  .eve__item { grid-template-columns: 56px 1fr; gap: 12px; }
+  .eve__item img { width: 56px; height: 76px; }
+  .eve__note { font-size: 16px; }
+}
+
+/* Ностальгия: подпись под названием, кассета-заглушка для трека, вкладыш сборника */
+.eve__item { text-decoration: none; }
+.eve__sub { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(237, 230, 214, 0.55); }
+.eve__tape {
+  position: relative; width: 72px; height: 96px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s ease;
+}
+.eve__item .eve__tape img {
+  width: 100%; height: 100%; object-fit: contain; border-radius: 0; box-shadow: none; background: none;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.55));
+}
+.eve__item:hover .eve__tape { transform: translateY(-3px) rotate(-1.5deg); }
+/* Картридж на ребро: картинка целиком, повёрнута на 90° */
+.eve__cart {
+  width: 72px; height: 96px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s ease;
+}
+.eve__item .eve__cart img,
+.eve__item:hover .eve__cart img,
+.eve__item:focus-visible .eve__cart img {
+  width: 96px; height: auto; max-width: none; object-fit: contain;
+  transform: rotate(-90deg); border-radius: 3px; box-shadow: none;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5));
+}
+.eve__item:hover .eve__cart, .eve__item:focus-visible .eve__cart { transform: translateY(-3px) rotate(-1.5deg); }
+@media (max-width: 860px) {
+  .eve__cart { width: 56px; height: 76px; }
+  .eve__item .eve__cart img, .eve__item:hover .eve__cart img { width: 76px; height: auto; }
+}
+
+.mix { display: grid; gap: 24px; }
+.mix__head { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+.mix__card {
+  background: #efe6cf; color: #2a2118; border-radius: 6px; padding: clamp(18px, 3vw, 32px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5); transform: rotate(-0.4deg);
+  background-image: repeating-linear-gradient(180deg, transparent 0 33px, rgba(60, 80, 140, 0.18) 33px 34px);
+}
+.mix__label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 2px solid #b8402f; padding-bottom: 10px; margin-bottom: 14px; }
+.mix__label .mix__hand { font-size: clamp(24px, 3vw, 34px); }
+.mix__label .mono { font-size: 12px; letter-spacing: 0.12em; opacity: 0.7; }
+.mix__hand { font-family: var(--font-hand); font-size: 21px; line-height: 1.2; }
+.mix__sides { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px; }
+.mix__side { list-style: none; margin: 0; padding: 0; }
+.mix__sidename { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #b8402f; padding: 4px 0 6px; }
+.mix__row {
+  width: 100%; display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: baseline;
+  padding: 6px 4px; border: 0; background: none; color: inherit; text-align: left; cursor: pointer; border-radius: 3px;
+}
+.mix__row:hover, .mix__row:focus-visible { background: rgba(184, 64, 47, 0.1); }
+.mix__row.is-on { color: #b8402f; }
+.mix__n, .mix__dur { font-size: 12px; opacity: 0.6; }
+.mix__row.is-on .mix__dur { opacity: 1; }
+@media (max-width: 860px) {
+  .mix__sides { grid-template-columns: 1fr; }
+  .eve__tape { width: 56px; height: 76px; }
+  .mix__hand { font-size: 19px; }
+}

@@ -1,23 +1,22 @@
-// Видеосалон: полка кассет. Клик по кассете ведёт на карточку фильма.
+// Видеосалон: шкаф с кассетами стопками. Клик по корешку ведёт на карточку фильма.
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { asset } from '../media/asset';
 import { SectionHeader } from '../components/core';
-import { VhsTape } from '../components/VhsTape';
+import { PageHero } from '../v2/PageHero';
+import { SalonShelf } from '../v2/SalonShelf';
 import { salon } from '../data/films';
 
 const SORTS = [
+  { id: 'title', label: 'По алфавиту' },
   { id: 'year-asc', label: 'Сначала ранние' },
   { id: 'year-desc', label: 'Сначала поздние' },
-  { id: 'rating', label: 'По рейтингу' },
-  { id: 'title', label: 'По алфавиту' }
+  { id: 'rating', label: 'По рейтингу' }
 ] as const;
 
 type SortId = (typeof SORTS)[number]['id'];
 
 export function SalonPage() {
   const [genre, setGenre] = useState('Все');
-  const [sort, setSort] = useState<SortId>('year-asc');
+  const [sort, setSort] = useState<SortId>('title');
   const [query, setQuery] = useState('');
 
   const genres = useMemo(() => {
@@ -43,7 +42,7 @@ export function SalonPage() {
     );
     return [...list].sort((a, b) =>
       sort === 'title'
-        ? a.title.localeCompare(b.title)
+        ? a.title.localeCompare(b.title, 'ru')
         : sort === 'rating'
           ? (b.rating ?? 0) - (a.rating ?? 0)
           : sort === 'year-desc'
@@ -54,26 +53,24 @@ export function SalonPage() {
 
   return (
     <>
-      <section className="hero vignette" style={{ minHeight: 'min(56vh, 520px)' }}>
-        <div className="hero__media">
-          <img src={asset('/images/movies/section-movies.webp')} alt="Полки видеопроката с кассетами" />
-        </div>
-        <div className="hero__inner container" style={{ paddingBottom: 48 }}>
-          <div className="hero__kicker pixel">01 · Видеосалон</div>
-          <h1 className="display display--l" style={{ margin: '12px 0' }}>
-            Дверь без вывески, три рубля за сеанс
-          </h1>
-          <p className="lead">
-            {salon.length} кассет на полке. Названия подписаны от руки — как тогда, шариковой по наклейке.
-            Возьми любую и смотри целиком.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        index="22:00"
+        time="22:00"
+        kicker="Ночной сеанс · Видеосалон"
+        title={<>Дверь без вывески, <em>три рубля за сеанс</em></>}
+        lead="Названия подписаны от руки — как тогда, шариковой по наклейке. Возьми любую кассету и смотри целиком."
+        image="/images/v2/ch-salon.webp"
+        alt="Уютный видеосалон: кресла, телевизор с видеомагнитофоном, полки кассет и тёплая лампа"
+        facts={[
+          { v: salon.length, l: 'кассет на полке' },
+          { v: genres.length - 1, l: 'жанров' }
+        ]}
+      />
 
-      <section className="section container">
-        <SectionHeader index="Полка" title="Выбери кассету" />
+      <section className="section container" style={{ paddingBottom: 0 }}>
+        <SectionHeader index="Шкаф" title="Выбери кассету" />
 
-        <div className="stack" style={{ marginBottom: 32 }}>
+        <div className="stack">
           <div className="row">
             <label className="mono" htmlFor="salon-q">Поиск</label>
             <input
@@ -103,27 +100,18 @@ export function SalonPage() {
           </div>
         </div>
 
-        {visible.length === 0 ? (
+      </section>
+
+      {/* Шкаф — на всю ширину страницы, как герой: фон салона без рамки */}
+      {visible.length === 0 ? (
+        <section className="section container">
           <div className="source">
             <span>Такой кассеты нет. Всё разобрали до тебя.</span>
           </div>
-        ) : (
-          <div className="vhs-shelf">
-            {visible.map((f) => (
-              <VhsTape key={f.slug} film={f} to={`/videosalon/${f.slug}`} />
-            ))}
-          </div>
-        )}
-      </section>
-
-      <section className="section container section--tight">
-        <div className="source">
-          <span>
-            Хочешь не смотреть, а вспоминать? В архиве есть заметки и кадры о том же кино.
-          </span>
-          <Link className="btn btn--sm" to="/filmy">Архив кино</Link>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <SalonShelf films={visible} />
+      )}
     </>
   );
 }

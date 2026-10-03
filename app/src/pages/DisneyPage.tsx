@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { asset } from '../media/asset';
 import { SectionHeader } from '../components/core';
+import { PageHero } from '../v2/PageHero';
 import { disney } from '../data/films';
 
 export function DisneyPage() {
@@ -12,21 +13,19 @@ export function DisneyPage() {
 
   return (
     <>
-      <section className="hero vignette" style={{ minHeight: 'min(56vh, 520px)' }}>
-        <div className="hero__media">
-          <img src={asset('/images/cartoons/section-cartoons.webp')} alt="Телевизор с мультфильмом утром" />
-        </div>
-        <div className="hero__inner container" style={{ paddingBottom: 48 }}>
-          <div className="hero__kicker pixel">02 · Дисней-клуб</div>
-          <h1 className="display display--l" style={{ margin: '12px 0' }}>
-            Воскресенье, половина девятого
-          </h1>
-          <p className="lead">
-            {disney.length} мультсериалов и {episodes} серий — тот самый блок, ради которого вставали
-            раньше, чем в школу. Выбирай мультсериал и включай подборку серий.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        index="08:30"
+        time="08:30"
+        kicker="Воскресенье, утро · Дисней-клуб"
+        title={<>Воскресенье, <em>половина девятого</em></>}
+        lead="Тот самый блок, ради которого вставали раньше, чем в школу. Выбирай мультсериал и включай подборку серий."
+        image="/images/v2/ch-disney.webp"
+        alt="Воскресное утро: солнце сквозь тюль, телевизор с мультфильмом, тарелка каши на ковре"
+        facts={[
+          { v: disney.length, l: 'мультсериалов' },
+          { v: episodes, l: 'серий' }
+        ]}
+      />
 
       <section className="section container">
         <SectionHeader index="Программа" title="Включай любой" />
@@ -51,13 +50,6 @@ export function DisneyPage() {
               </Link>
             );
           })}
-        </div>
-      </section>
-
-      <section className="section container section--tight">
-        <div className="source">
-          <span>Отечественная мультипликация и заметки об утреннем блоке — в архиве.</span>
-          <Link className="btn btn--sm" to="/multfilmy">Архив мультфильмов</Link>
         </div>
       </section>
     </>

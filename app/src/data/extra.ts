@@ -56,7 +56,7 @@ export const channels: Channel[] = [
   },
   {
     num: '06',
-    name: 'Игры',
+    name: 'Приставка',
     now: 'Приставка подключена · канал 3',
     next: 'Дальше: «ещё одна жизнь и всё»',
     image: '/images/games/game-2.webp',

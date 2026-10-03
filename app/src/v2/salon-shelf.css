@@ -1,0 +1,326 @@
+/* Шкаф видеосалона (SalonShelf.tsx). Слои: фон салона → виньетка → шкаф → свет по альфе шкафа → кассеты. */
+.salon-cab {
+  --sy: 0;
+  --mx: 0;
+  --my: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* на всю ширину страницы, края растворяются в фон под ним */
+  margin-top: clamp(24px, 3vw, 40px);
+  padding: clamp(72px, 9vw, 140px) var(--gutter, 24px) clamp(80px, 10vw, 150px);
+  background: var(--night, #070708);
+}
+
+.salon-cab__room {
+  position: absolute;
+  inset: -12% -6%;
+  z-index: -2;
+  background-size: cover;
+  background-position: center 42%;
+  /* кадр уже размыт в генерации — без CSS-blur, чтобы не нагружать скролл */
+  filter: brightness(0.72);
+  transform: translate3d(calc(var(--mx) * -22px), calc(var(--sy) * 70px + var(--my) * -10px), 0) scale(1.06);
+  will-change: transform;
+}
+
+.salon-cab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 80% at 50% 50%, transparent 50%, rgba(7, 7, 8, 0.6) 100%),
+    linear-gradient(to bottom, var(--night, #070708), transparent 18%, transparent 78%, var(--night, #070708));
+}
+
+.salon-cab__scroll {
+  position: relative;
+}
+
+.salon-cab__stage {
+  position: relative;
+  container-type: inline-size;
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  aspect-ratio: 1536 / 1024;
+  transform: translate3d(calc(var(--mx) * 6px), calc(var(--sy) * -16px), 0);
+  will-change: transform;
+}
+
+/* Тень шкафа на полу салона */
+.salon-cab__stage::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 2%;
+  bottom: -4%;
+  height: 10%;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.8), transparent 70%);
+  filter: blur(6px);
+}
+
+.salon-cab__wood {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.5) saturate(0.68) sepia(0.2) contrast(1.08);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Тёплая лампа справа сверху и синий отсвет телевизора слева — только по дереву */
+.salon-cab__light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask: var(--shelf) center / 100% 100% no-repeat;
+  mask: var(--shelf) center / 100% 100% no-repeat;
+  background:
+    radial-gradient(ellipse 55% 55% at calc(78% + var(--mx) * 6%) 0%, rgba(255, 176, 92, 0.3), transparent 70%),
+    linear-gradient(90deg, rgba(60, 150, 165, 0.2), transparent 38%),
+    linear-gradient(to bottom, transparent 55%, rgba(0, 0, 0, 0.4));
+  mix-blend-mode: screen;
+}
+
+.salon-cab__stage + .salon-cab__stage {
+  margin-top: clamp(28px, 4vw, 56px);
+}
+
+.salon-cab__tapes {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* —— Корешок кассеты —— */
+.spine {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transform: rotate(var(--tilt));
+  transform-origin: 50% 100%;
+  filter: brightness(0.82) saturate(0.85);
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.25s ease;
+}
+
+.spine__body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+  gap: calc(var(--sh) * 0.14);
+  padding: calc(var(--sh) * 0.12) calc(var(--sh) * 0.14);
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--sleeve) var(--sleeve-x) 50% / 280% auto, #111;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.65),
+    0 2px 3px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.25s ease;
+}
+
+.spine__poster {
+  flex: 0 0 11%;
+  min-width: 0;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 1px;
+  filter: saturate(0.85) contrast(1.05);
+}
+
+.spine__poster--none {
+  background: var(--stripe);
+}
+
+.spine__label {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 calc(var(--sh) * 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.25), transparent 40%, rgba(0, 0, 0, 0.08)),
+    var(--label);
+  border-left: calc(var(--sh) * 0.1) solid var(--stripe);
+  border-radius: 1px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.spine__title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  /* подписано от руки синей шариковой ручкой */
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: calc(var(--sh) * 0.62);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #1d2b73;
+  transform: rotate(calc(var(--tilt) * -1.5));
+}
+
+.spine--long .spine__title {
+  -webkit-line-clamp: 2;
+  font-size: calc(var(--sh) * 0.43);
+  line-height: 0.9;
+}
+
+.spine__year {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: calc(var(--sh) * 0.04);
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+.spine__year b {
+  font-size: calc(var(--sh) * 0.26);
+  font-weight: 600;
+  color: #e9e3d4;
+}
+
+.spine__year i {
+  font-size: calc(var(--sh) * 0.2);
+  font-style: normal;
+  letter-spacing: 0.12em;
+  color: var(--stripe);
+  filter: brightness(1.4);
+}
+
+.spine__tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  padding: 5px 8px;
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: var(--amber);
+  background: rgba(8, 10, 12, 0.94);
+  border: 1px solid rgba(255, 190, 110, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.spine:hover,
+.spine:focus-visible {
+  z-index: 6;
+  filter: brightness(1.08) saturate(1);
+  transform: translate3d(0, 10%, 0) scale(1.22) rotate(0deg);
+}
+
+.spine:focus-visible {
+  outline: none;
+}
+
+.spine:hover .spine__body,
+.spine:focus-visible .spine__body {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 16px 26px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(255, 196, 120, 0.45);
+}
+
+.spine:focus-visible .spine__body {
+  box-shadow:
+    0 16px 26px rgba(0, 0, 0, 0.75),
+    0 0 0 2px var(--amber);
+}
+
+.spine:hover .spine__tip,
+.spine:focus-visible .spine__tip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.salon-cab__tapes:has(.spine:hover) .spine:not(:hover) {
+  filter: brightness(0.55) saturate(0.7);
+}
+
+.spine.is-pulling {
+  z-index: 7;
+  animation: spine-pull 0.36s cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+
+@keyframes spine-pull {
+  from {
+    transform: translate3d(0, 10%, 0) scale(1.22);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, 60%, 0) scale(1.6);
+    opacity: 0;
+  }
+}
+
+.salon-cab__hint {
+  display: none;
+  margin: 10px 4px 0;
+  font-size: 12px;
+  text-align: right;
+  color: var(--amber);
+}
+
+@media (max-width: 760px) {
+  .salon-cab {
+    padding: 40px 0 48px;
+  }
+
+  .salon-cab__scroll {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    padding: 26px 14px 12px;
+  }
+
+  .salon-cab__stage {
+    width: 1000px;
+    max-width: none;
+    transform: none;
+  }
+
+  .salon-cab__hint {
+    display: block;
+    padding-right: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .salon-cab__room,
+  .salon-cab__stage {
+    transform: none;
+  }
+
+  .spine,
+  .spine__tip {
+    transition: none;
+  }
+
+  .spine:hover,
+  .spine:focus-visible {
+    transform: scale(1.12);
+  }
+}

@@ -6,14 +6,59 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Компьютерный клуб — ВИДИК</title>
 <link rel="icon" href="data:,">
+<link rel="stylesheet" href="/pc/desk/fonts.css">
 <link rel="stylesheet" href="/pc/desk/desk.css">
+<link rel="stylesheet" href="/pc/desk/v2.css">
+<link rel="stylesheet" href="/pc/desk/head.css">
 </head>
 <body class="club">
 <div class="club-bg"></div>
-<div class="club-top">
-  <a class="logo" href="/">ВИДИК</a>
-  <span class="sign">Компьютерный клуб</span>
-  <a class="back" href="/">← на главный сайт</a>
+<!-- Шапка как на основном сайте (src/components/Layout.tsx). Ссылки обычные: это отдельная страница. -->
+<header class="vhead">
+  <div class="vhead__inner">
+    <a href="/" class="vlogo" aria-label="ВИДИК — на главную"><span class="vlogo__rec" aria-hidden="true"></span><span class="vlogo__word">ВИДИК</span></a>
+    <nav class="vnav" aria-label="Основное меню">
+      <a class="vnav__link" href="/disney-klub"><span class="vnav__time">08:30</span>Дисней-клуб</a>
+      <a class="vnav__link" href="/igry"><span class="vnav__time">14:10</span>Приставка</a>
+      <a class="vnav__link is-active" href="/pc/" aria-current="page"><span class="vnav__time">17:40</span>Компьютерный клуб</a>
+      <a class="vnav__link" href="/televizor"><span class="vnav__time">19:30</span>Телевизор</a>
+      <a class="vnav__link" href="/videosalon"><span class="vnav__time">22:00</span>Видеосалон</a>
+    </nav>
+    <div class="vhead__actions">
+      <span class="vhead__clock" id="vclock"></span>
+      <a class="vhead__search" href="/poisk" aria-label="Поиск по архиву"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4.5 4.5"/></svg></a>
+      <button class="vburger" aria-expanded="false" aria-controls="vmenu"><span class="vburger__label">Меню</span><span class="vburger__lines" aria-hidden="true"><i></i><i></i></span></button>
+    </div>
+  </div>
+</header>
+<div id="vmenu" class="vmenu" role="dialog" aria-modal="true" aria-label="Меню сайта" aria-hidden="true" inert>
+  <div class="vmenu__media" aria-hidden="true">
+    <img src="/images/v2/ch-disney.webp" alt="" loading="lazy"><img src="/images/v2/ch-games.webp" alt="" loading="lazy"><img class="is-on" src="/images/v2/ch-pc.webp" alt="" loading="lazy"><img src="/images/v2/ch-tv.webp" alt="" loading="lazy"><img src="/images/v2/ch-salon.webp" alt="" loading="lazy"><img src="/images/music/section-music.webp" alt="" loading="lazy"><img src="/images/stories/section-stories.webp" alt="" loading="lazy"><img src="/images/ui/hero-night.webp" alt="" loading="lazy"><img src="/images/games/section-games.webp" alt="" loading="lazy"><img src="/images/hero/yard-golden.webp" alt="" loading="lazy"><img src="/images/hero/hero-room.webp" alt="" loading="lazy">
+  </div>
+  <div class="vmenu__inner">
+    <div class="vmenu__col">
+      <div class="vmenu__eyebrow mono">Программа дня</div>
+      <ol class="vmenu__rooms">
+        <li style="--d:0"><a class="vmenu__room" href="/disney-klub" data-img="/images/v2/ch-disney.webp"><span class="vmenu__time">08:30</span><span class="vmenu__label">Дисней-клуб</span><span class="vmenu__when">Воскресенье, утро</span></a></li>
+        <li style="--d:1"><a class="vmenu__room" href="/igry" data-img="/images/v2/ch-games.webp"><span class="vmenu__time">14:10</span><span class="vmenu__label">Приставка</span><span class="vmenu__when">После школы</span></a></li>
+        <li style="--d:2"><a class="vmenu__room is-active" href="/pc/" data-img="/images/v2/ch-pc.webp"><span class="vmenu__time">17:40</span><span class="vmenu__label">Компьютерный клуб</span><span class="vmenu__when">Клуб через дорогу</span></a></li>
+        <li style="--d:3"><a class="vmenu__room" href="/televizor" data-img="/images/v2/ch-tv.webp"><span class="vmenu__time">19:30</span><span class="vmenu__label">Телевизор</span><span class="vmenu__when">Вечерний эфир</span></a></li>
+        <li style="--d:4"><a class="vmenu__room" href="/videosalon" data-img="/images/v2/ch-salon.webp"><span class="vmenu__time">22:00</span><span class="vmenu__label">Видеосалон</span><span class="vmenu__when">Ночной сеанс</span></a></li>
+      </ol>
+    </div>
+    <div class="vmenu__col vmenu__col--more">
+      <div class="vmenu__eyebrow mono">Ещё в квартире</div>
+      <ul class="vmenu__more">
+        <li style="--d:5"><a href="/muzyka" data-img="/images/music/section-music.webp">Музыка</a></li>
+        <li style="--d:6"><a href="/istorii" data-img="/images/stories/section-stories.webp">Истории</a></li>
+        <li style="--d:7"><a href="/nostalgiya" data-img="/images/ui/hero-night.webp">Ностальгия</a></li>
+        <li style="--d:8"><a href="/retrointernet" data-img="/images/games/section-games.webp">Ретроинтернет</a></li>
+        <li style="--d:9"><a href="/po-godam" data-img="/images/hero/yard-golden.webp">По годам</a></li>
+        <li style="--d:10"><a href="/poisk" data-img="/images/hero/hero-room.webp">Поиск</a></li>
+      </ul>
+      <p class="vmenu__hint mono">Esc — закрыть</p>
+    </div>
+  </div>
 </div>
 
 <div class="rig">
@@ -49,6 +94,7 @@
 </div>
 <div class="hint">Клик по значку — <b>запустить</b> · <b>F</b> (<b>А</b>) — полный экран · <span id="hint-pad">🎮 подключите геймпад и нажмите любую кнопку</span></div>
 <div class="mobile-only"><h1>Только для ПК</h1><p>Компьютерный клуб работает на компьютере с клавиатурой и мышью.</p><p><a href="/" style="color:#b9a6ff">← на главный сайт</a></p></div>
+<script src="/pc/desk/head.js"></script>
 <script src="/pc/desk/desk.js"></script>
 <script src="/pc/desk/parallax.js"></script>
 </body>

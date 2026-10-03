@@ -1,0 +1,171 @@
+/* «Календарь на стене» — отрывной календарь, листок = год */
+.wcal { display: grid; gap: 28px; }
+
+.wcal__years {
+  overflow: hidden; padding: 4px 0 6px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.wcal__ytrack {
+  display: flex; width: max-content;
+  animation: wcal-years 60s linear infinite;
+  will-change: transform;
+}
+.wcal__years:hover .wcal__ytrack,
+.wcal__years:focus-within .wcal__ytrack { animation-play-state: paused; }
+.wcal__yset { display: flex; gap: 6px; padding-right: 6px; }
+@keyframes wcal-years { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .wcal__ytrack { animation: none; }
+  .wcal__years { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .wcal__yset[aria-hidden] { display: none; }
+}
+.wcal__y {
+  flex: none;
+  display: grid; justify-items: center; gap: 6px;
+  min-width: 58px; padding: 8px 6px 6px;
+  border: 1px solid rgba(237, 230, 214, 0.16); border-radius: 4px;
+  background: transparent; color: rgba(237, 230, 214, 0.7);
+  font-family: var(--font-mono); font-size: 13px; font-variant-numeric: tabular-nums;
+  cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.wcal__y:hover, .wcal__y:focus-visible { color: var(--bone, #ede6d6); border-color: rgba(237, 230, 214, 0.4); }
+.wcal__y.is-on { background: #b8402f; border-color: #b8402f; color: #fff; }
+.wcal__y.is-empty { opacity: 0.45; }
+/* Полоска под годом — сколько всего в коллекции */
+.wcal__dots {
+  display: block; height: 3px; border-radius: 2px;
+  width: calc(var(--n, 0) * 3.5px + 2px);
+  background: var(--amber, #f2a83b);
+}
+.wcal__y.is-on .wcal__dots { background: #fff; }
+
+.wcal__wall { position: relative; display: flex; justify-content: center; padding-top: 18px; }
+.wcal__nail {
+  position: absolute; top: 0; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #d9d4c8, #6b665c 70%); box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6); z-index: 3;
+}
+.wcal__pad { position: relative; width: min(920px, 100%); perspective: 1600px; }
+.wcal__rings {
+  position: absolute; top: -8px; left: 8%; right: 8%; height: 18px; z-index: 4; pointer-events: none;
+  background: radial-gradient(circle at 50% 70%, #2a2118 0 3px, transparent 3.5px) 0 0 / 28px 18px repeat-x;
+}
+/* Толщина пачки под листком */
+.wcal__under {
+  position: absolute; inset: 6px -4px -10px 4px; background: #e2d6b8; border-radius: 4px;
+  box-shadow: 0 2px 0 #d3c6a5, 0 4px 0 #c9bb98, 0 20px 40px rgba(0, 0, 0, 0.55);
+}
+
+.wcal__sheet {
+  position: relative; z-index: 2;
+  background: #f3ead2; color: #2a2118; border-radius: 4px;
+  padding: 34px clamp(18px, 4vw, 48px) 20px;
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0, transparent 18px),
+    repeating-linear-gradient(90deg, rgba(120, 90, 40, 0.025) 0 2px, transparent 2px 5px);
+  border-top: 2px dashed rgba(42, 33, 24, 0.18);
+  animation: wcal-in 0.35s ease both;
+}
+@keyframes wcal-in { from { opacity: 0.4; } to { opacity: 1; } }
+
+.wcal__sheet--torn {
+  position: absolute; inset: 0; z-index: 5; overflow: hidden; pointer-events: none;
+  display: flex; align-items: flex-start; justify-content: center;
+  transform-origin: 12% 0; animation: wcal-tear 0.62s cubic-bezier(0.4, 0.1, 0.7, 0.4) forwards;
+}
+.wcal__sheet--torn.is-back { transform-origin: 88% 0; animation-name: wcal-tear-back; }
+@keyframes wcal-tear {
+  0% { transform: rotate(0) translateY(0); opacity: 1; }
+  30% { transform: rotate(-6deg) translateY(4px); }
+  100% { transform: rotate(-24deg) translate(-8%, 70%); opacity: 0; }
+}
+@keyframes wcal-tear-back {
+  0% { transform: rotate(0) translateY(0); opacity: 1; }
+  30% { transform: rotate(6deg) translateY(4px); }
+  100% { transform: rotate(24deg) translate(8%, 70%); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wcal__sheet--torn { display: none; }
+  .wcal__sheet { animation: none; }
+}
+
+.wcal__top { display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; }
+.wcal__big {
+  font-family: var(--font-display); text-align: center; line-height: 0.9;
+  font-size: clamp(88px, 14vw, 168px); color: #b8402f; letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.wcal__arrow {
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(42, 33, 24, 0.25);
+  background: transparent; color: #2a2118; font-size: 26px; line-height: 1; cursor: pointer;
+}
+.wcal__arrow:hover:not(:disabled), .wcal__arrow:focus-visible { background: #2a2118; color: #f3ead2; }
+.wcal__arrow:disabled { opacity: 0.25; cursor: default; }
+
+.wcal__margin {
+  font-family: var(--font-hand); font-size: clamp(20px, 2.2vw, 26px); line-height: 1.3;
+  color: #1f3a78; text-align: center; max-width: 34em; margin: 14px auto 6px; transform: rotate(-0.6deg);
+}
+
+.wcal__block { border-top: 1px solid rgba(42, 33, 24, 0.16); padding-top: 14px; margin-top: 18px; }
+.wcal__h {
+  margin: 0 0 12px; font-size: 11px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: #b8402f;
+}
+.wcal__h span { color: rgba(42, 33, 24, 0.5); margin-left: 6px; }
+
+.wcal__tapes { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 18px 16px; }
+.wcal__tape, .wcal__cart { display: grid; gap: 4px; align-content: start; color: inherit; text-decoration: none; }
+.wcal__tape img, .wcal__noimg {
+  width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 3px; background: #d8ccad;
+  box-shadow: 0 6px 14px rgba(42, 33, 24, 0.35); transition: transform 0.2s ease;
+}
+.wcal__noimg { display: block; }
+.wcal__tape:hover img, .wcal__tape:focus-visible img { transform: translateY(-3px) rotate(-1deg); }
+.wcal__t { font-weight: 600; font-size: 14px; line-height: 1.2; margin-top: 4px; }
+.wcal__s { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(42, 33, 24, 0.55); }
+.wcal__tape:hover .wcal__t, .wcal__cart:hover .wcal__t { color: #b8402f; }
+
+.wcal__carts { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 18px 14px; }
+/* Слот 3:4. Картриджи (горизонтальные) ставим на ребро, арт — как есть. */
+.wcal__cimg {
+  position: relative; width: 100%; aspect-ratio: 3 / 4; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s ease;
+}
+.wcal__cimg img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 3px; box-shadow: 0 6px 14px rgba(42, 33, 24, 0.35);
+}
+.wcal__cimg.is-cart img {
+  position: absolute; left: 50%; top: 50%; width: 133%; height: auto; max-width: none; object-fit: contain;
+  transform: translate(-50%, -50%) rotate(-90deg); box-shadow: none; filter: drop-shadow(0 6px 10px rgba(42, 33, 24, 0.4));
+}
+.wcal__cart:hover .wcal__cimg, .wcal__cart:focus-visible .wcal__cimg { transform: translateY(-3px) rotate(-1deg); }
+
+.wcal__more {
+  margin-top: 14px; padding: 6px 14px; border: 1px solid rgba(42, 33, 24, 0.3); border-radius: 999px;
+  background: transparent; color: #2a2118; font: inherit; font-size: 13px; cursor: pointer;
+}
+.wcal__more:hover { background: #2a2118; color: #f3ead2; }
+
+.wcal__songs { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.wcal__song {
+  width: 100%; text-align: left; padding: 6px 6px; border: 0; border-radius: 3px; background: none;
+  color: inherit; font: inherit; font-size: 15px; cursor: pointer;
+}
+.wcal__song span { color: #b8402f; font-size: 11px; margin-right: 6px; }
+.wcal__song:hover, .wcal__song:focus-visible { background: rgba(184, 64, 47, 0.1); }
+
+.wcal__empty { text-align: center; font-size: 15px; color: rgba(42, 33, 24, 0.6); margin: 24px 0 8px; }
+.wcal__foot {
+  display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; padding-top: 10px;
+  border-top: 1px solid rgba(42, 33, 24, 0.16); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(42, 33, 24, 0.5);
+}
+
+@media (max-width: 640px) {
+  .wcal__top { grid-template-columns: 40px 1fr 40px; }
+  .wcal__arrow { width: 38px; height: 38px; font-size: 22px; }
+  .wcal__tapes { grid-template-columns: repeat(3, 1fr); gap: 14px 10px; }
+  .wcal__carts { grid-template-columns: repeat(3, 1fr); gap: 14px 10px; }
+  .wcal__t { font-size: 12px; }
+  .wcal__foot span:last-child { display: none; }
+}

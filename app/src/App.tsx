@@ -1,10 +1,12 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Header, Footer } from './components/Layout';
 import { BootScreen, Grain } from './components/core';
 import { Home } from './pages/Home';
+import { RevealObserver, RouteNoise } from './v2/fx';
 
-const CatalogPage = lazy(() => import('./pages/CatalogPage').then((m) => ({ default: m.CatalogPage })));
+const MusicPage = lazy(() => import('./pages/MusicPage').then((m) => ({ default: m.MusicPage })));
+const GamesPage = lazy(() => import('./pages/GamesPage').then((m) => ({ default: m.GamesPage })));
 const TVPage = lazy(() => import('./pages/TVPage').then((m) => ({ default: m.TVPage })));
 const StoriesPage = lazy(() => import('./pages/StoriesPage').then((m) => ({ default: m.StoriesPage })));
 const NostalgiaPage = lazy(() => import('./pages/NostalgiaPage').then((m) => ({ default: m.NostalgiaPage })));
@@ -15,11 +17,6 @@ const SalonPage = lazy(() => import('./pages/SalonPage').then((m) => ({ default:
 const DisneyPage = lazy(() => import('./pages/DisneyPage').then((m) => ({ default: m.DisneyPage })));
 const FilmPage = lazy(() => import('./pages/FilmPage').then((m) => ({ default: m.FilmPage })));
 const GamePage = lazy(() => import('./pages/GamePage').then((m) => ({ default: m.GamePage })));
-const CartridgeShelf = lazy(() =>
-  import('./components/CartridgeShelf').then((m) => ({ default: m.CartridgeShelf }))
-);
-const TapeDeck = lazy(() => import('./components/TapeDeck').then((m) => ({ default: m.TapeDeck })));
-import { movies, cartoons, games, music } from './data/catalog';
 import { hotkeyChar } from './media/hotkeys';
 import { PlayerProvider, PlayerTaskbar } from './media/player';
 
@@ -86,6 +83,8 @@ export default function App() {
   return (
     <PlayerProvider>
       <Grain />
+      <RouteNoise />
+      <RevealObserver />
       <KonamiEasterEgg />
       {!booted ? <BootScreen onDone={finishBoot} /> : null}
       <ScrollToTop />
@@ -101,65 +100,11 @@ export default function App() {
         >
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/filmy"
-            element={
-              <CatalogPage
-                index="01 · Фильмы"
-                title="Кино на кассетах"
-                note="То, что брали в видеосалоне и смотрели всей квартирой."
-                items={movies}
-                findTitle="Выбери кассету"
-                cover="/images/movies/section-movies.webp"
-                coverAlt="Полки видеопроката с кассетами"
-              />
-            }
-          />
-          <Route
-            path="/multfilmy"
-            element={
-              <CatalogPage
-                index="02 · Мультфильмы"
-                title="Утро на ковре"
-                note="Блок мультфильмов, ради которого вставали раньше, чем в школу."
-                items={cartoons}
-                findTitle="Включи утренний блок"
-                cover="/images/cartoons/section-cartoons.webp"
-                coverAlt="Телевизор с мультфильмом утром"
-              />
-            }
-          />
-          <Route
-            path="/igry"
-            element={
-              <CatalogPage
-                index="04 · Игры"
-                title="Картриджи и клубы"
-                note="От «9999 в 1» до ночного сеанса в подвале."
-                items={games}
-                findTitle="Вставь картридж"
-                cover="/images/games/section-games.webp"
-                coverAlt="Приставка и картриджи на ковре"
-                extra={<CartridgeShelf />}
-              />
-            }
-          />
+          <Route path="/filmy" element={<Navigate to="/videosalon" replace />} />
+          <Route path="/multfilmy" element={<Navigate to="/disney-klub" replace />} />
+          <Route path="/igry" element={<GamesPage />} />
           <Route path="/igry/:id" element={<GamePage />} />
-          <Route
-            path="/muzyka"
-            element={
-              <CatalogPage
-                index="05 · Музыка"
-                title="Плёнка и перезапись"
-                note="Альбомы, которые доставались через друзей и радиоэфир."
-                items={music}
-                findTitle="Перемотай на трек"
-                cover="/images/music/section-music.webp"
-                coverAlt="Магнитофон и кассеты"
-                extra={<TapeDeck />}
-              />
-            }
-          />
+          <Route path="/muzyka" element={<MusicPage />} />
           <Route path="/videosalon" element={<SalonPage />} />
           <Route path="/videosalon/:slug" element={<FilmPage group="salon" />} />
           <Route path="/disney-klub" element={<DisneyPage />} />

@@ -1,0 +1,88 @@
+/* Магнитофон: ассет 1622×970, все оверлеи в процентах от картинки. */
+.bbox { max-width: 1100px; margin: 0 auto 40px; }
+.bbox__set { position: relative; aspect-ratio: 1622 / 970; user-select: none; }
+.bbox__img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+
+/* Ролики: вырезаем ступицу из той же картинки и крутим её. */
+.bbox__reel {
+  position: absolute; width: 5.055%; height: 8.454%; border-radius: 50%;
+  background-image: url('/images/music/boombox.webp');
+  background-size: 1978.05% 1182.93%;
+  /* мягкий край, чтобы шов выреза не был виден на тёмном окне кассеты */
+  -webkit-mask-image: radial-gradient(circle closest-side, #000 90%, transparent 100%);
+  mask-image: radial-gradient(circle closest-side, #000 90%, transparent 100%);
+  animation: bbox-spin 2.2s linear infinite; animation-play-state: paused;
+  pointer-events: none;
+}
+/* Центры ступиц подобраны по светлому кольцу: (720, 567) и (898, 569), радиус кольца 38, вырез 41. */
+.bbox__reel--l { left: 41.862%; top: 54.227%; background-position: 44.091% 59.234%; }
+.bbox__reel--r { left: 52.836%; top: 54.433%; background-position: 55.649% 59.459%; animation-duration: 2.9s; }
+.bbox__set.is-spinning .bbox__reel { animation-play-state: running; }
+@keyframes bbox-spin { to { transform: rotate(-360deg); } }
+
+/* Шкала: выключен — тёмная, включён — подсвечена. */
+.bbox__shade {
+  position: absolute; left: 23%; top: 29.4%; width: 54.1%; height: 9.8%;
+  background: rgba(0, 0, 0, 0.55); border-radius: 4px; pointer-events: none;
+  transition: background 0.6s ease, box-shadow 0.6s ease;
+}
+.bbox__set.is-on .bbox__shade { background: rgba(242, 168, 59, 0.06); box-shadow: inset 0 0 24px rgba(242, 168, 59, 0.18); }
+
+.bbox__vfd {
+  position: absolute; left: 32.676%; top: 30.103%; width: 43.773%; height: 3.6%;
+  display: flex; align-items: center; gap: 0.8em; overflow: hidden;
+  font-family: var(--font-pixel); font-size: clamp(10px, 1.45vw, 17px); line-height: 1;
+  color: #f2a83b; text-shadow: 0 0 6px rgba(242, 168, 59, 0.75), 0 0 1px #ffd59a;
+  text-transform: uppercase; letter-spacing: 0.06em; pointer-events: none;
+}
+.bbox__num { flex: none; padding-right: 0.6em; border-right: 1px solid rgba(242, 168, 59, 0.4); }
+.bbox__run { position: relative; flex: 1; overflow: hidden; white-space: nowrap;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.bbox__track { display: inline-flex; animation: bbox-run 12s linear infinite; }
+.bbox__track > span { padding-right: 4em; }
+@keyframes bbox-run { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* Кнопка «Сеть» — левая квадратная клавиша самого ассета (гнездо 617–684 × 828–885).
+   Колпачок вырезан из той же картинки (623–678 × 834–879) и проседает при включении. */
+.bbox__power {
+  position: absolute; left: 38.040%; top: 85.361%; width: 4.192%; height: 5.979%;
+  padding: 0; border: 0; background: transparent; border-radius: 3px; cursor: pointer;
+}
+.bbox__power:focus-visible { outline: 2px solid #f2a83b; outline-offset: 2px; }
+.bbox__cap {
+  position: absolute; left: 8.82%; top: 10.34%; width: 80.88%; height: 77.59%;
+  background-image: url('/images/music/boombox.webp');
+  background-size: 2949.09% 2155.56%; background-position: 39.758% 90.162%;
+  transition: transform 0.08s ease, filter 0.2s ease;
+}
+.bbox__power:hover .bbox__cap { filter: brightness(1.12); }
+.bbox__power:active .bbox__cap, .bbox__power.is-on .bbox__cap { transform: translateY(6%); filter: brightness(0.85); }
+.bbox__plate {
+  position: absolute; left: 38.040%; top: 82.268%; width: 4.192%; height: 2.68%;
+  display: flex; align-items: center; justify-content: center; gap: 0.35em; pointer-events: none;
+}
+.bbox__led { width: clamp(4px, 0.45vw, 7px); aspect-ratio: 1; border-radius: 50%; background: #4a1611; box-shadow: inset 0 0 2px #000; transition: background 0.3s, box-shadow 0.3s; }
+.bbox__plate.is-on .bbox__led { background: #ff3b2a; box-shadow: 0 0 8px #ff3b2a, 0 0 2px #ffb3a8; }
+.bbox__plabel { font-family: var(--font-mono); font-size: clamp(6px, 0.55vw, 9px); line-height: 1; color: #2b2925; text-shadow: 0 1px 0 rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* Пульт под магнитофоном — как под телевизором. */
+.bbox__keys { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 18px; }
+.bbox__key {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 16px;
+  background: #1b1916; color: #ede6d6; border: 1px solid rgba(237, 230, 214, 0.18); border-radius: 6px;
+  font-family: var(--font-mono); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.bbox__key:hover { border-color: rgba(242, 168, 59, 0.6); }
+.bbox__key.is-on { border-color: #f2a83b; background: #2a2116; }
+.bbox__key--main { min-width: 170px; justify-content: center; }
+.bbox__ico { color: #f2a83b; font-size: 14px; letter-spacing: -0.12em; }
+.bbox__key kbd {
+  display: inline-grid; place-items: center; min-width: 26px; height: 24px; padding: 0 6px; border-radius: 4px;
+  background: #0f0e0c; border: 1px solid rgba(237, 230, 214, 0.25); font-family: var(--font-mono); font-size: 11px; color: #ede6d6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbox__reel { animation-duration: 6s; }
+  .bbox__track { animation: none; }
+}

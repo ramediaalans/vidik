@@ -1,0 +1,231 @@
+/* «Модем на 33.6» — рабочий стол Windows 98 */
+.w98 {
+  --w98-face: #c0c0c0; --w98-hi: #fff; --w98-lo: #808080; --w98-dk: #000;
+  position: relative; height: 620px; overflow: hidden; border-radius: 6px;
+  background: #008080; color: #000;
+  font: 13px/1.35 Tahoma, 'MS Sans Serif', Verdana, Arial, sans-serif;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), inset 0 0 0 2px #0b0b0c;
+  user-select: none; -webkit-user-select: none;
+}
+.w98 *, .w98 *::before, .w98 *::after { box-sizing: border-box; }
+.w98 button { font: inherit; color: inherit; }
+.w98 svg { width: 32px; height: 32px; flex: none; }
+
+.w98-bevel, .w98-win, .w98-btn, .w98-taskbar, .w98-start {
+  background: var(--w98-face);
+  box-shadow: inset -1px -1px var(--w98-dk), inset 1px 1px var(--w98-hi), inset -2px -2px var(--w98-lo), inset 2px 2px #dfdfdf;
+}
+.w98-field {
+  display: block; background: #fff; padding: 3px 5px; border: 0; font: inherit; min-width: 0;
+  box-shadow: inset 1px 1px var(--w98-lo), inset -1px -1px var(--w98-hi), inset 2px 2px var(--w98-dk), inset -2px -2px #dfdfdf;
+}
+
+/* иконки */
+.w98-icons { position: absolute; left: 10px; top: 10px; display: grid; gap: 14px; width: 86px; z-index: 1; }
+.w98-icon { display: grid; justify-items: center; gap: 4px; background: none; border: 0; padding: 4px 2px; cursor: default; color: #fff !important; }
+.w98-icon span { font-size: 12px; text-align: center; text-shadow: 1px 1px 0 #000; padding: 0 2px; }
+.w98-icon:focus-visible { outline: 1px dotted #fff; }
+.w98-icon:focus span { background: #000080; }
+.w98-hint { margin: 6px 0 0; font-size: 11px; color: rgba(255, 255, 255, 0.75); text-align: center; }
+
+/* окна */
+.w98-win { position: absolute; padding: 3px; display: flex; flex-direction: column; max-width: calc(100% - 20px); }
+.w98-title {
+  display: flex; align-items: center; gap: 4px; height: 22px; padding: 0 3px 0 4px; cursor: default; touch-action: none;
+  background: linear-gradient(90deg, #808080, #b5b5b5); color: #d4d0c8; font-weight: 700;
+}
+.w98-win.is-top .w98-title { background: linear-gradient(90deg, #000080, #1084d0); color: #fff; }
+.w98-title__ico svg { width: 16px; height: 16px; display: block; }
+.w98-title__txt { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.w98-tbtn {
+  width: 18px; height: 16px; padding: 0; border: 0; line-height: 12px; font-weight: 700; font-size: 12px; color: #000 !important;
+  background: var(--w98-face); box-shadow: inset -1px -1px var(--w98-dk), inset 1px 1px var(--w98-hi), inset -2px -2px var(--w98-lo);
+}
+.w98-tbtn:active { box-shadow: inset 1px 1px var(--w98-dk), inset -1px -1px var(--w98-hi); }
+.w98-body { padding: 12px; display: grid; gap: 8px; }
+.w98-small { margin: 0; font-size: 12px; color: #222; }
+
+.w98-btn {
+  border: 0; padding: 5px 14px; min-width: 76px; cursor: default; text-decoration: none; color: #000 !important; display: inline-block; text-align: center;
+}
+.w98-btn:active, .w98-btn.is-down { box-shadow: inset 1px 1px var(--w98-dk), inset -1px -1px var(--w98-hi), inset 2px 2px var(--w98-lo); }
+.w98-btn:focus-visible { outline: 1px dotted #000; outline-offset: -5px; }
+.w98-btn--def { box-shadow: inset 0 0 0 1px #000, inset -2px -2px var(--w98-dk), inset 2px 2px var(--w98-hi), inset -3px -3px var(--w98-lo); }
+.w98-btn--sm { padding: 2px 8px; min-width: 0; }
+.w98-btn:disabled { color: #808080 !important; text-shadow: 1px 1px #fff; }
+.w98-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
+
+/* дозвон */
+.w98-win--dial { width: 340px; }
+.w98-row { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 8px; }
+.w98-check { display: flex; gap: 6px; align-items: center; }
+.w98-status { min-height: 38px; padding: 8px; background: #fff; box-shadow: inset 1px 1px var(--w98-lo), inset -1px -1px var(--w98-hi); }
+
+/* браузер */
+.w98-win--ie { width: min(760px, calc(100% - 130px)); height: 560px; }
+.w98-ie { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.w98-menu { display: flex; gap: 14px; padding: 3px 6px; font-size: 12px; }
+.w98-addr { display: flex; gap: 6px; align-items: center; padding: 3px 6px; border-top: 1px solid var(--w98-lo); border-bottom: 1px solid var(--w98-hi); }
+.w98-field--addr { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; user-select: text; }
+.w98-fav { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px 6px; }
+.w98-favbtn { border: 0; background: none; padding: 3px 8px; cursor: default; font-size: 12px; }
+.w98-favbtn i { font-style: normal; color: #555; }
+.w98-favbtn:hover { box-shadow: inset -1px -1px var(--w98-lo), inset 1px 1px var(--w98-hi); }
+.w98-favbtn.is-on { box-shadow: inset 1px 1px var(--w98-lo), inset -1px -1px var(--w98-hi); background: #d4d0c8; }
+.w98-view { position: relative; flex: 1; min-height: 0; background: #fff; margin: 0 2px; box-shadow: inset 1px 1px var(--w98-lo), inset 2px 2px var(--w98-dk); }
+.w98-view iframe { position: absolute; inset: 2px; width: calc(100% - 4px); height: calc(100% - 4px); border: 0; background: #fff; }
+.w98-loading { position: absolute; inset: 2px; display: grid; place-content: center; justify-items: center; gap: 12px; background: #fff; text-align: center; padding: 20px; }
+.w98-nopage { padding: 24px 28px; max-width: 520px; font-family: Arial, sans-serif; }
+.w98-nopage h4 { margin: 0 0 10px; font-size: 18px; font-weight: 700; color: #000; }
+.w98-nopage p { margin: 0 0 16px; color: #333; }
+.w98-statusbar { display: flex; justify-content: space-between; gap: 10px; padding: 3px 6px 0; font-size: 12px; }
+.w98-statusbar span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.w98-bar {
+  display: block; width: 220px; height: 16px; padding: 2px; background: #fff;
+  box-shadow: inset 1px 1px var(--w98-lo), inset -1px -1px var(--w98-hi);
+}
+.w98-bar::after {
+  content: ''; display: block; height: 100%; width: 0;
+  background: repeating-linear-gradient(90deg, #000080 0 9px, transparent 9px 11px);
+  animation: w98-fill 6s steps(20) infinite;
+}
+.w98-bar--stuck::after { animation: w98-fill 3s steps(14) forwards; max-width: 87%; }
+@keyframes w98-fill { to { width: 100%; } }
+
+/* блокнот, папки, корзина, аська */
+.w98-win--pad { width: 430px; }
+.w98-pad {
+  margin: 0; padding: 8px 10px; min-height: 260px; background: #fff; white-space: pre-wrap; user-select: text;
+  font: 13px/1.45 'Courier New', 'Lucida Console', monospace; color: #000;
+  box-shadow: inset 1px 1px var(--w98-lo), inset 2px 2px var(--w98-dk);
+}
+.w98-win--pc { width: 360px; }
+.w98-pc { grid-template-columns: repeat(4, 1fr); background: #fff; margin: 2px; box-shadow: inset 1px 1px var(--w98-lo); }
+.w98-pc .w98-small { grid-column: 1 / -1; }
+.w98-folder { display: grid; justify-items: center; gap: 4px; border: 0; background: none; padding: 6px 2px; cursor: default; font-size: 12px; }
+.w98-folder:hover span, .w98-folder:focus span { background: #000080; color: #fff; }
+.w98-win--bin { width: 320px; }
+.w98-list { margin: 0; padding: 6px 8px 6px 26px; background: #fff; box-shadow: inset 1px 1px var(--w98-lo); font-size: 12px; }
+.w98-win[hidden] { display: none !important; }
+.w98-win--icq { width: min(520px, calc(100% - 120px)); height: 400px; }
+/* ICQ 99b */
+.icq { flex: 1; min-height: 0; display: grid; grid-template-columns: 180px 1fr; gap: 3px; padding: 3px; }
+.icq--off { display: grid; grid-template-columns: 1fr; place-content: center; justify-items: center; gap: 8px; text-align: center; padding: 20px; }
+.icq--off p { margin: 0; }
+.icq--off .icq-flower { width: 40px; height: 40px; }
+.icq-flower { width: 16px !important; height: 16px !important; flex: none; }
+.icq-list { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; background: #fff; box-shadow: inset 1px 1px var(--w98-lo), inset -1px -1px var(--w98-hi); padding: 2px; }
+.icq-group { font-size: 11px; font-weight: 700; color: #000080; padding: 6px 4px 2px; }
+.icq-contact { display: flex; align-items: center; gap: 6px; width: 100%; border: 0; background: none; padding: 3px 4px; text-align: left; cursor: default; font-size: 12px; }
+.icq-contact:hover .icq-nick { text-decoration: underline; }
+.icq-contact.is-on { background: #000080; color: #fff; }
+.icq-contact.is-off { color: #808080; }
+.icq-contact.is-new .icq-nick { font-weight: 700; }
+.icq-nick { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.icq-badge { min-width: 16px; padding: 0 4px; border-radius: 8px; background: #d12a2a; color: #fff; font-size: 10px; line-height: 16px; text-align: center; }
+.icq-contact.is-new .icq-flower { animation: icq-blink 0.9s steps(2) infinite; }
+@keyframes icq-blink { 50% { opacity: 0.2; } }
+.icq-me { margin-top: auto; padding: 6px 4px 2px; border-top: 1px solid #c0c0c0; display: grid; gap: 4px; font-size: 11px; color: #333; }
+.icq-chat { display: flex; flex-direction: column; min-height: 0; gap: 3px; }
+.icq-chat--idle { justify-content: center; padding: 16px; text-align: center; }
+.icq-head { display: flex; align-items: center; gap: 6px; padding: 3px 4px; font-size: 12px; }
+.icq-head i { font-style: normal; color: #555; font-size: 11px; }
+.icq-back { display: none; }
+.icq-log { flex: 1; min-height: 0; overflow-y: auto; background: #fff; padding: 6px 8px; box-shadow: inset 1px 1px var(--w98-lo), inset -1px -1px var(--w98-hi); font-size: 12px; display: grid; align-content: start; gap: 8px; }
+.icq-empty { margin: 0; color: #808080; }
+.icq-who { font-weight: 700; color: #c00000; font-size: 11px; }
+.icq-msg.is-me .icq-who { color: #0000c0; }
+.icq-who span { font-weight: 400; color: #808080; }
+.icq-text { white-space: pre-wrap; word-break: break-word; color: #000; }
+.icq-link { display: inline-block; margin-top: 3px; border: 0; background: none; padding: 0; color: #0000ee; text-decoration: underline; cursor: pointer; font-size: 12px; text-align: left; }
+.icq-typing { color: #808080; font-style: italic; }
+.icq-form { display: grid; grid-template-columns: 1fr auto; gap: 4px; align-items: end; }
+.icq-form textarea { resize: none; font: inherit; font-size: 12px; min-height: 40px; }
+.w98-trayico.is-blink svg { animation: icq-blink 0.9s steps(2) infinite; }
+@media (prefers-reduced-motion: reduce) { .icq-contact.is-new .icq-flower, .w98-trayico.is-blink svg { animation: none; } }
+
+/* панель задач и Пуск */
+.w98-taskbar { position: absolute; left: 0; right: 0; bottom: 0; height: 32px; display: flex; align-items: center; gap: 4px; padding: 3px; z-index: 50; }
+.w98-startbtn { display: flex; align-items: center; gap: 5px; font-weight: 700; min-width: 0; padding: 3px 8px; height: 100%; }
+.w98-flag { width: 16px; height: 14px; background: conic-gradient(from 90deg at 50% 50%, #e02020 0 25%, #3cb043 0 50%, #ffd400 0 75%, #1a5fd0 0); transform: skewY(-6deg); }
+.w98-tasks { flex: 1; display: flex; gap: 3px; min-width: 0; overflow: hidden; height: 100%; }
+.w98-task {
+  flex: 0 1 170px; min-width: 40px; border: 0; padding: 0 8px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;
+  background: var(--w98-face); box-shadow: inset -1px -1px var(--w98-dk), inset 1px 1px var(--w98-hi), inset -2px -2px var(--w98-lo);
+}
+.w98-task.is-down { font-weight: 700; background: repeating-conic-gradient(#c0c0c0 0 25%, #fff 0 50%) 0 0 / 2px 2px; box-shadow: inset 1px 1px var(--w98-dk), inset -1px -1px var(--w98-hi); }
+.w98-tray { display: flex; align-items: center; gap: 8px; height: 100%; padding: 0 10px; box-shadow: inset 1px 1px var(--w98-lo), inset -1px -1px var(--w98-hi); white-space: nowrap; }
+.w98-trayico { display: flex; align-items: center; gap: 4px; border: 0; background: none; padding: 0; cursor: default; font-size: 11px; }
+.w98-trayico svg { width: 16px; height: 16px; }
+.w98-start { position: absolute; left: 3px; bottom: 32px; display: flex; z-index: 60; padding: 3px; min-width: 260px; }
+.w98-start__side {
+  writing-mode: vertical-rl; transform: rotate(180deg); background: linear-gradient(0deg, #000080, #1084d0);
+  color: #c0c0c0; font-weight: 700; font-size: 20px; padding: 8px 4px; letter-spacing: 0.02em;
+}
+.w98-start__side b { color: #fff; }
+.w98-start__items { flex: 1; display: grid; }
+.w98-start__items button { display: flex; align-items: center; gap: 10px; border: 0; background: none; padding: 6px 12px 6px 8px; text-align: left; cursor: default; }
+.w98-start__items button:hover, .w98-start__items button:focus-visible { background: #000080; color: #fff; }
+.w98-start__items svg { width: 24px; height: 24px; }
+.w98-start__items hr { width: 100%; border: 0; border-top: 1px solid var(--w98-lo); border-bottom: 1px solid var(--w98-hi); margin: 3px 0; }
+
+.w98--off { display: grid; place-content: center; justify-items: center; gap: 24px; background: #000; }
+.w98--off p { margin: 0; color: #f4a300; font-size: clamp(20px, 2.4vw, 30px); font-weight: 700; text-align: center; }
+
+@media (max-width: 860px) {
+  .w98 { height: auto; min-height: 560px; padding: 10px 10px 44px; display: flex; flex-direction: column; gap: 10px; }
+  .w98-icons { position: static; width: auto; grid-template-columns: repeat(3, 1fr); }
+  .w98-hint { display: none; }
+  .w98-win { position: relative !important; left: auto !important; top: auto !important; width: 100% !important; max-width: none; }
+  .w98-win--ie { height: 480px; }
+  .w98-row { grid-template-columns: 1fr; gap: 2px; }
+  .w98-task { flex-basis: 90px; }
+  .w98-win--icq { height: 440px; }
+  .icq { grid-template-columns: 1fr; }
+  .icq.has-chat .icq-list, .icq:not(.has-chat) .icq-chat--idle { display: none; }
+  .icq-back { display: inline-block; }
+}
+
+/* живой поиск над архивной страницей */
+.w98-search { display: flex; gap: 6px; align-items: center; padding: 3px 6px 5px; border-bottom: 1px solid var(--w98-lo); }
+.w98-search label { font-size: 12px; }
+.w98-search .w98-field { flex: 1; min-width: 0; font: inherit; font-size: 12px; padding: 2px 4px; }
+.w98-search .w98-field:focus { outline: 1px dotted #000; outline-offset: -3px; }
+
+
+/* монитор с картинки: экран вписан в прозрачный проём кинескопа */
+.pcwrap { max-width: 1240px; margin: 0 auto; }
+.pcframe { position: relative; width: 100%; aspect-ratio: 1536 / 1024; }
+.pcframe__img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; user-select: none; }
+/* весь проём кинескопа: тёмное стекло, как чёрная кайма у настоящего ЭЛТ */
+.pcframe__glass { position: absolute; left: 10%; top: 16.1%; width: 49.6%; height: 54.9%; z-index: 0; border-radius: 9% / 12%;
+  background: radial-gradient(ellipse at 50% 50%, #0d100f 60%, #030404 100%); }
+/* сама картинка — целиком внутри проёма, с запасом от скруглённых углов */
+.pcframe__screen { position: absolute; left: 12.695%; top: 19.001%; width: 44.141%; height: 49.106%; overflow: hidden; background: #000; z-index: 1;
+  border-radius: 1.6% / 2.2%; box-shadow: 0 0 18px 4px rgba(120, 200, 190, 0.08); }
+.pcframe__screen .w98 { width: 960px; height: 712px; transform: scale(var(--k, 0.6)); transform-origin: 0 0; border-radius: 0; box-shadow: none; }
+.pcframe__screen::after { content: ''; position: absolute; inset: 0; z-index: 70; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 48%, transparent 62%, rgba(0, 0, 0, 0.32) 100%), linear-gradient(165deg, rgba(255, 255, 255, 0.06), transparent 38%); }
+
+.pcframe__hint { display: flex; align-items: center; gap: 10px; margin: 14px auto 0; padding: 6px 12px; border: 0; background: none;
+  color: var(--bone, #ede6d6); opacity: 0.72; font-family: var(--font-mono); font-size: 14px; cursor: pointer; transition: opacity 0.2s; }
+.pcframe__hint:hover, .pcframe__hint:focus-visible { opacity: 1; }
+.pcframe__hint kbd { display: inline-grid; place-items: center; min-width: 28px; height: 26px; padding: 0 6px; border-radius: 4px;
+  border: 1px solid rgba(237, 230, 214, 0.35); border-bottom-width: 3px; font: 700 13px var(--font-mono); color: #f2a83b; }
+
+/* полный экран: корпус прячем, рабочий стол — по центру на чёрном */
+.pcframe.is-full { position: fixed; inset: 0; z-index: 9999; width: 100vw; height: 100vh; aspect-ratio: auto; background: #000; }
+.pcframe.is-full .pcframe__img, .pcframe.is-full .pcframe__glass { display: none; }
+.pcframe.is-full .pcframe__screen { left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 0; box-shadow: none;
+  width: min(100vw, calc(100vh * 960 / 712)); height: min(100vh, calc(100vw * 712 / 960)); }
+.pcframe__exit { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 80; pointer-events: none;
+  padding: 6px 14px; border-radius: 4px; background: rgba(0, 0, 0, 0.7); color: #ede6d6; font: 13px var(--font-mono);
+  animation: pcexit 4s ease forwards; }
+@keyframes pcexit { 0%, 70% { opacity: 1; } 100% { opacity: 0; } }
+
+@media (max-width: 860px) {
+  .pcframe { aspect-ratio: auto; }
+  .pcframe__img, .pcframe__glass, .pcframe__screen::after, .pcframe__hint { display: none; }
+  .pcframe__screen { position: static; width: auto; height: auto; overflow: visible; background: none; border-radius: 0; box-shadow: none; }
+  .pcframe__screen .w98 { width: auto; height: auto; transform: none; border-radius: 6px; }
+}

@@ -1,134 +1,112 @@
-import { useEffect, useRef, useState } from 'react';
-import { asset } from '../media/asset';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { SectionHeader } from '../components/core';
-import { retroSites } from '../data/extra';
+import { PageHero } from '../v2/PageHero';
+import { RetroDesktop } from '../v2/RetroDesktop';
 
 const DIRECTORY = [
   {
-    title: 'Архивы и сохранение',
-    note: 'Сайты, где легально хранят цифровую историю.',
+    title: 'Сам архив',
+    note: 'Тут лежат миллиарды старых страниц. Вбиваешь адрес — выбираешь год.',
     links: [
-      { label: 'Internet Archive', url: 'https://archive.org' },
       { label: 'Wayback Machine', url: 'https://web.archive.org' },
-      { label: 'Открытая библиотека', url: 'https://openlibrary.org' }
+      { label: 'Internet Archive', url: 'https://archive.org' }
     ]
   },
   {
-    title: 'Игровая история',
-    note: 'Каталоги и документация эпохи 8 и 16 бит.',
-    links: [
-      { label: 'Каталог игр в Internet Archive', url: 'https://archive.org/details/softwarelibrary' },
-      { label: 'Статьи на Википедии', url: 'https://ru.wikipedia.org/wiki/История_компьютерных_игр' }
-    ]
+    title: 'Старые программы',
+    note: 'Игры и софт для DOS и Windows, которые запускаются прямо в браузере.',
+    links: [{ label: 'Библиотека софта', url: 'https://archive.org/details/softwarelibrary' }]
   },
   {
-    title: 'Журналы и печать',
-    note: 'То, что покупали в киоске ради постера на развороте.',
-    links: [
-      { label: 'Журнальные коллекции', url: 'https://archive.org/details/magazine_rack' }
-    ]
+    title: 'Журналы из киоска',
+    note: 'Те самые номера, которые покупали ради постера и диска с демками.',
+    links: [{ label: 'Журнальная стойка', url: 'https://archive.org/details/magazine_rack' }]
   }
 ];
 
-export function RetroNetPage() {
-  const [active, setActive] = useState(retroSites[0]);
-  const [status, setStatus] = useState<'loading' | 'ready' | 'slow'>('loading');
-  const timer = useRef<number | undefined>(undefined);
+// Экран рабочего стола вписан в монитор с картинки. Внутри рабочий стол
+// всегда 960×712, а на нужный размер его масштабирует transform.
+// Клавиша F (в русской раскладке — А) разворачивает экран на весь монитор.
+function RetroPC() {
+  const frame = useRef<HTMLDivElement>(null);
+  const screen = useRef<HTMLDivElement>(null);
+  const [full, setFull] = useState(false);
 
   useEffect(() => {
-    window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => {
-      setStatus((s) => (s === 'ready' ? s : 'slow'));
-    }, 15000);
-    return () => window.clearTimeout(timer.current);
-  }, [active.id]);
+    const el = screen.current;
+    if (!el) return;
+    const fit = () => el.style.setProperty('--k', String(el.clientWidth / 960));
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
-  const selectSite = (site: (typeof retroSites)[number]) => {
-    if (site.id === active.id) return;
-    setStatus('loading');
-    setActive(site);
-  };
+  const toggle = useCallback(() => {
+    setFull((was) => {
+      const next = !was;
+      const el = frame.current;
+      if (next) el?.requestFullscreen?.().catch(() => undefined);
+      else if (document.fullscreenElement) document.exitFullscreen().catch(() => undefined);
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      if (e.code === 'KeyF') { e.preventDefault(); toggle(); }
+      else if (e.code === 'Escape' && full) setFull(false);
+    };
+    const onFs = () => { if (!document.fullscreenElement) setFull(false); };
+    window.addEventListener('keydown', onKey);
+    document.addEventListener('fullscreenchange', onFs);
+    return () => { window.removeEventListener('keydown', onKey); document.removeEventListener('fullscreenchange', onFs); };
+  }, [toggle, full]);
 
   return (
+    <div className="pcwrap">
+      <div className={'pcframe' + (full ? ' is-full' : '')} ref={frame}>
+        <div className="pcframe__glass" aria-hidden="true" />
+        <div className="pcframe__screen" ref={screen}>
+          <RetroDesktop />
+        </div>
+        <img className="pcframe__img" src="/images/retro/pc-frame.webp" alt="" aria-hidden="true" width={1536} height={1024} draggable={false} />
+        {full && <div className="pcframe__exit">F или Esc — вернуться к столу</div>}
+      </div>
+      <button type="button" className="pcframe__hint" onClick={toggle}>
+        <kbd>F</kbd> — развернуть экран на весь монитор
+      </button>
+    </div>
+  );
+}
+
+export function RetroNetPage() {
+  return (
     <>
-      <section className="hero vignette" style={{ minHeight: 'min(52vh, 460px)' }}>
-        <div className="hero__media">
-          <img src={asset('/images/games/game-5.webp')} alt="Домашний компьютер конца 90-х" />
-        </div>
-        <div className="hero__inner container" style={{ paddingBottom: 48 }}>
-          <div className="hero__kicker pixel">08 · Ретроинтернет</div>
-          <h1 className="display display--l" style={{ margin: '12px 0' }}>
-            Интернет, который пищал
-          </h1>
-          <p className="lead">
-            Старые сайты открываются через Wayback Machine — это официальный архив, а не наша копия.
-          </p>
-        </div>
+      <PageHero
+        compact
+        index="08"
+        kicker="Ретроинтернет"
+        title="Интернет, который пищал"
+        lead="Сначала нужна свободная линия и чтобы никто не снял трубку. Потом — Яндекс, Рамблер и почта ровно такими, какими они были в конце девяностых."
+        image="/images/games/game-5.webp"
+        alt="Домашний компьютер конца 90-х"
+      />
+
+      <section className="section container">
+        <SectionHeader
+          index="Модем на 33.6"
+          title="Подключись, как тогда"
+          note="Нажми «Подключить» и дождись писка. Страницы настоящие — из архива Wayback Machine."
+        />
+        <RetroPC />
       </section>
 
       <section className="section container">
-        <SectionHeader index="Архив сайтов" title="Открой старую страницу" note="Страницы грузятся с серверов Internet Archive." />
-        <div className="grid grid--2" style={{ alignItems: 'start' }}>
-          <div className="crt">
-            <div className="crt__screen" style={{ aspectRatio: '4 / 3', background: '#0b0b0c' }}>
-              <iframe
-                key={active.id}
-                src={active.embedUrl}
-                title={`${active.title} · ${active.year}`}
-                style={{ width: '100%', height: '100%', border: 0, background: '#fff' }}
-                onLoad={() => setStatus('ready')}
-                referrerPolicy="no-referrer"
-              />
-              {status !== 'ready' && (
-                <div className="dialup" role="status">
-                  {status === 'loading' ? (
-                    <>
-                      <span className="pixel dialup__title">Соединение с архивом…</span>
-                      <span className="mono">web.archive.org · {active.year}</span>
-                      <span className="dialup__bar" aria-hidden="true" />
-                    </>
-                  ) : (
-                    <>
-                      <span className="pixel dialup__title">Архив отвечает медленно</span>
-                      <span className="mono">Страница ещё грузится или провайдер её не отдаёт.</span>
-                      <a className="btn btn--sm" href={active.embedUrl} target="_blank" rel="noreferrer noopener">
-                        Открыть в новой вкладке
-                      </a>
-                    </>
-                  )}
-                </div>
-              )}
-              <div className="crt__glass" aria-hidden="true" />
-            </div>
-            <div className="crt__panel">
-              <span className="mono">Источник: Internet Archive · официальный</span>
-              <a className="btn btn--sm" href={active.url} target="_blank" rel="noreferrer noopener">
-                Открыть у провайдера
-              </a>
-            </div>
-          </div>
-
-          <div className="channels">
-            {retroSites.map((s) => (
-              <button
-                key={s.id}
-                className={`channel${s.id === active.id ? ' is-active' : ''}`}
-                onClick={() => selectSite(s)}
-              >
-                <span className="channel__num">{s.year.slice(2)}</span>
-                <span>
-                  <span className="channel__name">{s.title}</span>
-                  <br />
-                  <span className="channel__now">{s.note}</span>
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section container">
-        <SectionHeader index="Каталог" title="Где искать дальше" note="Собственная подборка легальных источников для самостоятельных раскопок." />
+        <SectionHeader index="Закладки" title="Где копать дальше" />
         <div className="grid grid--3">
           {DIRECTORY.map((d) => (
             <div className="card" key={d.title}>
@@ -137,13 +115,7 @@ export function RetroNetPage() {
                 <p className="card__desc">{d.note}</p>
                 <div className="stack" style={{ gap: 6, marginTop: 8 }}>
                   {d.links.map((l) => (
-                    <a
-                      className="chip"
-                      key={l.url}
-                      href={l.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
+                    <a className="chip" key={l.url} href={l.url} target="_blank" rel="noreferrer noopener">
                       {l.label}
                     </a>
                   ))}

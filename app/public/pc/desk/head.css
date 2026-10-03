@@ -1,0 +1,68 @@
+/* Шапка и меню основного сайта для статичной страницы компьютерного клуба.
+   Копия правил .vhead/.vnav/.vmenu из src/redesign.css — при правке шапки там поправить и здесь. */
+:root{--head-h:76px;--gutter:clamp(18px,2.4vw,32px);--font-display:'Fira Sans Extra Condensed','Arial Narrow','Onest',sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;--amber:#ffb23f;--bone:#ede6d6;--dust:#8a8580;--rec:#ff4a3d;--night:#070708;--ink:#0b0b0c;--ease-out:cubic-bezier(.16,1,.3,1);--ease-io:cubic-bezier(.65,0,.35,1)}
+.vhead,.vmenu{font-family:'Onest',system-ui,sans-serif;color:var(--bone)}
+.vhead a,.vmenu a{color:inherit;text-decoration:none}
+.vhead button{background:none;color:inherit;font:inherit;cursor:pointer;margin:0}
+.mono{font-family:var(--font-mono);letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+
+.vhead{position:fixed;inset:0 0 auto;height:var(--head-h);z-index:70;background:linear-gradient(180deg,rgba(7,7,8,.75),rgba(7,7,8,0));border-bottom:1px solid transparent;transition:background-color .4s,border-color .4s}
+.vhead.is-open{background:transparent}
+.vhead__inner{height:100%;display:flex;align-items:center;gap:28px;padding:0 var(--gutter)}
+.vlogo{display:inline-flex;align-items:center;gap:10px;flex:none}
+.vlogo__rec{width:10px;height:10px;border-radius:50%;background:var(--rec);box-shadow:0 0 14px var(--rec);animation:recPulse 1.6s ease-in-out infinite}
+.vlogo__word{font-family:var(--font-display);font-weight:900;font-size:30px;letter-spacing:.04em;line-height:1}
+.vnav{display:flex;gap:clamp(16px,2vw,30px);margin:0 auto}
+.vnav__link{position:relative;font-family:var(--font-display);font-weight:600;font-size:17px;letter-spacing:.05em;text-transform:uppercase;color:rgba(237,230,214,.74);padding:6px 0;transition:color .3s;white-space:nowrap}
+.vnav__time{font-family:var(--font-mono);font-size:10px;font-weight:400;letter-spacing:.08em;color:var(--dust);margin-right:7px;vertical-align:5px;transition:color .3s}
+.vnav__link::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease-out)}
+.vnav__link:hover{color:var(--bone)}
+.vnav__link:hover::after,.vnav__link.is-active::after{transform:scaleX(1);transform-origin:left}
+.vnav__link.is-active,.vnav__link.is-active .vnav__time{color:var(--amber)}
+.vhead__actions{display:flex;align-items:center;gap:14px;flex:none}
+.vhead__clock{color:var(--bone);font-family:var(--font-mono);font-size:13px;font-variant-numeric:tabular-nums}
+.vhead__clock i{font-style:normal;animation:osdBlink 1s steps(2,start) infinite}
+.vhead__search{width:42px;height:42px;border-radius:50%;border:1px solid rgba(237,230,214,.22);display:grid;place-items:center;transition:border-color .3s,color .3s}
+.vhead__search:hover{border-color:var(--amber);color:var(--amber)}
+.vhead__search svg{width:17px;height:17px}
+.vburger{height:42px;display:inline-flex;align-items:center;gap:12px;padding:0 16px 0 18px;border-radius:999px;border:1px solid rgba(237,230,214,.22);transition:border-color .3s,background .3s,color .3s}
+.vburger:hover{border-color:var(--bone)}
+.vhead.is-open .vburger{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.vburger__label{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.vburger__lines{position:relative;width:22px;height:9px}
+.vburger__lines i{position:absolute;left:0;right:0;height:1.5px;background:currentColor;transition:transform .5s var(--ease-out),top .5s var(--ease-out)}
+.vburger__lines i:first-child{top:0}
+.vburger__lines i:last-child{top:7.5px}
+.vhead.is-open .vburger__lines i:first-child{top:4px;transform:rotate(45deg)}
+.vhead.is-open .vburger__lines i:last-child{top:4px;transform:rotate(-45deg)}
+
+.vmenu{position:fixed;inset:0;z-index:65;background:var(--night);visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .8s var(--ease-io),visibility 0s linear .8s;overflow-y:auto}
+.vmenu.is-open{visibility:visible;clip-path:inset(0 0 0 0);transition:clip-path .8s var(--ease-io),visibility 0s}
+.vmenu__media{position:absolute;inset:0 0 0 auto;width:44%;overflow:hidden}
+.vmenu__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .6s var(--ease-out),transform 1.4s var(--ease-out)}
+.vmenu__media img.is-on{opacity:.85;transform:scale(1)}
+.vmenu__media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--night) 0%,rgba(7,7,8,.35) 40%,rgba(7,7,8,.1) 100%)}
+.vmenu__inner{position:relative;z-index:1;min-height:100%;width:min(70%,1040px);display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,.7fr);gap:clamp(32px,5vw,80px);padding:calc(var(--head-h) + 6vh) var(--gutter) 64px;align-content:start;box-sizing:border-box}
+.vmenu__eyebrow{color:var(--amber);margin-bottom:18px}
+.vmenu__rooms,.vmenu__more{list-style:none;margin:0;padding:0}
+.vmenu__rooms li,.vmenu__more li{opacity:0;transform:translateY(40px);transition:opacity .4s,transform .4s}
+.vmenu.is-open .vmenu__rooms li,.vmenu.is-open .vmenu__more li{opacity:1;transform:none;transition:opacity .9s var(--ease-out) calc(var(--d) * 60ms + 260ms),transform 1.1s var(--ease-out) calc(var(--d) * 60ms + 260ms)}
+.vmenu__room{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:baseline;gap:0 12px;padding:8px 0 10px;border-bottom:1px solid rgba(237,230,214,.08)}
+.vmenu__time{font-family:var(--font-mono);font-size:13px;color:var(--amber)}
+.vmenu__label{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(34px,3.9vw,62px);line-height:1;transition:transform .6s var(--ease-out),color .3s}
+.vmenu__when{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dust);grid-column:2}
+.vmenu__room:hover .vmenu__label,.vmenu__room:focus-visible .vmenu__label,.vmenu__room.is-active .vmenu__label{color:var(--amber)}
+.vmenu__room:hover .vmenu__label,.vmenu__room:focus-visible .vmenu__label{transform:translateX(14px)}
+.vmenu__more a{display:block;padding:9px 0;font-family:var(--font-display);font-weight:600;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:rgba(237,230,214,.8);border-bottom:1px solid rgba(237,230,214,.08);transition:color .3s,padding .5s var(--ease-out)}
+.vmenu__more a:hover{color:var(--amber);padding-left:8px}
+.vmenu__hint{margin-top:40px;color:var(--dust)}
+
+/* Компьютер стоит под шапкой, а не за ней. */
+.rig{padding-top:calc(var(--head-h) + 6px)}
+
+@keyframes recPulse{50%{opacity:.25}}
+@keyframes osdBlink{to{visibility:hidden}}
+@media (max-width:1180px){.vnav{display:none}.vhead__actions{margin-left:auto}.vmenu__inner{width:min(78%,900px)}}
+@media (max-width:900px){.vmenu__media{width:100%}.vmenu__media img.is-on{opacity:.22}.vmenu__inner{width:100%;grid-template-columns:1fr;gap:40px}}
+@media (max-width:640px){.vhead__clock,.vburger__label{display:none}.vburger{padding:0 13px}.vlogo__word{font-size:26px}.vmenu__room{grid-template-columns:54px minmax(0,1fr)}.vmenu__when{display:none}.vmenu__label{font-size:10.4vw}}
+@media (prefers-reduced-motion:reduce){.vlogo__rec,.vhead__clock i{animation:none!important}.vmenu,.vmenu li{transition:none!important}}

@@ -10,7 +10,7 @@ import {
   buildDay,
   hhmm,
   nowPlaying,
-  slotLabel,
+
   type Slot
 } from './schedule';
 
@@ -353,7 +353,7 @@ function ScheduledMedia({ slot, offset, muted, onReady, onError }: {
   return (
     <div className="tv__generated" role="img" aria-label={slot.title}>
       <div className="tv__testMark">ТВ</div><strong>{slot.label ?? slot.title}</strong>
-      <span>{hhmm(slot.start)}—{hhmm(slot.end)} · UTC+3</span>
+      <span>{hhmm(slot.start)}—{hhmm(slot.end)}</span>
       <small>{slot.title}</small>
     </div>
   );
@@ -378,6 +378,10 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
   const [clock, setClock] = useState(() => hhmm(broadcastSecondsOfDay()));
   const [air, setAir] = useState<{ slot: Slot; offset: number } | null>(null);
   const airKey = air ? `${air.slot.provider}:${air.slot.mediaId}:${air.slot.start}` : null;
+  // Чёрные шторки прячут служебные плашки плеера в первые секунды эфира.
+  const [bars, setBars] = useState(false);
+  // Накопленный угол ручки переключателя каналов (шаг = один щелчок).
+  const [knobTurn, setKnobTurn] = useState(0);
   const failed = useRef(new Set<string>());
   const channel = tvData.channels[channelId];
   const slots = useMemo(() => buildDay(tvData, channelId, date), [channelId, date]);
@@ -426,6 +430,24 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
   };
   const mediaReady = air && ['youtube', 'rutube', 'vk'].includes(air.slot.provider) ? readyFor === airKey : Boolean(air);
 
+  // Шторки опускаются при включении, смене канала и новой передаче.
+  useEffect(() => {
+    const id = window.setTimeout(() => setBars(on), 0);
+    return () => window.clearTimeout(id);
+  }, [on, airKey, channelId]);
+  // …и уходят через 7 секунд после того, как картинка реально пошла.
+  useEffect(() => {
+    if (!on || !bars || !mediaReady) return;
+    const id = window.setTimeout(() => setBars(false), 7000);
+    return () => window.clearTimeout(id);
+  }, [on, bars, mediaReady, airKey, channelId]);
+
+  const step = useCallback((direction: -1 | 1) => {
+    setKnobTurn((turn) => turn + direction);
+    onChannelStep?.(direction);
+  }, [onChannelStep]);
+  const togglePower = () => { if (on) setOn(false); else turnOn(); };
+
   const mediaError = () => {
     if (!air) return;
     failed.current.add(`${air.slot.provider}:${air.slot.mediaId}`);
@@ -447,12 +469,12 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
       const key = hotkeyChar(event);
       if (key === 'f') { event.preventDefault(); toggleFullscreen(); return; }
       if (key === 'm') { event.preventDefault(); setMuted((v) => !v); return; }
-      if (key === 'ArrowLeft') { event.preventDefault(); onChannelStep?.(-1); return; }
-      if (key === 'ArrowRight') { event.preventDefault(); onChannelStep?.(1); }
+      if (key === 'ArrowLeft') { event.preventDefault(); step(-1); return; }
+      if (key === 'ArrowRight') { event.preventDefault(); step(1); }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [on, onChannelStep, toggleFullscreen]);
+  }, [on, step, toggleFullscreen]);
 
   if (!channel) return null;
   return (
@@ -466,25 +488,29 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
             {staticBurst ? <div className="tv__static" aria-hidden="true" /> : null}
             {error ? <div className="tv__overlay pixel">{error}</div> : null}
             {on && air ? <div className="tv__interactionShield" aria-hidden="true" /> : null}
+            {on ? <div className={`tv__bar tv__bar--top${bars ? '' : ' is-hidden'}`} aria-hidden="true" /> : null}
+            {on ? <div className={`tv__bar tv__bar--bottom${bars ? '' : ' is-hidden'}`} aria-hidden="true" /> : null}
             {isFullscreen ? <button className="tv__exitFs mono" onClick={toggleFullscreen} aria-label="Выйти из полного экрана">✕</button> : null}
             <div className="crt__glass" aria-hidden="true" />
-            {on ? <div className="tv__osd pixel"><span className="tv__osdNum">{channel.num}</span><span>{channel.name}</span><span className="tv__osdTime mono">{clock} UTC+3</span></div> : null}
+            {on ? <div className="tv__osd pixel"><span className="tv__osdNum">{channel.num}</span><span>{channel.name}</span><span className="tv__osdTime mono">{clock}</span></div> : null}
           </div>
           <img className="tv__cabinet" src={asset('/images/tv/tv-frame.webp')} alt="" aria-hidden="true" draggable={false} />
+          <button type="button" className="tv__knob" onClick={() => step(1)} aria-label="Повернуть переключатель каналов" title="Щёлк — следующий канал">
+            <img src={asset('/images/tv/tv-knob.webp')} alt="" draggable={false} style={{ transform: `rotate(${knobTurn * 30}deg)` }} />
+          </button>
+          <button type="button" className={`tv__cabPower${on ? ' is-on' : ''}`} onClick={togglePower} aria-pressed={on} aria-label={on ? 'Выключить телевизор' : 'Включить телевизор'} title={on ? 'Выключить' : 'Включить'} />
         </div>
       </div>
 
       <div className="tv__remote" aria-label="Пульт телевизора">
-        <button className="tv__remoteButton" onClick={() => onChannelStep?.(-1)} aria-label="Предыдущий канал">CH−</button>
-        <button className="tv__remoteButton tv__remoteButton--power" onClick={() => { if (on) setOn(false); else turnOn(); }}>{on ? 'Выкл' : 'Вкл'}</button>
-        <button className="tv__remoteButton" onClick={() => onChannelStep?.(1)} aria-label="Следующий канал">CH+</button>
+        <button className="tv__remoteButton" onClick={() => step(-1)} aria-label="Предыдущий канал">CH−</button>
+        <button className="tv__remoteButton tv__remoteButton--power" onClick={togglePower}>{on ? 'Выкл' : 'Вкл'}</button>
+        <button className="tv__remoteButton" onClick={() => step(1)} aria-label="Следующий канал">CH+</button>
         <button className="tv__remoteButton" onClick={() => setMuted((v) => !v)} disabled={!on}>{muted ? 'Звук' : 'Тихо'}</button>
         <button className="tv__remoteButton" onClick={toggleFullscreen} disabled={!on} aria-label={isFullscreen ? 'Выйти из полного экрана' : 'Открыть телевизор на весь экран'}>{isFullscreen ? 'Окно' : 'Полный экран'}</button>
       </div>
 
-      {air ? <p className="mono tv__onAir">Сейчас: {slotLabel(air.slot)} · {air.slot.title}
-        {!air.slot.canSeek && air.offset > 5 ? <span> · источник включается с начала</span> : null}
-      </p> : null}
+      {air ? <p className="mono tv__onAir">Сейчас: {air.slot.title}</p> : null}
     </div>
   );
 }
