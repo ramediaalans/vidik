@@ -127,9 +127,12 @@ async function posters() {
   log(`posters: ${todo.length} to fetch`);
   writeFileSync(resolve(OUT, 'posters-failed.txt'), '');
   let fail = 0;
-  await pool(todo, 8, async (c) => {
+  // TMDB режет частые запросы: для повторной докачки запускать с --c=2
+  const conc = Number(process.argv.find((a) => a.startsWith('--c='))?.slice(4)) || 8;
+  await pool(todo, conc, async (c) => {
     let url = c.poster_url.replace('image.tmdb.org/t/p/original/', 'image.tmdb.org/t/p/w780/');
-    for (let a = 0; a < 3; a++) {
+    let lastErr = '';
+    for (let a = 0; a < 5; a++) {
       try {
         // netFetch: TMDB-картинки иначе не открываются из-за DNS провайдера
         const r = await netFetch(url);
@@ -139,10 +142,10 @@ async function posters() {
         if (buf.length < 1500) throw new Error('empty');
         await sharp(buf).resize({ width: 600, withoutEnlargement: true }).webp({ quality: 80 }).toFile(resolve(POS, `${c.kp_id || 'v' + c.id}.webp`));
         return;
-      } catch { await sleep(800 * (a + 1)); }
+      } catch (e) { lastErr = e.message; await sleep(1500 * 2 ** a); }
     }
     fail++;
-    appendFileSync(resolve(OUT, 'posters-failed.txt'), `${c.kp_id}\t${c.id}\t${c.poster_url}\n`);
+    appendFileSync(resolve(OUT, 'posters-failed.txt'), `${c.kp_id}\t${c.id}\t${c.poster_url}\t${lastErr}\n`);
   });
   log(`posters: failed ${fail}`);
   index();
