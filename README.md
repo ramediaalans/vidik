@@ -70,7 +70,7 @@ Preview показывает сборку, не исходники: после �
 
 **Cloudflare Pages** публикует сайт из GitHub после push в `origin/main`. Тяжёлые файлы находятся отдельно в **Cloudflare R2**, bucket `vidik-media`, публичный адрес https://media.art-ai.studio .
 
-`asset()` в `app/src/media/asset.ts` перенаправляет только `roms/`, `music/`, `cores/` через `VITE_MEDIA_BASE` и подменяет старые фоны на новые через `V3_MAP` (`images/v3/*`). Переключателя вариантов v2/v3 больше нет. Изображения, постеры и небольшое видео оформления остаются на Pages. Пустой `VITE_MEDIA_BASE` означает локальные файлы из public. На чистом checkout тяжёлых медиа нет.
+`asset()` в `app/src/media/asset.ts` перенаправляет только `roms/`, `music/`, `cores/` через `VITE_MEDIA_BASE` и подменяет старые фоны на новые через `V3_MAP` (`images/v3/*`). Переключателя вариантов v2/v3 больше нет. На экранах ≤760px `asset()` отдаёт уменьшенные копии `*.m.webp` из списка `app/src/media/mobileImages.ts` (делает `node scripts/mobile-images.mjs`, подробнее — DEPLOY.md, раздел 3). Изображения, постеры и небольшое видео оформления остаются на Pages. Пустой `VITE_MEDIA_BASE` означает локальные файлы из public. На чистом checkout тяжёлых медиа нет.
 
 Загрузка в Git не загружает R2; загрузка в R2 не пересобирает каталог. Полный порядок и ограничения — [DEPLOY.md](DEPLOY.md).
 

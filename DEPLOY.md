@@ -60,6 +60,20 @@
 
 Open Graph уже настроен в `app/index.html`: абсолютные `og:url` и `og:image` указывают на art-ai.studio. Старое указание «добавить абсолютные OG-ссылки» выполнено.
 
+Кэш остальных статических файлов в `_headers`: `/fonts/*` — год `immutable` (имена шрифтов с хешем), `favicon.svg` и `icons.svg` — 1 день + `stale-while-revalidate`.
+
+**Пререндер разделов** (`app/scripts/prerender.mjs`, запускается в `npm run build`): для каждого индексируемого раздела из `src/seoSections.ts` пишет `dist/<раздел>.html` со своим title/description/og, canonical (кроме главной: `index.html` — ещё и запасная страница для карточек и 404) и JSON-LD. Туда же добавляется `<link rel="preload" as="image">` главной картинки первого экрана раздела (карта `HERO` в скрипте): на экранах ≤760px — `*.m.webp`, шире — полная. **При смене картинки в `PageHero` раздела поправить `HERO`**, иначе браузер скачает лишний файл. В `app/index.html` предзагружаются 3 шрифта первого экрана (Onest кириллица/латиница, Fira Sans Extra Condensed 900 кириллица); при перегенерации `fonts.css` с новыми хешами — обновить эти ссылки. В `fonts.css` везде `font-display: swap`.
+
+**Мобильные копии картинок:** `node scripts/mobile-images.mjs` (из `app/`) делает для картинок шире 1100px и тяжелее 60 КБ копию `name.m.webp` шириной 1000px и пишет список в `app/src/media/mobileImages.ts`. `asset()` на экранах ≤760px подставляет копию; фоновые картинки в CSS (текстура VHS, магнитофон) переключаются медиазапросом `(max-width: 760px)`. После добавления/замены большой картинки скрипт нужно запустить и закоммитить результат (сборка его не запускает).
+
+**IndexNow:** ключ `app/public/005ac82484595202b05717eafc4e3610.txt` (должен отдаваться на сайте с кодом 200). Отправка адресов из sitemap в Яндекс и indexnow.org — `node _backups\indexnow_submit.mjs [пути]` (скрипт лежит вне репозитория, в `E:\AI-workspace\sandbox\_backups`).
+
+**Настройки зоны Cloudflare вне репозитория (с 4 окт 2026):**
+- Cache Rules: `media.art-ai.studio` `/pc/*`, `/cores/*` — кэш на краю 30 дней; `art-ai.studio/pc/engines/*` — по заголовкам. Скрипт `_backups\cf_cache_rules_set.mjs` (откат `--rollback`).
+- WAF custom rule: на `art-ai.studio` и `www` запросы `*.php`, `/wp*`, `/.env`, `/.git` → 403. Скрипт `_backups\cf_waf_set.mjs` (откат `--rollback`).
+- AI Crawl Control: политика Training = Allow; заблокированы только Bytespider, TikTok Spider, CCBot. Search/Agent — Allow. Bot Preference Sync включён (robots.txt остаётся `Allow: /`). Меняется только в панели (токену прав не хватает).
+- Early Hints выключены.
+
 ## 4. R2: отдельная публикация медиа
 
 | Параметр | Значение |
@@ -129,6 +143,7 @@ git push origin main
 3. Убедиться, что новые медиа доступны через media.art-ai.studio и плеер их загружает.
 4. При замене картинки проверить кэш и фактически новую версию.
 5. Если статус деплоя не проверен, явно сообщить это пользователю.
+6. Сбросить кэш хоста: `node _backups\cf_purge_host.mjs`; при новых/изменённых разделах — отправить IndexNow (`node _backups\indexnow_submit.mjs`).
 
 Хеш бандла `assets/index-*.js` на сайте не совпадает с локальной сборкой: Cloudflare собирает с другими env-переменными. Проверять деплой по новым файлам (например, `/images/v3/hero-night.webp` или `/pc/desk/head.js`), а не по сравнению хеша.
 

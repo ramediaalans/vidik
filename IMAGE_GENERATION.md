@@ -46,6 +46,7 @@ not 3d render, not cgi, no glossy hdr, no vaporwave neon cliche
 | Соотношение | герои `16:9`, карточки `4:3`, вертикальные блоки `3:4` |
 | Исходники | `assets_raw/<имя>.png` |
 | Оптимизация | `node tools/optimize.mjs` → `app/public/images/<раздел>/<имя>.webp` |
+| Копии для телефона | из `app/`: `node scripts/mobile-images.mjs` → `<имя>.m.webp` (1000px) + `src/media/mobileImages.ts` |
 
 Оптимизатор читает только файлы непосредственно в assets_raw, использует PLAN/defaultsFor и не обходит вложенные папки. Для корпусов/картриджей есть отдельные генераторы. Команда сборки приложения выполняется из app.
 
