@@ -229,3 +229,10 @@
   .pcframe__screen { position: static; width: auto; height: auto; overflow: visible; background: none; border-radius: 0; box-shadow: none; }
   .pcframe__screen .w98 { width: auto; height: auto; transform: none; border-radius: 6px; }
 }
+
+/* аудит 4 окт: на планшете и телефоне все открытые окна видны в панели задач (сжимаются с многоточием),
+   кнопки «свернуть / закрыть» крупнее под палец */
+@media (max-width: 860px) {
+  .w98-task { flex: 1 1 0; min-width: 0; }
+  .w98-tbtn { width: 28px; height: 24px; font-size: 14px; line-height: 20px; }
+}

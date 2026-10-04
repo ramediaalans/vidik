@@ -43,7 +43,9 @@ body {
 
 main {
   padding-top: var(--head-h);
-  min-height: 70vh;
+  /* на всю высоту экрана: пока раздел подгружается, подвал не виден и не прыгает (CLS) */
+  min-height: 100vh;
+  min-height: 100svh;
 }
 
 /* ---------- типографика ---------- */
@@ -1716,3 +1718,17 @@ main > section.hero:first-child {
 @media (prefers-reduced-motion: reduce) { .vfoot__word { transition: none; } }
 .vfoot__word:hover { filter: saturate(0.7) sepia(0.2) brightness(0.75) contrast(1.05); }
 .vfoot__word.is-near { background-image: url('/images/v2/poster-90s.webp'); }
+
+/* ---------- правки по аудиту дизайна (4 окт) ---------- */
+/* «Сейчас в эфире»: длинное название передачи в две строки вместо многоточия после первого слова */
+.onair__now,
+.onair__next {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+}
+@media (max-width: 860px) {
+  /* большое время главы не наезжает на счётчик «01 / 05» */
+  .chapter__time { top: calc(var(--head-h) + 64px); }
+}

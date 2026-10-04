@@ -86,3 +86,7 @@
   .bbox__reel { animation-duration: 6s; }
   .bbox__track { animation: none; }
 }
+
+/* кнопка «Сеть»: пальцем попадать легко (зона не меньше 44×44 px), рисунок тот же */
+.bbox__power::after { content: ''; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); }
+.bbox__plabel { font-size: 9px; white-space: nowrap; }

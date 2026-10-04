@@ -218,3 +218,8 @@
     transition: none;
   }
 }
+
+/* дни в программе на телефоне: высота нажатия 40 px (было 26) */
+@media (max-width: 720px) {
+  .paper__day { min-height: 40px; padding: 8px 0; }
+}

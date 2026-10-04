@@ -86,7 +86,7 @@ export function SearchPage() {
 
   return (
     <section className="section container">
-      <SectionHeader index="Поиск" title="Найди воспоминание" note="Фильм, мультик, игра, песня или история — пиши, как помнишь." />
+      <SectionHeader as="h1" index="Поиск" title="Найди воспоминание" note="Фильм, мультик, игра, песня или история — пиши, как помнишь." />
 
       <div className="stack" style={{ marginBottom: 32 }}>
         <input

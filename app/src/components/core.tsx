@@ -47,18 +47,22 @@ export function SectionHeader({
   index,
   title,
   note,
-  action
+  action,
+  as = 'h2'
 }: {
   index: string;
   title: string;
   note?: string;
   action?: ReactNode;
+  /** h1 — если это главный заголовок страницы (например, поиск). Вид не меняется. */
+  as?: 'h1' | 'h2';
 }) {
+  const Heading = as;
   return (
     <div className="sec-head">
       <div>
         <div className="sec-head__index">{index}</div>
-        <h2 className="display display--l">{title}</h2>
+        <Heading className="display display--l">{title}</Heading>
         {note ? <p className="lead" style={{ marginTop: 12 }}>{note}</p> : null}
       </div>
       {action}

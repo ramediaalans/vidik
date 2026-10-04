@@ -331,3 +331,7 @@
   .salon-cab__room { transform: scale(1.06); will-change: auto; }
   .salon-cab__stage { transform: none; will-change: auto; }
 }
+
+/* год и «VHS» на корешке не мельче 10/9 px (на планшете были 7/5 px). Полное название — в подсказке .spine__tip */
+.spine__year b { font-size: max(10px, calc(var(--sh) * 0.26)); }
+.spine__year i { font-size: max(9px, calc(var(--sh) * 0.2)); }
