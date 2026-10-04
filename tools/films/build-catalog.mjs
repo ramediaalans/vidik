@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync, rmSync } 
 import { execFileSync } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { netFetch } from '../lib/net.mjs';
 
 const FFMPEG = ['C:/ffmpeg/bin/ffmpeg.exe', 'ffmpeg'].find((p) => {
   try {
@@ -46,9 +47,13 @@ async function grab(url, file, maxWidth) {
   let ok = false;
   for (let i = 0; i < 3 && !ok; i++) {
     try {
-      const r = await fetch(url);
-      if (!r.ok) throw new Error(String(r.status));
-      const buf = Buffer.from(await r.arrayBuffer());
+      // url может быть локальным файлом (постер из архива Vibix)
+      let buf;
+      if (/^https?:\/\//.test(url)) {
+        const r = await netFetch(url);
+        if (!r.ok) throw new Error(String(r.status));
+        buf = await r.buffer();
+      } else buf = readFileSync(url);
       if (buf.length < 2000) throw new Error('пусто');
       writeFileSync(tmp, buf);
       ok = true;

@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, appendFileSync, rea
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
+import { netFetch } from '../lib/net.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '../..');
@@ -124,15 +125,17 @@ async function posters() {
   const sharp = require('sharp');
   const todo = loadCards().filter((c) => c.poster_url && !existsSync(resolve(POS, `${c.kp_id || 'v' + c.id}.webp`)));
   log(`posters: ${todo.length} to fetch`);
+  writeFileSync(resolve(OUT, 'posters-failed.txt'), '');
   let fail = 0;
   await pool(todo, 8, async (c) => {
     let url = c.poster_url.replace('image.tmdb.org/t/p/original/', 'image.tmdb.org/t/p/w780/');
     for (let a = 0; a < 3; a++) {
       try {
-        const r = await fetch(url);
+        // netFetch: TMDB-картинки иначе не открываются из-за DNS провайдера
+        const r = await netFetch(url);
         if (r.status === 404) break;
         if (!r.ok) throw new Error(String(r.status));
-        const buf = Buffer.from(await r.arrayBuffer());
+        const buf = await r.buffer();
         if (buf.length < 1500) throw new Error('empty');
         await sharp(buf).resize({ width: 600, withoutEnlargement: true }).webp({ quality: 80 }).toFile(resolve(POS, `${c.kp_id || 'v' + c.id}.webp`));
         return;
