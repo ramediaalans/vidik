@@ -1732,3 +1732,8 @@ main > section.hero:first-child {
   /* большое время главы не наезжает на счётчик «01 / 05» */
   .chapter__time { top: calc(var(--head-h) + 64px); }
 }
+
+/* телефон: уменьшенная текстура (то же условие, что в asset.ts) */
+@media (max-width: 760px) {
+  .route-noise { background-image: url('/images/textures/texture-vhs.m.webp'); }
+}

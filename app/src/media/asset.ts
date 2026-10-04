@@ -4,6 +4,8 @@
 // Тяжёлые папки (музыка, картриджи, ядра эмулятора) можно увести на отдельный
 // хост через VITE_MEDIA_BASE (например, https://media.домен/ на Cloudflare R2).
 // Если переменная не задана — всё берётся из public, как раньше.
+import { MOBILE_IMAGES } from './mobileImages';
+
 const MEDIA_BASE = (import.meta.env.VITE_MEDIA_BASE ?? '').trim().replace(/\/$/, '');
 
 // Только эти префиксы уезжают на внешний хост. Картинки и постеры лёгкие
@@ -28,10 +30,18 @@ const V3_MAP: Record<string, string> = {
   'images/hero/hero-room.webp': 'images/v3/section-search.webp',
 };
 
+// На телефоне большие картинки берём из уменьшенных копий name.m.webp (1000px).
+// Список — src/media/mobileImages.ts, его делает scripts/mobile-images.mjs.
+// То же условие (max-width: 760px) стоит в CSS у фоновых картинок.
+const MOBILE = new Set(MOBILE_IMAGES);
+const SMALL_SCREEN =
+  typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 760px)').matches;
+
 export function asset(path: string): string {
   let clean = path.replace(/^\//, '');
 
   if (V3_MAP[clean]) clean = V3_MAP[clean];
+  if (SMALL_SCREEN && MOBILE.has(clean)) clean = clean.replace(/\.(webp|jpe?g|png)$/i, '.m.webp');
 
   if (MEDIA_BASE && REMOTE_PREFIXES.some((prefix) => clean.startsWith(prefix))) {
     return `${MEDIA_BASE}/${clean}`;

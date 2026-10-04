@@ -3538,3 +3538,9 @@ body.webamp-hidden #webamp {
 /* телевизор: зоны нажатия кнопки питания и ручки каналов не меньше 44×44 px (аудит 4 окт) */
 .tv__cabPower::after,
 .tv__knob::after { content: ''; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); border-radius: 50%; }
+
+/* телефон: уменьшенная текстура VHS (то же условие, что в asset.ts) */
+@media (max-width: 760px) {
+  .boot::after,
+  .crt__screen::after { background-image: url('/images/textures/texture-vhs.m.webp'); }
+}

@@ -38,6 +38,10 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const [preview, setPreview] = useState(ROOMS[0].image);
+  // Картинки меню (~1 МБ) грузим только когда меню вот-вот откроют: навели/коснулись кнопки.
+  // Меню fixed, поэтому loading="lazy" его не спасал — браузер считал их видимыми.
+  const [menuMedia, setMenuMedia] = useState(false);
+  const warmMenu = () => setMenuMedia(true);
   const clock = useClock();
   const { pathname } = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -116,7 +120,13 @@ export function Header() {
               className="vburger"
               aria-expanded={open}
               aria-controls="vmenu"
-              onClick={() => setOpen((v) => !v)}
+              onPointerEnter={warmMenu}
+              onPointerDown={warmMenu}
+              onFocus={warmMenu}
+              onClick={() => {
+                warmMenu();
+                setOpen((v) => !v);
+              }}
             >
               <span className="vburger__label">{open ? 'Закрыть' : 'Меню'}</span>
               <span className="vburger__lines" aria-hidden="true">
@@ -139,7 +149,7 @@ export function Header() {
         inert={!open}
       >
         <div className="vmenu__media" aria-hidden="true">
-          {[...ROOMS.map((r) => r.image), ...MORE.map((m) => m.image)].map((src) => (
+          {menuMedia && [...ROOMS.map((r) => r.image), ...MORE.map((m) => m.image)].map((src) => (
             <img key={src} src={asset(src)} alt="" className={src === preview ? 'is-on' : ''} loading="lazy" />
           ))}
         </div>

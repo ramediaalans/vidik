@@ -90,3 +90,9 @@
 /* кнопка «Сеть»: пальцем попадать легко (зона не меньше 44×44 px), рисунок тот же */
 .bbox__power::after { content: ''; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); }
 .bbox__plabel { font-size: 9px; white-space: nowrap; }
+
+/* телефон: та же уменьшенная картинка, что у <img> (asset.ts), чтобы не качать обе */
+@media (max-width: 760px) {
+  .bbox__reel,
+  .bbox__cap { background-image: url('/images/music/boombox.m.webp'); }
+}

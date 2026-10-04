@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { SectionHeader } from '../components/core';
+import { asset } from '../media/asset';
 import { PageHero } from '../v2/PageHero';
 import { RetroDesktop } from '../v2/RetroDesktop';
 
@@ -73,7 +74,7 @@ function RetroPC() {
         <div className="pcframe__screen" ref={screen}>
           <RetroDesktop />
         </div>
-        <img className="pcframe__img" src="/images/retro/pc-frame.webp" alt="" aria-hidden="true" width={1536} height={1024} draggable={false} />
+        <img className="pcframe__img" src={asset('/images/retro/pc-frame.webp')} alt="" aria-hidden="true" width={1536} height={1024} draggable={false} />
         {full && <div className="pcframe__exit">F или Esc — вернуться к столу</div>}
       </div>
       <button type="button" className="pcframe__hint" onClick={toggle}>
