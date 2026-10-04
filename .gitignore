@@ -50,3 +50,6 @@ __pycache__/
  
 # local Cloudflare dev server state (wrangler pages dev) 
 .wrangler/ 
+
+# Локальный архив каталога Vibix (карточки и постеры, несколько ГБ)
+/archive/
