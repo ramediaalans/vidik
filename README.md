@@ -25,7 +25,7 @@ Vite 8 + React 19 + TypeScript 6 + React Router 7. Собственная диз
 cd app
 npm ci
 npm run dev                 # обычно http://localhost:5173; сверить вывод Vite
-npm run lint                # oxlint
+npm run lint                # oxlint; public/pc/** исключён в .oxlintrc.json
 npm run build               # TypeScript + Vite → app/dist
 npm run preview -- --port 4173 --host
 ```
@@ -48,14 +48,15 @@ Preview показывает сборку, не исходники: после �
 | `app/public/pc/` | статический «Компьютерный клуб» (DOS-игры), своя шапка `desk/head.js` |
 | `app/public/images/`, `films/`, `video/` | лёгкие публичные ресурсы сайта |
 | `app/public/roms/`, `music/`, `cores/` | локальные медиа, исключённые из Git |
-| `tools/` | импорт, генераторы, проверки |
+| `tools/` | импорт, генераторы, проверки; `tools/films/` — каталог фильмов (TMDB + архив Vibix), `tools/vibix-archive/` — архиватор каталога Vibix, `tools/lib/net.mjs` — сетевые запросы в обход DNS провайдера |
+| `archive/vibix/` | локальный архив каталога Vibix (~34 тыс. карточек, постеры, ~2,2 ГБ); исключён из Git, держать резервную копию |
 | `assets_raw/`, `qa/` | исходники картинок и временные проверки; исключены из Git |
 | `docs/` | руководство и отчёты по контенту |
 
 ## Разделы и источники данных
 
 - `/televizor`: три линейных канала (Первая кнопка, Шестая кнопка, Кабельный), цикл A → B → C, каноническое время UTC+3. Эфир строится из `app/src/tv/grid.json` (пересборка — `tools/tv/xlsx_to_grid.py` из мастер-таблицы) логикой `schedule.ts`; газетная программа и подписи на кнопках каналов — `program.ts` через `onAir.ts`. Источники — VK, Rutube, YouTube. Перемотки нет.
-- `/videosalon` и `/multklub`: каталоги (SalonShelf — полка кассет) и страницы просмотра `FilmPage` → TvSet → ExternalVideoPlayer (VK/Rutube/YouTube). VibixPlayer и runtime-балансера нет.
+- `/videosalon` и `/multklub`: каталоги (SalonShelf — полка кассет) и страницы просмотра `FilmPage` → TvSet → ExternalVideoPlayer (VK/Rutube/YouTube). VibixPlayer и runtime-балансера нет. Карточки и постеры собираются заранее в `films.ts` и `public/films/`: метаданные — из TMDB с добором из локального архива Vibix (рейтинг и ID Кинопоиска, озвучки), см. [docs/project-guide.md](docs/project-guide.md), раздел 4. В рантайме сайт к этим API не обращается.
 - `/filmy` → редирект на `/videosalon`, `/multfilmy` → на `/multklub`, `/disney-klub(/*)` → `/multklub(/*)` (301 в `app/public/_redirects`). Старые архивные страницы удалены.
 - SEO и заголовки безопасности: `app/src/seo.tsx` (title/description/canonical по разделам), `app/public/robots.txt`, `sitemap.xml`, `_headers` (CSP, HSTS 1 год без поддоменов), `functions/_middleware.js` (www → основной домен). Подробно и правило синхронизации sitemap с разделами — в DEPLOY.md, раздел 3.
 - `/igry` — раздел «Приставка»: CartridgeShelf; `/igry/:id`: GamePage + Emulator. Список — `roms.ts` + `roms-more.ts`; картриджи — `rom-carts.ts`; приставки — `consoles.ts`.
@@ -80,7 +81,8 @@ Preview показывает сборку, не исходники: после �
 
 - `VITE_MEDIA_BASE` — публичный хост тяжёлых ресурсов, в продакшене `https://media.art-ai.studio`.
 - `VITE_BASE` — базовый путь, читается в `vite.config.ts` из окружения процесса. Для текущего домена — `/` или не задан. Если менять, задавать перед запуском сборки, а не рассчитывать на автоматическое чтение этого поля из .env в конфиге.
-- `BALANCER*`, `YT_API_KEY`, `VIBIX_*` — настройки отдельных инструментов сбора/диагностики, не runtime-настройки активного видеоплеера. Не запускать исторические интеграции без отдельной задачи.
+- `BALANCER*`, `YT_API_KEY`, `VIBIX_*` — настройки отдельных инструментов сбора/диагностики, не runtime-настройки активного видеоплеера. Не запускать исторические интеграции без отдельной задачи. Ключ Vibix (`BALANCER2_*`) действует до декабря 2026; каталог заранее сохранён в `archive/vibix/`.
+- `TMDB_API_KEY` — ключ API v3 themoviedb.org для `tools/films/resolve.mjs`. Только для скриптов, в клиент не попадает.
 - `VITE_VIBIX_PUBLISHER_ID` и `VITE_VIBIX_SDK_SOURCES` остались в старом шаблоне/workflow, но текущий клиент их не использует.
 
 Любая переменная `VITE_*`, попавшая в клиентский код, публична. Пароли/токены/ключи туда класть нельзя. Не выводить `.env` и конфигурацию rclone в чат; не коммитить секреты.

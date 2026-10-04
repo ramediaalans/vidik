@@ -70,6 +70,20 @@ Webamp (`media/player.tsx`) монтируется вне React-дерева и 
 
 `films.ts` генерируется `tools/films/build-catalog.mjs`. Входы — `tools/films/selection.json` и `source-overrides.json`; ручные записи подбора — `manual-selection.json`. `source` описывает основной проверенный ролик; `episodes` — реальные отдельные видео для плейлиста; метаданные seasons не доказывают наличие всех этих серий в просмотре.
 
+### Источники метаданных (с октября 2026)
+
+`tools/films/resolve.mjs` подбирает карточки для списков `SALON` и `DISNEY` внутри скрипта и пишет `selection.json`:
+
+1. **TMDB** — основной источник (ключ `TMDB_API_KEY` в `.env`): русское название, описание, постер, фон, жанры, страны, длительность, сезоны, режиссёры (`directors`) и актёры (`cast`, до 10).
+2. **Архив Vibix** `archive/vibix/cards.json` — запасной: ID и рейтинг Кинопоиска, озвучки, короткое описание, русское описание, если у TMDB его нет; целиком — если фильма нет в TMDB. Связь по IMDb ID, иначе по русскому названию и году. Архив собран `tools/vibix-archive/archive.mjs` (см. его README), лежит вне Git; API Vibix после декабря 2026 недоступен, скрипты к нему больше не обращаются.
+3. **Ручные карточки** `manual-selection.json` имеют приоритет: позиция списка с ручной карточкой не подбирается автоматически.
+
+Без флагов `resolve.mjs` не трогает уже подобранные записи `selection.json` (там бывают ручные правки) и дописывает только новые позиции в конец. `--dry` — записать результат в `selection.dry.json` для просмотра; `--refresh` — переподобрать всё (сначала сравнить с `--dry`, потому что меняются описания и постеры уже опубликованных фильмов). `directors`/`cast` пока остаются в `selection.json` и в `films.ts` не попадают.
+
+Добавить фильм: `['Название', год]` в `SALON`/`DISNEY` → `node tools/films/resolve.mjs --dry`, проверить совпадение → `node tools/films/resolve.mjs` → проверенный ролик в `source-overrides.json` (ключ — slug из названия и года) → `node tools/films/build-catalog.mjs`. Без записи в `source-overrides.json` сборка каталога останавливается.
+
+**Сеть и DNS.** Провайдер подменяет DNS-ответы для `api.themoviedb.org` и `image.tmdb.org` (заглушка `::1`/`127.0.0.1`), браузер с защищённым DNS этого не замечает. Скрипты `resolve.mjs`, `build-catalog.mjs` и `vibix-archive/archive.mjs` ходят в сеть через `tools/lib/net.mjs`: имя резолвится через 1.1.1.1/8.8.8.8, затем DNS-over-HTTPS, и только потом системный DNS (адреса-заглушки отбрасываются). Новые скрипты, обращающиеся к TMDB, делать через `netFetch`, а не глобальный `fetch`. TMDB требует указывать себя как источник данных и картинок.
+
 Инструменты, выбирать нужные шаги, а не запускать весь конвейер автоматически:
 
 ```powershell
@@ -119,7 +133,7 @@ node tools/films/audit-sources.mjs
 
 ## 8. Проверки и отчёты
 
-Из app: `npm run lint` и `npm run build`. Корневой npm test не является проверкой. Затем свежий preview и браузерный сценарий из корня, например:
+Из app: `npm run lint` и `npm run build`. Корневой npm test не является проверкой. Oxlint настроен в `app/.oxlintrc.json`; собранный чужой код `public/pc/**` (порты Diablo и др.) исключён через `ignorePatterns`, поэтому `npm run lint` проверяет только исходники проекта и должен завершаться без ошибок (предупреждения допустимы). Затем свежий preview и браузерный сценарий из корня, например:
 
 ```powershell
 node tools/probe.mjs --url http://localhost:4173/igry/chip-n-dale#play --steps tools/steps/game-page.js --out qa/game-page.png --w 1440 --h 1000 --dpr 1 --wait 60000
