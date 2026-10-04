@@ -19,6 +19,32 @@ function swap(html, re, value, label) {
   return html.replace(re, value);
 }
 
+// Главная картинка первого экрана раздела — грузим сразу из HTML, не дожидаясь JS (LCP).
+// Пути уже после V3_MAP из src/media/asset.ts; на телефоне — *.m.webp, если есть (то же условие 760px).
+// Если поменялась картинка в PageHero раздела — поправить и тут (иначе картинка скачается зря).
+const HERO = {
+  '/videosalon': 'images/v3/ch-salon.webp',
+  '/multklub': 'images/v3/ch-disney.webp',
+  '/igry': 'images/v3/ch-games.webp',
+  '/muzyka': 'images/v3/section-music.webp',
+  '/televizor': 'images/v3/ch-tv.webp',
+  '/istorii': 'images/v3/section-stories.webp',
+  '/nostalgiya': 'images/v3/yard-golden.webp',
+  '/po-godam': 'images/v3/yard-golden.webp',
+  '/retrointernet': 'images/games/game-5.webp',
+};
+
+function heroPreload(p) {
+  const img = HERO[p];
+  if (!img) return '';
+  if (!fs.existsSync(path.join(dist, img))) throw new Error(`prerender: нет картинки ${img}`);
+  const small = img.replace(/\.(webp|jpe?g|png)$/i, '.m.webp');
+  const tag = (href, media) => `<link rel="preload" as="image" href="/${href}" fetchpriority="high"${media ? ` media="${media}"` : ''} />\n    `;
+  return fs.existsSync(path.join(dist, small))
+    ? tag(small, '(max-width: 760px)') + tag(img, '(min-width: 761px)')
+    : tag(img);
+}
+
 function page(p, meta) {
   const url = p === '/' ? ORIGIN + '/' : ORIGIN + p;
   let html = base;
@@ -40,7 +66,7 @@ function page(p, meta) {
         ],
       };
   // canonical только у разделов: index.html заодно отдаётся как запасная страница для карточек и 404.
-  const extra = (p === '/' ? '' : `<link rel="canonical" href="${url}" />\n    `) + ldScript(p, ld);
+  const extra = (p === '/' ? '' : `<link rel="canonical" href="${url}" />\n    `) + heroPreload(p) + ldScript(p, ld);
   html = swap(html, /<\/head>/, `  ${extra}\n  </head>`, '</head>');
   return html;
 }
