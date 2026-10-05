@@ -74,6 +74,9 @@ Open Graph уже настроен в `app/index.html`: абсолютные `og
 - WAF custom rule: на `art-ai.studio` и `www` запросы `*.php`, `/wp*`, `/.env`, `/.git` → 403. Скрипт `_backups\cf_waf_set.mjs` (откат `--rollback`).
 - AI Crawl Control: политика Training = Allow; заблокированы только Bytespider, TikTok Spider, CCBot. Search/Agent — Allow. Bot Preference Sync включён (robots.txt остаётся `Allow: /`). Меняется только в панели (токену прав не хватает).
 - Early Hints выключены.
+- С 5 окт 2026 (скрипт `_backups\cf_media_rules.mjs` — добавляет правило через POST, остальные не трогает): WAF — блок хотлинка `media.art-ai.studio`, если Referer не пустой и не `https://art-ai.studio/`, `https://www.art-ai.studio/`, `*.vidik.pages.dev`, `localhost`; Cache Rule — `media` `/roms/*`, `/music/*` на краю 30 дней.
+- **Внимание:** `cf_waf_set.mjs` и `cf_cache_rules_set.mjs` делают PUT всего набора — сотрут правила выше и правило AI Crawl Control. Новые правила добавлять только по одному (как `cf_media_rules.mjs`) или в панели.
+- CORS бакета media пускает только `art-ai.studio`: на превью `*.vidik.pages.dev` игры и музыка не грузятся — это ожидаемо.
 
 ## 4. R2: отдельная публикация медиа
 
