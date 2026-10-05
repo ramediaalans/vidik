@@ -57,10 +57,13 @@ function run<T>(mode: IDBTransactionMode, body: (store: IDBObjectStore) => IDBRe
   return openDb().then(
     (db) =>
       new Promise<T>((resolve, reject) => {
+        // Успех запроса ещё не значит, что запись легла на диск: транзакция может
+        // откатиться (квота, закрытие вкладки). Поэтому ждём oncomplete.
         const transaction = db.transaction(STORE, mode);
         const request = body(transaction.objectStore(STORE));
-        request.onsuccess = () => resolve(request.result);
-        request.onerror = () => reject(request.error);
+        transaction.oncomplete = () => resolve(request.result);
+        transaction.onerror = () => reject(transaction.error ?? request.error);
+        transaction.onabort = () => reject(transaction.error ?? new Error('Транзакция IndexedDB прервана'));
       })
   );
 }
@@ -133,8 +136,9 @@ export async function listSlots(romId: string): Promise<SaveRecord[]> {
       const transaction = db.transaction(STORE, 'readonly');
       const index = transaction.objectStore(STORE).index('romId');
       const request = index.getAll(romId);
-      request.onsuccess = () => resolve(request.result as SaveRecord[]);
-      request.onerror = () => reject(request.error);
+      transaction.oncomplete = () => resolve(request.result as SaveRecord[]);
+      transaction.onerror = () => reject(transaction.error ?? request.error);
+      transaction.onabort = () => reject(transaction.error);
     });
   } catch {
     return [];
@@ -195,23 +199,62 @@ export async function exportSlot(record: SaveRecord, romTitle: string): Promise<
   const stamp = new Date(record.savedAt).toISOString().slice(0, 16).replace(/[:T]/g, '-');
   link.href = url;
   link.download = `${record.romId}-${record.slot}-${stamp}.vidiksave`;
+  link.style.display = 'none';
+  // Firefox качает только по ссылке из документа, а мгновенный revoke в части
+  // браузеров обрывает скачивание — освобождаем URL с запасом.
+  document.body.appendChild(link);
   link.click();
-  URL.revokeObjectURL(url);
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 30_000);
+}
+
+const IMPORT_SLOTS: SaveSlot[] = ['auto', ...MANUAL_SLOTS];
+const MAX_META_BYTES = 64 * 1024;
+
+function isSize(value: unknown): value is number {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0;
 }
 
 export async function importSaveFile(file: File): Promise<SaveRecord> {
   const buffer = new Uint8Array(await file.arrayBuffer());
+  const broken = new Error('Файл сохранёнки повреждён');
+  const metaStart = MAGIC.length + 1 + 4;
+  if (buffer.length < metaStart) throw new Error('Это не файл сохранёнки ВИДИКа');
   const magic = new TextDecoder().decode(buffer.slice(0, MAGIC.length));
   if (magic !== MAGIC) throw new Error('Это не файл сохранёнки ВИДИКа');
+  if (buffer[MAGIC.length] !== 1) throw new Error('Неизвестная версия файла сохранёнки');
   const metaLength = new DataView(buffer.buffer, buffer.byteOffset).getUint32(MAGIC.length + 1, true);
-  const metaStart = MAGIC.length + 1 + 4;
-  const meta = JSON.parse(new TextDecoder().decode(buffer.slice(metaStart, metaStart + metaLength))) as {
+  if (metaLength === 0 || metaLength > MAX_META_BYTES || metaStart + metaLength > buffer.length) throw broken;
+
+  let meta: {
     romId: string;
     slot: SaveSlot;
     savedAt: number;
     playedMs: number;
     sizes: { state: number; sram: number; thumb: number };
   };
+  try {
+    meta = JSON.parse(new TextDecoder().decode(buffer.slice(metaStart, metaStart + metaLength)));
+  } catch {
+    throw broken;
+  }
+  const sizes = meta?.sizes;
+  if (
+    !meta ||
+    typeof meta.romId !== 'string' ||
+    !/^[a-z0-9][a-z0-9_-]{0,79}$/i.test(meta.romId) ||
+    !IMPORT_SLOTS.includes(meta.slot) ||
+    !sizes ||
+    !isSize(sizes.state) ||
+    sizes.state === 0 ||
+    !isSize(sizes.sram) ||
+    !isSize(sizes.thumb) ||
+    metaStart + metaLength + sizes.state + sizes.sram + sizes.thumb !== buffer.length
+  ) {
+    throw broken;
+  }
+  const savedAt = Number.isFinite(meta.savedAt) && meta.savedAt > 0 ? meta.savedAt : Date.now();
+  const playedMs = Number.isFinite(meta.playedMs) && meta.playedMs >= 0 ? meta.playedMs : 0;
 
   let offset = metaStart + metaLength;
   const take = (length: number) => {
@@ -230,8 +273,8 @@ export async function importSaveFile(file: File): Promise<SaveRecord> {
     state,
     sram: sramBytes.length ? new Blob([sramBytes]) : undefined,
     thumb: thumbBytes.length ? new Blob([thumbBytes], { type: 'image/png' }) : undefined,
-    savedAt: meta.savedAt,
-    playedMs: meta.playedMs
+    savedAt,
+    playedMs
   };
   await putSlot(record);
   return record;

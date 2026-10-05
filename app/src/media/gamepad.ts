@@ -42,6 +42,16 @@ export const DEFAULT_MAP: Record<number, PadButton> = {
 
 const AXIS_DEAD_ZONE = 0.45;
 const MAP_STORAGE_KEY = 'vidik-pad-map';
+// Сообщает запущенному циклу опроса, что раскладку переназначили.
+const MAP_CHANGED_EVENT = 'vidik:padmap';
+
+function notifyMapChanged(): void {
+  try {
+    window.dispatchEvent(new Event(MAP_CHANGED_EVENT));
+  } catch {
+    // вне браузера — некому сообщать
+  }
+}
 
 export function loadMap(): Record<number, PadButton> {
   try {
@@ -62,6 +72,7 @@ export function saveMap(map: Record<number, PadButton>): void {
   } catch {
     // приватный режим — живём без запоминания
   }
+  notifyMapChanged();
 }
 
 export function resetMap(): void {
@@ -70,6 +81,7 @@ export function resetMap(): void {
   } catch {
     // нет так нет
   }
+  notifyMapChanged();
 }
 
 export type PadHandlers = {
@@ -138,16 +150,30 @@ export function startGamepadLoop(handlers: PadHandlers): () => void {
   };
 
   const onConnect = () => {
+    // Перед сменой раскладки отпускаем всё зажатое, иначе кнопка,
+    // переехавшая на другую клавишу, так и останется нажатой.
+    for (const [key, down] of pressed) {
+      if (!down) continue;
+      const [player, button] = key.split(':');
+      set(button as PadButton, Number(player), false);
+    }
     map = loadMap();
+  };
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === null || event.key === MAP_STORAGE_KEY) onConnect();
   };
   window.addEventListener('gamepadconnected', onConnect);
   window.addEventListener('gamepaddisconnected', onConnect);
+  window.addEventListener(MAP_CHANGED_EVENT, onConnect);
+  window.addEventListener('storage', onStorage);
   frame = requestAnimationFrame(tick);
 
   return () => {
     cancelAnimationFrame(frame);
     window.removeEventListener('gamepadconnected', onConnect);
     window.removeEventListener('gamepaddisconnected', onConnect);
+    window.removeEventListener(MAP_CHANGED_EVENT, onConnect);
+    window.removeEventListener('storage', onStorage);
   };
 }
 

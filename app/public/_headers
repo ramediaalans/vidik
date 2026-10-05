@@ -8,21 +8,25 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()
   Content-Security-Policy: default-src 'self'; script-src 'self' blob: data: 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com https://s.ytimg.com https://vk.com https://vk.ru https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' blob: data: https:; worker-src 'self' blob:; frame-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' blob: data: 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com https://s.ytimg.com https://vk.com https://vk.ru https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' blob: data: https:; worker-src 'self' blob:; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://rutube.ru https://vk.com https://vk.ru https://web.archive.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' blob: data: 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com https://s.ytimg.com https://vk.com https://vk.ru https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' blob: data: https:; worker-src 'self' blob:; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://rutube.ru https://vk.com https://vk.ru https://web.archive.org; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; report-uri /csp-report
   ! Access-Control-Allow-Origin
 
-# Хешированные бандлы и картинки никогда не меняются под тем же именем.
+# Хешированные бандлы никогда не меняются под тем же именем.
+# Отсутствующий файл в /assets/ и других папках статики отдаёт свой 404.html (код 404, без кэша),
+# а не запасную страницу приложения с кодом 200 — иначе её закэшировали бы на год под именем файла.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Картинки, постеры и видео без хеша в имени: неделя в кэше браузера, потом тихое обновление
+# в фоне. Замену под тем же именем пользователи увидят не сразу, но увидят (не через год).
 /images/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
 
 /films/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
 
 /video/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
 
 # Шрифты с хешем в имени: при смене файла меняется имя.
 /fonts/*

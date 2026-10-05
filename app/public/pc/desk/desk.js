@@ -359,9 +359,11 @@
     if (q) window.pcDesk.launch(q);
   }).catch(function () { toast('Не удалось загрузить список игр', 10000); });
 
-  var first = !sessionStorage.getItem('pc-boot');
+  // sessionStorage может быть запрещён (приватный режим, встроенные браузеры) — не падаем.
+  var first = true;
+  try { first = !sessionStorage.getItem('pc-boot'); } catch (e) { first = false; }
   setTimeout(function () {
     screenEl.classList.remove('off');
-    if (first) { sessionStorage.setItem('pc-boot', '1'); screenEl.classList.add('boot'); setTimeout(function () { screenEl.classList.remove('boot'); }, 1200); }
+    if (first) { try { sessionStorage.setItem('pc-boot', '1'); } catch (e) { /* нет хранилища */ } screenEl.classList.add('boot'); setTimeout(function () { screenEl.classList.remove('boot'); }, 1200); }
   }, first ? 350 : 0);
 })();

@@ -343,6 +343,8 @@ function VkVideoPlayer({ source, label, poster, progressKey, resumeAt = 0 }: {
   // Хоткеи работают при любой раскладке: смотрим на физическую клавишу.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      // Сочетания с Ctrl/Cmd/Alt — браузерные (Ctrl+F, Alt+← «Назад»), не перехватываем.
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
       if (isTypingTarget(event.target)) return;
       if (!player.current) return;
       const key = hotkeyChar(event);
@@ -707,6 +709,8 @@ function FramePlayer({ source, label, progressKey, resumeAt = 0 }: {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      // Сочетания с Ctrl/Cmd/Alt — браузерные (Ctrl+F, Alt+← «Назад»), не перехватываем.
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
       if (isTypingTarget(event.target)) return;
       const key = hotkeyChar(event);
       if ([' ', 'm', 'f', 'ArrowLeft', 'ArrowRight'].includes(key) || event.code === 'Space') revealControls();

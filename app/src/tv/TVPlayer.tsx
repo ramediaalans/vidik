@@ -28,6 +28,8 @@ type YTPlayer = {
 type YTNamespace = { Player: new (el: HTMLElement, opts: Record<string, unknown>) => YTPlayer };
 type YTWindow = Window & { YT?: YTNamespace; onYouTubeIframeAPIReady?: () => void };
 let apiPromise: Promise<YTNamespace> | null = null;
+// Сколько ждём ответа от внешнего плеера, прежде чем счесть источник недоступным.
+const PROVIDER_TIMEOUT_MS = 15_000;
 
 type VkPlayerState = { time?: number; duration?: number };
 type VkPlayer = {
@@ -55,9 +57,14 @@ function loadYouTubeApi(): Promise<YTNamespace> {
     const script = document.createElement('script');
     script.src = 'https://www.youtube.com/iframe_api';
     script.async = true;
-    script.onerror = () => reject(new Error('Не удалось загрузить YouTube'));
+    const timer = window.setTimeout(() => reject(new Error('YouTube не ответил')), PROVIDER_TIMEOUT_MS);
+    script.onerror = () => { window.clearTimeout(timer); script.remove(); reject(new Error('Не удалось загрузить YouTube')); };
+    const ready = w.onYouTubeIframeAPIReady;
+    w.onYouTubeIframeAPIReady = () => { window.clearTimeout(timer); ready?.(); };
     document.head.appendChild(script);
   });
+  // Неудачу не кешируем: иначе после одного сбоя сети YouTube не заработает до перезагрузки.
+  apiPromise.catch(() => { apiPromise = null; });
   return apiPromise;
 }
 
@@ -72,9 +79,10 @@ function loadVkApi(): Promise<{ VideoPlayer: VkVideoPlayerFactory }> {
     script.onload = () => w.VK?.VideoPlayer
       ? resolve({ VideoPlayer: w.VK.VideoPlayer })
       : reject(new Error('VK Video API недоступен'));
-    script.onerror = () => reject(new Error('Не удалось загрузить VK Video'));
+    script.onerror = () => { script.remove(); reject(new Error('Не удалось загрузить VK Video')); };
     document.head.appendChild(script);
   });
+  vkApiPromise.catch(() => { vkApiPromise = null; });
   return vkApiPromise;
 }
 
@@ -205,13 +213,14 @@ function YouTubeAir({ slot, offset, muted, onReady, onError }: {
 }
 
 // Rutube работает как линейный эфир: контроллы скрыты, пауза и перемотка отменяются.
-function RutubeAir({ slot, offset, muted, onReady }: {
-  slot: Slot; offset: number; muted: boolean; onReady: () => void;
+function RutubeAir({ slot, offset, muted, onReady, onError }: {
+  slot: Slot; offset: number; muted: boolean; onReady: () => void; onError: () => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
   const expected = useRef(offset);
   const mutedRef = useRef(muted);
   const readyRef = useRef(onReady);
+  const errorRef = useRef(onError);
   const lastSeek = useRef(0);
   const [src] = useState(
     () => `https://rutube.ru/play/embed/${slot.mediaId}/?t=${Math.floor(offset)}&autoStart=true`
@@ -219,6 +228,7 @@ function RutubeAir({ slot, offset, muted, onReady }: {
   useEffect(() => { expected.current = offset; }, [offset]);
   useEffect(() => { mutedRef.current = muted; }, [muted]);
   useEffect(() => { readyRef.current = onReady; }, [onReady]);
+  useEffect(() => { errorRef.current = onError; }, [onError]);
 
   const command = useCallback((type: string, data: Record<string, unknown> = {}) => {
     frame.current?.contentWindow?.postMessage(JSON.stringify({ type, data, ...data }), '*');
@@ -229,7 +239,9 @@ function RutubeAir({ slot, offset, muted, onReady }: {
       if (event.source !== frame.current?.contentWindow) return;
       let message: { type?: string; data?: { time?: number; state?: string } };
       try { message = typeof event.data === 'string' ? JSON.parse(event.data) : event.data; } catch { return; }
+      if (message.type === 'player:error') { window.clearTimeout(watchdog); errorRef.current(); return; }
       if (message.type === 'player:ready') {
+        window.clearTimeout(watchdog);
         command('player:hideControls');
         command(mutedRef.current ? 'player:mute' : 'player:unMute');
         command('player:setCurrentTime', { time: expected.current });
@@ -249,8 +261,10 @@ function RutubeAir({ slot, offset, muted, onReady }: {
       if (message.type === 'player:changeState' && message.data?.state === 'paused') command('player:play');
     };
     lastSeek.current = Date.now();
+    // Ролик удалён или Rutube недоступен — плеер молчит. Не держим «кинескоп» вечно.
+    const watchdog = window.setTimeout(() => errorRef.current(), PROVIDER_TIMEOUT_MS);
     window.addEventListener('message', onMessage);
-    return () => window.removeEventListener('message', onMessage);
+    return () => { window.clearTimeout(watchdog); window.removeEventListener('message', onMessage); };
   }, [command]);
 
   useEffect(() => { command(muted ? 'player:mute' : 'player:unMute'); }, [command, muted]);
@@ -322,6 +336,9 @@ function VkAir({ slot, offset, muted, onReady, onError }: {
     return () => {
       cancelled = true;
       window.clearInterval(timer);
+      // У VK API destroy есть не во всех версиях — вызываем, если он есть.
+      const p = player.current as (VkPlayer & { destroy?: () => void }) | null;
+      try { p?.destroy?.(); } catch { /* плеер уже снят */ }
       player.current = null;
     };
   }, [slot.mediaId, slot.start]);
@@ -342,7 +359,7 @@ function ScheduledMedia({ slot, offset, muted, onReady, onError }: {
     return <YouTubeAir key={`${slot.mediaId}:${slot.start}`} {...{ slot, offset, muted, onReady, onError }} />;
   }
   if (slot.provider === 'rutube') {
-    return <RutubeAir key={`${slot.mediaId}:${slot.start}`} slot={slot} offset={offset} muted={muted} onReady={onReady} />;
+    return <RutubeAir key={`${slot.mediaId}:${slot.start}`} {...{ slot, offset, muted, onReady, onError }} />;
   }
   if (slot.provider === 'vk') {
     return <VkAir key={`${slot.mediaId}:${slot.start}`} {...{ slot, offset, muted, onReady, onError }} />;
@@ -392,7 +409,17 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
     let i = current.index;
     // offset — позиция внутри исходника: слот может начинаться с середины сборника (slot.from).
     let offset = slots[i].from + current.offsetSec;
-    while (i < slots.length && failed.current.has(`${slots[i].provider}:${slots[i].mediaId}`)) { i++; offset = slots[i]?.from ?? 0; }
+    // Недоступный источник заменяем следующей передачей. Позицию считаем от текущего
+    // времени эфира, а не замораживаем на slot.from: иначе ожидаемое время стоит на месте,
+    // ресинк через 12 секунд отматывает подмену в начало — и так по кругу.
+    while (i < slots.length && failed.current.has(`${slots[i].provider}:${slots[i].mediaId}`)) {
+      i++;
+      const next = slots[i];
+      if (next) {
+        const length = next.end - next.start;
+        offset = next.from + (length > 0 ? current.offsetSec % length : 0);
+      }
+    }
     return i < slots.length ? { slot: slots[i], offset } : null;
   }, [slots]);
 
@@ -469,6 +496,7 @@ export function TVPlayer({ channelId, onSlotChange, onChannelStep }: TVPlayerPro
   useEffect(() => {
     if (!on) return;
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
       if (isTypingTarget(event.target)) return;
       const key = hotkeyChar(event);
       if (key === 'f') { event.preventDefault(); toggleFullscreen(); return; }

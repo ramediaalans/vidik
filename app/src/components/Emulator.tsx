@@ -74,7 +74,7 @@ function keyTable(core: RomCore, player: 1 | 2): KeyRow[] {
           ['X', 'C'],
           ['Q', 'X'],
           ['V', 'Y'],
-          ['W', 'Z'],
+          ['E', 'Z'],
           start,
           ['Правый Shift', 'Mode']
         ]
@@ -86,7 +86,7 @@ function keyTable(core: RomCore, player: 1 | 2): KeyRow[] {
     [p1 ? 'X' : 'Y', 'A'],
     [p1 ? 'C' : 'G', 'Y'],
     [p1 ? 'V' : 'H', 'X'],
-    ...(p1 ? ([['Q / W', 'L / R']] as KeyRow[]) : []),
+    ...(p1 ? ([['Q / E', 'L / R']] as KeyRow[]) : []),
     start,
     [p1 ? 'Правый Shift' : 'P', 'Select']
   ];
@@ -103,7 +103,8 @@ const INPUT_CONFIG = {
   input_player1_y: 'c',
   input_player1_x: 'v',
   input_player1_l: 'q',
-  input_player1_r: 'w',
+  // не W: она занята «вверх» второго игрока
+  input_player1_r: 'e',
   input_player1_start: 'enter',
   input_player1_select: 'rshift',
 
@@ -123,6 +124,26 @@ const INPUT_CONFIG = {
 };
 
 const AUTOSAVE_EVERY_MS = 30_000;
+// Ядра без батарейки иногда так и не отвечают на saveSRAM — не ждём их дольше этого.
+const SRAM_TIMEOUT_MS = 1_500;
+// Финальное автосохранение при уходе со страницы: сколько ждём перед выключением ядра.
+const FINAL_SAVE_TIMEOUT_MS = 4_000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T | undefined> {
+  return new Promise((resolve, reject) => {
+    const timer = window.setTimeout(() => resolve(undefined), ms);
+    promise.then(
+      (value) => {
+        window.clearTimeout(timer);
+        resolve(value);
+      },
+      (error: unknown) => {
+        window.clearTimeout(timer);
+        reject(error);
+      }
+    );
+  });
+}
 
 // Миниатюра для ячейки памяти. Скриншот ядра — это PNG во всю высоту буфера
 // (до половины мегабайта), а в списке он виден карточкой 160 пикселей шириной.
@@ -151,6 +172,7 @@ export function Emulator({ rom }: { rom: Rom }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const screenRef = useRef<HTMLDivElement>(null);
   const emuRef = useRef<Nostalgist | null>(null);
+  const finalSaveRef = useRef<((emu: Nostalgist, romId: string) => Promise<void>) | null>(null);
   const playedRef = useRef(0);
   const sessionStartRef = useRef(0);
   // До нажатия PLAY эмулятор не грузим: как в видеосалоне, телевизор сначала выключен.
@@ -269,13 +291,22 @@ export function Emulator({ rom }: { rom: Rom }) {
 
     return () => {
       cancelled = true;
-      try {
-        emuRef.current?.exit();
-      } catch {
-        // emulator already gone
-      }
+      const emu = emuRef.current;
       emuRef.current = null;
       detachPacer();
+      if (!emu) return;
+      const shutdown = () => {
+        try {
+          emu.exit();
+        } catch {
+          // emulator already gone
+        }
+      };
+      // Уход со страницы (или смена игры) — сначала автослот, потом выключаем ядро.
+      // emuRef уже обнулён, поэтому сохраняем через захваченный экземпляр.
+      void withTimeout(finalSaveRef.current?.(emu, rom.id) ?? Promise.resolve(), FINAL_SAVE_TIMEOUT_MS)
+        .catch(() => undefined)
+        .finally(shutdown);
     };
   }, [rom, started]);
 
@@ -307,45 +338,57 @@ export function Emulator({ rom }: { rom: Rom }) {
   }, [status]);
 
   // Собираем сразу всё: состояние, батарейку и картинку экрана.
+  const saveSnapshot = useCallback(
+    async (emu: Nostalgist, romId: string, slot: SaveSlot) => {
+      const { state, thumbnail } = await emu.saveState();
+      let sram: Blob | undefined;
+      try {
+        const battery = await withTimeout(emu.saveSRAM(), SRAM_TIMEOUT_MS);
+        if (battery && battery.size > 0) sram = battery;
+      } catch {
+        // ядро без батарейки — нормально
+      }
+      let thumb = thumbnail ? await makeThumb(thumbnail) : undefined;
+      if (!thumb) {
+        try {
+          const shot = await emu.screenshot();
+          thumb = shot ? await makeThumb(shot) : undefined;
+        } catch {
+          // скриншот не обязателен
+        }
+      }
+      await putSlot({
+        key: slotKey(romId, slot),
+        romId,
+        slot,
+        state,
+        sram,
+        thumb,
+        savedAt: Date.now(),
+        playedMs: playedMs()
+      });
+    },
+    [playedMs]
+  );
+
+  // Для финального сохранения из cleanup эффекта запуска: там нужна свежая версия.
+  useEffect(() => {
+    finalSaveRef.current = (emu, romId) => saveSnapshot(emu, romId, 'auto');
+  }, [saveSnapshot]);
+
   const writeSlot = useCallback(
     async (slot: SaveSlot, quiet = false) => {
       const emu = emuRef.current;
       if (!emu) return;
       try {
-        const { state, thumbnail } = await emu.saveState();
-        let sram: Blob | undefined;
-        try {
-          const battery = await emu.saveSRAM();
-          if (battery && battery.size > 0) sram = battery;
-        } catch {
-          // ядро без батарейки — нормально
-        }
-        let thumb = thumbnail ? await makeThumb(thumbnail) : undefined;
-        if (!thumb) {
-          try {
-            const shot = await emu.screenshot();
-            thumb = shot ? await makeThumb(shot) : undefined;
-          } catch {
-            // скриншот не обязателен
-          }
-        }
-        await putSlot({
-          key: slotKey(rom.id, slot),
-          romId: rom.id,
-          slot,
-          state,
-          sram,
-          thumb,
-          savedAt: Date.now(),
-          playedMs: playedMs()
-        });
+        await saveSnapshot(emu, rom.id, slot);
         await refreshSlots();
         if (!quiet) setNote('Сохранили. Можно идти ужинать.');
       } catch {
         if (!quiet) setNote('Не получилось сохранить — попробуй ещё раз.');
       }
     },
-    [playedMs, refreshSlots, rom.id]
+    [refreshSlots, rom.id, saveSnapshot]
   );
 
   const readSlot = useCallback(

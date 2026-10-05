@@ -2,7 +2,9 @@
 // 1) www.art-ai.studio -> art-ai.studio, постоянное перенаправление 301 с сохранением пути и параметров.
 // 2) Настоящий 404 для несуществующих адресов. Pages на любой неизвестный путь отдаёт index.html с кодом 200,
 //    из-за этого поисковики видят «мягкие 404». Тело ответа не меняется: приложение само показывает страницу «не найдено».
-// Список адресов должен совпадать с маршрутами в src/App.tsx.
+//    Карточки (/videosalon/<slug>, /multklub/<slug>, /igry/<id>) и /poisk — отдельные файлы из scripts/prerender.mjs:
+//    есть файл — 200, нет файла (Pages вернул запасной index.html) — 404.
+// Список разделов должен совпадать с маршрутами в src/App.tsx.
 const WWW = 'www.art-ai.studio';
 const APEX = 'art-ai.studio';
 
@@ -10,7 +12,6 @@ const SECTIONS = 'videosalon|multklub|igry|muzyka|televizor|istorii|nostalgiya|r
 const KNOWN = [
   /^\/$/,
   new RegExp(`^/(?:${SECTIONS})/?$`),
-  /^\/(?:videosalon|multklub|igry)\/[^/]+\/?$/,
 ];
 
 export async function onRequest(context) {
@@ -26,17 +27,14 @@ export async function onRequest(context) {
   if (!(res.headers.get('content-type') || '').includes('text/html')) return res;
   if (KNOWN.some((re) => re.test(url.pathname))) return res;
 
-  // Путь с расширением может быть настоящим файлом (например, подтверждение для поисковиков).
-  // Отдаём 404, только если вместо файла пришла запасная страница приложения.
-  const last = url.pathname.split('/').pop() || '';
-  if (last.includes('.')) {
-    try {
-      const fallback = await context.env.ASSETS.fetch(new URL('/', url));
-      const [a, b] = await Promise.all([res.clone().text(), fallback.text()]);
-      if (a !== b) return res;
-    } catch {
-      return res;
-    }
+  // Остальное может быть настоящим файлом: пререндеренная карточка, подтверждение для поисковиков.
+  // Отдаём 404, только если вместо файла пришла запасная страница приложения (тот же index.html).
+  try {
+    const fallback = await context.env.ASSETS.fetch(new URL('/', url));
+    const [a, b] = await Promise.all([res.clone().text(), fallback.text()]);
+    if (a !== b) return res;
+  } catch {
+    return res;
   }
 
   return new Response(res.body, { status: 404, statusText: 'Not Found', headers: res.headers });

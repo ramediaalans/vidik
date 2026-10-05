@@ -5,6 +5,8 @@ import { BootScreen, Grain } from './components/core';
 import { Home } from './pages/Home';
 import { RevealObserver, RouteNoise } from './v2/fx';
 import { RouteMeta } from './seo';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { sessionGet, sessionSet } from './safeStorage';
 
 const MusicPage = lazy(() => import('./pages/MusicPage').then((m) => ({ default: m.MusicPage })));
 const GamesPage = lazy(() => import('./pages/GamesPage').then((m) => ({ default: m.GamesPage })));
@@ -34,6 +36,13 @@ function ScrollToTop() {
 function LegacyCartoon() {
   const { slug } = useParams();
   return <Navigate to={`/multklub/${slug ?? ''}`} replace />;
+}
+
+// key по slug: при переходе с одной карточки на другую (похожие фильмы, серии)
+// страница монтируется заново и не тащит состояние плеера/серии/позиции.
+function FilmRoute({ group }: { group: 'salon' | 'disney' }) {
+  const { slug } = useParams();
+  return <FilmPage key={`${group}:${slug ?? ''}`} group={group} />;
 }
 
 function KonamiEasterEgg() {
@@ -81,10 +90,11 @@ function KonamiEasterEgg() {
 }
 
 export default function App() {
-  const [booted, setBooted] = useState(() => sessionStorage.getItem('vidik-booted') === '1');
+  const { pathname } = useLocation();
+  const [booted, setBooted] = useState(() => sessionGet('vidik-booted') === '1');
 
   const finishBoot = () => {
-    sessionStorage.setItem('vidik-booted', '1');
+    sessionSet('vidik-booted', '1');
     setBooted(true);
   };
 
@@ -100,6 +110,7 @@ export default function App() {
       <a className="skip-link" href="#main">К основному содержанию</a>
       <Header />
       <main id="main">
+        <ErrorBoundary resetKey={pathname}>
         <Suspense
           fallback={
             <section className="section container">
@@ -117,9 +128,9 @@ export default function App() {
           <Route path="/igry/:id" element={<GamePage />} />
           <Route path="/muzyka" element={<MusicPage />} />
           <Route path="/videosalon" element={<SalonPage />} />
-          <Route path="/videosalon/:slug" element={<FilmPage group="salon" />} />
+          <Route path="/videosalon/:slug" element={<FilmRoute group="salon" />} />
           <Route path="/multklub" element={<DisneyPage />} />
-          <Route path="/multklub/:slug" element={<FilmPage group="disney" />} />
+          <Route path="/multklub/:slug" element={<FilmRoute group="disney" />} />
           <Route path="/televizor" element={<TVPage />} />
           <Route path="/istorii" element={<StoriesPage />} />
           <Route path="/nostalgiya" element={<NostalgiaPage />} />
@@ -142,6 +153,7 @@ export default function App() {
           />
         </Routes>
         </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
       <PlayerTaskbar />
