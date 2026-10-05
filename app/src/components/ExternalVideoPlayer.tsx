@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
 import type { FilmVideoSource } from '../data/films';
 import { useFullscreen } from '../media/fullscreen';
 import { hotkeyChar, isTypingTarget } from '../media/hotkeys';
@@ -402,6 +402,7 @@ function VkVideoPlayer({ source, label, poster, progressKey, resumeAt = 0 }: {
         onPointerDown={revealControls}
         onPointerMove={revealControls}
         onFocus={revealControls}
+        onClick={handOffFocus}
       >
         <button type="button" className="vplayer__barBtn" onClick={() => seekBy(-10)} aria-label="Назад 10 секунд">◀◀ 10</button>
         <button type="button" className="vplayer__barBtn" onClick={togglePlay} aria-label={mode === 'paused' ? 'Продолжить' : 'Пауза'}>{mode === 'paused' ? '▶' : '❙❙'}</button>
@@ -772,6 +773,7 @@ function FramePlayer({ source, label, progressKey, resumeAt = 0 }: {
         onPointerDown={revealControls}
         onPointerMove={revealControls}
         onFocus={revealControls}
+        onClick={handOffFocus}
       >
         <button type="button" className="vplayer__barBtn" onClick={() => seekBy(-10)} aria-label="Назад 10 секунд">◀◀ 10</button>
         <button type="button" className="vplayer__barBtn" onClick={togglePlay} aria-label={paused ? 'Продолжить' : 'Пауза'}>{paused ? '▶' : '❙❙'}</button>
@@ -800,6 +802,16 @@ function FramePlayer({ source, label, progressKey, resumeAt = 0 }: {
       ) : null}
     </div>
   );
+}
+
+
+// После клика мышью по кнопке панели фокус уводим на «экран» плеера: иначе кнопка
+// остаётся в фокусе и после нажатия клавиш браузер считает её :focus-visible —
+// панель перестаёт прятаться. Нажатие с клавиатуры (detail === 0) фокус не трогает.
+function handOffFocus(event: ReactMouseEvent<HTMLDivElement>) {
+  if (event.detail === 0) return;
+  const shield = event.currentTarget.parentElement?.querySelector<HTMLElement>('.vplayer__contentShield');
+  shield?.focus({ preventScroll: true });
 }
 
 export function ExternalVideoPlayer({ source, label, poster, progressKey, resumeAt }: {

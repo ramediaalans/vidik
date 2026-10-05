@@ -3210,8 +3210,10 @@ body.webamp-hidden #webamp {
   pointer-events: none;
   transition: opacity .25s ease;
 }
+/* :focus-within держал панель вечно: после клика мышью фокус остаётся на кнопке.
+   Не прячем панель только при фокусе с клавиатуры (Tab), чтобы не терять кнопку из виду. */
 .vplayer__bar.is-on,
-.vplayer__bar:focus-within {
+.vplayer__bar:has(:focus-visible) {
   opacity: .92;
   pointer-events: auto;
 }
