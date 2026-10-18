@@ -1,5 +1,5 @@
 // Режим «игра на экране ПК»: страница игры открыта во фрейме рабочего стола /pc/ (параметр ?embed=1).
-// Подключается первым скриптом в <head>, чтобы перехват клавиши F стоял раньше обработчиков движков.
+// Подключается первым скриптом в <head>, чтобы Alt+Enter перехватывался раньше обработчиков движков; обычная F остаётся игре.
 (function () {
   var q = new URLSearchParams(location.search);
   // Выход из игры (пункт «Выход» в меню самой игры): на экране ПК — закрыть окно игры и вернуться на рабочий стол,
@@ -15,9 +15,18 @@
       if (h) h.close(); else location.href = '/pc/';
     }, 60);
   };
-  if (!q.has('embed')) return;
   var host = null;
-  try { if (window.parent !== window && window.parent.pcDesk) host = window.parent.pcDesk; } catch (e) { host = null; }
+  try { if (q.has('embed') && window.parent !== window && window.parent.pcDesk) host = window.parent.pcDesk; } catch (e) { host = null; }
+  // Install for embedded AND standalone game pages. No ordinary letter is reserved.
+  window.pcFullscreenKeys.install({
+    state: host ? host.fullscreenKeyState : undefined,
+    toggle: function () {
+      if (host) return host.toggleFullscreen();
+      if (document.fullscreenElement) return document.exitFullscreen();
+      return document.documentElement.requestFullscreen();
+    }
+  });
+  if (!q.has('embed')) return;
   window.PC_EMBED = true;
   var root = document.documentElement;
   root.classList.add('embed');
@@ -40,13 +49,6 @@
     'html.embed.pc-running .panel{display:none!important}'
   ].join('\n');
   var st = document.createElement('style'); st.textContent = css; (document.head || root).appendChild(st);
-
-  // F (на русской раскладке «А» — та же физическая клавиша) — полный экран экрана ПК. Игра эту клавишу не получает.
-  function isF(e) { return (e.code === 'KeyF' || e.key === 'f' || e.key === 'F' || e.key === 'а' || e.key === 'А') && !e.ctrlKey && !e.altKey && !e.metaKey && e.isTrusted; }
-  function swallow(e) { e.preventDefault(); e.stopImmediatePropagation(); }
-  window.addEventListener('keydown', function (e) { if (!isF(e)) return; swallow(e); if (!e.repeat && host) host.toggleFullscreen(); }, true);
-  window.addEventListener('keyup', function (e) { if (isF(e)) swallow(e); }, true);
-  window.addEventListener('keypress', function (e) { if (isF(e)) swallow(e); }, true);
 
   // ?mousey=0 — мышь только поворачивает (Wolf3D, Doom): вертикальное движение мыши в игру не передаём,
   // иначе движок двигает героя вперёд/назад. Настоящее событие гасим и отправляем копию с movementY=0.

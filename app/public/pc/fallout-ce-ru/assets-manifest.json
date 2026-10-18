@@ -1,0 +1,138 @@
+{
+  "edition": "Fallout 1 FULL Russian core data from local WGB",
+  "files": [
+    {
+      "path": "master.dat",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/master.dat",
+      "bytes": 358096677,
+      "sha256": "3b52c27ad282707880dbbc8bfb520e46133dd7153c06bb47901252463e180ae1"
+    },
+    {
+      "path": "critter.dat",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/critter.dat",
+      "bytes": 212886920,
+      "sha256": "386660110283888459e9ba932476f8914cec5e13cc64e32ad6c832b22670d01f"
+    },
+    {
+      "path": "data/data/vault13.gam",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/data/vault13.gam",
+      "bytes": 37912,
+      "sha256": "268e5d1a866458dca6caec3db8461eecb785a4edba506d6765d1e1d9c58afc4e"
+    },
+    {
+      "path": "data/sound/music/01hub.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/01hub.acm",
+      "bytes": 11076439,
+      "sha256": "710bafb2ce990959fe99f7340c3c23cb11c965c23b89d01f5b1968e8a14b6bcd"
+    },
+    {
+      "path": "data/sound/music/02mstrlr.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/02mstrlr.acm",
+      "bytes": 8043196,
+      "sha256": "fa23ad421193adcc6759ec0e47474b45b428bcb9d9110371ccdb6366a4cb20f0"
+    },
+    {
+      "path": "data/sound/music/03wrldmp.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/03wrldmp.acm",
+      "bytes": 7438966,
+      "sha256": "6aed2160041520ae645ae6dcbc392b03fa79abfed39f38bc86e512c94c02fe1e"
+    },
+    {
+      "path": "data/sound/music/04brthrh.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/04brthrh.acm",
+      "bytes": 8582113,
+      "sha256": "d61fb6171ce353798915873528781c170c834d17f3d9c3d3bfd2202762083f00"
+    },
+    {
+      "path": "data/sound/music/05raider.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/05raider.acm",
+      "bytes": 8959588,
+      "sha256": "416bf3c5f92ad5d7acb3fb4227cd5c00b18ab8ab322fac3408008aa782c42dfa"
+    },
+    {
+      "path": "data/sound/music/06vault.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/06vault.acm",
+      "bytes": 10708619,
+      "sha256": "8cb414f769e347adb97050fecc4888a8ffa3bc1d759fc44fdb9aa03ed33208c0"
+    },
+    {
+      "path": "data/sound/music/07desert.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/07desert.acm",
+      "bytes": 7187454,
+      "sha256": "19004bf8be48b7f545cf2d2b3443a422b8845d8e05206461804cfaaffca4c2f6"
+    },
+    {
+      "path": "data/sound/music/08vats.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/08vats.acm",
+      "bytes": 7879090,
+      "sha256": "62b9a09f9cb507622200b4731eec5c901e246da6529a30326f21b2ad11d5bbe7"
+    },
+    {
+      "path": "data/sound/music/09glow.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/09glow.acm",
+      "bytes": 9391134,
+      "sha256": "8c57405e68b161eeb703abfb3bff96b541d91673aea319ca1da5778a28847cdc"
+    },
+    {
+      "path": "data/sound/music/10labone.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/10labone.acm",
+      "bytes": 6479192,
+      "sha256": "6b8366cf12f264594bb76426c6531fbe3942dc644dc7a17a4578bdf9f0468405"
+    },
+    {
+      "path": "data/sound/music/11chilrn.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/11chilrn.acm",
+      "bytes": 10214361,
+      "sha256": "b46c53575052b4b474b45aa2d5f5c99ffa7584dbf892b85090f1af74748003fb"
+    },
+    {
+      "path": "data/sound/music/12junktn.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/12junktn.acm",
+      "bytes": 8651151,
+      "sha256": "38e241b0a8ba99548670737cc676dc27ffd6c714951410414ece0530f0d98941"
+    },
+    {
+      "path": "data/sound/music/13carvrn.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/13carvrn.acm",
+      "bytes": 9417212,
+      "sha256": "1decac730f344e4e54d56367d9d6c5069e1b949c0cd1a606a5ac902b405b720e"
+    },
+    {
+      "path": "data/sound/music/14necro.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/14necro.acm",
+      "bytes": 10016979,
+      "sha256": "2f2da9f63dda35ea7209b2bf40ccb68154d32f2c368d51885cb3cbf6cfca4611"
+    },
+    {
+      "path": "data/sound/music/15shady.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/15shady.acm",
+      "bytes": 9907327,
+      "sha256": "99264e08035d63937d9feac7cc373bc21b918f280c32a0126a5e5d73ddf160fb"
+    },
+    {
+      "path": "data/sound/music/16follow.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/16follow.acm",
+      "bytes": 7531478,
+      "sha256": "ffc9206f576c0af39b09a7addcfdffc04f554e843f347de59d39ae448def1915"
+    },
+    {
+      "path": "data/sound/music/maybe.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/maybe.acm",
+      "bytes": 4465931,
+      "sha256": "9b1357997ccd84b070f605d91f9f68c6e7a925ea3fce013a1670b1bc5b4b0d60"
+    },
+    {
+      "path": "data/sound/music/wind1.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/wind1.acm",
+      "bytes": 136918,
+      "sha256": "0957481c2de09f0e23e97271c8c5a8f6950a17a88bfddbe5d3dbea8295633cca"
+    },
+    {
+      "path": "data/sound/music/wind2.acm",
+      "url": "https://media.art-ai.studio/pc/releases/fallout-ce-f40-final/assets/data/sound/music/wind2.acm",
+      "bytes": 120544,
+      "sha256": "90b9d18ca95ed7e072ce80c6ec3a1ca427ec854844d9b81fc692665aa708706e"
+    }
+  ],
+  "totalBytes": 717229201
+}

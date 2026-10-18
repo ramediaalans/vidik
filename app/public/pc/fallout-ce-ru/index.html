@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fallout — Компьютерный клуб</title>
+<script src="/pc/fullscreen-keys.js?v=1"></script><script src="/pc/embed.js?v=fullscreen-v2"></script>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;font:13px Tahoma,"MS Sans Serif",sans-serif;color:#000}.stage{position:fixed;inset:0;display:grid;place-items:center;background:#000}.canvas-fit{width:min(100vw,calc(100vh * 4 / 3));height:min(100vh,calc(100vw * 3 / 4))}#canvas{display:block;width:100%!important;height:100%!important;outline:0;image-rendering:pixelated;object-fit:contain;background:#000}.game-running #canvas{cursor:none;touch-action:none}.overlay{position:fixed;inset:0;z-index:2;background:#008080;display:grid;place-items:center}.hidden,[hidden]{display:none!important}.panel{position:relative;width:min(440px,92vw);padding:32px 14px 14px;background:#c0c0c0;border:2px solid;border-color:#fff #404040 #404040 #fff;box-shadow:1px 1px #000;border-radius:0}.panel:before{content:"Fallout";position:absolute;inset:2px 2px auto;height:20px;background:linear-gradient(90deg,#000080,#1084d0);color:white;font:bold 13px Tahoma,sans-serif;padding:3px 6px;box-sizing:border-box}.loader-copy{margin:10px 0 14px;line-height:1.5}.meter{height:22px;padding:2px;background:#fff;border:2px solid;border-color:#808080 #fff #fff #808080}.meter-fill{height:100%;width:0;background:repeating-linear-gradient(90deg,#000080 0 8px,transparent 8px 10px)}#transfer{margin:7px 0 14px;font-size:12px;min-height:16px;font-variant-numeric:tabular-nums}.actions{display:flex;justify-content:flex-end;gap:8px}button{font:13px Tahoma,sans-serif;min-width:86px;padding:5px 12px;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;border-radius:0}button:active{border-color:#404040 #fff #fff #404040}button:focus-visible{outline:1px dotted #000;outline-offset:-5px}#error{display:none;white-space:pre-wrap;overflow-wrap:anywhere;max-height:35vh;overflow:auto;margin:8px 0;color:#800000;font-size:12px}
+</style>
+</head>
+<body>
+<div class="stage"><div class="canvas-fit"><canvas id="canvas" width="1024" height="768" tabindex="0" aria-label="Fallout" oncontextmenu="event.preventDefault()"></canvas></div></div>
+<div id="overlay" class="overlay"><section class="panel" role="dialog" aria-label="Запуск Fallout"><p id="message" class="loader-copy" role="status">Подготовка к запуску Fallout…</p><div class="meter" role="progressbar" aria-label="Загрузка Fallout" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="meter-fill" id="meter-fill"></div></div><div id="transfer">Пожалуйста, подождите.</div><div id="error"></div><div class="actions"><button id="retry" hidden>Повторить</button><button id="cancel">Отмена</button></div></section></div>
+<div hidden aria-hidden="true"><button id="load" disabled>Загрузить</button><button id="start" disabled>Играть</button><progress id="progress" max="1" value="0"></progress><span id="status"></span><input id="mute" type="checkbox" checked><button id="sync" disabled>Сохранить</button><button id="fullscreen">Полный экран</button><span id="save-state"></span></div>
+<script src="launcher.js?v=f40-final"></script>
+<script src="mouse-bridge.js?v=f40-final"></script>
+<script src="fallout-ce.js?v=f40-final"></script>
+<script src="club-bridge.js?v=club-shell-v3" defer></script>
+</body>
+</html>

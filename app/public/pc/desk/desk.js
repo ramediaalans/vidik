@@ -1,6 +1,7 @@
-// Компьютерный клуб: рабочий стол «Windows 98» на экране ПК, запуск игр во фрейме, полный экран (F/А), геймпад.
+// Компьютерный клуб: рабочий стол «Windows 98» на экране ПК, запуск игр во фрейме, полный экран (Alt+Enter; F/А только на рабочем столе), геймпад.
 (function () {
   'use strict';
+  if (window.pcClubRoute && window.pcClubRoute.redirecting) return;
   var $ = function (id) { return document.getElementById(id); };
   var screenEl = $('screen'), desk = $('desktop'), iconsEl = $('icons'), menu = $('startmenu'), startBtn = $('start'),
       tasks = $('tasks'), gw = $('gamewin'), toastEl = $('toast'), gwStatus = $('gw-status');
@@ -33,7 +34,7 @@
   function unlockKeys() { if (kb && kb.unlock) kb.unlock(); }
   document.addEventListener('fullscreenchange', function () {
     layout();
-    if (isFs()) { lockKeys(); toast(cur ? 'Полный экран. Выход — F (или удерживайте Esc)' : 'Полный экран. Выход — F или Esc', 3000); }
+    if (isFs()) { lockKeys(); toast(cur ? 'Полный экран. Выход — Alt+Enter (или удерживайте Esc)' : 'Полный экран. Выход — Alt+Enter, F или Esc', 3000); }
     else unlockKeys();
     focusGame();
   });
@@ -102,10 +103,14 @@
   }
   function gameUrl(g) {
     var p = g.page;
+    if (window.pcClubRoute.qaMute) p += (p.indexOf('?') >= 0 ? '&' : '?') + 'qaMute=1';
     return '/pc/' + p + (p.indexOf('?') >= 0 ? '&' : '?') + 'embed=1' + (g.start ? '&start=' + encodeURIComponent(g.start) : '') + (g.mouseY === false ? '&mousey=0' : g.mouseY === 'invert' ? '&mousey=inv' : '');
   }
   function launch(g) {
     if (!g) return;
+    // Isolation is a document capability, not its canonical address.
+    var target = window.pcClubRoute.destination(g);
+    if (target) { location.href = target; return; }
     closeMenu();
     if (cur && cur.g === g) { restore(); return; }
     if (cur) closeGame();
@@ -146,6 +151,7 @@
     cur.task.remove();
     cur = null; minimized = false; gw.hidden = true;
     unlockKeys(); window.focus();
+    window.pcClubRoute.clearLaunch();
   }
   gw.addEventListener('click', function (e) {
     var b = e.target.closest('[data-act]'); if (!b) return;
@@ -161,11 +167,11 @@
   }
 
   // ---------- клавиатура на рабочем столе ----------
-  function isF(e) {
-    return (e.code === 'KeyF' || e.key === 'f' || e.key === 'F' || e.key === 'а' || e.key === 'А') && !e.ctrlKey && !e.altKey && !e.metaKey;
-  }
+  var fullscreenKeyState = window.pcFullscreenKeys.install({
+    toggle: toggleFullscreen,
+    allowF: function () { return !gameVisible(); }
+  });
   window.addEventListener('keydown', function (e) {
-    if (isF(e)) { e.preventDefault(); if (!e.repeat) toggleFullscreen(); return; }
     if (gameVisible()) return;
     var k = e.key;
     if (menuOpen()) {
@@ -349,13 +355,13 @@
   })();
 
   window.addEventListener('blur', function () { /* фокус ушёл во фрейм игры — это нормально */ });
-  window.pcDesk = { toggleFullscreen: toggleFullscreen, status: status, close: closeGame, minimize: minimize, launch: function (id) { launch(games.filter(function (g) { return g.id === id; })[0]); } };
+  window.pcDesk = { fullscreenKeyState: fullscreenKeyState, toggleFullscreen: toggleFullscreen, status: status, close: closeGame, minimize: minimize, launch: function (id) { launch(games.filter(function (g) { return g.id === id; })[0]); } };
 
   // ---------- запуск ----------
   fetch('/pc/games.json').then(function (r) { return r.json(); }).then(function (list) {
     games = list.filter(function (g) { return g.status === 'playable' && g.icon; });
     render();
-    var q = new URLSearchParams(location.search).get('game');
+    var q = window.pcClubRoute.initialGame;
     if (q) window.pcDesk.launch(q);
   }).catch(function () { toast('Не удалось загрузить список игр', 10000); });
 

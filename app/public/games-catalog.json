@@ -1,0 +1,112 @@
+[
+  {
+    "id": "age-of-empires-full",
+    "name": "Age of Empires",
+    "subtitle": "FULL RU",
+    "description": "Базовая игра, без Rise of Rome.",
+    "enabled": true,
+    "year": "1997",
+    "genre": "RTS",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/age-of-empires-full-v1/AgeOfEmpires.wgb",
+    "preload": true
+  },
+  {
+    "id": "heroes3-full",
+    "name": "Heroes III Complete",
+    "subtitle": "FULL RU",
+    "description": "Полная русская версия.",
+    "enabled": true,
+    "year": "1999",
+    "genre": "Пошаговая стратегия",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/heroes3-complete-full-v1/Heroes3Complete.wgb",
+    "preload": true
+  },
+  {
+    "id": "max-payne-full",
+    "name": "Max Payne",
+    "subtitle": "FULL RU",
+    "description": "Полная русская версия.",
+    "enabled": true,
+    "year": "2001",
+    "genre": "Экшен",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/max-payne-full-v1/MaxPayne.wgb",
+    "preload": true
+  },
+  {
+    "id": "max-payne2-full",
+    "name": "Max Payne 2",
+    "subtitle": "FULL RU",
+    "description": "Полная русская версия.",
+    "enabled": true,
+    "year": "2003",
+    "genre": "Экшен",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/max-payne2-full-v1/MaxPayne2.wgb",
+    "preload": true
+  },
+  {
+    "id": "generals-full",
+    "name": "C&C Generals",
+    "subtitle": "FULL RU",
+    "description": "Полная версия. Тестовая интеграция; возможны ограничения скорости и звука.",
+    "enabled": true,
+    "year": "2003",
+    "genre": "RTS",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/generals-full-v1/Generals.wgb",
+    "preload": true
+  },
+  {
+    "id": "renegade-full",
+    "name": "C&C Renegade",
+    "subtitle": "FULL",
+    "description": "Полная версия. Тестовая интеграция.",
+    "enabled": true,
+    "year": "2002",
+    "genre": "Шутер",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/renegade-full-v1/Renegade.wgb",
+    "preload": true
+  },
+  {
+    "id": "starcraft-full-ru",
+    "name": "StarCraft",
+    "subtitle": "FULL RU 1.16.1",
+    "description": "Базовый StarCraft, без Brood War. Полная русская версия.",
+    "enabled": true,
+    "year": "1998",
+    "genre": "RTS",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/starcraft-full-ru-v1/StarCraft-RU-FULL-candidate.wgb",
+    "preload": true
+  },
+  {
+    "id": "stronghold-full-ru",
+    "name": "Stronghold",
+    "subtitle": "FULL RU",
+    "description": "Полная русская версия Stronghold. Тестовая интеграция.",
+    "enabled": true,
+    "year": "2001",
+    "genre": "Стратегия",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/stronghold-full-ru-v1/Stronghold-RU-FULL-candidate.wgb",
+    "preload": true
+  },
+  {
+    "id": "rtcw-full-ru",
+    "name": "Return to Castle Wolfenstein",
+    "subtitle": "FULL RU · Single player",
+    "description": "Полная русская версия, одиночная кампания. Принятый RTCW release 20261016.",
+    "enabled": true,
+    "year": "2001",
+    "genre": "FPS",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/rtcw-full-ru-v1/RTCW-RU-FULL-release-20261016.wgb",
+    "preload": true
+  },
+  {
+    "id": "nfsu-full",
+    "name": "Need for Speed Underground",
+    "subtitle": "FULL",
+    "description": "Полная версия. Исходный профиль без экспериментальных флагов.",
+    "enabled": true,
+    "year": "2003",
+    "genre": "Гонки",
+    "wgbUrl": "https://media.art-ai.studio/pc/releases/nfsu-full-v1/NFSUnderground.wgb",
+    "preload": true
+  }
+]

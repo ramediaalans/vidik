@@ -1,0 +1,631 @@
+{
+  "schemaVersion": 1,
+  "runtimeRelease": "rtcw-full-ru-20261016",
+  "main": "index-jyZ66EUc.js",
+  "worker": "emulator.worker-BloCnTYL.js",
+  "files": [
+    {
+      "path": "assets/bottleship-audio-worklet-H_6nqFKA.js",
+      "bytes": 37124,
+      "sha256": "4b7bc137e5c8288ba23af3ef11c23f61785b337da6f529fab328afde280a0837"
+    },
+    {
+      "path": "assets/d3d9-render-worker-Djh2V-YR.js",
+      "bytes": 2619489,
+      "sha256": "3735fdbcf6bcf35314050125d606dea17a1628b56b9515fef0f1d9cea6833c65"
+    },
+    {
+      "path": "assets/emulator.worker-BloCnTYL.js",
+      "bytes": 6797216,
+      "sha256": "01ca250cdcf0397d916381b9305e09761a122b191038c2eca57d027d2e428ea5"
+    },
+    {
+      "path": "assets/index-bm0nhuVM.css",
+      "bytes": 78334,
+      "sha256": "3149a7b85dde384817e68088ef3c07a0139ae5057a220b9e6c9885969c4f80df"
+    },
+    {
+      "path": "assets/index-jyZ66EUc.js",
+      "bytes": 723703,
+      "sha256": "c5cf9fbf9a1e02a6c1687fac0063b80a17c51c841d432c99eada9cc891c146ea"
+    },
+    {
+      "path": "assets/io-worker-D0zztUCI.js",
+      "bytes": 41486,
+      "sha256": "f9337a533ef27b315856809056203bfdb78b9b963b74f101b92e2b8783015202"
+    },
+    {
+      "path": "bios/seabios.bin",
+      "bytes": 131072,
+      "sha256": "73e3f359102e3a9982c35fce98eb7cd08f18303ac7f1ba6ebfbe6cdc1c244d98"
+    },
+    {
+      "path": "bios/vgabios.bin",
+      "bytes": 36352,
+      "sha256": "a4bc0d80cc3ca028c73dafa8fee396b8d054ce87ebd8abfbd31b06b437607880"
+    },
+    {
+      "path": "dxt-kernel-simd.wasm",
+      "bytes": 15427,
+      "sha256": "dc6613182ef554713bf934367e39d89f3859e7da22a0044d99a9d012456a4a68"
+    },
+    {
+      "path": "dxt-kernel.wasm",
+      "bytes": 5935,
+      "sha256": "6a216d9d9f2aea68a39834a21367da0d2344e2b47cb99acfbaf505451d056554"
+    },
+    {
+      "path": "gog-overrides.json",
+      "bytes": 292,
+      "sha256": "0c5bbcc77e1fb017d0da835a90d449e635e7f80fc0fc8431f6f129672767a404"
+    },
+    {
+      "path": "unpack-buffered.wasm",
+      "bytes": 222002,
+      "sha256": "2f65789af46c2f25f3aab3b6e8472e5c7ea1f48b0ab2448085144294dd10f28c"
+    },
+    {
+      "path": "unpack-streaming.wasm",
+      "bytes": 62501,
+      "sha256": "16c6dc4a36da9294f11ee2a04ac84fb08a51ba4bcc4129a94bfd328cf9e50530"
+    },
+    {
+      "path": "v86.wasm",
+      "bytes": 2734594,
+      "sha256": "ce21a0e21e2e2c9cc0bae9acfdf4615daf22664a5a3b94e907aea139e9693fa6"
+    },
+    {
+      "path": "video-decoder.wasm",
+      "bytes": 3143031,
+      "sha256": "52a80088679e4dc42b0a5a164da9eca86003763312152d1224a31a179c0d9b74"
+    }
+  ],
+  "games": {
+    "age-of-empires-full": {
+      "bytes": 272581533,
+      "sha256": "ad2036ab2a8f687ccd544e65753b5249f897bbe4e93b10c134247a879e59c02d",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:age-of-empires",
+        "name": "Age of Empires",
+        "entrypoint": "rom/EMPIRES.EXE",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 4,
+            "minor": 10,
+            "build": 2222,
+            "platformId": 1
+          },
+          "screenResolution": {
+            "width": 640,
+            "height": 480,
+            "bpp": 16
+          },
+          "memory": {
+            "ram": 67108864
+          },
+          "codepage": 1251,
+          "oemCodepage": 866,
+          "lcid": 1049
+        }
+      },
+      "url": "https://media.art-ai.studio/pc/releases/age-of-empires-full-v1/AgeOfEmpires.wgb",
+      "savesIncluded": false
+    },
+    "heroes3-full": {
+      "bytes": 1166223179,
+      "sha256": "8ef4817665052606dd5820de101b14184f5ea5889f2c288a7d29a59ebea801bb",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:heroes-iii-complete",
+        "name": "Heroes III Complete",
+        "entrypoint": "rom/Heroes3.exe",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 4,
+            "minor": 10,
+            "build": 2222,
+            "platformId": 1
+          },
+          "screenResolution": {
+            "width": 640,
+            "height": 480,
+            "bpp": 16
+          },
+          "memory": {
+            "ram": 67108864
+          },
+          "createDirs": [
+            "Clash of the Dragons\\games",
+            "Conquest of the Underworld\\games",
+            "Games",
+            "Masters of the Elements\\games",
+            "Random_Maps",
+            "Revolt of the Beastmasters\\games",
+            "The Fiery Moon\\games",
+            "The Sword of Frost\\games",
+            "The World Tree\\games",
+            "Warlords of the Wasteland\\games",
+            "_HD3_Data\\CD Data"
+          ]
+        }
+      },
+      "url": "https://media.art-ai.studio/pc/releases/heroes3-complete-full-v1/Heroes3Complete.wgb",
+      "savesIncluded": false
+    },
+    "max-payne-full": {
+      "bytes": 838583625,
+      "sha256": "e6e3cc952b1289af5df459d2c5e63398ab4bcb953ec2228253168b7429d42004",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:max-payne",
+        "name": "Max Payne",
+        "entrypoint": "rom/MaxPayne_Cracked.exe",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 4,
+            "minor": 10,
+            "build": 2222,
+            "platformId": 1
+          },
+          "screenResolution": {
+            "width": 640,
+            "height": 480,
+            "bpp": 16
+          },
+          "memory": {
+            "ram": 134217728
+          },
+          "codepage": 1251
+        },
+        "args": "-skipstartup"
+      },
+      "url": "https://media.art-ai.studio/pc/releases/max-payne-full-v1/MaxPayne.wgb",
+      "savesIncluded": false
+    },
+    "max-payne2-full": {
+      "bytes": 1733122679,
+      "sha256": "0860eafac56750be235c504157387501d2848c1fd5e84e51de1e17e5157db9b2",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:max-payne-2",
+        "name": "Max Payne 2",
+        "entrypoint": "rom/MP2.exe",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 5,
+            "minor": 1,
+            "build": 2600,
+            "platformId": 2
+          },
+          "screenResolution": {
+            "width": 640,
+            "height": 480,
+            "bpp": 16
+          },
+          "memory": {
+            "ram": 67108864
+          },
+          "codepage": 1251
+        },
+        "args": "-skipstartup"
+      },
+      "url": "https://media.art-ai.studio/pc/releases/max-payne2-full-v1/MaxPayne2.wgb",
+      "savesIncluded": false,
+      "runtime": {
+        "kind": "mp2-graphics-candidate-v1",
+        "status": "user-accepted",
+        "sourceRelease": "rtcw-full-ru-20261016/source",
+        "main": "index-jyZ66EUc.js",
+        "worker": "emulator.worker-mp2-gfx-f8790126-v1.js",
+        "files": [
+          {
+            "path": "assets/emulator.worker-mp2-gfx-f8790126-v1.js",
+            "bytes": 6911987,
+            "sha256": "f8790126e26184f3b27777bd77036ee25baac2d88c4acfaa5decb63c1238bc06"
+          },
+          {
+            "path": "assets/d3d9-render-worker-BOGUo9Tz.js",
+            "bytes": 3388676,
+            "sha256": "5542701e6023f6e0aa082c986c81530ef486906818c1ff71af88e8ca5d537eaf"
+          },
+          {
+            "path": "assets/io-worker-CUKAQV7c.js",
+            "bytes": 52072,
+            "sha256": "c1026bb7f12b120699bd5c457b073c49a0661092d4876ec588675e426e699d5d"
+          },
+          {
+            "path": "assets/unpack_buffered_bg-NF2k9cjw.wasm",
+            "bytes": 222002,
+            "sha256": "2f65789af46c2f25f3aab3b6e8472e5c7ea1f48b0ab2448085144294dd10f28c"
+          }
+        ],
+        "patchSha256": "9e74851fe969e33380ae8077d50c5b929172cbc911dc1abd7eeaa39094cc15b8",
+        "settingsForced": false,
+        "acceptance": {
+          "commit": "08ecf30177cd2f45db4441cde1512ca0fca4c71c",
+          "hostVersion": 8,
+          "record": "mp2-gfx-fix-v1/user-acceptance.json"
+        }
+      }
+    },
+    "generals-full": {
+      "bytes": 1387216575,
+      "sha256": "5ab7b576c9a9445c816900e6b846cb85f5aa7906ce58fd0a2742704e6959c1d8",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:c-c-generals",
+        "name": "C&C Generals",
+        "entrypoint": "rom/game.dat",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 5,
+            "minor": 1,
+            "build": 2600,
+            "platformId": 2
+          },
+          "screenResolution": {
+            "width": 800,
+            "height": 600,
+            "bpp": 32
+          },
+          "memory": {
+            "ram": 268435456
+          },
+          "createDirs": [
+            "UserData\\Maps"
+          ],
+          "codepage": 1251,
+          "oemCodepage": 866,
+          "lcid": 1049
+        },
+        "args": ""
+      },
+      "url": "https://media.art-ai.studio/pc/releases/generals-full-v1/Generals.wgb",
+      "savesIncluded": false,
+      "runtime": {
+        "kind": "shared-frozen-compatibility-candidate",
+        "status": "user-accepted",
+        "sourceRelease": "rtcw-full-ru-20261016",
+        "main": "index-jyZ66EUc.js",
+        "worker": "emulator.worker-BloCnTYL.js",
+        "exactGen36Binaries": false,
+        "settingsForced": false,
+        "acceptedLocalLimitations": "FPS/audio; final GEN36 args empty, vertexSourceBatch opt-in off, forceCpuVertexPath false",
+        "acceptance": {
+          "commit": "54cbbda969c4341f555cab31ffef0dc6cc17e3ba",
+          "hostVersion": 9,
+          "record": "generals-site-release-v1/user-acceptance.json"
+        }
+      }
+    },
+    "renegade-full": {
+      "bytes": 1089244664,
+      "sha256": "2838d378ad1b385240e88bafec4a3c4f18349e9e5a5b60e4afedb1cf8c64d2dd",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:c-c-renegade",
+        "name": "C&C Renegade",
+        "entrypoint": "rom/game.exe",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 4,
+            "minor": 10,
+            "build": 2222,
+            "platformId": 1
+          },
+          "screenResolution": {
+            "width": 640,
+            "height": 480,
+            "bpp": 16
+          },
+          "memory": {
+            "ram": 67108864
+          }
+        }
+      },
+      "registrySha256": "a524a01a140d1bc640c1a3ae84e626b51f7a609d1dee3b8fc1620666014f2640",
+      "url": "https://media.art-ai.studio/pc/releases/renegade-full-v1/Renegade.wgb",
+      "savesIncluded": false,
+      "runtime": {
+        "kind": "shared-frozen-compatibility-candidate",
+        "status": "user-accepted",
+        "sourceRelease": "rtcw-full-ru-20261016",
+        "main": "index-jyZ66EUc.js",
+        "worker": "emulator.worker-BloCnTYL.js",
+        "settingsForced": false,
+        "acceptance": {
+          "commit": "c7053e126ebb665859c666499dec48ac7de21ca3",
+          "hostVersion": 10,
+          "record": "renegade-site-release-v1/user-acceptance.json"
+        }
+      }
+    },
+    "starcraft-full-ru": {
+      "bytes": 869208370,
+      "sha256": "a7f5ca5e5b996216ec63db9d247077f63473925fb5f9a1b1aa2479674843346b",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:starcraft-full-ru-v1",
+        "name": "StarCraft FULL RU 1.16.1",
+        "entrypoint": "rom/StarCraft.exe",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 4,
+            "minor": 10,
+            "build": 2222,
+            "platformId": 1
+          },
+          "screenResolution": {
+            "width": 640,
+            "height": 480,
+            "bpp": 8
+          },
+          "memory": {
+            "ram": 268435456
+          },
+          "codepage": 1251,
+          "oemCodepage": 866,
+          "lcid": 1049,
+          "cdPath": "C:\\"
+        }
+      },
+      "registrySha256": "d59a8051446d131bc99a68beab78ea4f384399c870c59a505590f15c1ddcc2df",
+      "url": "https://media.art-ai.studio/pc/releases/starcraft-full-ru-v1/StarCraft-RU-FULL-candidate.wgb",
+      "savesIncluded": false,
+      "expansionIncluded": false,
+      "presentation": {
+        "width": 1024,
+        "height": 768,
+        "kind": "presentation-only",
+        "guestWidth": 640,
+        "guestHeight": 480,
+        "smallWindow": "fit without cropping"
+      },
+      "runtime": {
+        "kind": "shared-frozen-compatibility-candidate",
+        "status": "user-accepted",
+        "sourceRelease": "rtcw-full-ru-20261016",
+        "main": "index-jyZ66EUc.js",
+        "worker": "emulator.worker-BloCnTYL.js",
+        "exactLocalAcceptedWorker": false,
+        "localAcceptedWorker": "emulator.worker-BFAAcZpf.js",
+        "localAcceptedWorkerSha256": "fef0645e4276179b3ca3cdb219232a508fbc35b8b5d73cbeb7b64569170f523e",
+        "settingsForced": false,
+        "acceptance": {
+          "commit": "7e142b6154839d2c85db8b841fdf2ce60c9f07f0",
+          "hostVersion": 11,
+          "record": "starcraft-site-release-v1/user-acceptance.json"
+        }
+      }
+    },
+    "stronghold-full-ru": {
+      "bytes": 787580569,
+      "sha256": "574a4b5de41ecd498bbe12fc42da992ef6c62e2ac22babe01513d963aceaa477",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:stronghold-full-ru-v1",
+        "name": "Stronghold FULL RU",
+        "entrypoint": "rom/Stronghold.exe",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 4,
+            "minor": 10,
+            "build": 2222,
+            "platformId": 1
+          },
+          "screenResolution": {
+            "width": 1024,
+            "height": 768,
+            "bpp": 16
+          },
+          "memory": {
+            "ram": 268435456
+          },
+          "codepage": 1251,
+          "oemCodepage": 866,
+          "lcid": 1049,
+          "createDirs": [
+            "Saves"
+          ]
+        }
+      },
+      "registrySha256": "ffb641fff3f09eea3a9637160ac31f8d3d26bd2d1fed701007ca56b6d3c1759f",
+      "url": "https://media.art-ai.studio/pc/releases/stronghold-full-ru-v1/Stronghold-RU-FULL-candidate.wgb",
+      "savesIncluded": false,
+      "runtime": {
+        "kind": "stronghold-wmclose-callback-candidate-v1",
+        "status": "user-accepted",
+        "sourceRelease": "rtcw-full-ru-20261016",
+        "main": "index-jyZ66EUc.js",
+        "worker": "emulator.worker-stronghold-exit-6c542f4c73cb-v1.js",
+        "localAcceptedWorker": "emulator.worker-DJEnqkzX.js",
+        "localAcceptedWorkerSha256": "93c1ae460162a48290cd7129d7591d3e67c83e8aae8d7c7c5121912eb98a5ba1",
+        "exactLocalAcceptedWorker": false,
+        "acceptedSourceSnapshot": "stronghold-full-prep/accepted-2026-10-16T06-56-09-433Z",
+        "acceptedSourceMatches": [
+          {
+            "file": "src/worker/modules/mss32/sample.ts",
+            "sha256": "3d8a670185a5dfc9ac6fa98cdec3685d0e37fc0ea59ee46b2b478eb859e53dbd",
+            "matchesAcceptedSnapshot": true
+          },
+          {
+            "file": "src/worker/modules/mss32/context.ts",
+            "sha256": "1337634f248fc3b463c60fadf7181536a78fb3667034b644cdb82bbe6472d717",
+            "matchesAcceptedSnapshot": true
+          },
+          {
+            "file": "src/worker/modules/mss32/stream-engine.ts",
+            "sha256": "34dd6768cdec7901cef055c548534588127a8053eea6fd6713364e551271959f",
+            "matchesAcceptedSnapshot": true
+          },
+          {
+            "file": "src/worker/modules/binkw32.ts",
+            "sha256": "96379a484eb1f6bba56a13b8fc49475b8a0965148a2fc0920c62737d70d12265",
+            "matchesAcceptedSnapshot": true
+          },
+          {
+            "file": "src/video/video-engine.ts",
+            "sha256": "76bd2159abb495b7f07678a3f7d50c39e47ad6675b0730dfebe0480c46b32ca7",
+            "matchesAcceptedSnapshot": true
+          }
+        ],
+        "settingsForced": false,
+        "sourceRuntimeWorker": "emulator.worker-BloCnTYL.js",
+        "files": [
+          {
+            "path": "assets/emulator.worker-stronghold-exit-6c542f4c73cb-v1.js",
+            "bytes": 6797236,
+            "sha256": "6c542f4c73cb40d9edea37c4314cf75a1f61dcd898212f1b9a6a646542a2171f"
+          }
+        ],
+        "exitFix": {
+          "scope": "Stronghold only",
+          "method": "exact hash-guarded transform of frozen worker; source equivalent archived separately",
+          "preservesSuspendedCallback": true,
+          "defWindowProcCleanupBytes": 16,
+          "directDestroyWindowCleanupBytes": 4,
+          "normalizesFatalExitCode": false,
+          "fullGameReproduction": false
+        },
+        "acceptance": {
+          "commit": "5c218222d2baf6137a970464236007e62de1a4fa",
+          "hostVersion": 14,
+          "record": "stronghold-exit-fix-v1/user-acceptance.json",
+          "nativeExit": "user confirmed no error and desktop return"
+        }
+      }
+    },
+    "rtcw-full-ru": {
+      "bytes": 738754436,
+      "sha256": "6237bced34004af9027424ca12172d8e933c7e1574600bee807a66fd948f7ec6",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:rtcw-sp-full-ru-v1",
+        "name": "Return to Castle Wolfenstein FULL RU",
+        "entrypoint": "rom/WolfSP.exe",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 5,
+            "minor": 1,
+            "build": 2600,
+            "platformId": 2
+          },
+          "screenResolution": {
+            "width": 1024,
+            "height": 768,
+            "bpp": 32
+          },
+          "memory": {
+            "ram": 536870912
+          },
+          "codepage": 1251,
+          "oemCodepage": 866,
+          "lcid": 1049,
+          "createDirs": [
+            "Main\\save"
+          ]
+        }
+      },
+      "registrySha256": "ffb641fff3f09eea3a9637160ac31f8d3d26bd2d1fed701007ca56b6d3c1759f",
+      "url": "https://media.art-ai.studio/pc/releases/rtcw-full-ru-v1/RTCW-RU-FULL-release-20261016.wgb",
+      "savesIncluded": false,
+      "runtime": {
+        "kind": "exact-accepted-frozen-rtcw-runtime",
+        "status": "user-accepted",
+        "sourceRelease": "rtcw-full-ru-20261016",
+        "main": "index-jyZ66EUc.js",
+        "worker": "emulator.worker-BloCnTYL.js",
+        "exactLocalAcceptedWorker": true,
+        "settingsForced": false,
+        "preload": true,
+        "scope": "single player; Wolf 1.42c; no multiplayer certification",
+        "packagedAutoexec": {
+          "devdll": 1,
+          "r_glIgnoreWicked3D": 1,
+          "logfile": 2
+        },
+        "localFullEngineGate": "blocked by shallow vendor/v86 validate-jit-exports; not green",
+        "localSaveReloadRoundtrip": "not fully accepted; target origin user test pending",
+        "acceptance": {
+          "commit": "dddc83a441df7b02af06b329391ad68e0c99bbf9",
+          "gameplayCommit": "be73d9b3c9dd7adff6b26d9c2a0a6340045e9e96",
+          "hostVersion": 16,
+          "record": "rtcw-site-release-v1/user-acceptance.json",
+          "keyboard": "F passes to game; Alt+Enter enters and leaves fullscreen; user confirmed",
+          "scope": "Test-site user acceptance, not all missions/browsers or unmentioned save/reload roundtrip"
+        }
+      }
+    },
+    "nfsu-full": {
+      "bytes": 1336951849,
+      "sha256": "dccfd6e526bcb4b1ead98d04b603bf9971b27cb10f39ee6e096b856ed1d0324f",
+      "manifest": {
+        "formatVersion": 2,
+        "gameId": "app:nfs-underground",
+        "name": "NFS Underground",
+        "entrypoint": "rom/Speed.exe",
+        "rom": "rom",
+        "registry": "registry.json",
+        "emulator": {
+          "osVersion": {
+            "major": 5,
+            "minor": 1,
+            "build": 2600,
+            "platformId": 2
+          },
+          "screenResolution": {
+            "width": 640,
+            "height": 480,
+            "bpp": 16
+          },
+          "memory": {
+            "ram": 67108864
+          }
+        }
+      },
+      "registrySha256": "ffb641fff3f09eea3a9637160ac31f8d3d26bd2d1fed701007ca56b6d3c1759f",
+      "url": "https://media.art-ai.studio/pc/releases/nfsu-full-v1/NFSUnderground.wgb",
+      "savesIncluded": false,
+      "runtime": {
+        "kind": "shared-frozen-runtime",
+        "status": "user-accepted",
+        "sourceRelease": "rtcw-full-ru-20261016",
+        "main": "index-jyZ66EUc.js",
+        "worker": "emulator.worker-BloCnTYL.js",
+        "sourceStandRuntimeMatchesFrozen": true,
+        "settingsForced": false,
+        "preload": true,
+        "scope": "Single-player; no multiplayer or all-races certification",
+        "localAcceptance": "docs/STATUS.md: accepted within engine capabilities; old scene-specific FPS is not a guarantee",
+        "localFullEngineGate": "blocked by shallow vendor/v86 validate-jit-exports; not green",
+        "personalSaveMigration": false,
+        "acceptance": {
+          "commit": "132f2bca6ddb5f0cc412597ac4d7eff6de9e4d4f",
+          "hostVersion": 17,
+          "record": "nfsu-site-release-v1/user-acceptance.json",
+          "userQuote": "все работает, фиксируем успех. что у нас осталось?",
+          "scope": "User accepted test-site NFS integration; no claim of all races/browsers or separately unreported save/reload roundtrip"
+        }
+      }
+    }
+  }
+}

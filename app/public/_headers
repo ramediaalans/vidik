@@ -44,6 +44,51 @@
 # Раздел скрыт от поисковиков.
 /pc/*
   X-Robots-Tag: noindex, nofollow, noarchive
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
 
 /pc/engines/*
   Cache-Control: public, max-age=31536000, immutable
+
+# The PC section shares one isolated document; non-PC site routes remain unchanged.
+
+/assets/bottleship-audio-worklet-H_6nqFKA.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+/assets/d3d9-render-worker-Djh2V-YR.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+/assets/emulator.worker-BloCnTYL.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+/assets/index-jyZ66EUc.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+/assets/io-worker-D0zztUCI.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+# Separate preserved MP2 runtime modules, same PC-only isolation.
+
+/assets/d3d9-render-worker-DHStER7V.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+/assets/emulator.worker-MMIPTFnr.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+/assets/index-Ck6x04ma.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+# MP2-only graphics candidate worker closure; same origin and PC isolation.
+
+/assets/emulator.worker-mp2-gfx-f8790126-v1.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+/assets/d3d9-render-worker-BOGUo9Tz.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+/assets/io-worker-CUKAQV7c.js
+  Cross-Origin-Embedder-Policy: require-corp
+
+# Stronghold-only WM_CLOSE callback candidate.
+/assets/emulator.worker-stronghold-exit-6c542f4c73cb-v1.js
+  Cross-Origin-Embedder-Policy: require-corp

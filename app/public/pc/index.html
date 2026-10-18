@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Компьютерный клуб — ВИДИК</title>
+<script src="/pc/desk/route.js?v=unified-v2"></script>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="/pc/desk/fonts.css">
 <link rel="stylesheet" href="/pc/desk/desk.css">
@@ -71,7 +72,7 @@
           <div class="band"><b>ВИДИК</b><i>98</i></div>
           <div id="menu-games"></div>
           <div class="menu-sep"></div>
-          <button class="menu-item" data-act="fs"><span class="ico">⛶</span>Полный экран (F)</button>
+          <button class="menu-item" data-act="fs"><span class="ico">⛶</span>Полный экран (Alt+Enter)</button>
           <a class="menu-item" href="/pc/list.html"><span class="ico">▤</span>Список игр</a>
           <div class="menu-sep"></div>
           <a class="menu-item" href="/"><span class="ico">⏻</span>Выход на сайт ВИДИК</a>
@@ -83,7 +84,7 @@
         </div>
       </div>
       <div class="gamewin" id="gamewin" hidden>
-        <div class="title"><img id="gw-ico" alt=""><span class="t"><span id="gw-title"></span> <span class="s" id="gw-status"></span></span><button class="bevel" data-act="min" title="Свернуть">_</button><button class="bevel" data-act="fs" title="Полный экран (F)">□</button><button class="bevel x" data-act="close" title="Закрыть">×</button></div>
+        <div class="title"><img id="gw-ico" alt=""><span class="t"><span id="gw-title"></span> <span class="s" id="gw-status"></span></span><button class="bevel" data-act="min" title="Свернуть">_</button><button class="bevel" data-act="fs" title="Полный экран (Alt+Enter)">□</button><button class="bevel x" data-act="close" title="Закрыть">×</button></div>
         <div class="gw-body" id="gw-body"></div>
       </div>
       <div class="toast" id="toast" hidden></div>
@@ -92,10 +93,11 @@
     <img class="pc-img" src="/pc/desk/pc.webp" alt="Компьютер 90-х" draggable="false">
   </div>
 </div>
-<div class="hint">Клик по значку — <b>запустить</b> · <b>F</b> (<b>А</b>) — полный экран · <span id="hint-pad">🎮 подключите геймпад и нажмите любую кнопку</span></div>
+<div class="hint">Клик по значку — <b>запустить</b> · <b>Alt+Enter</b> — полный экран в игре · <b>F</b> (<b>А</b>) — полный экран на рабочем столе · <span id="hint-pad">🎮 подключите геймпад и нажмите любую кнопку</span></div>
 <div class="mobile-only"><h1>Только для ПК</h1><p>Компьютерный клуб работает на компьютере с клавиатурой и мышью.</p><p><a href="/" style="color:#b9a6ff">← на главный сайт</a></p></div>
 <script src="/pc/desk/head.js"></script>
-<script src="/pc/desk/desk.js"></script>
+<script src="/pc/fullscreen-keys.js?v=1"></script>
+<script src="/pc/desk/desk.js?v=club-unified-v4"></script>
 <script src="/pc/desk/parallax.js"></script>
 </body>
 </html>

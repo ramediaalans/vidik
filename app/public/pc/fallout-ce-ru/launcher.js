@@ -1,0 +1,42 @@
+'use strict';
+const diag=window.__FCE__={stage:'initializing',errors:[],engineErrors:[],logs:[],muted:true,loadedBytes:0,loadedFiles:0,saveSyncs:0,build:'f40-final',audioCallbacks:[]};
+const FIXED_DISPLAY=Object.freeze({width:1024,height:768,scale:1,locked:true});
+diag.display=FIXED_DISPLAY;
+const FIXED_DISPLAY_INI="[MAIN]\nSCR_WIDTH=1024\nSCR_HEIGHT=768\nWINDOWED=1\nSCALE_2X=0\n";
+const audioContexts=[];const nativeConnect=AudioNode.prototype.connect;
+const outputMap=new WeakMap();AudioNode.prototype.connect=function(destination,...args){return nativeConnect.call(this,outputMap.get(destination)||destination,...args)};
+function wrapAudioContext(Native){return class extends Native{constructor(...args){super(...args);const analyser=this.createAnalyser();analyser.fftSize=2048;const gate=this.createGain();gate.gain.value=diag.muted?0:1;nativeConnect.call(analyser,gate);nativeConnect.call(gate,this.destination);outputMap.set(this.destination,analyser);audioContexts.push({ctx:this,analyser,gate});}createScriptProcessor(...args){return instrumentProcessor(this,super.createScriptProcessor(...args));}}}
+// SDL3 uses main-thread ScriptProcessor. Measure scheduling BEFORE the mute gate.
+function instrumentProcessor(ctx,node) {
+ const m={buffer:node.bufferSize,rate:ctx.sampleRate,calls:0,late:0,maxGapMs:0,maxWorkMs:0,lastAt:null,rms:0,peak:0};
+ diag.audioCallbacks.push(m);let callback=null;
+ Object.defineProperty(node,'onaudioprocess',{configurable:true,get:()=>callback,set:fn=>{callback=fn}});
+ node.addEventListener('audioprocess',event=>{
+  const t=performance.now(),period=1000*node.bufferSize/ctx.sampleRate;
+  if(m.lastAt!==null){const gap=t-m.lastAt;m.maxGapMs=Math.max(m.maxGapMs,gap);if(gap>period*1.5)m.late++}m.lastAt=t;
+  try{if(callback)callback.call(node,event)}finally{
+   m.calls++;m.maxWorkMs=Math.max(m.maxWorkMs,performance.now()-t);
+   if(m.calls%8===0){let sq=0,peak=0,n=0;for(let c=0;c<event.outputBuffer.numberOfChannels;c++){const a=event.outputBuffer.getChannelData(c);for(let i=0;i<a.length;i++){sq+=a[i]*a[i];peak=Math.max(peak,Math.abs(a[i]));n++}}m.rms=Math.sqrt(sq/Math.max(n,1));m.peak=peak;}
+  }
+ });return node;
+}
+const NativeAudioContext=window.AudioContext;window.AudioContext=wrapAudioContext(NativeAudioContext);if(window.webkitAudioContext)window.webkitAudioContext=window.AudioContext;
+diag.audioStats=()=>audioContexts.map(({ctx,analyser,gate})=>{const a=new Float32Array(analyser.fftSize);analyser.getFloatTimeDomainData(a);let sum=0,peak=0;for(const v of a){sum+=v*v;peak=Math.max(peak,Math.abs(v))}return {state:ctx.state,rate:ctx.sampleRate,time:ctx.currentTime,muted:gate.gain.value===0,rms:Math.sqrt(sum/a.length),peak}});
+const status=document.getElementById('status'),load=document.getElementById('load'),start=document.getElementById('start'),progress=document.getElementById('progress');
+function fatal(e){diag.stage='error';const s=String(e?.message||e);diag.errors.push(s);document.getElementById('error').textContent=s;document.getElementById('error').style.display='block';document.getElementById('overlay').classList.remove('hidden');status.textContent='Ошибка запуска. Рабочая версия BottleShip сохранена.';console.error('[FCE]',s)}
+function showError(msg){fatal(msg)}
+window.addEventListener('error',e=>{diag.errors.push(String(e.message))});window.addEventListener('unhandledrejection',e=>fatal(e.reason));
+function engineLog(s,isErr=false){s=String(s);diag.logs.push((isErr?'stderr: ':'')+s);if(diag.logs.length>120)diag.logs.shift();if(/Error allocating|out of bounds|Aborted/.test(s))fatal(s);else if(/LOADSAVE.*(?:Error|failed)/i.test(s))diag.engineErrors.push(s);(isErr?console.warn:console.log)('[FCE]',s)}
+var Module={canvas:document.getElementById('canvas'),noInitialRun:true,locateFile:n=>new URL(n+'?v=f40-final',location.href).href,onRuntimeInitialized(){diag.stage='ready';load.disabled=false;status.textContent='Движок готов. Загрузите игровые данные.'},print:s=>engineLog(s),printErr:s=>engineLog(s,true),onAbort:fatal,onExit(code){diag.exitCode=code;diag.stage='exited';document.getElementById('overlay').classList.remove('hidden');status.textContent='Игра завершена. Для нового запуска обновите страницу.';if(code)fatal('Exit '+code)}};
+let syncPromise=null;
+async function syncSaves(){if(syncPromise)return syncPromise;syncPromise=new Promise((resolve,reject)=>Module.FS.syncfs(false,e=>e?reject(e):resolve())).then(()=>{diag.saveSyncs++;diag.lastSync=Date.now();document.getElementById('save-state').textContent='Сохранения записаны в браузере'}).finally(()=>syncPromise=null);return syncPromise}
+async function mountSaves(){const fs=Module.FS,base='/persist-fallout-ce-ru-v1';fs.mkdirTree(base);fs.mount(Module.IDBFS,{autoPersist:true},base);await new Promise((resolve,reject)=>fs.syncfs(true,e=>e?reject(e):resolve()));fs.mkdirTree(base+'/savegame');for(const d of ['maps','proto','scripts'])fs.mkdirTree('/data/'+d);try{fs.rmdir('/data/savegame')}catch{}fs.symlink(base+'/savegame','/data/savegame');for(const [name,url]of [['fallout.cfg','fallout-default.cfg'],['f1_res.ini','f1_res-default.ini']]){const dest=base+'/'+name;if(!fs.analyzePath(dest).exists){const res=await fetch(url);if(!res.ok)throw Error(url+' '+res.status);fs.writeFile(dest,await res.text())}fs.symlink(dest,'/'+name)}// Migrate only the dedicated display INI; preserve game preferences and all saves.
+fs.writeFile(base+'/f1_res.ini',FIXED_DISPLAY_INI);
+let cfg=fs.readFile(base+'/fallout.cfg',{encoding:'utf8'});cfg=cfg.replace(/^hashing=\d+\r?$/m,'hashing=0');fs.writeFile(base+'/fallout.cfg',cfg);await syncSaves();diag.saveMount=base;document.getElementById('sync').disabled=false;}
+async function loadGame(){if(diag.stage!=='ready')return;load.disabled=true;diag.stage='loading';diag.loadingStarted=performance.now();try{const res=await fetch('assets-manifest.json');if(!res.ok)throw Error('manifest '+res.status);const m=await res.json();diag.totalBytes=m.totalBytes;for(const entry of m.files){if(entry.path.includes('..')||entry.path.startsWith('/'))throw Error('unsafe path');status.textContent='Загрузка '+entry.path+'…';const r=await fetch(entry.url);if(!r.ok)throw Error(entry.path+' '+r.status);const a=new Uint8Array(entry.bytes);let offset=0;const reader=r.body.getReader();while(true){const{value,done}=await reader.read();if(done)break;if(offset+value.length>a.length)throw Error('size overflow '+entry.path);a.set(value,offset);offset+=value.length;progress.value=(diag.loadedBytes+offset)/m.totalBytes}if(offset!==a.length)throw Error('short read '+entry.path);const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',a))).map(b=>b.toString(16).padStart(2,'0')).join('');if(hash!==entry.sha256)throw Error('digest mismatch '+entry.path);const target='/'+entry.path;Module.FS.mkdirTree(target.slice(0,target.lastIndexOf('/'))||'/');Module.FS.writeFile(target,a,{canOwn:true});diag.loadedBytes+=a.length;diag.loadedFiles++;}await mountSaves();diag.stage='loaded';diag.loadMs=performance.now()-diag.loadingStarted;progress.value=1;start.disabled=false;status.textContent='Полная русская версия загружена. Можно играть.';await navigator.storage?.persist?.();}catch(e){fatal(e)}}
+load.addEventListener('click',loadGame);diag.loadGame=loadGame;
+start.addEventListener('click',()=>{if(diag.stage!=='loaded')return;if(document.hidden){status.textContent='Откройте вкладку игры перед запуском.';return;}start.disabled=true;document.getElementById('overlay').classList.add('hidden');document.body.classList.add('game-running');Module.canvas.focus();installWebMouseBridge(Module.canvas);diag.stage='running';diag.startedAt=performance.now();try{Module.callMain()}catch(e){if(e!=='unwind'&&typeof e!=='number')fatal(e);else if(typeof e==='number'&&e!==0)fatal('Exit '+e)}});
+document.getElementById('mute').addEventListener('change',e=>{diag.muted=e.target.checked;for(const{gate}of audioContexts)gate.gain.value=diag.muted?0:1});
+document.getElementById('sync').addEventListener('click',()=>syncSaves().catch(fatal));document.getElementById('fullscreen').addEventListener('click',()=>Module.canvas.requestFullscreen?.());
+setInterval(()=>{if(diag.stage==='running')syncSaves().catch(fatal)},15000);
+diag.syncSaves=syncSaves;diag.listSaves=()=>{const out=[];function walk(p){for(const n of Module.FS.readdir(p)){if(n==='.'||n==='..')continue;const f=p+'/'+n,s=Module.FS.stat(f);if(Module.FS.isDir(s.mode))walk(f);else out.push({path:f,size:s.size})}}walk('/persist-fallout-ce-ru-v1/savegame');return out};
